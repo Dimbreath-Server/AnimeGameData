@@ -1,0 +1,966 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Activity_Flightgear_CoinGet_TeamAbility",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "GV_PetalCoinRangeLevel",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5,
+                        100.0
+                    ],
+                    "modifierNameSteps": [
+                        "Blank",
+                        "NormalRange",
+                        "SuperRange"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Blank": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "NormalRange": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "DebugLog",
+                            "content": "基础拾取距离"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "BGDLPFKMMBG",
+                                "topLimit": 6,
+                                "sortType": "Nearest",
+                                "tag": "IS_PETALCOIN"
+                            },
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "Target",
+                                    "predicates": [
+                                        {
+                                            "$type": "OMMNCGCCJEK",
+                                            "logic": "LesserOrEqual",
+                                            "ACJBNJNEBOC": "XYZ",
+                                            "ratio": 3.0
+                                        }
+                                    ],
+                                    "ratio": 1.0,
+                                    "key": "GV_PetalPicked",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "SuperRange": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "modifierMixins": [
+                        {
+                            "$type": "CurLocalAvatarMixinV2",
+                            "modifierName": "Avatar_SuperRange_Eff"
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "DebugLog",
+                            "content": "超级拾取距离"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "BGDLPFKMMBG",
+                                "topLimit": 6,
+                                "sortType": "Nearest",
+                                "tag": "IS_PETALCOIN"
+                            },
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "Target",
+                                    "predicates": [
+                                        {
+                                            "$type": "OMMNCGCCJEK",
+                                            "logic": "LesserOrEqual",
+                                            "ACJBNJNEBOC": "XYZ",
+                                            "ratio": 6.0
+                                        }
+                                    ],
+                                    "ratio": 1.0,
+                                    "key": "GV_PetalPicked",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Avatar_SuperRange_Eff": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "target": "Team",
+                    "ratio": 1.0,
+                    "key": "GV_PetalCoinRangeLevel",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onRemoved": [
+                {
+                    "$type": "SetGlobalValue",
+                    "target": "Team",
+                    "ratio": 0.0,
+                    "key": "GV_PetalCoinRangeLevel",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Ani_Prop_CoinCircle_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToGlobalValueMixin",
+                    "globalValueKey": "GV_PetalPicked",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "BePicked"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "CoinMaterial": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_CoinCircle_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_CoinCircle_01_Die",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "BePicked": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "CurGalleryControlGroup",
+                            "funcName": "SLC_Activity_PenumbraFlightgear_CoinGet",
+                            "AFEHPHNEJHM": 0.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        },
+                        {
+                            "$type": "ReviveStamina",
+                            "target": "Vehicle",
+                            "PositionDampTime": true,
+                            "ratio": 15.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "CoinMaterial"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "CoinMaterial"
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_PetalPicked",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ChangeTag",
+                    "isAdd": true,
+                    "tag": "IS_PETALCOIN"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Ani_Prop_WindField_Special_01",
+            "modifiers": {
+                "StandByEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_WindField_Horizontal_UGC",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "StandByEffect"
+                }
+            ],
+            "onFieldEnter": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Vehicle"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ReviveStamina",
+                            "target": "Vehicle",
+                            "PositionDampTime": true,
+                            "ratio": 1000.0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Ani_Prop_FlyPlat_01",
+            "modifiers": {
+                "StandByEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_FlyPlat_03",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RotatePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_FlyPlat_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RotatePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_FlyPlat_02",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "EffRotatePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "StandByEffect"
+                }
+            ],
+            "onRemoved": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_FlyPlat_04",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "COAICNDKEMA": true,
+                        "attachPointName": "RotatePoint"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onFieldEnter": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Vehicle"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ReviveStamina",
+                            "target": "Vehicle",
+                            "PositionDampTime": true,
+                            "ratio": 1000.0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Ani_Prop_Jamballoon_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Elf_Target_Seeker"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "StandBy_Effect"
+                }
+            ],
+            "modifiers": {
+                "StandBy_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "CoreMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        }
+                    ]
+                },
+                "Blur_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "NeedEmit",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "DNBGMOHMAEN",
+                                "campTargetType": "All"
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Vehicle"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "NeedEmit",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "NeedEmit",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ChangeGadgetState",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "target": "Self",
+                                            "key": "AlreadyEmit",
+                                            "ratio": 0.0
+                                        }
+                                    ],
+                                    "state": 201
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "ChangeGadgetState"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Elf_Target_Seeker": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 5.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "CoreMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "CoreMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 10.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        },
+                        {
+                            "$type": "SetSelfAttackTarget",
+                            "otherTargets": {
+                                "$type": "DNBGMOHMAEN",
+                                "campTargetType": "All"
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Vehicle"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ],
+                            "modifierName": "Elf_Bullet_Queue"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "AlreadyEmit",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "AlreadyEmit",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetSelfAttackTarget",
+                            "otherTargets": {
+                                "$type": "DNBGMOHMAEN",
+                                "campTargetType": "All"
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Vehicle"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ],
+                            "modifierName": "Elf_Bullet_Queue"
+                        }
+                    ]
+                },
+                "Elf_Bullet_Queue": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Jamballoon_05",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "BNDNBMADMIJ",
+                                    "attachPointName": "AttachPoint"
+                                },
+                                "COAICNDKEMA": true,
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ],
+                            "bulletID": 70291138,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "ShootPoint1"
+                            },
+                            "lifeByOwnerV2": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Blur_Effect"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 0.0,
+                    "key": "NeedEmit",
+                    "useLimitRange": true,
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 0.0,
+                    "key": "AlreadyEmit",
+                    "useLimitRange": true,
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Ani_Prop_Jamballoon_02",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Standby"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Active"
+                }
+            ],
+            "modifiers": {
+                "Standby": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "CoreMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        }
+                    ]
+                },
+                "Active": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 5.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "CoreMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "CoreMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 10.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "ShootBullet"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "ShootBullet"
+                        }
+                    ]
+                },
+                "ShootBullet": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Jamballoon_05",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "BNDNBMADMIJ",
+                                    "attachPointName": "AttachPoint"
+                                },
+                                "COAICNDKEMA": true,
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 70291138,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "ShootPoint1"
+                            },
+                            "lifeByOwnerV2": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Ani_Prop_Jamballoon_Bullet_01_Damage",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "PositionDampTime": true,
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "EBADGGHGLKN": 5.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "SorushHit",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Ani_Prop_Jamballoon_Bullet_01_Material",
+            "modifiers": {
+                "EffectMaterial": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Jamballoon_04",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "EffectMaterial"
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Jamballoon_02",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Prop_FlightgearOperator_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "ReMove"
+                }
+            ],
+            "modifiers": {
+                "AddEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Challengestarter_02",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "EffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ReMove": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "AddEffect"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "AddEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Activity_Flightgear_BeHit_TeamAbility",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "Sorush_Active",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_FlightgearBeHit_TeamHandle"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Blank": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "UNIQUE_FlightgearBeHit_TeamHandle": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Vehicle",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_FlightgearBeHit_DetectDamage"
+                        }
+                    ]
+                },
+                "UNIQUE_FlightgearBeHit_DetectDamage": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "state": "LockHP",
+                    "onBeingHit": [
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "SorushHit"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "UNIQUE_FlightgearBeHit_DamageProgress"
+                        }
+                    ]
+                },
+                "UNIQUE_FlightgearBeHit_DamageProgress": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAudio",
+                            "operation": {
+                                "$type": "KKNAPGLMMPI",
+                                "operation": {
+                                    "text": "Play_motion_amb_sceneObj_gear_jamballoon_05"
+                                }
+                            }
+                        },
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "CurGalleryControlGroup",
+                            "funcName": "SLC_Activity_PenumbraFlightgear_BeHit",
+                            "AFEHPHNEJHM": 0.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "Sorush_Active",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onRemoved": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "Vehicle",
+                    "modifierName": "UNIQUE_FlightgearBeHit_DetectDamage"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Activity_Flightgear_BanItem_TeamAbility",
+            "abilityMixins": [
+                {
+                    "$type": "CurLocalAvatarMixinV2",
+                    "modifierName": "Activity_Flightgear_BanItem"
+                }
+            ],
+            "modifiers": {
+                "Activity_Flightgear_BanItem": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "HideActionSlotMixin",
+                            "slotType": "SlotQuickUse"
+                        }
+                    ]
+                }
+            },
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Activity_Flightgear_ClearLocalGadgets_TeamAbility",
+            "onAdded": [
+                {
+                    "$type": "ClearLocalGadgets"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    }
+]

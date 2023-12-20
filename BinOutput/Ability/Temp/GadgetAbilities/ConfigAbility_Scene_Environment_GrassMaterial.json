@@ -1,0 +1,789 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Environment_GrassMaterial_LeaveStacks_Interact",
+            "modifiers": {
+                "NormalModifier": {
+                    "modifierName": "",
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 50.0,
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "AttachModifier",
+                            "predicates": [
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Wind"
+                                }
+                            ],
+                            "modifierName": "ElementWindModifier"
+                        }
+                    ]
+                },
+                "ElementWindModifier": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_BlowOff",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "NormalModifier"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_ABILITY_BURNING_IGNITE_ONLY",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Environment_GrassMaterial_SakuraStacks_Interact",
+            "modifiers": {
+                "NormalModifier": {
+                    "modifierName": "",
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 50.0,
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "AttachModifier",
+                            "predicates": [
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Wind"
+                                }
+                            ],
+                            "modifierName": "ElementWindModifier"
+                        }
+                    ]
+                },
+                "ElementWindModifier": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Leavestacks_02_BlowOff",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "NormalModifier"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_ABILITY_BURNING_IGNITE_ONLY",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Environment_GrassMaterial_LeafBlanket_Interact",
+            "modifiers": {
+                "NormalModifier": {
+                    "modifierName": "",
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DoActionByEventMixin",
+                            "type": "Current",
+                            "onAbilityStateAdded": [
+                                {
+                                    "abilityState": "ElementBurning",
+                                    "actions": [
+                                        {
+                                            "$type": "AttachModifier",
+                                            "modifierName": "Burning_Effect"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "onAbilityStateRemoved": [
+                                {
+                                    "abilityState": "ElementBurning",
+                                    "actions": [
+                                        {
+                                            "$type": "RemoveModifier",
+                                            "modifierName": "Burning_Effect"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "costEnergyDeltaName": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Burning_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Element_Burning",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "NormalModifier"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 2.0,
+                    "key": "_CUSTOM_ATTACK_SHAPE_TYPE",
+                    "useLimitRange": true,
+                    "maxValue": 2.0,
+                    "minValue": 2.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_ABILITY_BURNING_IGNITE_ONLY",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Environment_GrassMaterial_GrassStacks_Interact",
+            "modifiers": {
+                "NormalModifier": {
+                    "modifierName": "",
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 50.0,
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Grassstacks_01_Burnt",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "BNDNBMADMIJ",
+                                    "attachPointName": "AttachPoint"
+                                },
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "NormalModifier"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_ABILITY_BURNING_IGNITE_ONLY",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Environment_GrassMaterial_LeafBlanket02_Interact",
+            "modifiers": {
+                "NormalModifier": {
+                    "modifierName": "",
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DoActionByEventMixin",
+                            "type": "Current",
+                            "onAbilityStateAdded": [
+                                {
+                                    "abilityState": "ElementBurning",
+                                    "actions": [
+                                        {
+                                            "$type": "AttachModifier",
+                                            "modifierName": "Burning_Effect"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "onAbilityStateRemoved": [
+                                {
+                                    "abilityState": "ElementBurning",
+                                    "actions": [
+                                        {
+                                            "$type": "RemoveModifier",
+                                            "modifierName": "Burning_Effect"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "costEnergyDeltaName": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint1"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint2"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint3"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint4"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint5"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint6"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint7"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint8"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint9"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint10"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint11"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint12"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint13"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint14"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_LeafBlanket_01_Burnout",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint15"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Burning_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Element_Burning",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "NormalModifier"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 2.0,
+                    "key": "_CUSTOM_ATTACK_SHAPE_TYPE",
+                    "useLimitRange": true,
+                    "maxValue": 2.0,
+                    "minValue": 2.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_ABILITY_BURNING_IGNITE_ONLY",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Environment_CobWeb_Interact",
+            "modifiers": {
+                "CobWebDestory": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "predicates": [
+                                {
+                                    "$type": "NEGFJPNFCFN",
+                                    "logic": "Equal",
+                                    "ratio": 0,
+                                    "parameter": "HitProtect"
+                                }
+                            ],
+                            "intID": "Hit",
+                            "ratio": 1.0
+                        }
+                    ]
+                },
+                "ShootCheck": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Applier",
+                            "ratio": 1.0,
+                            "key": "_Cobweb_Bullet_Shoot",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "ShootCheck"
+                        }
+                    ]
+                },
+                "AttackCheck": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.5,
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_Cobweb_Bullet_Shoot",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetSelfAttackTarget",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 1,
+                                "sortType": "Nearest",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 1,
+                                "sortType": "Nearest",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "ShootCheck"
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Cobweb_Bullet_Shoot",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "bulletID": 70220037,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "AttachPoint"
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "CobWebDestory"
+                },
+                {
+                    "$type": "SetSelfAttackTarget",
+                    "target": "AllPlayerAvatars"
+                },
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Prop_Arachnel_01",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "AttachPoint"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_Cobweb_Bullet_Shoot",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SecenObj_SpiderWeb_Destruction",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onFieldEnter": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "AttackCheck"
+                }
+            ],
+            "onFieldExit": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "AttackCheck"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Environment_CobWeb_Bullet_Loop",
+            "modifiers": {
+                "spider_bullet_Loop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Archnel_Bullet_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "spider_bullet_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Environment_CobWeb_Bullet_Explode",
+            "modifiers": {
+                "UNIQUE_SlowDown": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Animator_MoveSpeedRatio": -0.5
+                    },
+                    "state": "SpeedDown",
+                    "isLimitedProperties": true
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "UNIQUE_SlowDown"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 0.10000000149011612,
+                                "JKDAHJILGBJ": 0.10000000149011612,
+                                "MJHHBAFNOEG": 1.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.25,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Pierce",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "Eff_Hit_Archnel_01",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    }
+]

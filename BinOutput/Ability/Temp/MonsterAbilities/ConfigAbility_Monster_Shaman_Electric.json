@@ -1,0 +1,1138 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shaman_Electric_TotemPose",
+            "abilityMixins": [
+                {
+                    "$type": "ServerFinishWatcherMixin",
+                    "watcherId": 82094,
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Self",
+                            "key": "_WATCHER_82094_",
+                            "ratio": 1.0
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Pose_Detect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Monster_Shaman_Electric_TotemCount_",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                3.5,
+                                4.5
+                            ],
+                            "modifierNameSteps": [
+                                "Pose_NoTotem",
+                                "Pose_LessTotem",
+                                "Pose_MaxTotem"
+                            ]
+                        }
+                    ]
+                },
+                "Pose_Elite_Detect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Monster_Shaman_Electric_TotemCount_",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                5.5,
+                                10.5
+                            ],
+                            "modifierNameSteps": [
+                                "Pose_NoTotem",
+                                "Pose_LessTotem",
+                                "Pose_MaxTotem"
+                            ]
+                        }
+                    ]
+                },
+                "Pose_NoTotem": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "HasTotem"
+                        },
+                        {
+                            "$type": "SetAISkillCDAvailableNow",
+                            "skillIDs": [
+                                201,
+                                202
+                            ]
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_WATCHER_82094_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_WATCHER_82094_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Pose_LessTotem": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "HasTotem",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "MaxTotem"
+                        }
+                    ]
+                },
+                "Pose_MaxTotem": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "HasTotem",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "MaxTotem",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "SetAISkillCDAvailableNow",
+                            "skillIDs": [
+                                301,
+                                302
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Self",
+                            "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "modifierName": "Pose_Detect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Self",
+                            "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "Pose_Elite_Detect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shaman_Electric_EscapePose",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_Monster_Shaman_Electric_EscapeTag_",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Pose_EscapeOut",
+                        "Pose_EscapeIn"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "MeleeAttack"
+                    ],
+                    "modifierName": "EscapePoseHandler"
+                }
+            ],
+            "modifiers": {
+                "EscapePoseHandler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "EscapePoseTimer"
+                        }
+                    ]
+                },
+                "EscapePoseTimer": {
+                    "modifierName": "",
+                    "duration": 6.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Monster_Shaman_Electric_EscapeTag_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_Monster_Shaman_Electric_EscapeTag_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_Monster_Shaman_Electric_EscapeTag_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "EscapePoseHandler"
+                        }
+                    ]
+                },
+                "Pose_EscapeOut": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "EscapeState"
+                        }
+                    ]
+                },
+                "Pose_EscapeIn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "EscapeState",
+                            "ratio": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_Monster_Shaman_Electric_EscapeTag_",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shaman_Electric_NormalAttack",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalAttack_BS"
+                    ],
+                    "modifierName": "NormalAttack_SummonTotemHandler"
+                }
+            ],
+            "modifiers": {
+                "NormalAttack_SummonTotemHandler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "NormalAttack_SummonTotemDelay"
+                        }
+                    ]
+                },
+                "NormalAttack_SummonTotemDelay": {
+                    "modifierName": "",
+                    "duration": 0.3499999940395355,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "NormalAttack_SummonTotem"
+                        }
+                    ]
+                },
+                "NormalAttack_SummonTotem": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "target": "SelfAttackTarget",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "lifeByOwnerIsAlive": true,
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 3.5
+                                },
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 0.0,
+                                    "DEEJGGKEKNN": 1.5
+                                },
+                                "AMCAIHBNPDK": true
+                            },
+                            "gadgetID": 42103016,
+                            "campID": 4001,
+                            "byServer": true
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "target": "SelfAttackTarget",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "lifeByOwnerIsAlive": true,
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 1.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 2.5
+                                },
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 0.5,
+                                    "DEEJGGKEKNN": 2.5
+                                },
+                                "AMCAIHBNPDK": true
+                            },
+                            "gadgetID": 42103016,
+                            "campID": 4001,
+                            "byServer": true
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "target": "SelfAttackTarget",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "lifeByOwnerIsAlive": true,
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": -1.5,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": -1.2000000476837158
+                                },
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 0.5,
+                                    "DEEJGGKEKNN": 2.5
+                                },
+                                "AMCAIHBNPDK": true
+                            },
+                            "gadgetID": 42103016,
+                            "campID": 4001,
+                            "byServer": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_Monster_Shaman_Electric_TotemCount_",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Shaman_Electric_TotemSummon",
+            "modifiers": {
+                "Eff_DamageAlert": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_NormalAttack_Alert",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "TotemDamage_Summon"
+                        }
+                    ]
+                },
+                "TotemDamage_Summon": {
+                    "modifierName": "",
+                    "duration": 0.15000000596046448,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_NormalAttack_Thunder",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "FCLNLLGDNHB": true,
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.5,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Blunt",
+                                        "enBreak": 1.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    },
+                                    "cameraShake": {
+                                        "shakeRange": 0.05999999865889549,
+                                        "shakeTime": 0.09000000357627869
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Eff_TotemLoop"
+                        }
+                    ]
+                },
+                "Eff_TotemLoop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_TotemBS",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_TotemLoop",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "TotemLifeHandler": {
+                    "modifierName": "",
+                    "duration": 35.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Owner",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Owner",
+                                    "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "ratio": -1.0,
+                            "key": "_Monster_Shaman_Electric_TotemCount_",
+                            "useLimitRange": true,
+                            "maxValue": 4.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Owner",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Owner",
+                                    "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "ratio": -1.0,
+                            "key": "_Monster_Shaman_Electric_TotemCount_",
+                            "useLimitRange": true,
+                            "maxValue": 6.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Eff_DamageAlert"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "TotemLifeHandler"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "ratio": 1.0,
+                    "key": "_Monster_Shaman_Electric_TotemCount_",
+                    "useLimitRange": true,
+                    "maxValue": 4.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "ratio": 1.0,
+                    "key": "_Monster_Shaman_Electric_TotemCount_",
+                    "useLimitRange": true,
+                    "maxValue": 6.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Shaman_Electric_TotemAS",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "attachPointName": "RootNode"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shaman_Electric_SupportAttack",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "SupportAttack_BS",
+                        "SupportAttack"
+                    ],
+                    "modifierName": "SupportAttack_Eff"
+                }
+            ],
+            "modifiers": {
+                "SupportAttack_ActivatedTotem": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42103016
+                            },
+                            "abilityName": "Shaman_Electric_TotemDamage"
+                        }
+                    ]
+                },
+                "SupportAttack_Eff": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "SupportAttack_GatherEffect"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "GatherDie",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_SupportAttack_Gather"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "SupportAttack_Eff"
+                        }
+                    ]
+                },
+                "SupportAttack_GatherEffect": {
+                    "modifierName": "",
+                    "duration": 10.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_SupportAttack_Gather",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "SupportAttack_ActivatedTotem"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shaman_Electric_SupportAttack_SelfDamage",
+            "modifiers": {
+                "TotemDamage_SelfDamage_Handler": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_WeaponBS",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_SupportAttack_Damage",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "NMCELACOGBG": true,
+                                    "FCLNLLGDNHB": true,
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 1.5,
+                                    "EBADGGHGLKN": 4.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Shaman_Electric_TotemAtk",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.5,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 150.0,
+                                        "attackType": "Range",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "overrideHitImpulse": {
+                                            "hitLevel": "Heavy",
+                                            "JELEFKIMBOD": 100.0
+                                        },
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    },
+                                    "cameraShake": {
+                                        "shakeRange": 0.36000001430511475,
+                                        "shakeTime": 0.11999999731779099,
+                                        "shakeDistance": 30.0
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "TotemDamage_SelfDamage_Handler"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Shaman_Electric_TotemDamage",
+            "modifiers": {
+                "TotemDamage_Activated_Handler": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_TotemAlert",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "TotemActivated",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_TotemBS"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "TotemDamage_Activated"
+                        }
+                    ]
+                },
+                "TotemDamage_Activated": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_SupportAttack_Damage",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "FCLNLLGDNHB": true,
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 1.5,
+                                    "EBADGGHGLKN": 4.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Shaman_Electric_TotemAtk",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.5,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 150.0,
+                                        "attackType": "Range",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "overrideHitImpulse": {
+                                            "hitLevel": "Heavy",
+                                            "JELEFKIMBOD": 100.0
+                                        },
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    },
+                                    "cameraShake": {
+                                        "shakeRange": 0.36000001430511475,
+                                        "shakeTime": 0.11999999731779099,
+                                        "shakeDistance": 30.0
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "TotemDamage_Activated_Handler"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shaman_Electric_AnimationSteer",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "NormalAttack_BS"
+                    ],
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "SupportAttack_BS"
+                    ],
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "MeleeAttack"
+                    ],
+                    "endNormalizedTime": 0.15000000596046448,
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn"
+                    ],
+                    "startNormalizedTime": 0.20000000298023224,
+                    "endNormalizedTime": 0.75,
+                    "angularSpeed": 120.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shaman_Electric_WeaponElementEffect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalAttack_AS"
+                    ],
+                    "modifierName": "WeaponEff_NormalAttack"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "SupportAttack_Loop"
+                    ],
+                    "modifierName": "WeaponEff_SupportAttack"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "MeleeAttack"
+                    ],
+                    "modifierName": "WeaponEff_MeleeAttack"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        101,
+                        201,
+                        202,
+                        301
+                    ],
+                    "modifierName": "WeaponEff_Fight"
+                }
+            ],
+            "modifiers": {
+                "WeaponEff_NormalAttack": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "WeaponEff_NormalAttack"
+                        }
+                    ]
+                },
+                "WeaponEff_SupportAttack": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_WeaponLoop",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "WeaponEff_SupportAttack"
+                        }
+                    ]
+                },
+                "WeaponEff_MeleeAttack": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "WeaponEff_MeleeAttack"
+                        }
+                    ]
+                },
+                "WeaponEff_Fight": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Shaman_Electric_Weapon",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "WeaponEff_Fight"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shaman_Electric_WeaponInit",
+            "onAdded": [
+                {
+                    "$type": "TriggerAbility",
+                    "target": "Owner",
+                    "abilityName": "Monster_Shaman_Electric_WeaponElementEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shaman_Electric_EliteSet",
+            "modifiers": {
+                "UNIQUE_MonsterEliteAffix_DefaultState": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "UseSkillEliteSet",
+                            "skillEliteSetID": 1
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_SUPPORT_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "modifierName": "UNIQUE_MonsterEliteAffix_DefaultState"
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,4467 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_ExtraAttack",
+            "abilityMixins": [
+                {
+                    "$type": "ButtonHoldChargeMixin",
+                    "skillID": 10060,
+                    "chargeTime": 0.10000000149011612,
+                    "secondChargeTime": 0.10000000149011612,
+                    "OnBeginUncharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "predicates": [
+                                {
+                                    "$type": "NEGFJPNFCFN",
+                                    "logic": "Equal",
+                                    "ratio": 0,
+                                    "parameter": "ComboCount"
+                                }
+                            ],
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "predicates": [
+                                {
+                                    "$type": "NEGFJPNFCFN",
+                                    "logic": "Equal",
+                                    "ratio": 0,
+                                    "parameter": "ComboCount"
+                                }
+                            ],
+                            "intID": "SkillID",
+                            "ratio": 99.0
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "IsCharging"
+                        }
+                    ],
+                    "OnReleaseUncharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "OnBeginCharged": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "IsCharging",
+                            "ratio": true
+                        }
+                    ],
+                    "OnReleaseCharged": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "IsCharging"
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "OnBeginSecondCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "predicates": [
+                                {
+                                    "$type": "HJCCDFHBLJH",
+                                    "logic": "GreaterOrEqual",
+                                    "DGJADIEFBMC": [
+                                        "ExtraAttack_Catalyst_Stamina_Cost",
+                                        "Flexible_Stamina",
+                                        "ADD"
+                                    ]
+                                }
+                            ],
+                            "intID": "SkillID",
+                            "ratio": 6.0
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "predicates": [
+                                {
+                                    "$type": "HJCCDFHBLJH",
+                                    "logic": "Lesser",
+                                    "DGJADIEFBMC": [
+                                        "ExtraAttack_Catalyst_Stamina_Cost",
+                                        "Flexible_Stamina",
+                                        "ADD"
+                                    ]
+                                }
+                            ],
+                            "intID": "SkillID",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "IsCharging"
+                        }
+                    ],
+                    "chargeStateIDs": [
+                        "Attack01",
+                        "Attack02",
+                        "Attack03",
+                        "ExtraAttack_BS",
+                        "ExtraAttack_Charge",
+                        "ExtraAttack",
+                        "ExtraAttack_AS"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack_Charge"
+                    ],
+                    "modifierName": "ExtraAttack_StaminaCost"
+                }
+            ],
+            "abilitySpecials": {
+                "ExtraAttack_Catalyst_Stamina_Cost": 0.0,
+                "Flexible_Stamina": -2.0
+            },
+            "modifiers": {
+                "ExtraAttack_StaminaCost": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 10003,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": "ExtraAttack_Catalyst_Stamina_Cost"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_ExtraAttack_Damage",
+            "abilitySpecials": {
+                "Lisa_ExtraAttack_Damage": 0.0
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -3.0,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "height": 5.0,
+                            "MJBOOGOHDKH": 40.0,
+                            "EBADGGHGLKN": 10.0,
+                            "APOJHMOFCCF": "Clockwise"
+                        },
+                        "attackInfo": {
+                            "attackTag": "ExtraAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "Lisa_ExtraAttack_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "elementRank": 1.5,
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Default",
+                                "enBreak": 15.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "Eff_Hit_Lisa_NormalAttack_Burst_01",
+                                "hitImpulseType": "LV3",
+                                "retreatType": "ByHitDirection",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.30000001192092896,
+                                "shakeTime": 0.11999999731779099,
+                                "shakeDir": {
+                                    "y": -1.0
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Lisa_ExtraAttack_Material"
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Lisa_ExtraAttack_WhiteBox_FX",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack_Charge",
+                        "ExtraAttack",
+                        "ExtraAttack_AS"
+                    ],
+                    "modifierName": "Lisa_ExtraAttack_FX"
+                }
+            ],
+            "modifiers": {
+                "Lisa_ExtraAttack_FX": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Lisa_ExtraAttack_Lightning",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true
+                    },
+                    "gadgetID": 41006020,
+                    "campID": 1001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_NormalAttack04_Blink",
+            "modifiers": {
+                "Blink": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Lisa_Attack_HideSpark",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "passThrough": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "HJEPAPGHHBH": "Default"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TurnDirection",
+                            "turnMode": "OnlyTarget"
+                        },
+                        {
+                            "$type": "TriggerSetVisible",
+                            "PositionDampTime": true,
+                            "visible": true
+                        },
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "canBeHandledOnRecover": true,
+                            "enable": true,
+                            "HJEPAPGHHBH": "Default"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Lisa_Attack_ShowSpark",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "triggerID": "Attack"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Blink"
+                },
+                {
+                    "$type": "AvatarDoBlink",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ]
+                        }
+                    ],
+                    "Distance": 1.5
+                },
+                {
+                    "$type": "Predicated",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "topLimit": 1,
+                        "sortType": "Nearest",
+                        "shapeName": "CircleR10",
+                        "campTargetType": "Enemy",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "targetPredicates": [
+                        {
+                            "$type": "OMMNCGCCJEK",
+                            "logic": "GreaterOrEqual",
+                            "ratio": 8.5
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AvatarDoBlink",
+                            "Distance": 1.5
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "AvatarDoBlink",
+                            "Distance": -1.399999976158142
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_TriggerAbility2",
+            "abilityMixins": [
+                {
+                    "$type": "SkillButtonHoldChargeMixin",
+                    "skillID": 10061,
+                    "nextLoopTriggerID": "NextLoopTrigger",
+                    "endHoldTrigger": "EndHoldTrigger",
+                    "beforeStateIDs": [
+                        "Lisa_FlickerWave_BS"
+                    ],
+                    "chargeLoopStateIDs": [
+                        "Lisa_ThunderFall_Charge",
+                        "Lisa_ThunderFall_Ready",
+                        "Lisa_ThunderFall_AS"
+                    ],
+                    "chargeLoopDurations": [
+                        0.05000000074505806,
+                        4.0
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Lisa_ThunderFall_Charge",
+                        "Lisa_ThunderFall_Ready"
+                    ],
+                    "modifierName": "Charge1"
+                }
+            ],
+            "modifiers": {
+                "Charge1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_ThunderFall_Area",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_Weather_Trigger",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Lisa_ThunderFall_Charge",
+                        "Lisa_ThunderFall_Ready",
+                        "Lisa_ThunderFall_AS"
+                    ],
+                    "modifierName": "ThunderFall_Mark"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_TriggerWeather": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerWeatherMixin",
+                            "type": "Skill",
+                            "weatherPattern": "Weather_Lisa_ThunderFall",
+                            "transDuration": 1.5,
+                            "duration": 5.0
+                        }
+                    ]
+                },
+                "ThunderFall_Mark": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_TriggerWeather"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_TriggerWeather"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_Weather_Remove",
+            "modifiers": {
+                "UNIQUE_TriggerWeather": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerWeatherMixin",
+                            "type": "Skill",
+                            "weatherPattern": "Weather_Lisa_ThunderFall",
+                            "transDuration": 1.5,
+                            "duration": 5.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_TriggerWeather"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_Attack01",
+            "abilitySpecials": {
+                "Damage01": 0.0
+            },
+            "modifiers": {
+                "Lisa_Lightning_Attack01": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Ani_Lisa_AttackLightning_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponR",
+                                "OINJEIEFIBB": "Caster"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Hit_Lisa_NormalAttack_Burst_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAudio",
+                            "responder": "FreeAgent",
+                            "operation": {
+                                "$type": "HDPDNPIMFGB",
+                                "operation": {
+                                    "text": ""
+                                },
+                                "MNNNCIJGLMP": 0.5,
+                                "duration": 5.0
+                            }
+                        }
+                    ]
+                },
+                "Lisa_Lightning_Attack01_Retreat": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "RootNode",
+                                        "OINJEIEFIBB": "Self"
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 100.0,
+                                        "enBreak": 60.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "none",
+                                        "hitImpulseType": "LV3",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ]
+                        }
+                    ],
+                    "shieldHP": "Eff_Ani_Lisa_NormalAttack_Lightning_Right",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "SetGlobalPos",
+                    "target": "SelfAttackTarget",
+                    "PositionDampTime": true,
+                    "key": "_ABILITY_Lisa_NormalAttack_01",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "RootNode"
+                    },
+                    "setTarget": false
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "PKCCKMFHFEL"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "positionKey": "_ABILITY_Lisa_NormalAttack_01",
+                                "directionKey": ""
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "NormalAttack_01",
+                            "attenuationTag": "Lisa_Electric_Damage",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "Damage01",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Default",
+                                "enBreak": 6.75,
+                                "attackType": "Range",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV1",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "modifierName": "Lisa_Lightning_Attack01"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_StaticElec_COUNT",
+                            "ratio": 1.0,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        },
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Magic_TriStars"
+                        }
+                    ],
+                    "modifierName": "Lisa_Lightning_Attack01_Retreat"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Bullet_Lightning_Material",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Lisa_Bullet_Lightning",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_Attack02",
+            "abilitySpecials": {
+                "Damage02": 0.0
+            },
+            "modifiers": {
+                "Lisa_Lightning_Attack02": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Ani_Lisa_AttackLightning_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponR",
+                                "OINJEIEFIBB": "Caster"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Hit_Lisa_NormalAttack_Burst_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAudio",
+                            "responder": "FreeAgent",
+                            "operation": {
+                                "$type": "HDPDNPIMFGB",
+                                "operation": {
+                                    "text": ""
+                                },
+                                "MNNNCIJGLMP": 0.5,
+                                "duration": 5.0
+                            }
+                        }
+                    ]
+                },
+                "Lisa_Lightning_Attack02_Retreat": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "RootNode",
+                                        "OINJEIEFIBB": "Self"
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 100.0,
+                                        "enBreak": 60.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "none",
+                                        "hitImpulseType": "LV3",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ]
+                        }
+                    ],
+                    "shieldHP": "Eff_Ani_Lisa_NormalAttack_Lightning_Left",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "SetGlobalPos",
+                    "target": "SelfAttackTarget",
+                    "PositionDampTime": true,
+                    "key": "_ABILITY_Lisa_NormalAttack_02",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "RootNode"
+                    },
+                    "setTarget": false
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "PKCCKMFHFEL"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "positionKey": "_ABILITY_Lisa_NormalAttack_02",
+                                "directionKey": ""
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "NormalAttack_02",
+                            "attenuationTag": "Lisa_Electric_Damage",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "Damage02",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Default",
+                                "enBreak": 6.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV1",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.23999999463558197,
+                                "shakeTime": 0.07999999821186066,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": -1.0
+                                },
+                                "extension": {
+                                    "baseOnCamera": true
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "modifierName": "Lisa_Lightning_Attack02"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_StaticElec_COUNT",
+                            "ratio": 1.0,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        },
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Magic_TriStars"
+                        }
+                    ],
+                    "modifierName": "Lisa_Lightning_Attack02_Retreat"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_Attack03",
+            "abilitySpecials": {
+                "Damage03": 0.0
+            },
+            "modifiers": {
+                "Lisa_Lightning_Attack03": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Ani_Lisa_AttackLightning_03",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponR",
+                                "OINJEIEFIBB": "Caster"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Ani_Lisa_AttackLightning_04",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponR",
+                                "OINJEIEFIBB": "Caster"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Hit_Lisa_NormalAttack_Burst_02",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAudio",
+                            "responder": "FreeAgent",
+                            "operation": {
+                                "$type": "HDPDNPIMFGB",
+                                "operation": {
+                                    "text": ""
+                                },
+                                "MNNNCIJGLMP": 0.5,
+                                "duration": 5.0
+                            }
+                        }
+                    ]
+                },
+                "Lisa_Lightning_Attack03_Retreat": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "RootNode",
+                                        "OINJEIEFIBB": "Self"
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 100.0,
+                                        "enBreak": 60.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "none",
+                                        "hitImpulseType": "LV3",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ]
+                        }
+                    ],
+                    "shieldHP": "Eff_Ani_Lisa_NormalAttack_Lightning_Right",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "SetGlobalPos",
+                    "target": "SelfAttackTarget",
+                    "PositionDampTime": true,
+                    "key": "_ABILITY_Lisa_NormalAttack_03",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "RootNode"
+                    },
+                    "setTarget": false
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "modifierName": "Lisa_Lightning_Attack03"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "PKCCKMFHFEL"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "positionKey": "_ABILITY_Lisa_NormalAttack_03",
+                                "directionKey": ""
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "NormalAttack_03",
+                            "attenuationTag": "Lisa_Electric_Damage",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "Damage03",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Default",
+                                "enBreak": 7.349999904632568,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV1",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.23999999463558197,
+                                "shakeTime": 0.07999999821186066,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": -1.0
+                                },
+                                "extension": {
+                                    "baseOnCamera": true
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_StaticElec_COUNT",
+                            "ratio": 1.0,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        },
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Magic_TriStars"
+                        }
+                    ],
+                    "modifierName": "Lisa_Lightning_Attack03_Retreat"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_Attack04",
+            "abilitySpecials": {
+                "Damage04": 0.0
+            },
+            "modifiers": {
+                "Lisa_Lightning_Attack04": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Ani_Lisa_AttackLightning_03",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponR",
+                                "OINJEIEFIBB": "Caster"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Ani_Lisa_AttackLightning_04",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponR",
+                                "OINJEIEFIBB": "Caster"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Hit_Lisa_NormalAttack_Burst_02",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAudio",
+                            "responder": "FreeAgent",
+                            "operation": {
+                                "$type": "HDPDNPIMFGB",
+                                "operation": {
+                                    "text": ""
+                                },
+                                "MNNNCIJGLMP": 0.5,
+                                "duration": 5.0
+                            }
+                        }
+                    ]
+                },
+                "Lisa_Lightning_Attack04_Retreat": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "RootNode",
+                                        "OINJEIEFIBB": "Self"
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 100.0,
+                                        "enBreak": 60.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "none",
+                                        "hitImpulseType": "LV3",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ]
+                        }
+                    ],
+                    "shieldHP": "Eff_Ani_Lisa_NormalAttack_Lightning_Left",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "SetGlobalPos",
+                    "target": "SelfAttackTarget",
+                    "PositionDampTime": true,
+                    "key": "_ABILITY_Lisa_NormalAttack_04",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "RootNode"
+                    },
+                    "setTarget": false
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "PKCCKMFHFEL"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "positionKey": "_ABILITY_Lisa_NormalAttack_04",
+                                "directionKey": ""
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "NormalAttack_04",
+                            "attenuationTag": "Lisa_Electric_Damage",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "Damage04",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Default",
+                                "enBreak": 8.699999809265137,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV1",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.23999999463558197,
+                                "shakeTime": 0.07999999821186066,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": -1.0
+                                },
+                                "extension": {
+                                    "baseOnCamera": true
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "modifierName": "Lisa_Lightning_Attack04"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_StaticElec_COUNT",
+                            "ratio": 1.0,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        },
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Magic_TriStars"
+                        }
+                    ],
+                    "modifierName": "Lisa_Lightning_Attack04_Retreat"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_NormalAttack_Burst",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Hit_Lisa_NormalAttack_Burst_01",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_NormalAttack_Hit_Fx",
+            "onAbilityStart": [
+                {
+                    "$type": "FireHitEffect",
+                    "hitEntity": "",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Hit_Lisa_NormalAttack_Burst_01"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_FlickerWave_Burst",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Hit_Lisa_FlickerWave_Burst",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_FlickerWave_Hit_Fx",
+            "onAbilityStart": [
+                {
+                    "$type": "FireHitEffect",
+                    "hitEntity": "",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Hit_Lisa_FlickerWave_Burst"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_FlickerWave",
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "predicates": [
+                        {
+                            "$type": "HLKINEFIJDF",
+                            "skillID": 10061
+                        }
+                    ],
+                    "skillID": 10061,
+                    "amountByCasterMaxHPRatio": 0.06750000268220901,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41006009,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM"
+                        },
+                        "attachPointName": "WeaponR"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_FlickerWaveDamage",
+            "abilitySpecials": {
+                "Damage": 0.0
+            },
+            "modifiers": {
+                "StaticElec_Pre": {
+                    "modifierName": "",
+                    "duration": 3.200000047683716,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Owner",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ],
+                                    "KPEIKHGPBBF": true
+                                }
+                            ],
+                            "abilityName": "Avatar_Lisa_StaticElecField"
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "PositionDampTime": true
+                        }
+                    ]
+                },
+                "FlickerWaveElementBall": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Art"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AttachModifier",
+                                    "modifierName": "Ball"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Ball": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Randomed",
+                            "chance": 0.5,
+                            "successActions": [
+                                {
+                                    "$type": "GenerateElemBall",
+                                    "configID": 2020,
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "value": 1.0,
+                                    "baseEnergy": 3.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Ani_FlickerWave_Bul",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "StaticElec_Pre"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "FlickerWaveElementBall"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "PositionDampTime": true,
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "Elemental_Art",
+                            "attenuationTag": "Lisa_Electric_Damage",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "elementRank": 1.5,
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Default",
+                                "enBreak": 18.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "Eff_Hit_Lisa_FlickerWave_Burst",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_StaticElecField",
+            "abilitySpecials": {
+                "Square": 1.0,
+                "chance": 0.20000000298023224,
+                "Lisa_Talent_ExtraAttack_StaticElecField_Chance": 1.0,
+                "Lisa_Constellation_6_Chance": 1.0
+            },
+            "modifiers": {
+                "FlickerWave_Effect": {
+                    "modifierName": "",
+                    "duration": 0.800000011920929,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_FlickerWave_Buff",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FlickerWave_Talent_Effect": {
+                    "modifierName": "",
+                    "duration": 0.800000011920929,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_FlickerWave_Buff_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "StaticElec": {
+                    "stacking": "MultipleRefreshNoRemove",
+                    "stackingOption": {
+                        "abilitySpecialName": "",
+                        "maxModifierNumForMultipleType": 3.0
+                    },
+                    "modifierName": "",
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_StaticElec_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_ABILITY_StaticElec_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "RemoveModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_StaticElec_COUNT",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "modifierName": "StaticElec"
+                        }
+                    ]
+                },
+                "UNIQUE_StaticElec_Effect": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_ABILITY_StaticElec_COUNT",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -1.0,
+                                0.5,
+                                1.5,
+                                2.5,
+                                3.5
+                            ],
+                            "modifierNameSteps": [
+                                "StaticElec_effect_0",
+                                "StaticElec_effect_1",
+                                "StaticElec_effect_2",
+                                "StaticElec_effect_3"
+                            ],
+                            "actionQueues": [
+                                [],
+                                [
+                                    {
+                                        "$type": "RemoveModifier",
+                                        "modifierName": "StaticElec_effect_2"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "$type": "RemoveModifier",
+                                        "modifierName": "StaticElec_effect_3"
+                                    }
+                                ],
+                                []
+                            ],
+                            "removeAppliedModifier": false
+                        }
+                    ]
+                },
+                "StaticElec_effect_0": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_1"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_2"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_3"
+                        }
+                    ]
+                },
+                "StaticElec_effect_1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Lisa_StaticElec_Number1",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_0"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_2"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_3"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_1"
+                        }
+                    ]
+                },
+                "StaticElec_effect_2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Lisa_StaticElec_Number2",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_3"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_1"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_2"
+                        }
+                    ]
+                },
+                "StaticElec_effect_3": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Lisa_StaticElec_Number3",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_2"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_1"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "StaticElec_effect_3"
+                        }
+                    ]
+                },
+                "Lisa_Talent_ExtraAttack_StaticElecField_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Randomed",
+                            "target": "Target",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "ExtraAttack"
+                                    ]
+                                },
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Lisa_ExtraAttack_StaticElecField"
+                                }
+                            ],
+                            "chance": "Lisa_Talent_ExtraAttack_StaticElecField_Chance",
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Target",
+                                    "predicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Monster"
+                                            ]
+                                        }
+                                    ],
+                                    "modifierName": "StaticElec"
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Target",
+                                    "predicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Monster"
+                                            ]
+                                        }
+                                    ],
+                                    "modifierName": "UNIQUE_StaticElec_Effect"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Lisa_Constellation_6_Chance_CD": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_LISA_CONSTELLATION_6_CD",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": -1.0,
+                            "key": "_LISA_CONSTELLATION_6_CD",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Lisa_Talent_ExtraAttack_StaticElecField_Handler"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -1.0,
+                    "key": "_LISA_CONSTELLATION_6_CD",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "shapeName": "CircleR2",
+                        "IKJGFEDGMGF": "Target",
+                        "campTargetType": "Enemy",
+                        "OHJFACHECDC": "Square"
+                    },
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster"
+                            ]
+                        }
+                    ],
+                    "modifierName": "StaticElec"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "shapeName": "CircleR3",
+                        "IKJGFEDGMGF": "Target",
+                        "campTargetType": "Enemy",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster"
+                            ]
+                        }
+                    ],
+                    "modifierName": "UNIQUE_StaticElec_Effect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster"
+                            ]
+                        },
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Lisa_Super_FlickerWave2"
+                                }
+                            ]
+                        }
+                    ],
+                    "modifierName": "FlickerWave_Effect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster"
+                            ]
+                        },
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Lisa_Super_FlickerWave2"
+                        }
+                    ],
+                    "modifierName": "FlickerWave_Talent_Effect"
+                }
+            ],
+            "onAvatarIn": [
+                {
+                    "$type": "Randomed",
+                    "chance": "Lisa_Constellation_6_Chance",
+                    "successActions": [
+                        {
+                            "$type": "Repeated",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Lisa_Constellation_6"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_LISA_CONSTELLATION_6_CD",
+                                    "ratio": 0.0,
+                                    "PLDDAFOIEGE": true,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "repeatTimes": 3,
+                            "actions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "otherTargets": {
+                                        "$type": "JGOEKECMJLH",
+                                        "shapeName": "CircleR5",
+                                        "IKJGFEDGMGF": "Target",
+                                        "campTargetType": "Enemy",
+                                        "OHJFACHECDC": "Square"
+                                    },
+                                    "predicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Monster"
+                                            ]
+                                        }
+                                    ],
+                                    "modifierName": "StaticElec"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR5",
+                                "IKJGFEDGMGF": "Target",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Lisa_Constellation_6"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_LISA_CONSTELLATION_6_CD",
+                                    "ratio": 0.0,
+                                    "PLDDAFOIEGE": true,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "UNIQUE_StaticElec_Effect"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "GOKNABBEDCM"
+                                },
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Lisa_Constellation_6"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_LISA_CONSTELLATION_6_CD",
+                                    "ratio": 0.0,
+                                    "PLDDAFOIEGE": true,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "shieldHP": "Eff_Avatar_Lisa_Constellation_6",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "GOKNABBEDCM"
+                                },
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Lisa_Constellation_6"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_LISA_CONSTELLATION_6_CD",
+                                    "ratio": 0.0,
+                                    "PLDDAFOIEGE": true,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "Lisa_Constellation_6_Chance_CD"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_ThunderFall",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Lisa_ThunderFall_Charge"
+                    ],
+                    "modifierName": "Eff_Lisa_ThunderFall_1"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Lisa_ThunderFall_AS"
+                    ],
+                    "modifierName": "Eff_Lisa_ThunderFall_3"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Lisa_ThunderFall_Charge",
+                        "Lisa_ThunderFall_Ready",
+                        "Lisa_ThunderFall_AS"
+                    ],
+                    "modifierName": "CountBall"
+                }
+            ],
+            "abilitySpecials": {
+                "Damage_0": 0.0,
+                "Damage_1": 0.0,
+                "Damage_2": 0.0,
+                "Damage_3": 0.0,
+                "Time": 6.0,
+                "ThunderFall_Talent_ReviveElemEnergy": 2.0,
+                "Lisa_Constellation_2_DefenceUp_SubHurtDelta": 0.25,
+                "Lisa_Constellation_2_DefenceUp_EndureDelta": 0.5,
+                "Lisa_ThunderFall_Talent_ReviveElemEnergy_Number": 0.0
+            },
+            "modifiers": {
+                "Lisa_ThunderFall_GenerateEelmentBall_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Art"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "ENLNAJBJAKE",
+                                    "logic": "GreaterOrEqual",
+                                    "HJMCHPBKEDN": 120.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalPos",
+                                    "target": "Target",
+                                    "key": "_ABILITY_Lisa_GenerateElemBall_CustomPos",
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN"
+                                    },
+                                    "setTarget": false
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Caster",
+                                    "modifierName": "Lisa_ThunderFall_GenerateEelmentBall"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Lisa_ThunderFall_GenerateEelmentBall": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "GenerateElemBall",
+                            "configID": 2020,
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "AMCAIHBNPDK": true,
+                                "AIGLODBBHFA": true,
+                                "PEJBIAJDKKF": 3.0,
+                                "positionKey": "_ABILITY_Lisa_GenerateElemBall_CustomPos",
+                                "directionKey": ""
+                            },
+                            "value": 1.0,
+                            "baseEnergy": 15.0
+                        }
+                    ]
+                },
+                "CountBall": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Ball_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_Ball_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Eff_Lisa_ThunderFall_1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Lisa_ThunderFall_1_LHand",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Eff_Lisa_ThunderFall_3": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Lisa_ThunderFall_3",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "SelectNearModifier": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "SelfAttackTarget",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "BAMBPOIJFPG",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_StaticElec_COUNT",
+                                            "ratio": 1.0
+                                        },
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_StaticElec_COUNT",
+                                            "ratio": 2.0
+                                        },
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_StaticElec_COUNT",
+                                            "ratio": 3.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "modifierName": "ThunderFall_Damage_0"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "SelfAttackTarget",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_StaticElec_COUNT",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "modifierName": "ThunderFall_Damage_1"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "SelfAttackTarget",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_StaticElec_COUNT",
+                                    "ratio": 2.0
+                                }
+                            ],
+                            "modifierName": "ThunderFall_Damage_2"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "SelfAttackTarget",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_StaticElec_COUNT",
+                                    "ratio": 3.0
+                                }
+                            ],
+                            "modifierName": "ThunderFall_Damage_3"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "shieldHP": "Eff_ThunderFall_00",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_StaticElec_COUNT",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "modifierName": "ThunderFall_1"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_StaticElec_COUNT",
+                                    "ratio": 2.0
+                                }
+                            ],
+                            "modifierName": "ThunderFall_2"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_StaticElec_COUNT",
+                                    "ratio": 3.0
+                                }
+                            ],
+                            "modifierName": "ThunderFall_3"
+                        }
+                    ]
+                },
+                "ThunderFall_Damage_0": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "FCLNLLGDNHB": true,
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "RootNode",
+                                        "OINJEIEFIBB": "Self"
+                                    },
+                                    "EBADGGHGLKN": 0.20000000298023224
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Art",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Damage_0",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 50.0,
+                                        "enBreak": 150.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "ThunderFall_Damage_1": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "FCLNLLGDNHB": true,
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "RootNode",
+                                        "OINJEIEFIBB": "Self"
+                                    },
+                                    "EBADGGHGLKN": 0.20000000298023224
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Art",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Damage_1",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 50.0,
+                                        "enBreak": 195.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "ThunderFall_Damage_2": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "FCLNLLGDNHB": true,
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "RootNode",
+                                        "OINJEIEFIBB": "Self"
+                                    },
+                                    "EBADGGHGLKN": 0.20000000298023224
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Art",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Damage_2",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 50.0,
+                                        "enBreak": 240.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "ThunderFall_Damage_3": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "FCLNLLGDNHB": true,
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "RootNode",
+                                        "OINJEIEFIBB": "Self"
+                                    },
+                                    "EBADGGHGLKN": 0.20000000298023224
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Art",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Damage_3",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 50.0,
+                                        "enBreak": 300.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "ThunderFall_1": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_ThunderFall_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_ABILITY_StaticElec_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "ThunderFall_2": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_ThunderFall_02",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -2.0,
+                            "key": "_ABILITY_StaticElec_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "ThunderFall_3": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_ThunderFall_03",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -3.0,
+                            "key": "_ABILITY_StaticElec_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "ThunderFall_ElementBall_1": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Randomed",
+                            "chance": 1.0,
+                            "successActions": [
+                                {
+                                    "$type": "GenerateElemBall",
+                                    "configID": 2020,
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "value": 1.0,
+                                    "baseEnergy": 15.0
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_GenerateElemBall_Recently",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_GenerateElemBall_Recently",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "ThunderFall_ElementBall_2": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Caster",
+                            "ratio": -1.0,
+                            "key": "_Ball_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_GenerateElemBall_Recently",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_GenerateElemBall_Recently",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "ThunderFall_ElementBall_3": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Caster",
+                            "ratio": -1.0,
+                            "key": "_Ball_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_GenerateElemBall_Recently",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_GenerateElemBall_Recently",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Lisa_ThunderFall_Talent_ReviveElemEnergy_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Art"
+                                    ]
+                                },
+                                {
+                                    "$type": "ENLNAJBJAKE",
+                                    "HJMCHPBKEDN": 140.0
+                                }
+                            ],
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Lisa_ThunderFall_Talent_ReviveElemEnergy_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_ABILITY_Lisa_ThunderFall_Talent_ReviveElemEnergy_COUNT",
+                            "overrideMapKey": "Lisa_ThunderFall_Talent_ReviveElemEnergy_Number"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Art"
+                                    ]
+                                },
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Lisa_ThunderFall_Talent_ReviveElemEnergy"
+                                },
+                                {
+                                    "$type": "ENLNAJBJAKE",
+                                    "HJMCHPBKEDN": 140.0
+                                }
+                            ],
+                            "modifierName": "ThunderFall_Talent_ReviveElemEnergy_Trigger"
+                        }
+                    ]
+                },
+                "ThunderFall_Talent_ReviveElemEnergy_Trigger": {
+                    "modifierName": "",
+                    "duration": 0.4000000059604645,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Boy_Claymore_Razor_ClawMark_Restore_2",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ReviveElemEnergy",
+                            "ratio": [
+                                "ThunderFall_Talent_ReviveElemEnergy",
+                                "Lisa_ThunderFall_Talent_ReviveElemEnergy_Number",
+                                "MUL"
+                            ]
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -5.0,
+                            "key": "_ABILITY_Lisa_ThunderFall_Talent_ReviveElemEnergy_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Lisa_Constellation_2_DefenceUp_Handler": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToStateIDMixin",
+                            "stateIDs": [
+                                "Lisa_ThunderFall_Charge",
+                                "Lisa_ThunderFall_Ready"
+                            ],
+                            "modifierName": "Lisa_Constellation_2_DefenceUp"
+                        }
+                    ]
+                },
+                "Lisa_Constellation_2_DefenceUp": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_DefenceRatio": "Lisa_Constellation_2_DefenceUp_SubHurtDelta",
+                        "Actor_EndureDelta": "Lisa_Constellation_2_DefenceUp_EndureDelta"
+                    },
+                    "state": "DefenseUp",
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Lisa_ThunderFall_GenerateEelmentBall_Handler"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Lisa_ThunderFall_Talent_ReviveElemEnergy_Handler"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Lisa_Constellation_2"
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Lisa_Constellation_2_DefenceUp_Handler"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Lisa_Constellation_2"
+                                }
+                            ]
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Lisa_Constellation_2_DefenceUp_Handler"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "predicates": [
+                        {
+                            "$type": "HLKINEFIJDF",
+                            "skillID": 10061
+                        }
+                    ],
+                    "skillID": 10061,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "SelectNearModifier"
+                },
+                {
+                    "$type": "ActCameraShake",
+                    "cameraShake": {
+                        "shakeType": "CustomVector",
+                        "shakeRange": 0.5,
+                        "shakeTime": 0.11999999731779099,
+                        "shakeDistance": 30.0,
+                        "shakeDir": {
+                            "y": -1.0
+                        },
+                        "extension": {
+                            "baseOnCamera": true,
+                            "baseCycle": 0.07999999821186066,
+                            "cycleDamping": -0.03999999910593033
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Lisa_ThunderFall_FX_WithOutMonster",
+            "onAbilityStart": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -1.0,
+                    "key": "_ABILITY_Lisa_ThunderFall_Monster_COUNT",
+                    "useLimitRange": true,
+                    "maxValue": 0.0,
+                    "minValue": -1.0
+                },
+                {
+                    "$type": "Predicated",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "shapeName": "CircleR10",
+                        "campTargetType": "Enemy",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Lisa_ThunderFall_Monster_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": -1.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "SetGlobalPos",
+                    "key": "ThunderFall_WithOutMonster_Pos_1",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 3.5
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 3.0,
+                            "DEEJGGKEKNN": 3.0
+                        }
+                    }
+                },
+                {
+                    "$type": "SetGlobalPos",
+                    "key": "ThunderFall_WithOutMonster_Pos_2",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": -3.5,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 3.0,
+                            "DEEJGGKEKNN": 3.0
+                        }
+                    }
+                },
+                {
+                    "$type": "SetGlobalPos",
+                    "key": "ThunderFall_WithOutMonster_Pos_3",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 3.5,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 3.0,
+                            "DEEJGGKEKNN": 3.0
+                        }
+                    }
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_Lisa_ThunderFall_Monster_COUNT",
+                            "ratio": -1.0
+                        }
+                    ],
+                    "shieldHP": "Eff_ThunderFall_00",
+                    "born": {
+                        "$type": "DAPJIKNDLLN",
+                        "positionKey": "ThunderFall_WithOutMonster_Pos_1",
+                        "directionKey": ""
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_Lisa_ThunderFall_Monster_COUNT",
+                            "ratio": -1.0
+                        }
+                    ],
+                    "shieldHP": "Eff_ThunderFall_00",
+                    "born": {
+                        "$type": "DAPJIKNDLLN",
+                        "positionKey": "ThunderFall_WithOutMonster_Pos_2",
+                        "directionKey": ""
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_Lisa_ThunderFall_Monster_COUNT",
+                            "ratio": -1.0
+                        }
+                    ],
+                    "shieldHP": "Eff_ThunderFall_00",
+                    "born": {
+                        "$type": "DAPJIKNDLLN",
+                        "positionKey": "ThunderFall_WithOutMonster_Pos_3",
+                        "directionKey": ""
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_PierceLightning",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "PierceLightning"
+                    ],
+                    "modifierName": "Eff_Ani_PierceLightning"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "PierceLightning"
+                    ],
+                    "modifierName": "Elemental_Burst_IsGhostToEnemy"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "PierceLightning"
+                    ],
+                    "modifierName": "Elemental_Burst_Invincible"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "PierceLightning"
+                    ],
+                    "modifierName": "Camera_Remover_Handler"
+                }
+            ],
+            "modifiers": {
+                "Camera_Remover_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "AvatarCameraParam",
+                            "cameraParam": {
+                                "forceRadius": 6.0,
+                                "forceRadiusDuration": 0.0,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "AvatarCameraParam",
+                            "cameraParam": {
+                                "forceRadius": 6.0,
+                                "forceRadiusDuration": 0.0,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "Elemental_Burst_Invincible": {
+                    "modifierName": "",
+                    "duration": 1.2000000476837158,
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "Elemental_Burst_IsGhostToEnemy": {
+                    "modifierName": "",
+                    "duration": 1.2000000476837158,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 11002
+                        }
+                    ]
+                },
+                "Eff_Ani_PierceLightning": {
+                    "modifierName": "",
+                    "duration": 1.1699999570846558,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_PierceLightning_LHand",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_PierceLightning_RHand",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ActCameraRadialBlur",
+                    "cameraRadialBlur": {
+                        "power": 1.0,
+                        "blurTime": 0.20000000298023224,
+                        "fadeTime": 0.10000000149011612
+                    }
+                },
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10062,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 7.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "Elemental_Burst",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.10000000149011612,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "elementRank": 1.5,
+                                "bonusCriticalHurt": 0.0,
+                                "strikeType": "Default",
+                                "enBreak": 10.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV4",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {}
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_PierceLightning_Ball",
+            "onAbilityStart": [
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "gadgetID": 41006013,
+                    "campID": 1001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_PierceLightning_Ball_Attack",
+            "abilitySpecials": {
+                "Time": 10.0,
+                "Damage": 0.0,
+                "Ball_Attack_COUNT_RANGE": 1.0,
+                "DamageTakeRatio": -0.15000000596046448
+            },
+            "modifiers": {
+                "ALESystem": {
+                    "modifierName": "",
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "entityTypePriority": [
+                                    "Monster",
+                                    "Gadget"
+                                ],
+                                "sortType": "Random",
+                                "shapeName": "CircleR7NoHeight",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicatesForeach": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster",
+                                        "Gadget"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Ball_Attack_COUNT",
+                                    "ratio": 1.0,
+                                    "PLDDAFOIEGE": true,
+                                    "ACJBNJNEBOC": "MoreThanAndEqual"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "PierceLightning_Ball_Attack_FX"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "PierceLightning_Ball_Timer"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "CountAttack"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "Attack",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Avatar_Lisa_PierceLightning_Ball"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ],
+                            "shieldHP": "Eff_PierceLightning_Ball_Attack",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Life_Timer": {
+                    "modifierName": "",
+                    "duration": 16.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "PierceLightning_Ball_Timer": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR7NoHeight",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster",
+                                        "Gadget"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Ball_Attack_Flag",
+                                    "ratio": 1.0
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "PierceLightning_Ball_Damage"
+                        }
+                    ]
+                },
+                "PierceLightning_Ball_Damage": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "RootNode",
+                                        "OINJEIEFIBB": "Self"
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Burst",
+                                    "attenuationTag": "Elemental_Burst",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Damage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 25.0,
+                                        "enBreak": 10.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "CountAttack": {
+                    "modifierName": "",
+                    "duration": 0.4000000059604645,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_Ball_Attack_COUNT",
+                            "useLimitRange": true,
+                            "randomInRange": true,
+                            "maxValue": "_Ball_Attack_COUNT_RANGE",
+                            "minValue": 1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -3.0,
+                            "key": "_Ball_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "PierceLightning_Ball_Attack_FX": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_PierceLightning_Ball_Lightning",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.15000000596046448,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode",
+                                "OINJEIEFIBB": "Caster"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_PierceLightning_Ball_Petal",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Ball_Attack_Flag",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Caster",
+                            "modifierName": "PierceLightning_Ball_Attack_Msg"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_Ball_Attack_Flag",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "PierceLightning_Ball_Attack_Msg": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Caster",
+                            "PositionDampTime": true,
+                            "ratio": -1.0,
+                            "key": "_Ball_Attack_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": "_Ball_Attack_COUNT_RANGE",
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "PierceLightning_Hit_Pre": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "Target",
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Burst"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "UNIQUE_PierceLightning"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Target",
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Burst"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "UNIQUE_PierceLightning"
+                        }
+                    ]
+                },
+                "UNIQUE_PierceLightning": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Time",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_DefenceRatio": "DamageTakeRatio"
+                    },
+                    "state": "DefenseDown",
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_PierceLightning",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "ALESystem"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Life_Timer"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Lisa_Constellation_5"
+                        }
+                    ],
+                    "modifierName": "PierceLightning_Hit_Pre"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_PierceLightning_Ball_FX",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Avatar_Lisa_PierceLightning_Ball",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "PierceLightning_Ball_Bullet_Material",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_PierceLightning_Ball_Lightning_Trail",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_Captain",
+            "abilitySpecials": {
+                "PickRadius": 1.2000000476837158
+            },
+            "modifiers": {
+                "PickRadius": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AdsorbatePickRadiusDelta": "PickRadius"
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "target": "CurTeamAvatars",
+                    "PositionDampTime": true,
+                    "modifierName": "PickRadius"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Lisa_FallingAnthem",
+            "abilityMixins": [
+                {
+                    "$type": "AvatarChangeSkillMixin",
+                    "jumpSkillID": 5006010,
+                    "flySkillID": 5006010
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_BS_Material"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS_2",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_Loop_Low"
+                    ],
+                    "modifierName": "FallingAnthem_LoopDamage"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_BS_VelocityForce_Initialize"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_Height_Detect"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_FallingDamageImmune_01"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "Inertia"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_OverHead_Camera"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_ClearVelocityForce"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS_2",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_Loop_Low",
+                        "FallingAnthem_AS_1"
+                    ],
+                    "modifierName": "FallingAnthem_Attach_SelfEffect"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_AS_1"
+                    ],
+                    "modifierName": "FallingAnthem_Remove_SelfEffect"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS_2",
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "FallingAnthem_SetVisible"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1"
+                    ],
+                    "modifierName": "HideWeapon"
+                }
+            ],
+            "abilitySpecials": {
+                "FallingAnthem_Normal_Loop_Damage": 0.0,
+                "FallingAnthem_Normal_Rank_1_Damage": 0.0,
+                "FallingAnthem_Normal_Rank_2_Damage": 0.0,
+                "FallingAnthem_Altitude_Lv0": 20.0,
+                "FallingAnthem_Altitude_Lv1": 40.0,
+                "FallingAnthem_Altitude_Lv2": 60.0,
+                "FallingAnthem_Altitude_Lv3": 100.0,
+                "FallingAnthem_Altitude_Lv4": 200.0,
+                "FallingAnthem_FallingDamageRatio_Lv0": -1.0,
+                "FallingAnthem_FallingDamageRatio_Lv1": -1.0,
+                "FallingAnthem_FallingDamageRatio_Lv2": -0.8999999761581421,
+                "FallingAnthem_FallingDamageRatio_Lv3": -0.800000011920929,
+                "FallingAnthem_FallingDamageRatio_Lv4": -0.6000000238418579,
+                "FallingAnthem_FallingDamageRatio": 0.0
+            },
+            "modifiers": {
+                "HideWeapon": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01",
+                                "equip02",
+                                "sheathPoint"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip01",
+                                "equip02",
+                                "sheathPoint"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_SetVisible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "PositionDampTime": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "PositionDampTime": true,
+                            "visible": true
+                        }
+                    ]
+                },
+                "FallingAnthem_BS_Material": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_BS_Electric",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "FallingAnthem_BSCameraRadialBlur"
+                        }
+                    ]
+                },
+                "FallingAnthem_BS_VelocityForce_Initialize": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_LoopDamage": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.30000001192092896,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "FallingAttack",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "FallingAnthem_Normal_Loop_Damage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 0.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 5.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ClearGlobalValue",
+                            "key": "_ABILITY_FallingAttack_Altitude"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv0"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv1"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv0"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv2"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv1"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv3"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv2"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv3"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "FallingAnthem_FallingDamageImmune_02"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_ABILITY_FallingAttack_Altitude",
+                            "overrideMapKey": "FallingAnthem_FallingDamageRatio"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "FallingAnthem_FallingDamageImmune_03"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_03": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
+                    }
+                },
+                "Inertia": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ApplyInertiaVelocityMixin",
+                            "useXZ": false,
+                            "useY": false
+                        }
+                    ]
+                },
+                "FallingAnthem_Height_Detect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "ratio": 0.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "ratio": 5.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "FallingAnthem_OverHead_Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarCameraParam",
+                            "predicates": [
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Equal",
+                                    "ratio": 1.0,
+                                    "parameter": "FallingAnthem_UseCamera"
+                                }
+                            ],
+                            "cameraParam": {
+                                "forceRadius": 4.5,
+                                "forceRadiusDuration": 0.20000000298023224,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "FallingAnthem_OverHead_Camera_Remover": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        }
+                    ]
+                },
+                "FallingAnthem_Landed_Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarCameraParam",
+                            "predicates": [
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Equal",
+                                    "ratio": 1.0,
+                                    "parameter": "FallingAnthem_UseCamera"
+                                }
+                            ],
+                            "cameraParam": {
+                                "forceRadius": 6.0,
+                                "forceRadiusDuration": 0.10000000149011612,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "FallingAnthem_ClearVelocityForce": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType",
+                                "InertiaType"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_Attach_SelfEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_Self_Electric",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_Remove_SelfEffect": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "FallingAnthem_Attach_SelfEffect"
+                        }
+                    ]
+                },
+                "FallingAnthem_BSCameraRadialBlur": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CameraBlurMixin",
+                            "cameraRadialBlur": {
+                                "power": 0.30000001192092896,
+                                "fadeTime": 0.15000000596046448
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "FallingAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_1_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Default",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.10000000149011612
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.23999999463558197,
+                                "shakeTime": 0.11999999731779099,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.23999999463558197,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 3.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "FallingAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_2_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Default",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV4",
+                                "hitHaltTimeScale": 0.10000000149011612
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.5,
+                                "shakeTime": 0.20000000298023224,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0,
+                                    "z": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.4000000059604645,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_Strike_01_Electric",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_Strike_02_Electric",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    }
+]

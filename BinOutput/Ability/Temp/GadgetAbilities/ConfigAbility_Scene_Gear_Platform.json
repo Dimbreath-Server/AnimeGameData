@@ -1,0 +1,2272 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_Seelie",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_SceneObj_Seelie_MoveTrail",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Seelia_Disappear",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_Seelie_UW",
+            "abilityMixins": [
+                {
+                    "$type": "PlatformMoveMixin",
+                    "moveModifiers": [
+                        "move"
+                    ],
+                    "stopModifiers": [
+                        "stop"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Eff": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Lamp_Seelie_01_UW",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Seelie_MoveTrail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "move": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "IsFlying",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "value": 1,
+                            "shieldHP": "Eff_SceneObj_Lamp_Seelie_01_UW"
+                        }
+                    ]
+                },
+                "stop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "IsFlying",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "shieldHP": "Eff_SceneObj_Lamp_Seelie_01_UW"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Eff"
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "SendEffectTrigger",
+                    "parameter": "Die",
+                    "attachPoint": "",
+                    "shieldHP": "Eff_SceneObj_Lamp_Seelie_01_UW"
+                },
+                {
+                    "$type": "SendEffectTrigger",
+                    "parameter": "Die2",
+                    "attachPoint": "",
+                    "shieldHP": "Eff_SceneObj_Lamp_Seelie_01_UW"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Seelia_Disappear",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_BalloonTree_MovingTarget",
+            "modifiers": {
+                "GrassMaterial": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 50.0,
+                    "isElementDurabilityMutable": false
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "GrassMaterial"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_GlideChampBalloon",
+            "onFieldEnter": [
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "EOJBLPNGNCN"
+                    },
+                    "gadgetID": 70690015
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_GlideDirtyBalloon",
+            "modifiers": {
+                "DirtyBalloon": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "DirtyBalloon_Eff"
+                        }
+                    ]
+                },
+                "DirtyBalloon_Eff": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerPostProcessEffectMixin",
+                            "postEffectAssetName": "PostEffect_Scene_Mud",
+                            "duration": 1.5
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "DungeonFogEffects",
+                            "muteRemoteAction": true,
+                            "enable": true,
+                            "cameraFogEffectName": "Eff_SceneObj_GlideChampBalloon_03_02",
+                            "playerFogEffectName": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "DungeonFogEffects",
+                            "cameraFogEffectName": "",
+                            "playerFogEffectName": ""
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "DirtyBalloon"
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Md_Property_Prop_FleurVortex_02",
+            "onFieldEnter": [
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "EOJBLPNGNCN"
+                    },
+                    "gadgetID": 70690023
+                },
+                {
+                    "$type": "KillSelf",
+                    "duration": 1.0,
+                    "hideEntity": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_GlideChampCoin",
+            "modifiers": {
+                "UNIQUE_GlideChampCoin_FX": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_GlideChampCoin",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "GlideChampCoin_FireEffectOnAvatar": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_GetGlideChampCoin",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_GlideChampCoin_FX"
+                }
+            ],
+            "onFieldEnter": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "GlideChampCoin_FireEffectOnAvatar"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_GlideChampCoin_FX"
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Item_Moving_Gardencart",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 204,
+                    "modifierName": "Finish"
+                },
+                {
+                    "$type": "AttachModifierToHPPercentMixin",
+                    "valueSteps": [
+                        0.800000011920929,
+                        0.20000000298023224
+                    ],
+                    "modifierNameSteps": [
+                        "BalloonCart_Normal",
+                        "BalloonCart_Hited",
+                        "BalloonCart_Borken"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "BalloonCart_Normal": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "BalloonCart_Hited": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ExecuteGadgetLua",
+                            "param1": 202
+                        }
+                    ]
+                },
+                "BalloonCart_Borken": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ExecuteGadgetLua",
+                            "param1": 203
+                        }
+                    ]
+                },
+                "Finish": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Taunting"
+                        }
+                    ]
+                },
+                "Taunting": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 2.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerTaunt",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR25",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "careValue": 10.0
+                        }
+                    ]
+                },
+                "Gardencart": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 2.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR5H20",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Gadget"
+                                    ]
+                                }
+                            ],
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 1.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "bonusCriticalHurt": 20.0,
+                                    "enBreak": 500.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV0",
+                                    "overrideHitImpulse": {
+                                        "JELEFKIMBOD": 50.0,
+                                        "hitImpulseY": 800.0
+                                    },
+                                    "hitHaltTimeScale": 0.05000000074505806,
+                                    "muteHitText": true
+                                }
+                            }
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_BalloonCart_01_Destroy",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "EMPHHFJEKMM",
+                                    "LPHIFJDFKHI": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": -90.0
+                                    }
+                                },
+                                "attachPointName": "DestroyPoint2"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_BalloonCart_01_TopDestroy",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "DestroyPoint1"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Taunted_FX": {
+                    "modifierName": "",
+                    "duration": 9.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Ambor_Dummy_Taunted",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "HurtSelf": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "target": "Caster",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 1.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Rock",
+                                    "bonusCriticalHurt": 20.0,
+                                    "strikeType": "Blunt",
+                                    "enBreak": 500.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV4",
+                                    "overrideHitImpulse": {
+                                        "hitLevel": "Heavy",
+                                        "JELEFKIMBOD": 50.0,
+                                        "hitImpulseY": 800.0
+                                    },
+                                    "hitHaltTimeScale": 0.05000000074505806,
+                                    "muteHitText": true
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Taunting"
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_SCENEOBJ_PROTECTTARGET",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Taunting"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Item_Moving_Gardencart_Brk1",
+            "modifiers": {
+                "Cart_Brk1_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Balloon_Broken_FanBase_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Balloon_Broken_Base_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Cart_Brk1_Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Item_Moving_Gardencart_Brk2",
+            "modifiers": {
+                "Cart_Brk2_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Balloon_Broken_Fan_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Balloon_Broken_Balloon_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Cart_Brk2_Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_IceElf",
+            "modifiers": {
+                "ElementIce": {
+                    "modifierName": "",
+                    "elementType": "Ice",
+                    "bonusCriticalHurt": 50.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_IceFlower_01_Idle",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Delay"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "bonusCriticalHurt": 10.0,
+                                        "strikeType": "Default",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV0",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "Delay": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_IceFlower_01_Base",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "ElementIce"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "ElementIce"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_FireElf",
+            "modifiers": {
+                "ElementFire": {
+                    "modifierName": "",
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 50.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_FireBasin_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Delay"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 10.0,
+                                        "strikeType": "Default",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV0",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "Delay": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_FireBasin_Smoke",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "attachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "ElementFire"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "ElementFire"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_ElecElf",
+            "modifiers": {
+                "UNIQUE_Shocking_Modifier": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Electric",
+                    "bonusCriticalHurt": 50.0,
+                    "isElementDurabilityMutable": false,
+                    "thinkInterval": 1.5,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Element_Shock_Loop",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Electric_Plie_Shock_Recently_Shocked"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 5,
+                                "shapeName": "CircleR5",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar",
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Electric_Plie_Shock_Rencently_Shocked",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "ConductShock"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 5,
+                                "shapeName": "CircleR5",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Is_Electric_Pile",
+                                    "ratio": 1.0
+                                },
+                                {
+                                    "$type": "JFAJHKINFDM",
+                                    "isTarget": false,
+                                    "MEGGHKBHBEH": ""
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Electric_Plie_Shock_Rencently_Shocked",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "ConductShock"
+                        }
+                    ]
+                },
+                "ConductShock": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Element_Conduct_Lightning",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode",
+                                "OINJEIEFIBB": "Applier"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "DamageByAttackValue",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            },
+                            "attackInfo": {
+                                "attackTag": "ElectricPlieDamage",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 1.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Electric",
+                                    "elementRank": 1.5,
+                                    "bonusCriticalHurt": 25.0,
+                                    "strikeType": "Default",
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "Eff_Element_Shock_Damage",
+                                    "hitImpulseType": "LV2",
+                                    "overrideHitImpulse": {
+                                        "hitLevel": "Light",
+                                        "JELEFKIMBOD": 0.0,
+                                        "hitImpulseY": 0.0
+                                    },
+                                    "hitHaltTimeScale": 0.05000000074505806
+                                }
+                            }
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Electric_Plie_Shock_Recently_Shocked"
+                        }
+                    ]
+                },
+                "UNIQUE_Electric_Plie_Shock_Recently_Shocked": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "Electric_Plie_Shock_Rencently_Shocked",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "Electric_Plie_Shock_Rencently_Shocked",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Shocking_Modifier"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "Is_Electric_Pile",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 1.0
+                },
+                {
+                    "$type": "DamageByAttackValue",
+                    "attackInfo": {
+                        "attackTag": "",
+                        "attenuationTag": "",
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                            "LIMFCEKGALF": 0.0,
+                            "JJGGAPONHOE": 0.0,
+                            "elementType": "Electric",
+                            "bonusCriticalHurt": 50.0,
+                            "ignoreAttackerProperty": true,
+                            "damagePercentage": 0.0
+                        },
+                        "hitPattern": {
+                            "onHitEffectName": "none",
+                            "hitImpulseType": "LV0",
+                            "hitHaltTimeScale": 0.05000000074505806
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_Gravity",
+            "modifiers": {
+                "RockMove": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "CurLocalAvatar",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Gravity_Rock",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "GoingDown",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "RemoveModifier",
+                                    "modifierName": "RockMove"
+                                }
+                            ]
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "Predicated",
+                            "target": "CurLocalAvatar",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Gravity_Rock",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "GoingDown",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "RemoveModifier",
+                                    "modifierName": "RockMove"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "RockMove"
+                }
+            ],
+            "onFieldExit": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "GoingDown",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "GoingDown",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "RockMove"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_Bubble",
+            "modifiers": {
+                "Normal": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "WindZoneMixin",
+                            "shapeName": "CircleR10",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "KJCCGILPGFE": 15.0,
+                            "attenuation": 0.0,
+                            "DPIFCMEMHDF": 0.5,
+                            "targetType": "All",
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "modifierName": ""
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Normal"
+                },
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Bubble",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_MoveStone",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Default"
+                }
+            ],
+            "modifiers": {
+                "Default": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "IN_ACTIVE",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "IN_ACTIVE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 1.0
+                        }
+                    ]
+                },
+                "Delay": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "IN_ACTIVE",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ExecuteGadgetLua",
+                            "param1": 2
+                        },
+                        {
+                            "$type": "ExecuteGadgetLua",
+                            "param1": 1
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "ExecuteGadgetLua",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "IN_ACTIVE",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "param1": 3
+                },
+                {
+                    "$type": "ExecuteGadgetLua",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "IN_ACTIVE",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "param1": 1
+                }
+            ],
+            "onFieldExit": [
+                {
+                    "$type": "ExecuteGadgetLua"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Delay"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_WhiteBox_Weight",
+            "abilityMixins": [
+                {
+                    "$type": "WeightDetectRegionMixin",
+                    "globalValueKey": "TOTAL_WEIGHT",
+                    "onWeightChanged": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "TOTAL_WEIGHT",
+                            "overrideMapKey": "total_weight"
+                        },
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "floatID": "WeightValue",
+                            "ratio": "total_weight"
+                        }
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "total_weight": 0.0
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_Jigsaw",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "Is_Jigsaw",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_Whirlpool",
+            "modifiers": {
+                "Delay_To_Kill": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Delay_To_Kill"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Item_Hili_Cart",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Idle1"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Move"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Idle2"
+                },
+                {
+                    "$type": "AttachModifierToHPPercentMixin",
+                    "valueSteps": [
+                        0.5
+                    ],
+                    "modifierNameSteps": [
+                        "Hili_Cart_Damaged",
+                        "Hili_Cart_Intact"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "BeHit": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Hili_Cart_Hit_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "BoneRoot"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Idle1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        }
+                    ]
+                },
+                "Move": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HideUIBillBoard"
+                        }
+                    ]
+                },
+                "Idle2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HideUIBillBoard"
+                        }
+                    ]
+                },
+                "Hili_Cart_Damaged": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "isDamaged",
+                            "ratio": 0.0
+                        }
+                    ]
+                },
+                "Hili_Cart_Intact": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "isDamaged",
+                            "ratio": 1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BeHit"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_ImmortalPlatform01",
+            "modifiers": {
+                "AddEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Stages_FatOtaKuRotatePlane_Dungeon_01_Vo",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "AddEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_ImmortalPlatform02",
+            "modifiers": {
+                "AddEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Stages_FatOtaKuRotatePlane_Dungeon_02_Vo",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "AddEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Md_Property_Ani_Prop_Ballon_03",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Suicide01"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Suicide02"
+                }
+            ],
+            "modifiers": {
+                "Balloon03_Boom": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "Balloon03_HitCount",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Balloon03_Boom2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Balloon03_Attacker": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Suicide01": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_03_Warning",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_03_Destroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Suicide02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_03_Destroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Balloon03_Boom"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "IS_BOMBBALLOON",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 0.0,
+                    "key": "Balloon03_HitCount",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "Balloon03_TargetFlag",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Ballon_Born",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Md_Property_Ani_Prop_Ballon_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Suicide01"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Suicide02"
+                }
+            ],
+            "modifiers": {
+                "Balloon01_Boom": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "Balloon_BeHit",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Balloon_BeHit",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_SceneObj_Ballon_01_Shoot",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Suicide01": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_01_Warning",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_01_Destroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Suicide02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_01_Destroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Balloon01_Boom"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "IS_LOWBALLOON",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "Balloon03_TargetFlag",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Ballon_Born",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Md_Property_Ani_Prop_Ballon_02",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Suicide01"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Suicide02"
+                }
+            ],
+            "modifiers": {
+                "Balloon01_Boom": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "Balloon_BeHit",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Balloon_BeHit",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_SceneObj_Ballon_02_Shoot",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Suicide01": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_02_Warning",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_02_Destroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Suicide02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_02_Destroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Balloon01_Boom"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "IS_HIGHBALLOON",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "Balloon03_TargetFlag",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Ballon_Born",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Md_Property_Ani_Prop_Ballon_04",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Suicide01"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Suicide02"
+                }
+            ],
+            "modifiers": {
+                "Balloon01_Boom": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "Balloon_BeHit",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Balloon_BeHit",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_SceneObj_Ballon_04_Shoot",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Suicide01": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_04_Warning",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_04_Destroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Suicide02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Ballon_04_Destroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Balloon01_Boom"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "IS_SUBBALLOON",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "Balloon03_TargetFlag",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Ballon_Born",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Prop_Suspiciousbubbles_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "LoopEffect"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "DisableLoopEffect"
+                }
+            ],
+            "modifiers": {
+                "LoopEffect": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_ScenObj_Suspiciousbubbles_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "DisableLoopEffect": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Dq_Property_Ani_Water_ElecWater",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "ActivePhase"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "DeActivePhase"
+                }
+            ],
+            "modifiers": {
+                "Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_ElectricCover_R120",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ActivePhase": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "DeActivePhase": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Dq_Property_Ani_Water_ElecWaterR60",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "ActivePhase"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "DeActivePhase"
+                }
+            ],
+            "modifiers": {
+                "Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_ElectricCover_R60",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ActivePhase": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "DeActivePhase": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Dq_Property_Ani_Water_ElecWaterR20",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "ActivePhase"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "DeActivePhase"
+                }
+            ],
+            "modifiers": {
+                "Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_ElectricCover_R20",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ActivePhase": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "DeActivePhase": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Dq_Property_Ani_Prop_ElecWaterShallow_Radius20_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "ActivePhase"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "DeActivePhase"
+                }
+            ],
+            "modifiers": {
+                "Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_ElectricCover_Shallow_R20",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ActivePhase": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "DeActivePhase": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_EffectVersion",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Stop"
+                }
+            ],
+            "modifiers": {
+                "Stop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "GadgetState",
+                            "ratio": 0.0
+                        }
+                    ]
+                },
+                "Delay": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "GadgetState",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ExecuteGadgetLua",
+                            "param1": 201
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Delay"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_SpeedButterfly_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "FastFly"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Stop"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "IdleFly"
+                }
+            ],
+            "modifiers": {
+                "Stop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "UNIQUE_IdleEff"
+                        }
+                    ]
+                },
+                "IdleFly": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_IdleEff"
+                        }
+                    ]
+                },
+                "FastFly": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_IdleEff"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_SpeedButterfly_01_FastFly",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "UNIQUE_IdleEff": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_SpeedButterfly_01_Idle",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_Elevator",
+            "abilitySpecials": {
+                "Height": 0.0
+            },
+            "modifiers": {
+                "SetHeight": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "canBeHandledOnRecover": true,
+                            "globalValueKey": "SGV_Elevator_Height",
+                            "overrideMapKey": "Height"
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Height",
+                            "patternName": "_OpacityMask_WS_Y",
+                            "ratio": "Height"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "SetHeight"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_Platform_WaterPlatform_02",
+            "abilityMixins": [
+                {
+                    "$type": "PlatformMoveMixin",
+                    "moveModifiers": [
+                        "WaterPlatform_Move"
+                    ],
+                    "stopModifiers": [
+                        "WaterPlatform_Stop"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "WaterPlatform_Move": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "IsMoving",
+                            "ratio": 1.0
+                        }
+                    ]
+                },
+                "WaterPlatform_Stop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "IsMoving",
+                            "ratio": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]

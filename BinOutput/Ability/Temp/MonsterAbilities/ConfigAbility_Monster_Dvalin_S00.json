@@ -1,0 +1,233 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Dvalin_S00_StateController",
+            "abilityMixins": [
+                {
+                    "$type": "StageReadyMixin",
+                    "onStageReady": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "STAGE_ALREADY_BEGIN",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "Init"
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "STAGE_ALREADY_BEGIN",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Init": {
+                    "modifierName": "",
+                    "duration": 12.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DvalinS01PathEffsMixin",
+                            "effectStart": 4,
+                            "effectEnd": 3,
+                            "effInfos": [
+                                {
+                                    "effectName": "Eff_Monster_Dvalin_S01_Cloud01",
+                                    "rangeMax": 0.0,
+                                    "rangeMin": 0.0,
+                                    "eularMax": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "PROCESS_STATE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 1.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 2.0,
+                            "key": "DFM_STATE",
+                            "useLimitRange": true,
+                            "maxValue": 2.0,
+                            "minValue": 2.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "STAGE_STATE",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42901048
+                            },
+                            "ratio": 2.0,
+                            "key": "AIRFLOW_STATE",
+                            "useLimitRange": true,
+                            "maxValue": 2.0,
+                            "minValue": 2.0
+                        },
+                        {
+                            "$type": "ShowReminder",
+                            "id": 20010031
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "S00"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "SetShootCamera"
+                        }
+                    ]
+                },
+                "S00": {
+                    "modifierName": "",
+                    "duration": 8.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DvalinS01PathEffsMixin",
+                            "effectStart": 4,
+                            "effectEnd": 3,
+                            "effInfos": [
+                                {
+                                    "effectName": "Eff_Monster_Dvalin_S01_Cloud01",
+                                    "rangeMax": 0.0,
+                                    "rangeMin": 0.0,
+                                    "eularMax": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 2.0,
+                            "key": "HPBAR_STATE",
+                            "useLimitRange": true,
+                            "maxValue": 2.0,
+                            "minValue": 2.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 2.0,
+                            "key": "DFM_STATE",
+                            "useLimitRange": true,
+                            "maxValue": 2.0,
+                            "minValue": 2.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "S01"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Dvalin_HitBlood",
+                            "born": {
+                                "$type": "AJEIONFOHLC"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "S01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DvalinS01PathEffsMixin",
+                            "effectStart": 4,
+                            "effectEnd": 3,
+                            "effInfos": [
+                                {
+                                    "effectName": "Eff_Monster_Dvalin_S01_Cloud01",
+                                    "rangeMax": 0.0,
+                                    "rangeMin": 0.0,
+                                    "eularMax": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "DFM_STATE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 1.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Dvalin_HitBlood",
+                            "born": {
+                                "$type": "AJEIONFOHLC"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "SetShootCamera": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "CurTeamAvatars",
+                            "ratio": 1.0,
+                            "key": "AVATAR_SHOOT_MODE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Dvalin_S00_ResetSkyBox",
+            "onAbilityStart": [
+                {
+                    "$type": "ResetEnviroEular"
+                }
+            ]
+        }
+    }
+]

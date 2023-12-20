@@ -1,0 +1,141 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Squirrel_AIStateInitial",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        1
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                103,
+                                202
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        2
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                101,
+                                102,
+                                201
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Squirrel_IntoWander",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "WanderState",
+                    "ratio": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Squirrel_IntoIdle",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "WanderState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Squirrel_Random",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Run",
+                        "Disappear"
+                    ],
+                    "modifierName": "Random_MoveSpeedRatio"
+                }
+            ],
+            "abilitySpecials": {
+                "RandomSpeed": 0.0
+            },
+            "modifiers": {
+                "Random_MoveSpeedRatio": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Animator_MoveSpeedRatio": "RandomSpeed"
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetRandomOverrideMapValue",
+                    "valueRangeMax": 0.15000000596046448,
+                    "valueRangeMin": -0.15000000596046448,
+                    "overrideMapKey": "RandomSpeed"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Squirrel_Disappear",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Disappear"
+                    ],
+                    "modifierName": "DisappearTimer"
+                }
+            ],
+            "modifiers": {
+                "DisappearTimer": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "StartDither",
+                            "duration": 2.0
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Disappear",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "duration": 1.5,
+                            "banDrop": true,
+                            "banExp": true,
+                            "killSelfType": "Disappear"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]

@@ -1,0 +1,240 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Oceanid_Crane_WaterWave",
+            "modifiers": {
+                "FireWaterWave": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42005001,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.25,
+                                    "MJHHBAFNOEG": 2.5
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "maxAngle": 60.0,
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "FireWaterWave"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Crane_WaterWave_Explode",
+            "modifiers": {
+                "EffectModifier": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Oceanid_Crane_WaterWaveLoop",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Oceanid_Crane_WaterWaveLoop_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "EffectModifier"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Avatar"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Oceanid_Crane_WaterWaveAS",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 50.0,
+                                        "attackType": "Range",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Crane_WaterWave_LifeTimeOver",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Oceanid_Crane_WaterWaveAS",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Oceanid_Crane_Steer",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "WaterWave"
+                    ],
+                    "endNormalizedTime": 0.25,
+                    "angularSpeed": 150.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn"
+                    ],
+                    "endNormalizedTime": 0.6499999761581421,
+                    "angularSpeed": 150.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                },
+                {
+                    "$type": "SteerAttackTraceMixin",
+                    "steerStateIDs": [
+                        "Dodge"
+                    ],
+                    "endNormalizedTime": 0.6000000238418579,
+                    "angularSpeed": 90.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Oceanid_Crane_ElementState",
+            "modifiers": {
+                "UNIQUE_ElementState": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 100.0,
+                    "isElementDurabilityMutable": false
+                },
+                "Monster_Oceanid_Crane_CommonEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Oceanid_Crane_CommonEffectLoop",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_ElementState"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceBuffDebuffs": [
+                        "ElementWet",
+                        "Struggle"
+                    ]
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTERAFFIX_OCEANID_ANIMAL_FOOTEFFECT_OFF",
+                                    "ratio": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "modifierName": "Monster_Oceanid_Crane_CommonEffect"
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,3941 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ExtraAttack",
+            "abilityMixins": [
+                {
+                    "$type": "ButtonHoldChargeMixin",
+                    "skillID": 10531,
+                    "chargeTime": 0.25,
+                    "secondChargeTime": "ExtraAttack_Claymore_MaxTime",
+                    "OnBeginUncharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "ResetAnimatorTrigger",
+                            "triggerID": "EndHoldTrigger"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "SetTrigger"
+                        }
+                    ],
+                    "OnBeginCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 6.0
+                        }
+                    ],
+                    "OnReleaseCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "EndHoldTrigger"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "SetTrigger"
+                        }
+                    ],
+                    "OnBeginSecondCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "EndHoldTrigger"
+                        }
+                    ],
+                    "chargeStateIDs": [
+                        "Attack01_BS",
+                        "Attack01",
+                        "Attack02",
+                        "Attack03",
+                        "Attack04",
+                        "ExtraAttack",
+                        "ExtraAttack1"
+                    ]
+                },
+                {
+                    "$type": "AvatarSteerByCameraMixin",
+                    "stateIDs": [
+                        "ExtraAttack1"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack",
+                        "ExtraAttack1",
+                        "ExtraAttack2",
+                        "ExtraAttack3"
+                    ],
+                    "modifierName": "Camera"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack1"
+                    ],
+                    "modifierName": "Cost"
+                }
+            ],
+            "abilitySpecials": {
+                "ExtraAttack_Claymore_Stamina_Cost": 0.0,
+                "ExtraAttack_Claymore_MaxTime": 0.0
+            },
+            "modifiers": {
+                "SetTrigger": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "EndHoldTrigger"
+                        }
+                    ]
+                },
+                "Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        }
+                    ]
+                },
+                "Cost": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CostStaminaMixin",
+                            "costStaminaRatio": "ExtraAttack_Claymore_Stamina_Cost",
+                            "onStaminaEmpty": [
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "EndHoldTrigger"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_NormalAttack_Handler",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Attack04",
+                    "modifierName": "Avatar_Sayu_NormalAttack_Hide",
+                    "normalizeEnd": 0.0949999988079071
+                }
+            ],
+            "modifiers": {
+                "Avatar_Sayu_NormalAttack_Hide": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "PositionDampTime": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "PositionDampTime": true,
+                            "visible": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Check",
+            "abilityMixins": [
+                {
+                    "$type": "SkillButtonHoldChargeMixin",
+                    "skillID": 10532,
+                    "nextLoopTriggerID": "NextLoopTrigger",
+                    "endHoldTrigger": "EndHoldTrigger",
+                    "beforeStateIDs": [
+                        "Sayu_ElementalArt_BS"
+                    ],
+                    "chargeLoopStateIDs": [
+                        "Sayu_ElementalArt_Charge"
+                    ],
+                    "chargeLoopDurations": [
+                        3.0
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Avatar_Sayu_ElementalArt_DropBall_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Art"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "PositionDampTime": true,
+                                    "modifierName": "UNIQUE_Strike_DropBall"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Art_Hold"
+                                    ]
+                                },
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Wind"
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Caster",
+                                    "key": "_ABILITY_Sayu_ElementalArt_ClickOrHold_Mark",
+                                    "ratio": 2.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "PositionDampTime": true,
+                                    "modifierName": "UNIQUE_Roll_DropBall"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Strike_DropBall": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "GenerateElemBall",
+                            "PositionDampTime": true,
+                            "configID": 2021,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.5,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "value": 1.0,
+                            "baseEnergy": 6.0
+                        }
+                    ]
+                },
+                "UNIQUE_Roll_DropBall": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "GenerateElemBall",
+                            "PositionDampTime": true,
+                            "configID": 2021,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.5,
+                                    "MJHHBAFNOEG": 0.5
+                                }
+                            },
+                            "value": 1.0,
+                            "baseEnergy": 3.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Avatar_Sayu_ElementalArt_DropBall_Handler"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Click",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Strike"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalArt_Click_EnterCD"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Roll"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalArt_Click_TriggerBullet"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Roll"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalArt_Click_Effect"
+                }
+            ],
+            "abilitySpecials": {
+                "Click_StrikeDamage": 0.0
+            },
+            "modifiers": {
+                "Avatar_Sayu_ElementalArt_Click_EnterCD": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "predicates": [
+                                {
+                                    "$type": "HLKINEFIJDF",
+                                    "skillID": 10532
+                                }
+                            ],
+                            "skillID": 10532,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalArt_Click_TriggerBullet": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Sayu_ElementalArt_ClickOrHold_Mark",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 41053001,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillGadget",
+                            "PositionDampTime": true,
+                            "gadgetInfo": {
+                                "configID": 41053001
+                            }
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalArt_Click_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_HideSpark",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Roll",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Roll_Fade",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 0.5
+                                }
+                            },
+                            "height": 1.7999999523162842,
+                            "EBADGGHGLKN": 2.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "Elemental_Art",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "Click_StrikeDamage",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Wind",
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Default",
+                                "enBreak": 120.0,
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV3",
+                                "retreatType": "ByHitDirection",
+                                "hitHaltTime": 0.019999999552965164,
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.36000001430511475,
+                                "shakeTime": 0.15000000596046448,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.23999999463558197,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Strike",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Bullet",
+            "abilitySpecials": {
+                "Roll_Damage": 0.0
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "DamageByAttackValue",
+                    "target": "Target",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "attackInfo": {
+                        "attackTag": "Elemental_Art_Hold",
+                        "attenuationTag": "Elemental_Art_Wind",
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                            "LIMFCEKGALF": "Roll_Damage",
+                            "JJGGAPONHOE": 0.0,
+                            "elementType": "Wind",
+                            "bonusCriticalHurt": 25.0,
+                            "strikeType": "Default",
+                            "enBreak": 25.0,
+                            "attackType": "Melee",
+                            "damagePercentage": 0.0
+                        },
+                        "hitPattern": {
+                            "onHitEffectName": "default",
+                            "hitImpulseType": "LV2",
+                            "retreatType": "ByHitDirection",
+                            "hitHaltTime": 0.009999999776482582,
+                            "hitHaltTimeScale": 0.05000000074505806
+                        },
+                        "canBeModifiedBy": "OriginOwner"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Hold",
+            "abilityMixins": [
+                {
+                    "$type": "AvatarSteerByCameraMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Hold_Roll"
+                    ],
+                    "angularSpeed": 3600.0
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Hold_Roll"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalArt_Roll_CDHandler"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Hold_Roll"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalArt_Roll_Handler"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Hold_Roll"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalArt_Roll_CloseCollider"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Hold_Roll"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalArt_Roll_Effect"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Hold_Roll"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalArt_Roll_TriggerBullet"
+                }
+            ],
+            "abilitySpecials": {
+                "CD_Count": 0.0,
+                "Hold_StrikeDamage": 0.0,
+                "Hold_Mix_StrikeDamage": 0.0
+            },
+            "modifiers": {
+                "Avatar_Sayu_ElementalArt_Roll_CDHandler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Sayu_ElementalArt_CD_Count",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "PositionDampTime": true,
+                            "globalValueKey": "_ABILITY_Sayu_ElementalArt_CD_Count",
+                            "overrideMapKey": "CD_Count"
+                        },
+                        {
+                            "$type": "AvatarSkillStart",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "HLKINEFIJDF",
+                                    "skillID": 10532
+                                }
+                            ],
+                            "skillID": 10532,
+                            "amountByCasterMaxHPRatio": [
+                                1.0,
+                                "CD_Count",
+                                0.04170000180602074,
+                                "MUL",
+                                "ADD"
+                            ],
+                            "costStaminaDelta": 1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Sayu_ElementalArt_CD_Count",
+                            "useLimitRange": true,
+                            "maxValue": 20.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "PositionDampTime": true,
+                            "globalValueKey": "_ABILITY_Sayu_ElementalArt_CD_Count",
+                            "overrideMapKey": "CD_Count"
+                        },
+                        {
+                            "$type": "AvatarSkillStart",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "HLKINEFIJDF",
+                                    "skillID": 10532
+                                }
+                            ],
+                            "skillID": 10532,
+                            "amountByCasterMaxHPRatio": [
+                                1.0,
+                                "CD_Count",
+                                0.04170000180602074,
+                                "MUL",
+                                "ADD"
+                            ],
+                            "costStaminaDelta": 1.0
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalArt_Roll_Handler": {
+                    "modifierName": "",
+                    "duration": 10.5,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "modifierMixins": [
+                        {
+                            "$type": "SwitchSkillIDMixin",
+                            "priority": "AvatarSpecial",
+                            "skillIndex": 1,
+                            "skillID": 10533
+                        },
+                        {
+                            "$type": "CostStaminaMixin",
+                            "costStaminaRatio": 0.10000000149011612
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 2.0,
+                            "key": "_ABILITY_Sayu_ElementalArt_ClickOrHold_Mark",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "PositionDampTime": true,
+                            "triggerID": "PRIVATE_ElementalArt_End"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "predicates": [
+                                {
+                                    "$type": "FMJPAFDCABA",
+                                    "ACJBNJNEBOC": "MoreThan",
+                                    "PCJDBGELMLA": 1.0
+                                }
+                            ],
+                            "triggerID": "PRIVATE_ElementalArt_End"
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalArt_Roll_CloseCollider": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "passThrough": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "HJEPAPGHHBH": "Default"
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "enable": true,
+                            "HJEPAPGHHBH": "ElementalArt"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true,
+                            "HJEPAPGHHBH": "ElementalArt"
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true,
+                            "enable": true,
+                            "HJEPAPGHHBH": "Default"
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalArt_Roll_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Charge_Spark",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Roll",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Roll_Fade",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalArt_Roll_TriggerBullet": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 41053002,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "RootNode"
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillGadget",
+                            "PositionDampTime": true,
+                            "gadgetInfo": {
+                                "configID": 41053002
+                            }
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "KillGadget",
+                            "PositionDampTime": true,
+                            "gadgetInfo": {
+                                "configID": 41053002
+                            }
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalArt_Hold_Strike": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": -0.5,
+                                            "MJHHBAFNOEG": 0.5
+                                        }
+                                    },
+                                    "height": 2.5,
+                                    "EBADGGHGLKN": 3.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Art",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Hold_StrikeDamage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Wind",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 200.0,
+                                        "attackType": "Melee",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "retreatType": "ByHitDirection",
+                                        "hitHaltTime": 0.019999999552965164,
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "cameraShake": {
+                                        "shakeType": "CustomVector",
+                                        "shakeRange": 0.36000001430511475,
+                                        "shakeTime": 0.15000000596046448,
+                                        "shakeDistance": 30.0,
+                                        "shakeDir": {
+                                            "y": 1.0
+                                        },
+                                        "extension": {
+                                            "baseCycle": 0.23999999463558197,
+                                            "cycleDamping": 0.0,
+                                            "rangeAttenuation": 0.30000001192092896
+                                        }
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "ratio": 0.0,
+                                    "PLDDAFOIEGE": true
+                                }
+                            ],
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Hold_Strike",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "ratio": 1.0,
+                                    "PLDDAFOIEGE": true
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "TriggerAttackEvent",
+                                    "attackEvent": {
+                                        "attackPattern": {
+                                            "$type": "FPEIAHONPIH",
+                                            "triggerType": "TriggerNoRepeat",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "offset": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": -0.5,
+                                                    "MJHHBAFNOEG": 0.5
+                                                }
+                                            },
+                                            "height": 2.5,
+                                            "EBADGGHGLKN": 3.0
+                                        },
+                                        "attackInfo": {
+                                            "attackTag": "Elemental_Art",
+                                            "attenuationTag": "",
+                                            "attenuationGroup": "default",
+                                            "attackProperty": {
+                                                "LIMFCEKGALF": "Hold_Mix_StrikeDamage",
+                                                "JJGGAPONHOE": 0.0,
+                                                "elementType": "Fire",
+                                                "bonusCriticalHurt": 25.0,
+                                                "strikeType": "Default",
+                                                "enBreak": 0.0,
+                                                "attackType": "Melee",
+                                                "damagePercentage": 0.0
+                                            },
+                                            "hitPattern": {
+                                                "onHitEffectName": "default",
+                                                "hitImpulseType": "LV3",
+                                                "retreatType": "ByHitDirection",
+                                                "hitHaltTimeScale": 0.05000000074505806
+                                            }
+                                        }
+                                    },
+                                    "targetType": "Enemy"
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Hold_Strike_Fire",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "ratio": 2.0,
+                                    "PLDDAFOIEGE": true
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "TriggerAttackEvent",
+                                    "attackEvent": {
+                                        "attackPattern": {
+                                            "$type": "FPEIAHONPIH",
+                                            "triggerType": "TriggerNoRepeat",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "offset": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": -0.5,
+                                                    "MJHHBAFNOEG": 0.5
+                                                }
+                                            },
+                                            "height": 2.5,
+                                            "EBADGGHGLKN": 3.0
+                                        },
+                                        "attackInfo": {
+                                            "attackTag": "Elemental_Art",
+                                            "attenuationTag": "",
+                                            "attenuationGroup": "default",
+                                            "attackProperty": {
+                                                "LIMFCEKGALF": "Hold_Mix_StrikeDamage",
+                                                "JJGGAPONHOE": 0.0,
+                                                "elementType": "Water",
+                                                "bonusCriticalHurt": 25.0,
+                                                "strikeType": "Default",
+                                                "enBreak": 0.0,
+                                                "attackType": "Melee",
+                                                "damagePercentage": 0.0
+                                            },
+                                            "hitPattern": {
+                                                "onHitEffectName": "default",
+                                                "hitImpulseType": "LV3",
+                                                "retreatType": "ByHitDirection",
+                                                "hitHaltTimeScale": 0.05000000074505806
+                                            }
+                                        }
+                                    },
+                                    "targetType": "Enemy"
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Hold_Strike_Water",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "ratio": 3.0,
+                                    "PLDDAFOIEGE": true
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "TriggerAttackEvent",
+                                    "attackEvent": {
+                                        "attackPattern": {
+                                            "$type": "FPEIAHONPIH",
+                                            "triggerType": "TriggerNoRepeat",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "offset": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": -0.5,
+                                                    "MJHHBAFNOEG": 0.5
+                                                }
+                                            },
+                                            "height": 2.5,
+                                            "EBADGGHGLKN": 3.0
+                                        },
+                                        "attackInfo": {
+                                            "attackTag": "Elemental_Art",
+                                            "attenuationTag": "",
+                                            "attenuationGroup": "default",
+                                            "attackProperty": {
+                                                "LIMFCEKGALF": "Hold_Mix_StrikeDamage",
+                                                "JJGGAPONHOE": 0.0,
+                                                "elementType": "Electric",
+                                                "bonusCriticalHurt": 25.0,
+                                                "strikeType": "Default",
+                                                "enBreak": 0.0,
+                                                "attackType": "Melee",
+                                                "damagePercentage": 0.0
+                                            },
+                                            "hitPattern": {
+                                                "onHitEffectName": "default",
+                                                "hitImpulseType": "LV3",
+                                                "retreatType": "ByHitDirection",
+                                                "hitHaltTimeScale": 0.05000000074505806
+                                            }
+                                        }
+                                    },
+                                    "targetType": "Enemy"
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Hold_Strike_Electric",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "ratio": 4.0,
+                                    "PLDDAFOIEGE": true
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "TriggerAttackEvent",
+                                    "attackEvent": {
+                                        "attackPattern": {
+                                            "$type": "FPEIAHONPIH",
+                                            "triggerType": "TriggerNoRepeat",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "offset": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": -0.5,
+                                                    "MJHHBAFNOEG": 0.5
+                                                }
+                                            },
+                                            "height": 2.5,
+                                            "EBADGGHGLKN": 3.0
+                                        },
+                                        "attackInfo": {
+                                            "attackTag": "Elemental_Art",
+                                            "attenuationTag": "",
+                                            "attenuationGroup": "default",
+                                            "attackProperty": {
+                                                "LIMFCEKGALF": "Hold_Mix_StrikeDamage",
+                                                "JJGGAPONHOE": 0.0,
+                                                "elementType": "Ice",
+                                                "bonusCriticalHurt": 25.0,
+                                                "strikeType": "Default",
+                                                "enBreak": 0.0,
+                                                "attackType": "Melee",
+                                                "damagePercentage": 0.0
+                                            },
+                                            "hitPattern": {
+                                                "onHitEffectName": "default",
+                                                "hitImpulseType": "LV3",
+                                                "retreatType": "ByHitDirection",
+                                                "hitHaltTimeScale": 0.05000000074505806
+                                            }
+                                        }
+                                    },
+                                    "targetType": "Enemy"
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Hold_Strike_Ice",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Avatar_Sayu_ElementalArt_Hold_Strike"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Roll_TriggerFire",
+            "onAbilityStart": [
+                {
+                    "$type": "SendEffectTrigger",
+                    "parameter": "Get_Fire",
+                    "attachPoint": "",
+                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Roll"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Roll_TriggerWater",
+            "onAbilityStart": [
+                {
+                    "$type": "SendEffectTrigger",
+                    "parameter": "Get_Water",
+                    "attachPoint": "",
+                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Roll"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Roll_TriggerElectric",
+            "onAbilityStart": [
+                {
+                    "$type": "SendEffectTrigger",
+                    "parameter": "Get_Electric",
+                    "attachPoint": "",
+                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Roll"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Roll_TriggerIce",
+            "onAbilityStart": [
+                {
+                    "$type": "SendEffectTrigger",
+                    "parameter": "Get_Ice",
+                    "attachPoint": "",
+                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalArt_Roll"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Roll_Bullet",
+            "abilitySpecials": {
+                "Roll_Damage": 0.0,
+                "MixRoll_Damage": 0.0
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "DamageByAttackValue",
+                    "target": "Target",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "attackInfo": {
+                        "attackTag": "Elemental_Art_Hold",
+                        "attenuationTag": "Elemental_Art_Wind",
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                            "LIMFCEKGALF": "Roll_Damage",
+                            "JJGGAPONHOE": 0.0,
+                            "elementType": "Wind",
+                            "bonusCriticalHurt": 25.0,
+                            "strikeType": "Default",
+                            "enBreak": 25.0,
+                            "attackType": "Melee",
+                            "damagePercentage": 0.0
+                        },
+                        "hitPattern": {
+                            "onHitEffectName": "default",
+                            "hitImpulseType": "LV2",
+                            "retreatType": "ByHitDirection",
+                            "hitHaltTime": 0.009999999776482582,
+                            "hitHaltTimeScale": 0.05000000074505806
+                        },
+                        "canBeModifiedBy": "OriginOwner"
+                    }
+                },
+                {
+                    "$type": "DamageByAttackValue",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "attackInfo": {
+                        "attackTag": "Elemental_Art_Hold",
+                        "attenuationTag": "Elemental_Art_Fire",
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                            "LIMFCEKGALF": "MixRoll_Damage",
+                            "JJGGAPONHOE": 0.0,
+                            "elementType": "Fire",
+                            "bonusCriticalHurt": 25.0,
+                            "strikeType": "Default",
+                            "enBreak": 0.0,
+                            "attackType": "Melee",
+                            "damagePercentage": 0.0
+                        },
+                        "hitPattern": {
+                            "onHitEffectName": "default",
+                            "hitImpulseType": "LV2",
+                            "retreatType": "ByHitDirection",
+                            "hitHaltTimeScale": 0.05000000074505806
+                        },
+                        "canBeModifiedBy": "OriginOwner"
+                    }
+                },
+                {
+                    "$type": "DamageByAttackValue",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                            "ratio": 2.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "attackInfo": {
+                        "attackTag": "Elemental_Art_Hold",
+                        "attenuationTag": "Elemental_Art_Water",
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                            "LIMFCEKGALF": "MixRoll_Damage",
+                            "JJGGAPONHOE": 0.0,
+                            "elementType": "Water",
+                            "bonusCriticalHurt": 25.0,
+                            "strikeType": "Default",
+                            "enBreak": 0.0,
+                            "attackType": "Melee",
+                            "damagePercentage": 0.0
+                        },
+                        "hitPattern": {
+                            "onHitEffectName": "default",
+                            "hitImpulseType": "LV2",
+                            "retreatType": "ByHitDirection",
+                            "hitHaltTimeScale": 0.05000000074505806
+                        },
+                        "canBeModifiedBy": "OriginOwner"
+                    }
+                },
+                {
+                    "$type": "DamageByAttackValue",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                            "ratio": 3.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "attackInfo": {
+                        "attackTag": "Elemental_Art_Hold",
+                        "attenuationTag": "Elemental_Art_Electric",
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                            "LIMFCEKGALF": "MixRoll_Damage",
+                            "JJGGAPONHOE": 0.0,
+                            "elementType": "Electric",
+                            "bonusCriticalHurt": 25.0,
+                            "strikeType": "Default",
+                            "enBreak": 0.0,
+                            "attackType": "Melee",
+                            "damagePercentage": 0.0
+                        },
+                        "hitPattern": {
+                            "onHitEffectName": "default",
+                            "hitImpulseType": "LV2",
+                            "retreatType": "ByHitDirection",
+                            "hitHaltTimeScale": 0.05000000074505806
+                        },
+                        "canBeModifiedBy": "OriginOwner"
+                    }
+                },
+                {
+                    "$type": "DamageByAttackValue",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                            "ratio": 4.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "attackInfo": {
+                        "attackTag": "Elemental_Art_Hold",
+                        "attenuationTag": "Elemental_Art_Ice",
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                            "LIMFCEKGALF": "MixRoll_Damage",
+                            "JJGGAPONHOE": 0.0,
+                            "elementType": "Ice",
+                            "bonusCriticalHurt": 25.0,
+                            "strikeType": "Default",
+                            "enBreak": 0.0,
+                            "attackType": "Melee",
+                            "damagePercentage": 0.0
+                        },
+                        "hitPattern": {
+                            "onHitEffectName": "default",
+                            "hitImpulseType": "LV2",
+                            "retreatType": "ByHitDirection",
+                            "hitHaltTimeScale": 0.05000000074505806
+                        },
+                        "canBeModifiedBy": "OriginOwner"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalArt_Roll_Mix",
+            "abilityMixins": [
+                {
+                    "$type": "ElementHittingOtherPredicatedMixin",
+                    "prePredicates": [
+                        {
+                            "$type": "GLBJFGGNGGD",
+                            "attackTags": [
+                                "Sayu_ElementalArt_Mix_Detect"
+                            ]
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "elementBatchPredicateds": [
+                        {
+                            "elementTypeArr": [
+                                "Fire"
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "PositionDampTime": true,
+                                    "ratio": 1.0,
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "OriginOwner",
+                                    "PositionDampTime": true,
+                                    "ratio": 1.0,
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "Sayu_ElementalArt_Mix_Fire"
+                                },
+                                {
+                                    "$type": "AttachModifier",
+                                    "modifierName": "Mix_To_Fire"
+                                }
+                            ]
+                        },
+                        {
+                            "elementTypeArr": [
+                                "Water"
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "PositionDampTime": true,
+                                    "ratio": 2.0,
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "OriginOwner",
+                                    "PositionDampTime": true,
+                                    "ratio": 2.0,
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "Sayu_ElementalArt_Mix_Water"
+                                },
+                                {
+                                    "$type": "AttachModifier",
+                                    "modifierName": "Mix_To_Water"
+                                }
+                            ]
+                        },
+                        {
+                            "elementTypeArr": [
+                                "Electric"
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "PositionDampTime": true,
+                                    "ratio": 3.0,
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "OriginOwner",
+                                    "PositionDampTime": true,
+                                    "ratio": 3.0,
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "Sayu_ElementalArt_Mix_Electric"
+                                }
+                            ]
+                        },
+                        {
+                            "elementTypeArr": [
+                                "Ice",
+                                "Frozen"
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "PositionDampTime": true,
+                                    "ratio": 4.0,
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "OriginOwner",
+                                    "PositionDampTime": true,
+                                    "ratio": 4.0,
+                                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "AttachModifier",
+                                    "modifierName": "Sayu_ElementalArt_Mix_Ice"
+                                },
+                                {
+                                    "$type": "AttachModifier",
+                                    "modifierName": "Mix_To_Froze"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Sayu_ElementalArt_Mix_Detect_Pre": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_ABILITY_Sayu_ElementalArt_MixType",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                100.0
+                            ],
+                            "modifierNameSteps": [
+                                "Sayu_ElementalArt_Mix_Detect",
+                                "Blank"
+                            ]
+                        }
+                    ]
+                },
+                "Blank": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Sayu_ElementalArt_Mix_Detect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.20000000298023224,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": -0.5,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "PPABILOOIJI": true,
+                                    "height": 1.5,
+                                    "EBADGGHGLKN": 1.2000000476837158
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Sayu_ElementalArt_Mix_Detect",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "AntiFire",
+                                        "bonusCriticalHurt": 1.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    }
+                                }
+                            },
+                            "targetType": "All"
+                        }
+                    ]
+                },
+                "Sayu_ElementalArt_Mix_Fire": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "OriginOwner",
+                            "abilityName": "Avatar_Sayu_ElementalArt_Roll_TriggerFire"
+                        }
+                    ]
+                },
+                "Sayu_ElementalArt_Mix_Water": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "OriginOwner",
+                            "abilityName": "Avatar_Sayu_ElementalArt_Roll_TriggerWater"
+                        }
+                    ]
+                },
+                "Sayu_ElementalArt_Mix_Electric": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "OriginOwner",
+                            "abilityName": "Avatar_Sayu_ElementalArt_Roll_TriggerElectric"
+                        }
+                    ]
+                },
+                "Sayu_ElementalArt_Mix_Ice": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "OriginOwner",
+                            "abilityName": "Avatar_Sayu_ElementalArt_Roll_TriggerIce"
+                        }
+                    ]
+                },
+                "Mix_To_Froze": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.20000000298023224,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "IHDPLNOPPMG": "OnlyGrassAndWater",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "none",
+                                        "hitImpulseType": "LV0"
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "Mix_To_Water": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.20000000298023224,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "IHDPLNOPPMG": "OnlyGrass",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "none",
+                                        "hitImpulseType": "LV0"
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "Mix_To_Fire": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.20000000298023224,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "IHDPLNOPPMG": "OnlyGrass",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "none",
+                                        "hitImpulseType": "LV0"
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "PositionDampTime": true,
+                    "ratio": 0.0,
+                    "key": "_ABILITY_Sayu_ElementalArt_MixType",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Sayu_ElementalArt_Mix_Detect_Pre"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalBurst",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalBurst"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalBurst_Initialize"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Sayu_ElementalBurst",
+                    "modifierName": "Avatar_Sayu_ElementalBurst_Camera_Handler"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Sayu_ElementalBurst",
+                    "modifierName": "Avatar_Sayu_ElementalBurst_Strike",
+                    "normalizeStart": 0.15800000727176666
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Sayu_ElementalBurst",
+                    "modifierName": "Avatar_Sayu_ElementalBurst_Heal",
+                    "normalizeStart": 0.15800000727176666
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalBurst",
+                        "Sayu_ElementalBurst_AS"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalBurst_EmotionControl"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalBurst",
+                        "Sayu_ElementalBurst_AS"
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalBurst_Invincible"
+                }
+            ],
+            "abilitySpecials": {
+                "Damage_Ratio": 0.0,
+                "Heal_BaseAmount": 0.0,
+                "Heal_AttackRatio": 0.0
+            },
+            "modifiers": {
+                "Avatar_Sayu_ElementalBurst_Initialize": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "predicates": [
+                                {
+                                    "$type": "HLKINEFIJDF",
+                                    "skillID": 10535
+                                }
+                            ],
+                            "skillID": 10535,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "KillGadget",
+                            "gadgetInfo": {
+                                "configID": 41053003
+                            }
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_Camera_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "AvatarCameraParam",
+                            "PositionDampTime": true,
+                            "cameraParam": {
+                                "forceRadius": 5.0,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "AvatarCameraParam",
+                            "PositionDampTime": true,
+                            "cameraParam": {
+                                "forceRadius": 5.0,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_EmotionControl": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableHeadControl",
+                            "blend": false
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableHeadControl",
+                            "PositionDampTime": true,
+                            "enable": true
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "EnableHeadControl",
+                            "PositionDampTime": true,
+                            "enable": true
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_Invincible": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible",
+                    "onAdded": [
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 11002
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_CameraBlur": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ActCameraRadialBlur",
+                            "cameraRadialBlur": {
+                                "power": 0.800000011920929,
+                                "blurTime": 0.20000000298023224,
+                                "fadeTime": 0.20000000298023224
+                            }
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_TriggerDaruma": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalBurst_Spark",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 1.5
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "LPHIFJDFKHI": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 180.0,
+                                        "MJHHBAFNOEG": 0.0
+                                    }
+                                }
+                            },
+                            "gadgetID": 41053003,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_Strike": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_ElementalBurst_Strike",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": -1.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 3.0,
+                                    "EBADGGHGLKN": 4.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Burst",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Damage_Ratio",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Wind",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 200.0,
+                                        "attackType": "Range",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "retreatType": "ByHitDirection",
+                                        "hitHaltTime": 0.019999999552965164,
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_Heal": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HealHP",
+                            "target": "AllPlayerAvatars",
+                            "predicates": [
+                                {
+                                    "$type": "OMMNCGCCJEK",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 40.0
+                                }
+                            ],
+                            "JPKNCEBHPHF": "Heal_BaseAmount",
+                            "amountByCasterAttackRatio": "Heal_AttackRatio",
+                            "cdRatio": ""
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Avatar_Sayu_ElementalBurst_TriggerDaruma"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Avatar_Sayu_ElementalBurst_CameraBlur"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_ElementalBurst_Phantom",
+            "abilitySpecials": {
+                "Constellation_6_Heal": 0.0,
+                "Constellation_6_Damage": 0.0,
+                "Damage_Ratio": 0.0,
+                "Heal_BaseAmount": 0.0,
+                "Heal_AttackRatio": 0.0,
+                "PermanentSkill_2_RangeRatio": 0.0,
+                "Constellation_6_PerMasteryHeal": 0.0,
+                "Constellation_6_MaxHeal": 0.0,
+                "Constellation_6_PerMasteryDamage": 0.0,
+                "Constellation_6_MaxDamage": 0.0
+            },
+            "modifiers": {
+                "Avatar_Sayu_ElementalBurst_Phantom_Delay": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Avatar_Sayu_ElementalBurst_Phantom_Handler"
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_Phantom_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.5,
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_Sayu_Phantom_HasAvatar",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_Sayu_Phantom_HasMonster",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 1,
+                                "entityTypePriority": [
+                                    "Avatar"
+                                ],
+                                "sortType": "Nearest",
+                                "shapeName": "CircleR10H8",
+                                "campTargetType": "SelfCamp",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_ABILITY_Sayu_Phantom_HasAvatar",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 1,
+                                "entityTypePriority": [
+                                    "Monster"
+                                ],
+                                "sortType": "Nearest",
+                                "shapeName": "CircleR10H8",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_ABILITY_Sayu_Phantom_HasMonster",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_Sayu_Phantom_BulletType",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 1,
+                                "entityTypePriority": [
+                                    "Avatar"
+                                ],
+                                "sortType": "LowHpRatio",
+                                "shapeName": "CircleR10H8",
+                                "campTargetType": "SelfCamp",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "DCOBBFPJDNP",
+                                    "logic": "LesserOrEqual",
+                                    "CNMKEMBMAFE": 0.699999988079071
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_ABILITY_Sayu_Phantom_BulletType",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_Phantom_HasMonster",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "Predicated",
+                                    "otherTargets": {
+                                        "$type": "JGOEKECMJLH",
+                                        "topLimit": 1,
+                                        "entityTypePriority": [
+                                            "Avatar"
+                                        ],
+                                        "sortType": "LowHpRatio",
+                                        "shapeName": "CircleR10H8",
+                                        "campTargetType": "SelfCamp",
+                                        "OHJFACHECDC": 1.0
+                                    },
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Avatar"
+                                            ]
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "SetGlobalValue",
+                                            "ratio": 1.0,
+                                            "key": "_ABILITY_Sayu_Phantom_BulletType",
+                                            "maxValue": 0.0,
+                                            "minValue": 0.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Sayu_Constellation_1"
+                                }
+                            ],
+                            "ratio": 2.0,
+                            "key": "_ABILITY_Sayu_Phantom_BulletType",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Avatar_Sayu_ElementalBurst_Phantom_PlayAnim"
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_Phantom_PlayAnim": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_Phantom_BulletType",
+                                    "ratio": 0.0
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_Phantom_HasMonster",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "Attack",
+                                    "MPTriggerOnRemote": true
+                                },
+                                {
+                                    "$type": "SetSelfAttackTarget",
+                                    "otherTargets": {
+                                        "$type": "JGOEKECMJLH",
+                                        "topLimit": 1,
+                                        "entityTypePriority": [
+                                            "Monster"
+                                        ],
+                                        "sortType": "Nearest",
+                                        "shapeName": "CircleR10H8",
+                                        "campTargetType": "Enemy",
+                                        "OHJFACHECDC": 1.0
+                                    },
+                                    "turnToTargetImmediately": true
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_Phantom_BulletType",
+                                    "ratio": 1.0
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_Phantom_HasAvatar",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "Heal",
+                                    "MPTriggerOnRemote": true
+                                },
+                                {
+                                    "$type": "SetSelfAttackTarget",
+                                    "otherTargets": {
+                                        "$type": "JGOEKECMJLH",
+                                        "topLimit": 1,
+                                        "entityTypePriority": [
+                                            "Avatar"
+                                        ],
+                                        "sortType": "LowHpRatio",
+                                        "shapeName": "CircleR10H8",
+                                        "campTargetType": "SelfCamp",
+                                        "OHJFACHECDC": 1.0
+                                    },
+                                    "turnToTargetImmediately": true
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Sayu_Phantom_BulletType",
+                                    "ratio": 2.0
+                                },
+                                {
+                                    "$type": "NNBKBBILDGO",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_Sayu_Phantom_HasMonster",
+                                            "ratio": 1.0
+                                        },
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_Sayu_Phantom_HasAvatar",
+                                            "ratio": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "Break",
+                                    "MPTriggerOnRemote": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Phantom_Life_Handler": {
+                    "modifierName": "",
+                    "duration": 12.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ResetAnimatorTrigger",
+                            "triggerID": "Die"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Daruma_Born",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Daruma_Field",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "Die",
+                            "MPTriggerOnRemote": true
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Avatar_Sayu_ElementalBurst_Phantom_Handler"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Phantom_KillSelf_Delay"
+                        }
+                    ]
+                },
+                "Phantom_KillSelf_Delay": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Daruma_Die",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_Phantom_Heal": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Caster",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Sayu_PermanentSkill_2"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "HealHP",
+                                    "JPKNCEBHPHF": [
+                                        "Heal_BaseAmount",
+                                        "Constellation_6_Heal",
+                                        "ADD"
+                                    ],
+                                    "amountByCasterAttackRatio": "Heal_AttackRatio",
+                                    "cdRatio": ""
+                                },
+                                {
+                                    "$type": "HealHP",
+                                    "otherTargets": {
+                                        "$type": "JGOEKECMJLH",
+                                        "topLimit": 5,
+                                        "entityTypePriority": [
+                                            "Avatar"
+                                        ],
+                                        "sortType": "Nearest",
+                                        "shapeName": "CircleR6",
+                                        "campTargetType": "SelfCamp",
+                                        "OHJFACHECDC": 1.0
+                                    },
+                                    "predicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Avatar"
+                                            ]
+                                        },
+                                        {
+                                            "$type": "NIGFAMEJKPF",
+                                            "EHPIEHBDNAA": false
+                                        }
+                                    ],
+                                    "JPKNCEBHPHF": [
+                                        "Heal_BaseAmount",
+                                        "PermanentSkill_2_RangeRatio",
+                                        "MUL",
+                                        "Constellation_6_Heal",
+                                        "PermanentSkill_2_RangeRatio",
+                                        "MUL",
+                                        "ADD"
+                                    ],
+                                    "amountByCasterAttackRatio": [
+                                        "Heal_AttackRatio",
+                                        "PermanentSkill_2_RangeRatio",
+                                        "MUL"
+                                    ],
+                                    "cdRatio": ""
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Daruma_HealSingle",
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Daruma_HealZone",
+                                    "effectTempleteID": -1.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "HealHP",
+                                    "JPKNCEBHPHF": [
+                                        "Heal_BaseAmount",
+                                        "Constellation_6_Heal",
+                                        "ADD"
+                                    ],
+                                    "amountByCasterAttackRatio": "Heal_AttackRatio",
+                                    "cdRatio": ""
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Daruma_HealSingle",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_Phantom_Attack": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Caster",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Sayu_PermanentSkill_2"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "TriggerAttackEvent",
+                                    "target": "Caster",
+                                    "attackEvent": {
+                                        "attackPattern": {
+                                            "$type": "FPEIAHONPIH",
+                                            "triggerType": "TriggerNoRepeat",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "offset": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": -0.5,
+                                                    "MJHHBAFNOEG": 0.0
+                                                }
+                                            },
+                                            "height": 2.5,
+                                            "EBADGGHGLKN": 3.5
+                                        },
+                                        "attackInfo": {
+                                            "attackTag": "Elemental_Burst",
+                                            "attenuationTag": "Elemental_Burst",
+                                            "attenuationGroup": "default",
+                                            "attackProperty": {
+                                                "LIMFCEKGALF": [
+                                                    "Damage_Ratio",
+                                                    "Constellation_6_Damage",
+                                                    "ADD"
+                                                ],
+                                                "JJGGAPONHOE": 0.0,
+                                                "elementType": "Wind",
+                                                "bonusCriticalHurt": 25.0,
+                                                "strikeType": "Default",
+                                                "enBreak": 50.0,
+                                                "damagePercentage": 0.0
+                                            },
+                                            "hitPattern": {
+                                                "onHitEffectName": "default",
+                                                "hitImpulseType": "LV3",
+                                                "hitHaltTimeScale": 0.05000000074505806
+                                            },
+                                            "canBeModifiedBy": "OriginOwner"
+                                        }
+                                    },
+                                    "targetType": "Enemy"
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Daruma_AttackZone",
+                                    "effectTempleteID": -1.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "TriggerAttackEvent",
+                                    "target": "Caster",
+                                    "attackEvent": {
+                                        "attackPattern": {
+                                            "$type": "DALACABODFA",
+                                            "triggerType": "TriggerNoRepeat",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "offset": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": 0.800000011920929,
+                                                    "MJHHBAFNOEG": 0.0
+                                                }
+                                            },
+                                            "EBADGGHGLKN": 1.0
+                                        },
+                                        "attackInfo": {
+                                            "attackTag": "Elemental_Burst",
+                                            "attenuationTag": "Elemental_Burst",
+                                            "attenuationGroup": "default",
+                                            "attackProperty": {
+                                                "LIMFCEKGALF": [
+                                                    "Damage_Ratio",
+                                                    "Constellation_6_Damage",
+                                                    "ADD"
+                                                ],
+                                                "JJGGAPONHOE": 0.0,
+                                                "elementType": "Wind",
+                                                "bonusCriticalHurt": 25.0,
+                                                "strikeType": "Default",
+                                                "enBreak": 50.0,
+                                                "damagePercentage": 0.0
+                                            },
+                                            "hitPattern": {
+                                                "onHitEffectName": "default",
+                                                "hitImpulseType": "LV3",
+                                                "hitHaltTimeScale": 0.05000000074505806
+                                            },
+                                            "canBeModifiedBy": "OriginOwner"
+                                        }
+                                    },
+                                    "targetType": "Enemy"
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Daruma_AttackSingle",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Avatar_Sayu_ElementalBurst_Phantom_AttackAndHeal": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 1,
+                                "entityTypePriority": [
+                                    "Avatar"
+                                ],
+                                "sortType": "LowHpRatio",
+                                "shapeName": "CircleR10H8",
+                                "campTargetType": "SelfCamp",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "Avatar_Sayu_ElementalBurst_Phantom_Heal"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 1,
+                                "entityTypePriority": [
+                                    "Monster"
+                                ],
+                                "sortType": "Nearest",
+                                "shapeName": "CircleR10H8",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "modifierName": "Avatar_Sayu_ElementalBurst_Phantom_Attack"
+                        }
+                    ]
+                },
+                "Avatar_Sayu_Constellation_6_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Sayu_Constellation_6"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": [
+                                        "FIGHT_PROP_ELEMENT_MASTERY",
+                                        "Constellation_6_PerMasteryHeal",
+                                        "MUL"
+                                    ],
+                                    "key": "_ABILITY_Sayu_Constellation_6_HealValue",
+                                    "useLimitRange": true,
+                                    "maxValue": "Constellation_6_MaxHeal",
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "SetGlobalValueToOverrideMap",
+                                    "globalValueKey": "_ABILITY_Sayu_Constellation_6_HealValue",
+                                    "overrideMapKey": "Constellation_6_Heal"
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": [
+                                        "FIGHT_PROP_ELEMENT_MASTERY",
+                                        "Constellation_6_PerMasteryDamage",
+                                        "MUL"
+                                    ],
+                                    "key": "_ABILITY_Sayu_Constellation_6_Damage",
+                                    "useLimitRange": true,
+                                    "maxValue": "Constellation_6_MaxDamage",
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "SetGlobalValueToOverrideMap",
+                                    "globalValueKey": "_ABILITY_Sayu_Constellation_6_Damage",
+                                    "overrideMapKey": "Constellation_6_Damage"
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "SetOverrideMapValue",
+                                    "ratio": 0.0,
+                                    "overrideMapKey": "Constellation_6_Heal",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "SetOverrideMapValue",
+                                    "ratio": 0.0,
+                                    "overrideMapKey": "Constellation_6_Damage",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Avatar_Sayu_ElementalBurst_Phantom_Delay"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Phantom_Life_Handler"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Avatar_Sayu_Constellation_6_Handler"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Caster",
+                            "key": "_ABILITY_Sayu_Phantom_BulletType",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalBurst_Phantom_Attack"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Caster",
+                            "key": "_ABILITY_Sayu_Phantom_BulletType",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalBurst_Phantom_Heal"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_Sayu_Phantom_BulletType",
+                            "ratio": 2.0
+                        }
+                    ],
+                    "modifierName": "Avatar_Sayu_ElementalBurst_Phantom_AttackAndHeal"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_FallingAnthem",
+            "abilityMixins": [
+                {
+                    "$type": "AvatarChangeSkillMixin",
+                    "jumpSkillID": 5053010,
+                    "flySkillID": 5053010
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_BS_Material"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "FallingAnthem_Loop_Normal"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS_2",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_Loop_Low"
+                    ],
+                    "modifierName": "FallingAnthem_LoopDamage"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_BS_VelocityForce_Initialize"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_Height_Detect"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_FallingDamageImmune_01"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "Inertia"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_OverHead_Camera"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_ClearVelocityForce"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "FallingAnthem_AttachSelfEffect"
+                }
+            ],
+            "abilitySpecials": {
+                "FallingAnthem_Normal_Loop_Damage": 0.0,
+                "FallingAnthem_Normal_Rank_1_Damage": 0.0,
+                "FallingAnthem_Normal_Rank_2_Damage": 0.0,
+                "FallingAnthem_Altitude_Lv0": 20.0,
+                "FallingAnthem_Altitude_Lv1": 40.0,
+                "FallingAnthem_Altitude_Lv2": 60.0,
+                "FallingAnthem_Altitude_Lv3": 100.0,
+                "FallingAnthem_Altitude_Lv4": 200.0,
+                "FallingAnthem_FallingDamageRatio_Lv0": -1.0,
+                "FallingAnthem_FallingDamageRatio_Lv1": -1.0,
+                "FallingAnthem_FallingDamageRatio_Lv2": -0.8999999761581421,
+                "FallingAnthem_FallingDamageRatio_Lv3": -0.800000011920929,
+                "FallingAnthem_FallingDamageRatio_Lv4": -0.6000000238418579,
+                "FallingAnthem_FallingDamageRatio": 0.0
+            },
+            "modifiers": {
+                "FallingAnthem_AttachSelfEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_BS_Material": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_BS",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_BS_VelocityForce_Initialize": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_LoopDamage": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.30000001192092896,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 1.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "FallingAttack",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "FallingAnthem_Normal_Loop_Damage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "overrideByWeapon": true,
+                                        "strikeType": "Slash",
+                                        "enBreak": 35.0,
+                                        "attackType": "Melee",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ClearGlobalValue",
+                            "key": "_ABILITY_FallingAttack_Altitude"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv0"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv1"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv0"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv2"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv1"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv3"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv2"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv3"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "FallingAnthem_FallingDamageImmune_02"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_ABILITY_FallingAttack_Altitude",
+                            "overrideMapKey": "FallingAnthem_FallingDamageRatio"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "FallingAnthem_FallingDamageImmune_03"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_03": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
+                    }
+                },
+                "FallingAnthem_Loop_Normal": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -1.0,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "FallingAnthem_Loop_Normal_Rank_1",
+                                "FallingAnthem_Loop_Normal_Rank_2"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_Loop_Normal_Rank_1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Loop_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_Loop_Normal_Rank_2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Loop_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Inertia": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ApplyInertiaVelocityMixin",
+                            "useXZ": false,
+                            "useY": false
+                        }
+                    ]
+                },
+                "FallingAnthem_Height_Detect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "ratio": 0.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "ratio": 5.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "FallingAnthem_OverHead_Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarCameraParam",
+                            "predicates": [
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Equal",
+                                    "ratio": 1.0,
+                                    "parameter": "FallingAnthem_UseCamera"
+                                }
+                            ],
+                            "cameraParam": {
+                                "forceRadius": 4.5,
+                                "forceRadiusDuration": 0.20000000298023224,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "FallingAnthem_OverHead_Camera_Remover": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        }
+                    ]
+                },
+                "FallingAnthem_Landed_Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarCameraParam",
+                            "predicates": [
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Equal",
+                                    "ratio": 1.0,
+                                    "parameter": "FallingAnthem_UseCamera"
+                                }
+                            ],
+                            "cameraParam": {
+                                "forceRadius": 6.0,
+                                "forceRadiusDuration": 0.10000000149011612,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "FallingAnthem_ClearVelocityForce": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType",
+                                "InertiaType"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "FallingAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_1_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 25.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Blunt",
+                                "enBreak": 150.0,
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV4",
+                                "hitHaltTimeScale": 0.10000000149011612
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.23999999463558197,
+                                "shakeTime": 0.11999999731779099,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.23999999463558197,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 5.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "FallingAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_2_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 25.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Blunt",
+                                "enBreak": 200.0,
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV7",
+                                "hitHaltTimeScale": 0.10000000149011612
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.5,
+                                "shakeTime": 0.20000000298023224,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0,
+                                    "z": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.4000000059604645,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_01",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_02",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_NormalAttack_DamageHandler",
+            "abilityMixins": [
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK01"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_01_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK02"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_02_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK03_1"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_03_1_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK03_2"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_03_2_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK04"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_04_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ExtraAttack1"
+                    ],
+                    "LIMFCEKGALF": "ExtraAttack_1_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ExtraAttack2"
+                    ],
+                    "LIMFCEKGALF": "ExtraAttack_2_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                }
+            ],
+            "abilitySpecials": {
+                "NormalAttack_01_DamagePercentage": 0.0,
+                "NormalAttack_02_DamagePercentage": 0.0,
+                "NormalAttack_03_1_DamagePercentage": 0.0,
+                "NormalAttack_03_2_DamagePercentage": 0.0,
+                "NormalAttack_04_DamagePercentage": 0.0,
+                "ExtraAttack_1_DamagePercentage": 0.0,
+                "ExtraAttack_2_DamagePercentage": 0.0
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_PermanentSkill_1",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByElementReactionMixin",
+                    "entityTypes": [
+                        "Monster"
+                    ],
+                    "reactionTypes": [
+                        "SwirlFire",
+                        "SwirlWater",
+                        "SwirlElectric",
+                        "SwirlIce"
+                    ],
+                    "actions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Sayu_PermanentSkill_1_HealHp"
+                        }
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "Heal_BaseAmount": 0.0,
+                "Heal_MasteryRatio": 0.0,
+                "CDTime": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Sayu_PermanentSkill_1_HealHp": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "CDTime",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HealHP",
+                            "target": "AllPlayerAvatars",
+                            "predicates": [
+                                {
+                                    "$type": "OMMNCGCCJEK",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 40.0
+                                }
+                            ],
+                            "JPKNCEBHPHF": [
+                                "Heal_BaseAmount",
+                                "FIGHT_PROP_ELEMENT_MASTERY",
+                                "Heal_MasteryRatio",
+                                "MUL",
+                                "ADD"
+                            ],
+                            "cdRatio": ""
+                        }
+                    ]
+                }
+            },
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_Constellation_2",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_BS"
+                    ],
+                    "modifierName": "Constellation_2_Initalize"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Roll"
+                    ],
+                    "modifierName": "Avatar_Sayu_Constellation_2_ElementalArt_Click"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Hold_Roll"
+                    ],
+                    "modifierName": "Avatar_Sayu_Constellation_2_ElementalArt_Hold"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Sayu_ElementalArt_Strike",
+                        "Sayu_ElementalArt_Hold_Strike"
+                    ],
+                    "modifierName": "Avatar_Sayu_Constellation_2_ValueHandler"
+                }
+            ],
+            "abilitySpecials": {
+                "Buff_Level": 0.0,
+                "Rate": 0.0,
+                "MaxLevel": 0.0
+            },
+            "modifiers": {
+                "Constellation_2_Initalize": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_Sayu_Constellation_2_BuffLevel",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Avatar_Sayu_Constellation_2_ElementalArt_Click": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Sayu_Constellation_2_BuffLevel",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Avatar_Sayu_Constellation_2_ElementalArt_Hold": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Sayu_Constellation_2_BuffLevel",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Sayu_Constellation_2_BuffLevel",
+                            "useLimitRange": true,
+                            "maxValue": "MaxLevel",
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Avatar_Sayu_Constellation_2_ValueHandler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_ABILITY_Sayu_Constellation_2_BuffLevel",
+                            "overrideMapKey": "Buff_Level"
+                        }
+                    ]
+                },
+                "Avatar_Sayu_Constellation_2_DamageUp": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ModifyDamageMixin",
+                            "attackTags": [
+                                "Elemental_Art"
+                            ],
+                            "JJGGAPONHOE": [
+                                "Buff_Level",
+                                "Rate",
+                                "MUL"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "Avatar_Sayu_Constellation_2_DamageUp"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_Constellation_4",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByElementReactionMixin",
+                    "entityTypes": [
+                        "Monster"
+                    ],
+                    "reactionTypes": [
+                        "SwirlFire",
+                        "SwirlWater",
+                        "SwirlElectric",
+                        "SwirlIce"
+                    ],
+                    "actions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Sayu_Constellation_4_ReviveEnergy"
+                        }
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "Energy": 0.0,
+                "CDTime": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Sayu_Constellation_4_ReviveEnergy": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "CDTime",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ReviveElemEnergy",
+                            "ratio": "Energy"
+                        }
+                    ]
+                }
+            },
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_Show",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "StandbyShow_01",
+                    "modifierName": "Avatar_Sayu_Show_VFX",
+                    "normalizeEnd": 0.7200000286102295
+                }
+            ],
+            "modifiers": {
+                "Avatar_Sayu_Show_VFX": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Show01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Loli_Claymore_Sayu_Show01_00",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Sayu_Talent_Stealth_Animal_Misc",
+            "modifiers": {
+                "Stealth_Animal_Misc_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 5.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurTeamAvatars",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_Stealth_Animal_Misc"
+                        }
+                    ]
+                },
+                "UNIQUE_Stealth_Animal_Misc": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AIPerceptionMixin",
+                            "featureTagIDs": [
+                                9005
+                            ],
+                            "perceptionTemplateID": 1
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "target": "CurTeamAvatars",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_Stealth_Animal_Misc"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "Stealth_Animal_Misc_Handler"
+                }
+            ]
+        }
+    }
+]

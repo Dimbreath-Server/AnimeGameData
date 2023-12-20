@@ -1,0 +1,2320 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_PlayerBoy_CrouchThrowTrigger",
+            "abilityMixins": [
+                {
+                    "$type": "SkillButtonHoldChargeMixin",
+                    "skillID": 10035,
+                    "nextLoopTriggerID": "NextLoopTrigger",
+                    "endHoldTrigger": "EndHoldTrigger",
+                    "beforeStateIDs": [
+                        "CrouchThrowBS"
+                    ],
+                    "chargeLoopStateIDs": [
+                        "CrouchThrowLoop",
+                        "CrouchThrowAS"
+                    ],
+                    "chargeLoopDurations": [
+                        0.05000000074505806,
+                        6.5
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "CrouchThrowLoop"
+                    ],
+                    "modifierName": "Charge"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "CrouchThrowLoop"
+                    ],
+                    "modifierName": "Charge2"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "CrouchThrowLoop"
+                    ],
+                    "modifierName": "Focus"
+                }
+            ],
+            "abilitySpecials": {
+                "DummyThrowSpeedUp": 0.0
+            },
+            "modifiers": {
+                "Focus": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarEnterFocus",
+                            "cameraFollowLower": {
+                                "x": 0.800000011920929,
+                                "y": 0.20000000298023224,
+                                "z": -2.5
+                            },
+                            "cameraFollowUpper": {
+                                "x": 0.5,
+                                "y": -0.20000000298023224
+                            },
+                            "dragButtonName": "Skill1",
+                            "showCrosshair": false,
+                            "HALMPLOGBHJ": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitFocus"
+                        }
+                    ]
+                },
+                "Charge": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 8.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return"
+                        }
+                    ]
+                },
+                "Charge_Return": {
+                    "modifierName": "",
+                    "duration": 3.9000000953674316,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 3.0,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Ambor_Dummy_Line",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.25,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_DUMMY_THROW_RANGE",
+                            "overrideMapKey": "DummyThrowSpeedUp"
+                        }
+                    ]
+                },
+                "Charge2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2_Trigger"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return2"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return2_Trigger"
+                        }
+                    ]
+                },
+                "Charge_Return2_Trigger": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 4.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2"
+                        }
+                    ]
+                },
+                "Charge_Return2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 8.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2_Loop"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return2_Loop"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2_Loop"
+                        }
+                    ]
+                },
+                "Charge_Return2_Loop": {
+                    "modifierName": "",
+                    "duration": 3.9000000953674316,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 10.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Ambor_Dummy_Line",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -0.25,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_DUMMY_THROW_RANGE",
+                            "overrideMapKey": "DummyThrowSpeedUp"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 4.0,
+                    "key": "_DUMMY_THROW_RANGE",
+                    "useLimitRange": true,
+                    "maxValue": 10.0,
+                    "minValue": 4.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_PlayerBoy_CrouchThrow",
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10384,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 70300036,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.7999999523162842,
+                            "MJHHBAFNOEG": 0.10000000149011612
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_PlayerBoy_CrouchThrow_Speed_Fix",
+            "abilitySpecials": {
+                "DummyThrowSpeedUp": 0.0
+            },
+            "modifiers": {
+                "SpeedUP": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Animator_OverallSpeedRatio": "DummyThrowSpeedUp"
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "DJENFLMHMDI": "DummyThrowSpeed",
+                    "isFromOwner": true,
+                    "globalValueKey": "_DUMMY_THROW_RANGE",
+                    "overrideMapKey": "DummyThrowSpeedUp"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "SpeedUP"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_PlayerBoy_CreateCrouchThrow",
+            "onAbilityStart": [
+                {
+                    "$type": "FireAISoundEvent",
+                    "volume": 0.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Ambor_Dummy_ThrowGround",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_PlayerBoy_FindCatThrowTrigger",
+            "abilityMixins": [
+                {
+                    "$type": "SkillButtonHoldChargeMixin",
+                    "skillID": 10384,
+                    "nextLoopTriggerID": "NextLoopTrigger",
+                    "endHoldTrigger": "EndHoldTrigger",
+                    "beforeStateIDs": [
+                        "FindCatThrowBS"
+                    ],
+                    "chargeLoopStateIDs": [
+                        "FindCatThrowLoop",
+                        "FindCatThrowAS"
+                    ],
+                    "chargeLoopDurations": [
+                        0.05000000074505806,
+                        6.5
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FindCatThrowLoop"
+                    ],
+                    "modifierName": "Charge"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FindCatThrowLoop"
+                    ],
+                    "modifierName": "Charge2"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FindCatThrowLoop"
+                    ],
+                    "modifierName": "Focus"
+                }
+            ],
+            "abilitySpecials": {
+                "DummyThrowSpeedUp": 0.0
+            },
+            "modifiers": {
+                "Focus": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarEnterFocus",
+                            "cameraFollowLower": {
+                                "x": 0.800000011920929,
+                                "y": 0.20000000298023224,
+                                "z": -2.5
+                            },
+                            "cameraFollowUpper": {
+                                "x": 0.5,
+                                "y": -0.20000000298023224
+                            },
+                            "dragButtonName": "Skill1",
+                            "showCrosshair": false,
+                            "HALMPLOGBHJ": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitFocus"
+                        }
+                    ]
+                },
+                "Charge": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 8.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return"
+                        }
+                    ]
+                },
+                "Charge_Return": {
+                    "modifierName": "",
+                    "duration": 3.9000000953674316,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 3.0,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Ambor_Dummy_Line",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.25,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_DUMMY_THROW_RANGE",
+                            "overrideMapKey": "DummyThrowSpeedUp"
+                        }
+                    ]
+                },
+                "Charge2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2_Trigger"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return2"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return2_Trigger"
+                        }
+                    ]
+                },
+                "Charge_Return2_Trigger": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 4.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2"
+                        }
+                    ]
+                },
+                "Charge_Return2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 8.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2_Loop"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return2_Loop"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2_Loop"
+                        }
+                    ]
+                },
+                "Charge_Return2_Loop": {
+                    "modifierName": "",
+                    "duration": 3.9000000953674316,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 10.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Ambor_Dummy_Line",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -0.25,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_DUMMY_THROW_RANGE",
+                            "overrideMapKey": "DummyThrowSpeedUp"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 4.0,
+                    "key": "_DUMMY_THROW_RANGE",
+                    "useLimitRange": true,
+                    "maxValue": 10.0,
+                    "minValue": 4.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_PlayerBoy_FindCatThrow",
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "KABPACCLFMP",
+                            "itemId": 100084,
+                            "itemNum": 1
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 10384,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "UseItem",
+                            "itemId": 100084,
+                            "itemNum": 1
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 41029006,
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 2.0,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_PlayerBoy_FindCatThrow_Speed_Fix",
+            "abilitySpecials": {
+                "DummyThrowSpeedUp": 0.0
+            },
+            "modifiers": {
+                "SpeedUP": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Animator_OverallSpeedRatio": "DummyThrowSpeedUp"
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "DJENFLMHMDI": "DummyThrowSpeed",
+                    "isFromOwner": true,
+                    "globalValueKey": "_DUMMY_THROW_RANGE",
+                    "overrideMapKey": "DummyThrowSpeedUp"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "SpeedUP"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_PlayerBoy_CreateFindCatThrow",
+            "onAbilityStart": [
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "HANJDCBOIIE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true
+                    },
+                    "gadgetID": 70710025
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Ambor_Dummy_ThrowGround",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Player_CamCtrl",
+            "modifiers": {
+                "UNIQUE_Avatar_CameraCtrl": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToStateIDMixin",
+                            "stateIDs": [
+                                "Fly"
+                            ],
+                            "modifierName": "Avatar_Flying_CameraCtrl"
+                        }
+                    ]
+                },
+                "Avatar_Flying_CameraCtrl": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarEnterCameraShot",
+                            "cameraMoveCfgPath": "Camera_Avatar_FlyingBomber"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_AmborBomb_Alert",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_Avatar_CameraCtrl"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Player_FlyingBomber",
+            "modifiers": {
+                "AmborBulletChain": {
+                    "modifierName": "",
+                    "duration": 0.4000000059604645,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.15000000596046448,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 40000179,
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.5,
+                                    "JKDAHJILGBJ": 0.5,
+                                    "MJHHBAFNOEG": 1.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "NBLKPHLEMGO": "Horizontal",
+                                    "maxAngle": 360.0,
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 40000179,
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.5,
+                                    "MJHHBAFNOEG": 0.10000000149011612
+                                }
+                            }
+                        }
+                    ]
+                },
+                "MixinStart": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ButtonHoldChargeMixin",
+                            "skillID": 10037,
+                            "chargeTime": 0.10000000149011612,
+                            "secondChargeTime": 999999.0,
+                            "OnReleaseUncharged": [
+                                {
+                                    "$type": "AvatarSkillStart",
+                                    "skillID": 10037,
+                                    "amountByCasterMaxHPRatio": 1.0,
+                                    "costStaminaDelta": 1.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "AmborBulletChain"
+                                }
+                            ],
+                            "OnReleaseCharged": [
+                                {
+                                    "$type": "AvatarSkillStart",
+                                    "skillID": 10037,
+                                    "amountByCasterMaxHPRatio": 1.0,
+                                    "costStaminaDelta": 1.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "AmborBulletChain"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "MixinStart"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "AmborFlyBullet_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 8.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "bonusCriticalHurt": 300.0,
+                                "strikeType": "Blunt",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Ambortask_Explode",
+                    "scale": 2.0,
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "SetSelfAttackTarget",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "topLimit": 1,
+                        "shapeName": "CircleR6",
+                        "campTargetType": "Enemy",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Player_GlidingChallenge_AirDash_Forward",
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "target": "Team",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "AVATAR_GLIDING_ENERGY",
+                            "ratio": 50.0,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Team",
+                            "ratio": -50.0,
+                            "key": "AVATAR_GLIDING_ENERGY",
+                            "useLimitRange": true,
+                            "maxValue": 100.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ActCameraRadialBlur",
+                            "cameraRadialBlur": {
+                                "power": 1.5,
+                                "blurTime": 0.30000001192092896,
+                                "fadeTime": 0.5
+                            }
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "gadgetID": 44000002,
+                            "campID": 1001,
+                            "campTargetType": "Self"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "CurTeamAvatars",
+                            "abilityName": "Avatar_Player_GlidingChallenge_AirDash_Forward_SkillStart"
+                        }
+                    ]
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Player_GlidingChallenge_AirDash_Upward",
+            "modifiers": {
+                "UNIQUE_GlidingChallenge_AirDash_AirflowField": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "gadgetID": 44000003,
+                            "campID": 1001,
+                            "campTargetType": "Self"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "UNIQUE_GlidingChallenge_AirDash_SpeedupField"
+                        }
+                    ]
+                },
+                "UNIQUE_GlidingChallenge_AirDash_SpeedupField": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "RootNode",
+                                "OINJEIEFIBB": "Caster"
+                            },
+                            "gadgetID": 44000004,
+                            "campID": 1001,
+                            "campTargetType": "Self"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_GlidingChallenge_AirDash_AirflowField"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_GlidingChallenge_AirDash_AirflowField"
+                },
+                {
+                    "$type": "TriggerAbility",
+                    "target": "CurTeamAvatars",
+                    "abilityName": "Avatar_Player_GlidingChallenge_AirDash_Upward_SkillStart"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Player_GlidingChallenge_AirDash_Forward_SkillStart",
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "PositionDampTime": true,
+                    "skillID": 20011,
+                    "amountByCasterMaxHPRatio": 0.10000000149011612,
+                    "costStaminaDelta": 1.0
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Player_GlidingChallenge_AirDash_Upward_SkillStart",
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "PositionDampTime": true,
+                    "skillID": 20012,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Player_GlidingChallenge_AirDash_Active",
+            "modifiers": {
+                "GlidingChallenge_AirDash_AddSkill": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddAvatarSkillInfo",
+                            "skillID": 20011
+                        },
+                        {
+                            "$type": "AddAvatarSkillInfo",
+                            "skillID": 20012
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "GlidingChallenge_AirDash_ChangeSkill"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "AVATAR_GLIDING_ENERGY",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ChangePlayMode",
+                            "canBeHandledOnRecover": true,
+                            "toPlayMode": "GlidingChallengeState"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ChangePlayMode",
+                            "BOFKGNEHCCF": "GlidingChallengeState"
+                        },
+                        {
+                            "$type": "RemoveAvatarSkillInfo",
+                            "skillID": 20011
+                        },
+                        {
+                            "$type": "RemoveAvatarSkillInfo",
+                            "skillID": 20012
+                        }
+                    ]
+                },
+                "GlidingChallenge_AirDash_ChangeSkill": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AvatarChangeSkillMixin",
+                            "priority": "Playmode",
+                            "jumpSkillID": 20011,
+                            "flySkillID": 20011
+                        },
+                        {
+                            "$type": "AvatarChangeSkillMixin",
+                            "index": 1,
+                            "priority": "Playmode",
+                            "jumpSkillID": 20012,
+                            "flySkillID": 20012
+                        }
+                    ]
+                },
+                "UNIQUE_GlidingChallenge_FailOnLanded_TeamHandler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "AVATAR_GLIDING_FAILONLANDED_COUNT",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                0.0,
+                                14.5,
+                                15.5
+                            ],
+                            "modifierNameSteps": [
+                                "Blank",
+                                "Blank"
+                            ],
+                            "actionQueues": [
+                                [],
+                                [
+                                    {
+                                        "$type": "ServerLuaCall",
+                                        "luaCallType": "CurChallengeGroup",
+                                        "funcName": "ChallengeFail",
+                                        "AFEHPHNEJHM": 0.0,
+                                        "param2": 0.0,
+                                        "param3": 0.0
+                                    }
+                                ]
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "AVATAR_GLIDING_FAILONLANDED_COUNT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "AVATAR_GLIDING_FAILONLANDED_COUNT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "AVATAR_GLIDING_FAILONLANDED_COUNT",
+                            "useLimitRange": true,
+                            "maxValue": 15.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "GlidingChallenge_FailOnLanded_AvatarHandler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToStateIDMixin",
+                            "stateIDs": [
+                                "Fly",
+                                "Fall"
+                            ],
+                            "modifierName": "GlidingChallenge_FailOnLanded"
+                        }
+                    ]
+                },
+                "GlidingChallenge_FailOnLanded": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "AVATAR_GLIDING_FAILONLANDED_COUNT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "AVATAR_GLIDING_FAILONLANDED_COUNT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Blank": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "AVATAR_GLIDING_FAILONLANDED_COUNT",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "GlidingChallenge_AirDash_AddSkill"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_GlidingChallenge_FailOnLanded_TeamHandler"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "GlidingChallenge_FailOnLanded_AvatarHandler"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Player_FleurFair_FlyBall",
+            "modifiers": {
+                "UNIQUE_FlyBall_SetTeamGlobalValue": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ServerUpdateGlobalValueMixin",
+                            "key": "has_end_game",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "has_end_game",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "FlyBall_FailOnLanded_AvatarHandler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToStateIDMixin",
+                            "stateIDs": [
+                                "Fly",
+                                "Fall",
+                                "FallingAnthem_BS",
+                                "FallingAnthem_Loop",
+                                "FallingAnthem_AS_1",
+                                "FallingAnthem_AS_2",
+                                "BeHitAir"
+                            ],
+                            "modifierName": "FlyBall_FailOnLanded"
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "ChangePlayMode",
+                            "PositionDampTime": true,
+                            "muteRemoteAction": true,
+                            "toPlayMode": "FleurFairFall"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ChangePlayMode",
+                            "PositionDampTime": true,
+                            "muteRemoteAction": true,
+                            "BOFKGNEHCCF": "FleurFairFall"
+                        }
+                    ]
+                },
+                "FlyBall_FailOnLanded": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "Avatar_Activity_FlyBall_FlyTimer",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Team",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Avatar_Activity_FlyBall_FlyTimer",
+                                    "ratio": 4.5,
+                                    "ACJBNJNEBOC": "MoreThanAndEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ServerLuaCall",
+                                    "PositionDampTime": true,
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "has_end_game",
+                                            "ratio": 0.0,
+                                            "ACJBNJNEBOC": "NoneOrEqual"
+                                        }
+                                    ],
+                                    "luaCallType": "CurGalleryControlGroup",
+                                    "isTarget": true,
+                                    "funcName": "FlyBalloonLanding",
+                                    "AFEHPHNEJHM": 0.0,
+                                    "param2": 0.0,
+                                    "param3": 0.0
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "Team",
+                                    "PositionDampTime": true,
+                                    "ratio": 1.0,
+                                    "key": "has_end_game",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "Avatar_Activity_FlyBall_FlyTimer",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "target": "Team",
+                    "PositionDampTime": true,
+                    "ratio": 0.0,
+                    "key": "has_end_game",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "FlyBall_FailOnLanded_AvatarHandler"
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "RemoveModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "FlyBall_FailOnLanded"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "QuestAbility_Player_SpecialBattle_200102",
+            "modifiers": {
+                "UNIQUE_QuestAbility_Player_SpecialBattle_200102": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_MaxHPDelta": 12000.0,
+                        "Actor_AttackDelta": 5000.0,
+                        "Actor_DefenceDelta": 800.0
+                    },
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_QuestAbility_Player_SpecialBattle_200102"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "QuestAbility_Player_BanGuoba_4001506",
+            "modifiers": {
+                "UNIQUE_QuestAbility_Player_BanGuoba_4001506": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20035
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_QuestAbility_Player_SwitchSkill"
+                        },
+                        {
+                            "$type": "KillGadget",
+                            "PositionDampTime": true,
+                            "gadgetInfo": {
+                                "configID": 41023011
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_QuestAbility_Player_SwitchSkill"
+                        },
+                        {
+                            "$type": "RemoveAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20035
+                        }
+                    ]
+                },
+                "UNIQUE_QuestAbility_Player_SwitchSkill": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "SwitchSkillIDMixin",
+                            "priority": "Playmode",
+                            "skillIndex": 1,
+                            "skillID": 20035
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_QuestAbility_Player_BanGuoba_4001506"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "QuestAbility_Player_BanOzzy",
+            "modifiers": {
+                "UNIQUE_QuestAbility_Player_BanOzzy": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "state": "IgnoreAddEnergy",
+                    "onAdded": [
+                        {
+                            "$type": "AddAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20036
+                        },
+                        {
+                            "$type": "AddAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20037
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_QuestAbility_Player_BanOzzy_SwitchSkill"
+                        },
+                        {
+                            "$type": "KillGadget",
+                            "PositionDampTime": true,
+                            "gadgetInfo": {
+                                "configID": 41031008
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_QuestAbility_Player_BanOzzy_SwitchSkill"
+                        },
+                        {
+                            "$type": "RemoveAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20036
+                        },
+                        {
+                            "$type": "RemoveAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20037
+                        }
+                    ]
+                },
+                "UNIQUE_QuestAbility_Player_BanOzzy_SwitchSkill": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "SwitchSkillIDMixin",
+                            "priority": "Playmode",
+                            "skillIndex": 1,
+                            "skillID": 20036
+                        },
+                        {
+                            "$type": "SwitchSkillIDMixin",
+                            "priority": "Playmode",
+                            "skillIndex": 4,
+                            "skillID": 20037
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "PositionDampTime": true,
+                    "predicates": [
+                        {
+                            "$type": "EEJMHENNFEO",
+                            "featureTagIDs": [
+                                10031
+                            ]
+                        }
+                    ],
+                    "modifierName": "UNIQUE_QuestAbility_Player_BanOzzy"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "QuestAbility_Avatar_ThrowBean",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "CrouchThrowLoop"
+                    ],
+                    "modifierName": "Charge"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "CrouchThrowLoop"
+                    ],
+                    "modifierName": "Charge2"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "CrouchThrowLoop"
+                    ],
+                    "modifierName": "Focus"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "CrouchThrowAS",
+                    "modifierName": "ThrowBean_Trigger",
+                    "normalizeStart": 0.009999999776482582
+                },
+                {
+                    "$type": "SkillButtonHoldChargeMixin",
+                    "skillID": 10038,
+                    "nextLoopTriggerID": "NextLoopTrigger",
+                    "endHoldTrigger": "EndHoldTrigger",
+                    "beforeStateIDs": [
+                        "CrouchThrowBS"
+                    ],
+                    "chargeLoopStateIDs": [
+                        "CrouchThrowLoop",
+                        "CrouchThrowAS"
+                    ],
+                    "chargeLoopDurations": [
+                        0.05000000074505806,
+                        6.5
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "DummyThrowSpeedUp": 0.0
+            },
+            "modifiers": {
+                "Quest_AddSkillInfo": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddAvatarSkillInfo",
+                            "skillID": 10038
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveAvatarSkillInfo",
+                            "skillID": 10038
+                        }
+                    ]
+                },
+                "Quest_ChangePlayMode_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "SwitchSkillIDMixin",
+                            "priority": "Quest",
+                            "skillIndex": 1,
+                            "skillID": 10038
+                        }
+                    ]
+                },
+                "Focus": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarEnterFocus",
+                            "cameraFollowLower": {
+                                "x": 0.800000011920929,
+                                "y": 0.20000000298023224,
+                                "z": -2.5
+                            },
+                            "cameraFollowUpper": {
+                                "x": 0.5,
+                                "y": -0.20000000298023224
+                            },
+                            "dragButtonName": "Skill2",
+                            "showCrosshair": false,
+                            "HALMPLOGBHJ": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitFocus"
+                        }
+                    ]
+                },
+                "Charge": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 8.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return"
+                        }
+                    ]
+                },
+                "Charge_Return": {
+                    "modifierName": "",
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 3.0,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Ambor_Dummy_Line",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.25,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 8.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_DUMMY_THROW_RANGE",
+                            "overrideMapKey": "DummyThrowSpeedUp"
+                        }
+                    ]
+                },
+                "Charge2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2_Trigger"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return2"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return2_Trigger"
+                        }
+                    ]
+                },
+                "Charge_Return2_Trigger": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 4.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2"
+                        }
+                    ]
+                },
+                "Charge_Return2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 8.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2_Loop"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Charge_Return2_Loop"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Charge_Return2_Loop"
+                        }
+                    ]
+                },
+                "Charge_Return2_Loop": {
+                    "modifierName": "",
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 8.0,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 8.0,
+                            "minValue": 8.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Ambor_Dummy_Line",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -0.25,
+                            "key": "_DUMMY_THROW_RANGE",
+                            "useLimitRange": true,
+                            "maxValue": 8.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_DUMMY_THROW_RANGE",
+                            "overrideMapKey": "DummyThrowSpeedUp"
+                        }
+                    ]
+                },
+                "ThrowBean_Trigger": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 10038,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 70300124,
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 1.7999999523162842,
+                                    "MJHHBAFNOEG": 0.10000000149011612
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Quest_AddSkillInfo"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Quest_ChangePlayMode_Handler"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 4.0,
+                    "key": "_DUMMY_THROW_RANGE",
+                    "useLimitRange": true,
+                    "maxValue": 8.0,
+                    "minValue": 4.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Gadget_Quest_Bean",
+            "abilitySpecials": {
+                "DummyThrowSpeedUp": 0.0
+            },
+            "modifiers": {
+                "SpeedUP": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Animator_OverallSpeedRatio": [
+                            "DummyThrowSpeedUp",
+                            0.07999999821186066,
+                            "MUL",
+                            0.23999999463558197,
+                            "SUB"
+                        ]
+                    }
+                },
+                "Bean_Bloom_Strike": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Quest_Bean_Hit",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    }
+                                }
+                            },
+                            "targetType": "All"
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 4.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Quest_Bean_Threat",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    }
+                                }
+                            },
+                            "targetType": "All"
+                        },
+                        {
+                            "$type": "DebugLog",
+                            "content": "豆子攻击盒"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "CopyGlobalValue",
+                    "srcTarget": "OriginOwner",
+                    "dstTarget": "Self",
+                    "srcKey": "_DUMMY_THROW_RANGE",
+                    "dstKey": "_DUMMY_THROW_RANGE"
+                },
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "globalValueKey": "_DUMMY_THROW_RANGE",
+                    "overrideMapKey": "DummyThrowSpeedUp"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "SpeedUP"
+                },
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_SceneObj_Bean_Bullet",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireAISoundEvent",
+                    "volume": 0.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Bean_Bloom",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Bean_Bloom_Strike"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_PlayerBoy_Bartender_FX_Test",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Bartender_Standby",
+                        "Bartender_PrepareStart",
+                        "Bartender_AddStandby",
+                        "Bartender_AddLoop",
+                        "Bartender_MixingStart",
+                        "Bartender_MixingStandby"
+                    ],
+                    "modifierName": "Bartender_FX_Origin_Cup"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_MixingToPour",
+                    "modifierName": "Bartender_FX_Test1",
+                    "normalizeEnd": 0.7699999809265137
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_MixingToPour",
+                    "modifierName": "Bartender_FX_Test2",
+                    "normalizeStart": 0.7699999809265137
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_PourStandby",
+                    "modifierName": "Bartender_FX_Test2"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Bartender_Pour",
+                        "Bartender_PourFinish"
+                    ],
+                    "modifierName": "Bartender_FX_Test3"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Bartender_AddLoop"
+                    ],
+                    "modifierName": "Bartender_FX_Add_Cup"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Bartender_MixingStandby"
+                    ],
+                    "modifierName": "Bartender_FX_Bar2"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_MixingToPour",
+                    "modifierName": "Bartender_FX_Bar1",
+                    "normalizeEnd": 0.5799999833106995
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_MixingStart",
+                    "modifierName": "Bartender_FX_Bar1",
+                    "normalizeStart": 0.44999998807907104
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_MixingToPour",
+                    "modifierName": "Bartender_FX_Finish_Cup1",
+                    "normalizeStart": 0.6899999976158142,
+                    "normalizeEnd": 0.9200000166893005
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_MixingToPour",
+                    "modifierName": "Bartender_FX_Finish_Cup2",
+                    "normalizeStart": 0.9200000166893005
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_PourStandby",
+                    "modifierName": "Bartender_FX_Finish_Cup2"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_Pour",
+                    "modifierName": "Bartender_FX_Finish_Cup2"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_PourFinish",
+                    "modifierName": "Bartender_FX_Finish_Cup2",
+                    "normalizeEnd": 0.18000000715255737
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_PourFinish",
+                    "modifierName": "Bartender_FX_Finish_Cup3",
+                    "normalizeStart": 0.18000000715255737,
+                    "normalizeEnd": 0.4699999988079071
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Bartender_PourFinish",
+                    "modifierName": "Bartender_FX_Finish_Cup4",
+                    "normalizeStart": 0.4699999988079071
+                }
+            ],
+            "modifiers": {
+                "Bartender_FX_Test1": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Test1",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Test2": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Test2",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Test3": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Test2",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Origin_Cup": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Origin_Cup",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Bar1": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Bar",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Bar2": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Bar",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Finish_Cup1": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Finish_Cup1",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Finish_Cup2": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Finish_Cup2",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Finish_Cup3": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Finish_Cup3",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Finish_Cup4": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Finish_Cup4",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Bartender_FX_Add_Cup": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Player_Bartender_FX_Add_Cup",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Team_Yoimiya_EndlessStamina",
+            "modifiers": {
+                "UNIQUE_Yoimiya_EndlessStaminaBuff": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CurLocalAvatarMixinV2",
+                            "modifierName": "Yoimiya_EndlessStaminaBuff"
+                        }
+                    ]
+                },
+                "Yoimiya_EndlessStaminaBuff": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_CostStaminaRatio": -2.0
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_Yoimiya_EndlessStaminaBuff"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "QuestAbility_4_2_OceanCurrent_Eff_Preload",
+            "modifiers": {
+                "eff_preload": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Stages_SceneObj_Fd_FYD_OceanCurrent_Track_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Stages_FYD_OceanCurrent_Flow_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Stages_SceneObj_Fd_FYD_CurrentEntrance_Entry_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Self",
+                            "key": "abc",
+                            "ratio": 999.0
+                        }
+                    ],
+                    "modifierName": "eff_preload"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    }
+]

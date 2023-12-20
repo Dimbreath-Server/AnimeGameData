@@ -1,0 +1,1293 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AkaFesGrapplingHookPoint_01_Ability",
+            "modifiers": {
+                "AttachEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_GrappleHook_01_Follow",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_GrappleHook_01_Appear",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "AttachEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AkaFesGrapplingHookPoint_02_Ability",
+            "modifiers": {
+                "CreatHookPoint": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RootNode"
+                            },
+                            "lifeByOwnerV2": true,
+                            "gadgetID": 70291120,
+                            "campID": 5001,
+                            "byServer": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "CreatHookPoint"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AkaFesGrapplingHookPoint_03_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "ScanEntityMixin",
+                    "tag": "GrapplingHook"
+                }
+            ],
+            "onAdded": [
+                {
+                    "$type": "ChangeTag",
+                    "isAdd": true,
+                    "tag": "GrapplingHookPoint"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_GrappleHook_01_Appear",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "AkaFesGrapplingHookSkill_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "CheckScanEntityMixin",
+                    "tag": "GrapplingHook",
+                    "IJLPGNGABMF": [
+                        {
+                            "$type": "AddAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20043
+                        },
+                        {
+                            "$type": "AddAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20044
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Hook_SwitchAirSkill"
+                        },
+                        {
+                            "$type": "DoWatcherSystemAction",
+                            "watcherId": 10014,
+                            "authorityOnly": true
+                        }
+                    ],
+                    "LIGFADKPJGI": [
+                        {
+                            "$type": "RemoveAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20043
+                        },
+                        {
+                            "$type": "RemoveAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20044
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Hook_SwitchAirSkill"
+                        }
+                    ],
+                    "activateSkillKey": "AVATAR_GrapplingHookSkill"
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_ABILITY_GrapplingHookSkill_Step",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        3.9000000953674316
+                    ],
+                    "modifierNameSteps": [
+                        "Blank",
+                        "UNIQUE_AkaFes_GrapplingHookSkill_GrassCoreEffect"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ActivitySkill_GrapplingHook"
+                    ],
+                    "modifierName": "UNIQUE_AkaFes_GrapplingHookSkill_SkillHandler"
+                }
+            ],
+            "modifiers": {
+                "Blank": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "UNIQUE_AkaFes_GrapplingHookSkill_RecoverHandler": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onReconnect": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_ABILITY_GrapplingHookSkill_Step",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_AkaFes_GrapplingHookSkill_PreSkill"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_AkaFes_GrapplingHookSkill_ThrowHook"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_AkaFes_GrapplingHookSkill_SkillStart"
+                        }
+                    ]
+                },
+                "UNIQUE_AkaFes_GrapplingHookSkill_SkillHandler": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_ABILITY_GrapplingHookSkill_Step",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                0.5,
+                                1.5,
+                                3.5
+                            ],
+                            "modifierNameSteps": [
+                                "UNIQUE_AkaFes_GrapplingHookSkill_PreSkill",
+                                "UNIQUE_AkaFes_GrapplingHookSkill_ThrowHook"
+                            ]
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_ABILITY_GrapplingHookSkill_Step",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                2.5,
+                                4.5
+                            ],
+                            "modifierNameSteps": [
+                                "UNIQUE_AkaFes_GrapplingHookSkill_SkillStart"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_GrapplingHookSkill_Step",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_GrapplingHookSkill_Step",
+                                    "ratio": 3.0,
+                                    "ACJBNJNEBOC": "LessAndEqual"
+                                }
+                            ],
+                            "ratio": 0.0,
+                            "key": "_ABILITY_GrapplingHookSkill_Step",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Hook_SwitchAirSkill": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ActivitySkillMixin",
+                            "priority": "Auto",
+                            "GMHLDBEDELB": 20050
+                        },
+                        {
+                            "$type": "AvatarChangeSkillMixin",
+                            "index": -1,
+                            "priority": "Playmode",
+                            "jumpSkillID": 20044,
+                            "flySkillID": 20044
+                        },
+                        {
+                            "$type": "AttachToStateIDMixin",
+                            "stateIDs": [
+                                "Fly",
+                                "Fall"
+                            ],
+                            "modifierName": "ChangePlayMode_FlyMark",
+                            "isCheckOnAttach": true
+                        },
+                        {
+                            "$type": "AttachToStateIDMixin",
+                            "stateIDs": [
+                                "Jump"
+                            ],
+                            "modifierName": "ChangePlayMode_JumpMark_Handler",
+                            "isCheckOnAttach": true
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                5.5
+                            ],
+                            "modifierNameSteps": [
+                                "Blank",
+                                "ChangePlayModeForJoypad"
+                            ]
+                        }
+                    ]
+                },
+                "ChangePlayModeForJoypad": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ChangePlayMode",
+                            "PositionDampTime": true,
+                            "muteRemoteAction": true,
+                            "toPlayMode": "GrapplingHook"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ChangePlayMode",
+                            "PositionDampTime": true,
+                            "muteRemoteAction": true
+                        }
+                    ]
+                },
+                "ChangePlayMode_FlyMark": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": -1.0,
+                            "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "ChangePlayMode_JumpMark_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.699999988079071,
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ChangePlayMode_JumpMark"
+                        }
+                    ]
+                },
+                "ChangePlayMode_JumpMark": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": -1.0,
+                            "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_AkaFes_GrapplingHookSkill_PreSkill": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "RushMoveOnGround"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_AkaFes_StreamingOptimization"
+                        },
+                        {
+                            "$type": "DoWatcherSystemAction",
+                            "watcherId": 81260,
+                            "authorityOnly": true
+                        }
+                    ]
+                },
+                "RushMoveOnGround": {
+                    "modifierName": "",
+                    "duration": 0.05999999865889549,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 0.5
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "RemoveVelocityForce",
+                                    "forces": [
+                                        "RushMoveType",
+                                        "InertiaType"
+                                    ]
+                                },
+                                {
+                                    "$type": "FixedAvatarRushMove",
+                                    "toPos": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.5,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "COAICNDKEMA": true
+                                    },
+                                    "timeRange": 0.05000000074505806,
+                                    "maxRange": 2.0,
+                                    "animatorStateIDs": [
+                                        "ActivitySkill_GrapplingHook"
+                                    ],
+                                    "overrideMoveCollider": "",
+                                    "isInAir": true
+                                }
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType",
+                                "InertiaType"
+                            ]
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "Avatar_HookVisible",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_GrapplingHookSkill_Step",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "ratio": 2.0,
+                            "key": "_ABILITY_GrapplingHookSkill_Step",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_AkaFes_GrapplingHookSkill_ThrowHook": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ThrowGrapplingHookMixin",
+                            "shieldHP": "Eff_SceneObj_Grapple_01_Line",
+                            "positionKey": "_GrapplingHook_TargetPos",
+                            "onHookReached": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_GrapplingHookSkill_Step",
+                                            "ratio": 2.0
+                                        }
+                                    ],
+                                    "ratio": 3.0,
+                                    "key": "_ABILITY_GrapplingHookSkill_Step",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "AttachModifier",
+                                    "modifierName": "HookEffectTrigger"
+                                }
+                            ],
+                            "NELDOKPNFMH": true
+                        },
+                        {
+                            "$type": "GrapplingHookMoveStayInPlaceMixin"
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    }
+                },
+                "UNIQUE_AkaFes_GrapplingHookSkill_SkillStart": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "GrapplingHookMoveMixin",
+                            "onArrived": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_GrapplingHookSkill_Step",
+                                            "ratio": 3.0
+                                        }
+                                    ],
+                                    "ratio": 4.0,
+                                    "key": "_ABILITY_GrapplingHookSkill_Step",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "GrapplingHook_ArrivedRushMove"
+                                }
+                            ],
+                            "upForceValue": 5.0,
+                            "upForceTime": 1.0,
+                            "arriveDistance": 0.5
+                        },
+                        {
+                            "$type": "ModifyCameraMaxDistanceMixin",
+                            "MaxDistance": 10.0,
+                            "ResetToMaxOnStart": true,
+                            "LerpInDuration": 0.20000000298023224,
+                            "LerpOutDuration": 0.699999988079071
+                        },
+                        {
+                            "$type": "TriggerPostProcessEffectMixin",
+                            "postEffectAssetName": "PostEffect_Skiff_Sprint",
+                            "duration": 0.0
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "GrapplingHookRushMove",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_GrapplingHookSkill_Step",
+                                    "ratio": 3.0
+                                }
+                            ],
+                            "toPos": {
+                                "$type": "DAPJIKNDLLN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "NNLPINDGCEC",
+                                    "directionKey": "_GrapplingHook_TargetDir"
+                                },
+                                "positionKey": "_GrapplingHook_TargetPos",
+                                "directionKey": ""
+                            },
+                            "speed": 15.0,
+                            "accSpeed": 10.0,
+                            "maxSpeed": 20.0,
+                            "animatorStateIDs": [
+                                "ActivitySkill_GrapplingHook",
+                                "Fly",
+                                "Standby",
+                                "Run"
+                            ],
+                            "isInAir": true
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_GrapplingHookSkill_Step",
+                                    "ratio": 3.0
+                                }
+                            ],
+                            "modifierName": "Camera_Blur"
+                        },
+                        {
+                            "$type": "DebugLog",
+                            "content": "!!!!!!!!!!!Camera_Blur!!!!!!!!!!"
+                        }
+                    ]
+                },
+                "UNIQUE_AkaFes_GrapplingHookSkill_HookHideHanlde": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DoActionOnGlobalValueChangeMixin",
+                            "globalValueKey": "Avatar_HookVisible",
+                            "actions": [
+                                {
+                                    "$type": "TriggerSetVisible",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "Avatar_HookVisible",
+                                            "ratio": 1.0,
+                                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "Avatar_HookVisible",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerSetVisible",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true,
+                            "visible": true
+                        }
+                    ]
+                },
+                "UNIQUE_AkaFes_GrapplingHookSkill_GrassCoreEffect": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "SetVelocityIgnoreAirGY",
+                            "ignoreAirGY": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Grapple_01_MoveIn",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Grapple_01_Moving",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "GIAOINGDIPJ": {
+                                    "$type": "NNLPINDGCEC",
+                                    "directionKey": "_GrapplingHook_TargetDir"
+                                },
+                                "COAICNDKEMA": true
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_AkaFes_GrapplingHookSkill_HookHideHanlde"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_AkaFes_GrapplingHookSkill_HookHideHanlde"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetVelocityIgnoreAirGY",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "PositionDampTime": true,
+                            "forces": [
+                                "RushMoveType",
+                                "InertiaType"
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Grapple_01_MoveOut",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "GrapplingHook_SkillCharge"
+                        }
+                    ]
+                },
+                "GrapplingHook_SkillCharge": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 100.0,
+                            "key": "AVATAR_GrapplingHookSkill",
+                            "useLimitRange": true,
+                            "maxValue": 100.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "GrapplingHook_ArrivedRushMove": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "SetVelocityIgnoreAirGY",
+                            "ignoreAirGY": true
+                        },
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "InertiaType",
+                                "GrapplingHookMoveType"
+                            ]
+                        },
+                        {
+                            "$type": "FixedAvatarRushMove",
+                            "target": "CurLocalAvatar",
+                            "toPos": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 1.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "COAICNDKEMA": true
+                            },
+                            "timeRange": 0.05000000074505806,
+                            "maxRange": 0.5,
+                            "animatorStateIDs": [
+                                "ActivitySkill_GrapplingHook",
+                                "DropDown"
+                            ],
+                            "overrideMoveCollider": "",
+                            "isInAir": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetVelocityIgnoreAirGY"
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "GrapplingHook_Drop"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_GrapplingHookSkill_Step",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Camera_Blur": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CameraBlurMixin",
+                            "cameraRadialBlur": {
+                                "power": 1.0,
+                                "fadeTime": 0.10000000149011612
+                            }
+                        }
+                    ]
+                },
+                "UNIQUE_AkaFes_StreamingOptimization": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 4.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "StreamingModifierMixin"
+                        }
+                    ]
+                },
+                "GrapplingHook_Init": {
+                    "stacking": "MultipleRefresh",
+                    "stackingOption": {
+                        "abilitySpecialName": "",
+                        "maxModifierNumForMultipleType": 1.0
+                    },
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_GrapplingHookSkill_Step",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "GrapplingHook_Drop"
+                        },
+                        {
+                            "$type": "SetVelocityIgnoreAirGY",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType",
+                                "InertiaType",
+                                "FixedRushMoveType",
+                                "SpeedupType",
+                                "GrapplingHookMoveType"
+                            ]
+                        }
+                    ]
+                },
+                "HookEffectTrigger": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "muteRemoteAction": true,
+                            "shieldHP": "Eff_SceneObj_GrappleHook_01_Active",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "_GrapplingHook_TargetPos",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "Get",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_SceneObj_Grapple_01_Line"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "PositionDampTime": true,
+                    "ratio": 0.0,
+                    "key": "_ABILITY_GrapplingHookSkill_Step",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_AkaFes_GrapplingHookSkill_RecoverHandler"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ClearGlobalPos",
+                    "key": "_GrapplingHook_TargetPos"
+                },
+                {
+                    "$type": "Predicated",
+                    "otherTargets": {
+                        "$type": "FHPHDDDMILA",
+                        "topLimit": 1,
+                        "tag": "GrapplingHook"
+                    },
+                    "successActions": [
+                        {
+                            "$type": "DebugLog",
+                            "content": "TD:Hook AbilityStart!!!"
+                        },
+                        {
+                            "$type": "SetGlobalPos",
+                            "target": "Target",
+                            "key": "_GrapplingHook_TargetPos",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "setTarget": false
+                        },
+                        {
+                            "$type": "SetGlobalDir",
+                            "target": "Target",
+                            "key": "_GrapplingHook_TargetDir",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "GIAOINGDIPJ": {
+                                    "$type": "IODLJEIOAPP"
+                                },
+                                "COAICNDKEMA": true
+                            },
+                            "setTarget": false
+                        },
+                        {
+                            "$type": "SetSelfAttackTarget",
+                            "target": "Target",
+                            "turnToTargetImmediately": true
+                        },
+                        {
+                            "$type": "EntityDoSkill",
+                            "skillID": 20044
+                        },
+                        {
+                            "$type": "EntityDoSkill",
+                            "skillID": 20043
+                        }
+                    ]
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "GrapplingHook_Init"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_AkaFesArcCheckPoint_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "ShowLightHole"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "StandBy"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Interacted"
+                }
+            ],
+            "modifiers": {
+                "EffectAttach": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_AkaFesArcCheckPoint_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ShowLightHole": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_AkaFesArcCheckPoint_01_Hint",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "StandBy": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Interacted": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_AkaFesArcCheckPoint_01_Active",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "EffectAttach"
+                }
+            ],
+            "onFieldEnter": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Avatar"
+                            ]
+                        },
+                        {
+                            "$type": "HKDMEKKBAKE",
+                            "target": "Self",
+                            "gadgetState": 201
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "CurGalleryControlGroup",
+                            "funcName": "SLC_Activity_AkaFesArchitect_CheckPointArrived",
+                            "AFEHPHNEJHM": 0.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonsterPowerUp_Amplifier_Ice_AkaFes",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "isUnique": true,
+                    "gadgetState": 201,
+                    "modifierName": "UNIQUE_MonsterPowerUp_Amplifier_Ice_Host_AkaFes"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_MonsterPowerUp_Amplifier_Ice_Host_AkaFes": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 15.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_MonsterPowerUp_Wave",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR30",
+                                "campTargetType": "AllExceptSelf",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_AMPLIFIER_ICE_SLAVE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_AMPLIFIER_COOLDOWN",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "NNBKBBILDGO",
+                                    "predicates": [
+                                        {
+                                            "$type": "BAMBPOIJFPG",
+                                            "predicates": [
+                                                {
+                                                    "$type": "EEJMHENNFEO",
+                                                    "featureTagIDs": [
+                                                        3005
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "$type": "LOIMAGKHLJA",
+                                            "element": "Frozen"
+                                        },
+                                        {
+                                            "$type": "LOIMAGKHLJA",
+                                            "element": "Ice"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "modifierName": "UNIQUE_MonsterPowerUp_Amplifier_Ice_Slave_AkaFes"
+                        },
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR30",
+                                "campTargetType": "All",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Target",
+                                    "modifierName": "MonsterPowerUp_Amplifier_Add_Buff"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_MonsterPowerUp_Amplifier_Ice_Slave_AkaFes": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Ice",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ElementOuterGlowEffectMixin"
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.009999999776482582,
+                        "Actor_PhysicalSubHurtDelta": 0.5,
+                        "Actor_FireSubHurtDelta": 0.5,
+                        "Actor_ElecSubHurtDelta": 0.5,
+                        "Actor_IceSubHurtDelta": 1.0,
+                        "Actor_WaterSubHurtDelta": 0.5,
+                        "Actor_GrassSubHurtDelta": 0.5,
+                        "Actor_WindSubHurtDelta": 0.5,
+                        "Actor_RockSubHurtDelta": 0.5,
+                        "Actor_AttackRatio": 0.10000000149011612
+                    },
+                    "state": "DefenseUp",
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_AMPLIFIER_ICE_SLAVE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -2.0,
+                            "key": "_AMPLIFIER_COOLDOWN",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": -2.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_AMPLIFIER_ICE_SLAVE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "MonsterPowerUp_Amplifier_Add_Buff": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddElementDurability",
+                            "target": "Target",
+                            "ratio": 30.0,
+                            "modifierName": "UNIQUE_MonsterPowerUp_Amplifier_Ice_Slave_AkaFes",
+                            "elementType": "Ice",
+                            "useLimitRange": true,
+                            "maxValue": 100.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Target",
+                            "ratio": 1.0,
+                            "key": "_AMPLIFIER_COOLDOWN",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": -2.0
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]

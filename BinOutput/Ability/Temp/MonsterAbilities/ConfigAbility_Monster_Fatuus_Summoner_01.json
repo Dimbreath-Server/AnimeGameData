@@ -1,0 +1,2262 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_Fatuus_SetPose",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_Summon_Count",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5,
+                        2.5,
+                        3.5
+                    ],
+                    "modifierNameSteps": [
+                        "Fatuus_Summoner_ChildrenState0",
+                        "Fatuus_Summoner_ChildrenState1",
+                        "Fatuus_Summoner_ChildrenState2",
+                        "Fatuus_Summoner_ChildrenState3"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_MonsterEliteAffix_DefaultState": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "UseSkillEliteSet",
+                            "skillEliteSetID": 1
+                        }
+                    ]
+                },
+                "UNIQUE_WeaponEffect": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Fatuus_Summoner_Lamp",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponAttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Fatuus_Summoner_ChildrenState0": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "ChildrenState"
+                        }
+                    ]
+                },
+                "Fatuus_Summoner_ChildrenState1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "ChildrenState",
+                            "value": 1
+                        }
+                    ]
+                },
+                "Fatuus_Summoner_ChildrenState2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "ChildrenState",
+                            "value": 2
+                        }
+                    ]
+                },
+                "Fatuus_Summoner_ChildrenState3": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "ChildrenState",
+                            "value": 3
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "TriggerSetRenderersEnable",
+                    "renderNames": [
+                        "MonEquip_Lantern_Thunder_01"
+                    ],
+                    "setEnable": true
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_WeaponEffect"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_Summon_Count",
+                    "useLimitRange": true,
+                    "maxValue": 3.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_TrySummon_Count",
+                    "useLimitRange": true,
+                    "maxValue": 3.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerSetRenderersEnable",
+                    "renderNames": [
+                        "MonEquip_Lantern_Thunder_01"
+                    ]
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_WeaponDisappear",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_WeaponEffect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_TAG",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "modifierName": "UNIQUE_MonsterEliteAffix_DefaultState"
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "SetPoseBool",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 26060101
+                    },
+                    "boolID": "IsSummoned"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_Summon",
+            "abilitySpecials": {
+                "SummonCount": 0.0
+            },
+            "modifiers": {
+                "Fatuus_Summoner_Summon": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 26060101
+                            },
+                            "boolID": "IsSummoned",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 26060101
+                            },
+                            "ratio": 1.0,
+                            "key": "_Is_Summoned",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_TrySummon_Count",
+                                    "ratio": 2.0,
+                                    "ACJBNJNEBOC": "LessAndEqual"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Summon_Count",
+                                    "ratio": 2.0,
+                                    "ACJBNJNEBOC": "LessAndEqual"
+                                }
+                            ],
+                            "abilityName": "Monster_Fatuus_Summoner_Summon"
+                        }
+                    ]
+                },
+                "ClearGlobalValue": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_TrySummon_Count",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTERAFFIX_SUMMON_LIFETIME",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "Summon",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Summon_Count",
+                                    "ratio": 0.0
+                                },
+                                {
+                                    "$type": "FNMENDNJDPL",
+                                    "attackPattern": {
+                                        "$type": "FPEIAHONPIH",
+                                        "triggerType": "TriggerNoRepeat",
+                                        "born": {
+                                            "$type": "PBDNLGHAMHE",
+                                            "offset": {
+                                                "LOGNGLEIFML": 0.0,
+                                                "JKDAHJILGBJ": 1.75,
+                                                "MJHHBAFNOEG": 0.0
+                                            },
+                                            "GIAOINGDIPJ": {
+                                                "$type": "IPAGJMPLLIN",
+                                                "LPHIFJDFKHI": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": 0.0,
+                                                    "MJHHBAFNOEG": 0.0
+                                                }
+                                            }
+                                        },
+                                        "height": 0.6000000238418579,
+                                        "MJBOOGOHDKH": 10.0,
+                                        "EBADGGHGLKN": 3.75
+                                    }
+                                }
+                            ],
+                            "monsterID": 26060101,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.75,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "ServantSlot0"
+                            },
+                            "summonTag": 26060101,
+                            "aliveByOwner": true,
+                            "sightGroupWithOwner": true
+                        },
+                        {
+                            "$type": "Summon",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Summon_Count",
+                                    "ratio": 1.0
+                                },
+                                {
+                                    "$type": "FNMENDNJDPL",
+                                    "attackPattern": {
+                                        "$type": "FPEIAHONPIH",
+                                        "triggerType": "TriggerNoRepeat",
+                                        "born": {
+                                            "$type": "PBDNLGHAMHE",
+                                            "offset": {
+                                                "LOGNGLEIFML": 0.0,
+                                                "JKDAHJILGBJ": 1.75,
+                                                "MJHHBAFNOEG": 0.0
+                                            },
+                                            "GIAOINGDIPJ": {
+                                                "$type": "IPAGJMPLLIN",
+                                                "LPHIFJDFKHI": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": 135.0,
+                                                    "MJHHBAFNOEG": 0.0
+                                                }
+                                            }
+                                        },
+                                        "height": 0.6000000238418579,
+                                        "MJBOOGOHDKH": 10.0,
+                                        "EBADGGHGLKN": 3.75
+                                    }
+                                }
+                            ],
+                            "monsterID": 26060101,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.75,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "ServantSlot1"
+                            },
+                            "bornSlotIndex": 1,
+                            "summonTag": 26060101,
+                            "aliveByOwner": true,
+                            "sightGroupWithOwner": true
+                        },
+                        {
+                            "$type": "Summon",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Summon_Count",
+                                    "ratio": 2.0
+                                },
+                                {
+                                    "$type": "FNMENDNJDPL",
+                                    "attackPattern": {
+                                        "$type": "FPEIAHONPIH",
+                                        "triggerType": "TriggerNoRepeat",
+                                        "born": {
+                                            "$type": "PBDNLGHAMHE",
+                                            "offset": {
+                                                "LOGNGLEIFML": 0.0,
+                                                "JKDAHJILGBJ": 1.75,
+                                                "MJHHBAFNOEG": 0.0
+                                            },
+                                            "GIAOINGDIPJ": {
+                                                "$type": "IPAGJMPLLIN",
+                                                "LPHIFJDFKHI": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": 225.0,
+                                                    "MJHHBAFNOEG": 0.0
+                                                }
+                                            }
+                                        },
+                                        "height": 0.6000000238418579,
+                                        "MJBOOGOHDKH": 10.0,
+                                        "EBADGGHGLKN": 3.75
+                                    }
+                                }
+                            ],
+                            "monsterID": 26060101,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.75,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "ServantSlot2"
+                            },
+                            "bornSlotIndex": 2,
+                            "summonTag": 26060101,
+                            "aliveByOwner": true,
+                            "sightGroupWithOwner": true
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "Summon",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Summon_Count",
+                                    "ratio": 0.0
+                                },
+                                {
+                                    "$type": "FNMENDNJDPL",
+                                    "attackPattern": {
+                                        "$type": "FPEIAHONPIH",
+                                        "triggerType": "TriggerNoRepeat",
+                                        "born": {
+                                            "$type": "PBDNLGHAMHE",
+                                            "offset": {
+                                                "LOGNGLEIFML": 0.0,
+                                                "JKDAHJILGBJ": 1.75,
+                                                "MJHHBAFNOEG": 0.0
+                                            },
+                                            "GIAOINGDIPJ": {
+                                                "$type": "IPAGJMPLLIN",
+                                                "LPHIFJDFKHI": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": 0.0,
+                                                    "MJHHBAFNOEG": 0.0
+                                                }
+                                            }
+                                        },
+                                        "height": 0.6000000238418579,
+                                        "MJBOOGOHDKH": 10.0,
+                                        "EBADGGHGLKN": 3.75
+                                    }
+                                }
+                            ],
+                            "monsterID": 26060101,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.75,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "ServantSlot0"
+                            },
+                            "summonTag": 26060101,
+                            "sightGroupWithOwner": true
+                        },
+                        {
+                            "$type": "Summon",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Summon_Count",
+                                    "ratio": 1.0
+                                },
+                                {
+                                    "$type": "FNMENDNJDPL",
+                                    "attackPattern": {
+                                        "$type": "FPEIAHONPIH",
+                                        "triggerType": "TriggerNoRepeat",
+                                        "born": {
+                                            "$type": "PBDNLGHAMHE",
+                                            "offset": {
+                                                "LOGNGLEIFML": 0.0,
+                                                "JKDAHJILGBJ": 1.75,
+                                                "MJHHBAFNOEG": 0.0
+                                            },
+                                            "GIAOINGDIPJ": {
+                                                "$type": "IPAGJMPLLIN",
+                                                "LPHIFJDFKHI": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": 135.0,
+                                                    "MJHHBAFNOEG": 0.0
+                                                }
+                                            }
+                                        },
+                                        "height": 0.6000000238418579,
+                                        "MJBOOGOHDKH": 10.0,
+                                        "EBADGGHGLKN": 3.75
+                                    }
+                                }
+                            ],
+                            "monsterID": 26060101,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.75,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "ServantSlot1"
+                            },
+                            "bornSlotIndex": 1,
+                            "summonTag": 26060101,
+                            "sightGroupWithOwner": true
+                        },
+                        {
+                            "$type": "Summon",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Summon_Count",
+                                    "ratio": 2.0
+                                },
+                                {
+                                    "$type": "FNMENDNJDPL",
+                                    "attackPattern": {
+                                        "$type": "FPEIAHONPIH",
+                                        "triggerType": "TriggerNoRepeat",
+                                        "born": {
+                                            "$type": "PBDNLGHAMHE",
+                                            "offset": {
+                                                "LOGNGLEIFML": 0.0,
+                                                "JKDAHJILGBJ": 1.75,
+                                                "MJHHBAFNOEG": 0.0
+                                            },
+                                            "GIAOINGDIPJ": {
+                                                "$type": "IPAGJMPLLIN",
+                                                "LPHIFJDFKHI": {
+                                                    "LOGNGLEIFML": 0.0,
+                                                    "JKDAHJILGBJ": 225.0,
+                                                    "MJHHBAFNOEG": 0.0
+                                                }
+                                            }
+                                        },
+                                        "height": 0.6000000238418579,
+                                        "MJBOOGOHDKH": 10.0,
+                                        "EBADGGHGLKN": 3.75
+                                    }
+                                }
+                            ],
+                            "monsterID": 26060101,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.75,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "ServantSlot2"
+                            },
+                            "bornSlotIndex": 2,
+                            "summonTag": 26060101,
+                            "sightGroupWithOwner": true
+                        }
+                    ]
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_TrySummon_Count",
+                    "useLimitRange": true,
+                    "maxValue": 3.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Fatuus_Summoner_Summon"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ClearGlobalValue"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_SummonEffect",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_CicinCreate",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.75,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "attachPointName": "ServantSlot0"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_CicinCreate",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.75,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "attachPointName": "ServantSlot1"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_CicinCreate",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.75,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "attachPointName": "ServantSlot2"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_ClearGlobalValue",
+            "onAbilityStart": [
+                {
+                    "$type": "AddGlobalValue",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 26060101
+                    },
+                    "ratio": -10.0,
+                    "key": "_SummonNumberInCicin",
+                    "useLimitRange": true,
+                    "maxValue": 3.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_SummonNumberInFatuus",
+                    "useLimitRange": true,
+                    "maxValue": 3.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_CicinRush",
+            "abilitySpecials": {
+                "SummonNumber": 0.0
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "shapeName": "CircleR50",
+                        "campTargetType": "Alliance",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Is_Summoned",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_SummonNumberInFatuus",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_SummonNumberInFatuus",
+                            "overrideMapKey": "SummonNumber"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Target",
+                            "ratio": "SummonNumber",
+                            "key": "_SummonNumberInCicin",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_SetCicinBlink",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 26060101
+                    },
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_SummonNumberInFatuus",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        }
+                    ],
+                    "triggerID": "BlinkTrigger"
+                },
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_SummonNumberInFatuus",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "triggerID": "NormalCancle"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_SetCicin_NotFollow",
+            "modifiers": {
+                "UNIQUE_SetCicin_NotFollow": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Follow"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Follow",
+                            "ratio": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 26060101
+                    },
+                    "modifierName": "UNIQUE_SetCicin_NotFollow"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_CicinFury",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 26060101
+                    },
+                    "triggerID": "FuryTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_BlinkState",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "BlinkFar",
+                        "BlinkNear",
+                        "Dodge"
+                    ],
+                    "modifierName": "Blink_State"
+                }
+            ],
+            "modifiers": {
+                "Blink_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Fatuus_Summoner_Blink_Actions"
+                        }
+                    ]
+                },
+                "UNIQUE_Fatuus_Summoner_Blink_Actions": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Blink_Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Blink_DenyLockOn"
+                        },
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard"
+                        }
+                    ]
+                },
+                "Blink_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "Blink_DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Fatuus_Summoner_Blink_Actions"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_Disappear",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.2000000476837158,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ClearLockTarget",
+                    "target": "CurLocalAvatar"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_FindBlinkPointNear",
+            "onAbilityStart": [
+                {
+                    "$type": "TryFindBlinkPoint",
+                    "forwardAngle": 45.0,
+                    "minRange": 4.0,
+                    "maxRange": 5.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_BLINK_NEAR_COUNT_",
+                    "useLimitRange": true,
+                    "maxValue": 10.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_FindBlinkPointFar",
+            "onAbilityStart": [
+                {
+                    "$type": "TryFindBlinkPoint",
+                    "forwardAngle": 45.0,
+                    "minRange": 8.0,
+                    "maxRange": 9.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_BLINK_FAR_COUNT_",
+                    "useLimitRange": true,
+                    "maxValue": 10.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_Blink",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_Appear_Trail",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "DoBlink"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_BlinkASNear",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_Appear",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.2000000476837158,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Fatuus_Summoner_Blink_Actions"
+                },
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "predicates": [
+                        {
+                            "$type": "OMMNCGCCJEK",
+                            "target": "SelfAttackTarget",
+                            "logic": "GreaterOrEqual",
+                            "ratio": 10.0
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Self",
+                            "key": "_BLINK_NEAR_COUNT_",
+                            "ratio": 3.0,
+                            "ACJBNJNEBOC": "LessAndEqual"
+                        }
+                    ],
+                    "triggerID": "BlinkTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_BlinkASFar",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "BlinkNear_AS",
+                        "BlinkFar_AS"
+                    ],
+                    "modifierName": "ResetBlinkCount"
+                }
+            ],
+            "modifiers": {
+                "ResetBlinkCount": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_BLINK_NEAR_COUNT_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_BLINK_FAR_COUNT_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_Appear",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.2000000476837158,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Fatuus_Summoner_Blink_Actions"
+                },
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "predicates": [
+                        {
+                            "$type": "OMMNCGCCJEK",
+                            "target": "SelfAttackTarget",
+                            "logic": "GreaterOrEqual",
+                            "ratio": 18.0
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Self",
+                            "key": "_BLINK_FAR_COUNT_",
+                            "ratio": 3.0,
+                            "ACJBNJNEBOC": "LessAndEqual"
+                        }
+                    ],
+                    "triggerID": "BlinkTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_TriggerDodge",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "sortType": "Random",
+                        "configID": 26060101
+                    },
+                    "abilityName": "Monster_Cicin_TriggerOwnerDodge"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_FindDodgePoint",
+            "onAbilityStart": [
+                {
+                    "$type": "TryFindBlinkPoint",
+                    "target": "Target",
+                    "forwardAngle": -30.0,
+                    "minRange": 1.5,
+                    "maxRange": 2.5
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_FindDodgeBackPoint",
+            "onAbilityStart": [
+                {
+                    "$type": "TryFindBlinkPoint",
+                    "forwardAngle": 30.0,
+                    "minRange": 8.0,
+                    "maxRange": 10.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_DodgeAS",
+            "onAbilityStart": [
+                {
+                    "$type": "SetSelfAttackTarget",
+                    "target": "SelfAttackTarget",
+                    "turnToTargetImmediately": true
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_Appear",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.2000000476837158,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAbility",
+                    "abilityName": "Monster_Fatuus_Summoner_SetCicin_NotFollow"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Fatuus_Summoner_Blink_Actions"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_DoNotDodge",
+            "modifiers": {
+                "DoNotDodge_Timer": {
+                    "modifierName": "",
+                    "duration": 6.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "DodgeState"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "DodgeState",
+                            "ratio": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "DoNotDodge_Timer"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_ForceDodge",
+            "modifiers": {
+                "ForceDodge": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "BeHit",
+                                "BeHitThrow"
+                            ],
+                            "defendTriggerID": "DodgeTrigger",
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 5.0,
+                            "defendCountInterval": 0,
+                            "onDefendSucceded": [
+                                {
+                                    "$type": "TriggerAbility",
+                                    "abilityName": "Abyss_Fire_ForceBlink"
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "DoNotDodge_Timer"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "DoNotDodge_Timer": {
+                    "modifierName": "",
+                    "duration": 6.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "DodgeState"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "DodgeState",
+                            "ratio": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "ForceDodge"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_RangeAtk",
+            "abilitySpecials": {
+                "RangeAtk_Timers": 0.0
+            },
+            "modifiers": {
+                "Fatuus_Summoner_RangeAtk_Times": {
+                    "modifierName": "",
+                    "duration": [
+                        0.5,
+                        "RangeAtk_Timers",
+                        "MUL",
+                        0.20000000298023224,
+                        "ADD"
+                    ],
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "target": "SelfAttackTarget",
+                            "born": {
+                                "$type": "AKKLFFBMMHL",
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true,
+                                "DOHGLKAMJKA": 0.5
+                            },
+                            "gadgetID": 42303001,
+                            "campID": 4001,
+                            "campTargetType": "All"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "CreateGadget",
+                            "target": "SelfAttackTarget",
+                            "born": {
+                                "$type": "AKKLFFBMMHL",
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true,
+                                "DOHGLKAMJKA": 0.5
+                            },
+                            "gadgetID": 42303001,
+                            "campID": 4001,
+                            "campTargetType": "All"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Fatuus_Summoner_RangeAtk_Times"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_RANDOM_RANGEATK_TIMES",
+                    "useLimitRange": true,
+                    "randomInRange": true,
+                    "maxValue": 5.0,
+                    "minValue": 2.0
+                },
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "globalValueKey": "_ABILITY_RANDOM_RANGEATK_TIMES",
+                    "overrideMapKey": "RangeAtk_Timers"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_RangeAtk_Damage",
+            "modifiers": {
+                "Damage_Timer": {
+                    "modifierName": "",
+                    "duration": 1.2000000476837158,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "SingleDamage"
+                        }
+                    ]
+                },
+                "Effect_Timer": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Fatuus_Summoner_ThunderDrop",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "SingleDamage": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "AMCAIHBNPDK": true,
+                                        "OLIAGPMOBLE": true
+                                    },
+                                    "height": 1.0,
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 100.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "forceCameraShake": true,
+                                    "cameraShake": {
+                                        "shakeType": "CustomVector",
+                                        "shakeRange": 0.03999999910593033,
+                                        "shakeTime": 0.09000000357627869,
+                                        "shakeDir": {
+                                            "y": 1.0
+                                        }
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "OverTimeDamage"
+                        }
+                    ]
+                },
+                "OverTimeDamage": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "AMCAIHBNPDK": true,
+                                        "OLIAGPMOBLE": true
+                                    },
+                                    "height": 1.0,
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Group1",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.25,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 1.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV1",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "forceCameraShake": true,
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_ThunderDropAlert",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Effect_Timer"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Damage_Timer"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_ThunderShieldTrigger",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByEventMixin",
+                    "type": "Current",
+                    "onEvent": "HP",
+                    "actions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Fatuus_Summoner_ThunderShieldTrigger"
+                        }
+                    ],
+                    "costEnergyDeltaName": ""
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Fatuus_Summoner_ThunderShieldTrigger": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_CicinCreateEnergy",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 26060101
+                    },
+                    "abilityName": "Monster_Cicin_ThunderShieldCreateEnergy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_KillCicin",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 26060101
+                    },
+                    "abilityName": "Monster_Cicin_ThunderShieldDie"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_ThunderShield",
+            "modifiers": {
+                "UNIQUE_Fatuus_Summoner_ElementShield": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 12.5,
+                    "elementType": "Electric",
+                    "bonusCriticalHurt": 200.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ElementShieldMixin",
+                            "elementType": "Electric",
+                            "showDamageText": "",
+                            "shieldAngle": 360.0,
+                            "maxShieldByHPRatio": 1.0,
+                            "damageRatio": 0.20000000298023224,
+                            "onShieldBroken": [
+                                {
+                                    "$type": "DamageByAttackValue",
+                                    "attackInfo": {
+                                        "attackTag": "",
+                                        "attenuationTag": "",
+                                        "attenuationGroup": "default",
+                                        "attackProperty": {
+                                            "LIMFCEKGALF": 0.0,
+                                            "JJGGAPONHOE": 0.0,
+                                            "bonusCriticalHurt": 100.0,
+                                            "strikeType": "Default",
+                                            "enBreak": 1000.0,
+                                            "damagePercentage": 0.0
+                                        },
+                                        "hitPattern": {
+                                            "onHitEffectName": "default",
+                                            "hitImpulseType": "LV5",
+                                            "hitHaltTimeScale": 0.05000000074505806
+                                        },
+                                        "forceCameraShake": true,
+                                        "cameraShake": {
+                                            "shakeRange": 0.23999999463558197,
+                                            "shakeTime": 0.11999999731779099
+                                        }
+                                    }
+                                }
+                            ],
+                            "onShieldSuccess": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Avatar"
+                                            ]
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "SetGlobalDir",
+                                            "target": "Target",
+                                            "key": "_ABILITY_FATUUS_SUMMONER_ELEMENTSHIELD_HIT",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "GIAOINGDIPJ": {
+                                                    "$type": "IODLJEIOAPP"
+                                                }
+                                            },
+                                            "setTarget": false
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "SetGlobalDir",
+                                            "target": "TargetOriginOwner",
+                                            "key": "_ABILITY_FATUUS_SUMMONER_ELEMENTSHIELD_HIT",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "GIAOINGDIPJ": {
+                                                    "$type": "IODLJEIOAPP"
+                                                }
+                                            },
+                                            "setTarget": false
+                                        }
+                                    ]
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Fatuus_Summoner_ElectricShieldHitInvalid",
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "GIAOINGDIPJ": {
+                                            "$type": "NNLPINDGCEC",
+                                            "directionKey": "_ABILITY_FATUUS_SUMMONER_ELEMENTSHIELD_HIT"
+                                        }
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ],
+                            "onShieldFailed": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Avatar"
+                                            ]
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "SetGlobalDir",
+                                            "target": "Target",
+                                            "key": "_ABILITY_FATUUS_SUMMONER_ELEMENTSHIELD_HIT",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "GIAOINGDIPJ": {
+                                                    "$type": "IODLJEIOAPP"
+                                                }
+                                            },
+                                            "setTarget": false
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "SetGlobalDir",
+                                            "target": "TargetOriginOwner",
+                                            "key": "_ABILITY_FATUUS_SUMMONER_ELEMENTSHIELD_HIT",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "GIAOINGDIPJ": {
+                                                    "$type": "IODLJEIOAPP"
+                                                }
+                                            },
+                                            "setTarget": false
+                                        }
+                                    ]
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Fatuus_Summoner_ElectricShieldHitValid",
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "GIAOINGDIPJ": {
+                                            "$type": "NNLPINDGCEC",
+                                            "directionKey": "_ABILITY_FATUUS_SUMMONER_ELEMENTSHIELD_HIT"
+                                        }
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ],
+                            "useMutiPlayerFixData": true
+                        },
+                        {
+                            "$type": "VelocityForceMixin",
+                            "excludeForces": [
+                                "WindZoneType"
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Fatuus_Summoner_ElectricShieldBS",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "ThunderShield",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 14003
+                        },
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 14001
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox_ElementShield"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ]
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider_ElementShield"
+                            ],
+                            "setEnable": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "ThunderShield"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Fatuus_Summoner_ElectricShieldAS",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox_ElementShield"
+                            ]
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider_ElementShield"
+                            ]
+                        },
+                        {
+                            "$type": "DoWatcherSystemAction",
+                            "watcherId": 82005,
+                            "inThreatListOnly": true
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Fatuus_Summoner_ElementShield"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Fatuus_Summoner_ElementShield"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Fatuus_Summoner_ThunderShieldTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_BurstAtk",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "BurstAtk",
+                        "BurstAtkStandby"
+                    ],
+                    "modifierName": "BurstAtk_Effect"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "BurstAtk",
+                        "BurstAtkStandby"
+                    ],
+                    "modifierName": "BurstAtk_FindTargets"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "BurstAtk",
+                        "BurstAtkStandby"
+                    ],
+                    "modifierName": "BurstAtk_Resistance"
+                }
+            ],
+            "modifiers": {
+                "BurstAtk_Resistance": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 14001
+                        }
+                    ]
+                },
+                "BurstAtk_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Fatuus_Summoner_BurstAtk",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "Fx_HeadNode"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Fatuus_Summoner_BurstAtk_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "BurstAtk_FindTargets": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.4000000059604645,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR8",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicatesForeach": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "BurstAtk_Damage"
+                        }
+                    ]
+                },
+                "BurstAtk_Damage": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "Group1",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.25,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Electric",
+                                    "bonusCriticalHurt": 25.0,
+                                    "strikeType": "Default",
+                                    "enBreak": 1.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "Eff_Monster_Fatuus_Summoner_BurstAtk_Hit",
+                                    "hitImpulseType": "LV1",
+                                    "hitHaltTimeScale": 0.05000000074505806
+                                },
+                                "cameraShake": {}
+                            }
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Fatuus_Summoner_BurstAtk_Lightning",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 1.5,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponAttachPoint",
+                                "OINJEIEFIBB": "Applier"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_BurstAtkBS",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "height": 1.0,
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 20.0,
+                                "strikeType": "Default",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {}
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_BurstAtk_SetWeaponRender",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "BurstAtk_BS2",
+                        "BurstAtk",
+                        "BurstAtk_AS1",
+                        "BurstAtkStandby"
+                    ],
+                    "modifierName": "SetWeaponRender"
+                }
+            ],
+            "modifiers": {
+                "SetWeaponRender": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "renderNames": [
+                                "MonEquip_Lantern_Thunder_01"
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Fatuus_Summoner_WeaponDisappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "renderNames": [
+                                "MonEquip_Lantern_Thunder_01"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Fatuus_Summoner_WeaponDisappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_BurstAtk_SkinLayerOn",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorBool",
+                    "boolID": "SkinLayerState",
+                    "ratio": true
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Fatuus_Summoner_ElementShield"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_BurstAtk_SkinLayerOff",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorBool",
+                    "boolID": "SkinLayerState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_Random2_Timer",
+            "modifiers": {
+                "Timer": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Timer"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_BurstAtk_LHandEffect",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_BurstAtk_Hand",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "attachPointName": "LHandAttachPoint"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fatuus_Summoner_BurstAtk_RHandEffect",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fatuus_Summoner_BurstAtk_Hand",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "attachPointName": "RHandAttachPoint"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Fatuus_Summoner_Steer",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn"
+                    ],
+                    "angularSpeed": 120.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "BlinkNear"
+                    ],
+                    "endNormalizedTime": 2.0,
+                    "angularSpeed": 150.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "BlinkFar"
+                    ],
+                    "endNormalizedTime": 2.0,
+                    "angularSpeed": 150.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Summon"
+                    ],
+                    "endNormalizedTime": 0.15000000596046448,
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "RangeAtk"
+                    ],
+                    "startNormalizedTime": 0.17499999701976776,
+                    "endNormalizedTime": 0.25,
+                    "angularSpeed": 360.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "BurstAtkStandby"
+                    ],
+                    "endNormalizedTime": 20.0,
+                    "angularSpeed": 120.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,312 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Trois_BVB_Ice_Digging",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "DigAttack_Loop"
+                    ],
+                    "modifierName": "DigMoveLoopHandler"
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "NormalAttack"
+                    ],
+                    "endNormalizedTime": 99.0,
+                    "angularSpeed": 240.0,
+                    "attackTrigger": "DigOutTrigger",
+                    "attackDistance": 2.0
+                }
+            ],
+            "modifiers": {
+                "DigMoveLoopHandler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Fungus_Trois_Ice_DigAttack_Trail",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerSetCastShadow"
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetCastShadow",
+                            "castShadow": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "HideUIBillBoard"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Trois_BVB_Ice_Bullet",
+            "modifiers": {
+                "Fungus_Trois_BVB_Ice_Bullet_Display": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Fungus_Trois_Ice_Bullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Fungus_Trois_BVB_Ice_Bullet_Display"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Trois_BVB_Ice_Bullet_Fire",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "UnionBurst"
+                    ],
+                    "angularSpeed": 120.0,
+                    "attackTrigger": ""
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42609011,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.2000000476837158,
+                            "MJHHBAFNOEG": -0.5
+                        },
+                        "COAICNDKEMA": true
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Trois_BVB_Ice_Blizzard",
+            "modifiers": {
+                "UNIQUE_ElementShield_Ice": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ElementShieldMixin",
+                            "elementType": "Frozen",
+                            "showDamageText": "",
+                            "shieldAngle": 360.0,
+                            "maxShieldByHPRatio": 1.0,
+                            "damageRatio": 0.25
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_IN_SHIELD_PROTECT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Fungus_Trois_Ice_FrozenShield",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Shield_Timer"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_IN_SHIELD_PROTECT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Fungus_Trois_Ice_FrozenShield_Break",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Shield_Timer": {
+                    "modifierName": "",
+                    "duration": 6.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "UNIQUE_ElementShield_Ice"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_State_Shield_Up"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_ElementShield_Ice"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "AMCAIHBNPDK": true,
+                        "COAICNDKEMA": true
+                    },
+                    "gadgetID": 42609028
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Trois_BVB_Ice_Blizzard_Gadget",
+            "modifiers": {
+                "FrozenStorm_State": {
+                    "modifierName": "",
+                    "duration": 6.099999904632568,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Fungus_Trois_Ice_Blizzard",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "FungusAOE_R5",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "FrozenStorm",
+                                "attenuationGroup": "FungusFightV2_Seq1",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 1.5,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Ice",
+                                    "bonusCriticalHurt": 25.0,
+                                    "enBreak": 20.0,
+                                    "attackType": "Range",
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV1"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FrozenStorm_State"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Trois_BVB_Ice_Passive",
+            "modifiers": {
+                "Taunt_Logic": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 2.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerTaunt",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR30H10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster",
+                                        "Partner"
+                                    ]
+                                }
+                            ],
+                            "tauntLevel": "Ability_TauntLevel_4",
+                            "careValue": 36.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Taunt_Logic"
+                }
+            ]
+        }
+    }
+]

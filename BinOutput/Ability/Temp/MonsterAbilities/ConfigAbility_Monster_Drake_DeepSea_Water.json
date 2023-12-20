@@ -1,0 +1,2772 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_Water_SpecialStateAlert",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalIdle"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_Water_Hide",
+                    "predicates": [
+                        {
+                            "$type": "PCGFCGPFNLE",
+                            "logic": "Equal",
+                            "ratio": 9001.0,
+                            "parameter": "PoseID"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_Water_Hide": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_JumpToAlertPos",
+            "onAbilityStart": [
+                {
+                    "$type": "FixedMonsterRushMove",
+                    "toPos": {
+                        "$type": "HPMHPFGMPLH"
+                    },
+                    "timeRange": 0.6000000238418579,
+                    "maxRange": 100.0,
+                    "animatorStateIDs": [
+                        "Alert_Jump"
+                    ],
+                    "overrideMoveCollider": ""
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_Water_Run",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalMove"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_Water_Run"
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_Water_Run": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_RushWater_Middle",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_Water_Run_Small",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalMove"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_Water_Run"
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_Water_Run": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_RushWater_Small",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_JumpAttack",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "JumpAtk"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_JumpAttack_MuteForce_Handler"
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_JumpAttack_MuteForce_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Monster_Drake_DeepSea_JumpAttack_MuteForce"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_JumpAttack_MuteForce": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "VelocityForceMixin",
+                            "includeForces": [
+                                "FixedRushMoveType"
+                            ]
+                        },
+                        {
+                            "$type": "ExcludeGravityMixin"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FixedMonsterRushMove",
+                    "toPos": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 10.0,
+                            "MJHHBAFNOEG": 10.0
+                        }
+                    },
+                    "timeRange": 0.5,
+                    "animatorStateIDs": [
+                        "JumpAtk"
+                    ],
+                    "overrideMoveCollider": "",
+                    "isInAir": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_MagicWaterBall",
+            "modifiers": {
+                "Monster_Drake_DeepSea_MagicWaterBall_DecreaseMPAttack": {
+                    "modifierName": "",
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 0.0,
+                                    "NEFIEFFCJKO": true
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_DRAKE_DEEPSEA_MPATTACK_TIMES",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "IEOKJFBHCBD",
+                                            "logic": "Lesser",
+                                            "ratio": 20.0
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_More",
+                                            "effectSlot": "ElementBurst"
+                                        },
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_HPBar",
+                                            "effectSlot": "HPBar"
+                                        },
+                                        {
+                                            "$type": "DungeonFogEffects",
+                                            "target": "Target",
+                                            "muteRemoteAction": true,
+                                            "enable": true,
+                                            "cameraFogEffectName": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_ScreenEffect",
+                                            "playerFogEffectName": ""
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy",
+                                            "effectSlot": "ElementBurst"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "$type": "AttackByEnergy",
+                                    "target": "Target",
+                                    "energy": 10.0,
+                                    "overDamageRatio": 20.0,
+                                    "overDamageMaxHPRatio": 0.14000000059604645
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_DRAKE_DEEPSEA_MPATTACK_TIMES",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_MagicWaterBall_Timer": {
+                    "modifierName": "",
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_MagicWaterBall"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_WaterBallExplode",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE"
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "TrickDog_Damage",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.5,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Blunt",
+                                        "enBreak": 101.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2"
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_MagicWaterBall": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_WaterBall_Tail",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_WaterBall",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicWaterBall"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicWaterBall_Timer"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicWaterBall_DecreaseMPAttack"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicWaterBall"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_WaterBallExplode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "TrickDog_Damage",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.5,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 101.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_FireWaterBall",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605025,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "maxAngle": 30.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "MouthFirePoint"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_MagicWaterBall_Small",
+            "modifiers": {
+                "Monster_Drake_DeepSea_MagicWaterBall_DecreaseMPAttack": {
+                    "modifierName": "",
+                    "duration": 4.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 0.0,
+                                    "NEFIEFFCJKO": true
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_DRAKE_DEEPSEA_MPATTACK_TIMES",
+                                    "ratio": 0.0,
+                                    "PLDDAFOIEGE": true,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "IEOKJFBHCBD",
+                                            "logic": "Lesser",
+                                            "ratio": 10.0
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_More",
+                                            "effectSlot": "ElementBurst"
+                                        },
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_HPBar",
+                                            "effectSlot": "HPBar"
+                                        },
+                                        {
+                                            "$type": "DungeonFogEffects",
+                                            "target": "Target",
+                                            "muteRemoteAction": true,
+                                            "enable": true,
+                                            "cameraFogEffectName": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_ScreenEffect",
+                                            "playerFogEffectName": ""
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy",
+                                            "effectSlot": "ElementBurst"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "$type": "AttackByEnergy",
+                                    "target": "Target",
+                                    "energy": 10.0,
+                                    "overDamageRatio": 20.0,
+                                    "overDamageMaxHPRatio": 0.14000000059604645
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_DRAKE_DEEPSEA_MPATTACK_TIMES",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_MagicWaterBall_Timer": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_MagicWaterBall"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_WaterBallExplode",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE"
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "TrickDog_Damage",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.5,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Blunt",
+                                        "enBreak": 101.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2"
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_MagicWaterBall": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_WaterBall_Tail",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_WaterBall",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicWaterBall"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicWaterBall_Timer"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicWaterBall_DecreaseMPAttack"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicWaterBall"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_WaterBallExplode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "TrickDog_Damage",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.5,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 101.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_FireWaterBall_Small",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605046,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "maxAngle": 30.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "MouthFirePoint"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_TaiRangeAttack_WaterSpear",
+            "modifiers": {
+                "Monster_Drake_DeepSea_TaiRangeAttack_WaterSpear": {
+                    "modifierName": "",
+                    "duration": 4.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_WaterSpear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_WaterSpear_Tail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_TaiRangeAttack_WaterSpear"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Monster_Drake_DeepSea_TaiRangeAttack_WaterSpear"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_WaterExplode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 0.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "WaterSpearAttack",
+                            "attenuationGroup": "Skirmisher_Fat_SprayGun_Ice",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.30000001192092896,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 101.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_TailRangeSpearWaterCharge",
+            "modifiers": {
+                "Monster_Drake_DeepSea_TailRangeSpearWaterCharge1": {
+                    "modifierName": "",
+                    "duration": 1.25,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_ChargeBall_Water",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 5.0,
+                                    "JKDAHJILGBJ": 4.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 20.0
+                                    }
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_TailRangeSpearWaterCharge2": {
+                    "modifierName": "",
+                    "duration": 1.5499999523162842,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_ChargeBall_Water",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": -5.0,
+                                    "JKDAHJILGBJ": 4.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": -20.0
+                                    }
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_ChargeBall_Water",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 3.359999895095825,
+                            "MJHHBAFNOEG": 5.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "CMKPBPBACMP": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 90.0
+                            }
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_ChargeBall_Water",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": -0.5,
+                            "JKDAHJILGBJ": 3.359999895095825,
+                            "MJHHBAFNOEG": 5.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "CMKPBPBACMP": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": -30.0,
+                                "MJHHBAFNOEG": 90.0
+                            }
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_ChargeBall_Water",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.5,
+                            "JKDAHJILGBJ": 3.359999895095825,
+                            "MJHHBAFNOEG": 5.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "CMKPBPBACMP": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 30.0,
+                                "MJHHBAFNOEG": 90.0
+                            }
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_WaterSpear_Earth",
+            "modifiers": {
+                "Monster_Drake_DeepSea_WaterSpear_Earth": {
+                    "modifierName": "",
+                    "duration": 4.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_WaterSpear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_WaterSpear_Tail",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_WaterExplode",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE"
+                                    },
+                                    "EBADGGHGLKN": 0.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "WaterSpearAttack",
+                                    "attenuationGroup": "Skirmisher_Fat_SprayGun_Ice",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.30000001192092896,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Blunt",
+                                        "enBreak": 101.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2"
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_WaterSpear_Earth"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Avatar",
+                                "Gadget"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_WaterSpear_Earth"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_WaterExplode",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE"
+                                    },
+                                    "EBADGGHGLKN": 0.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "WaterSpearAttack",
+                                    "attenuationGroup": "Skirmisher_Fat_SprayGun_Ice",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.30000001192092896,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Blunt",
+                                        "enBreak": 101.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2"
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_FireTailRangeSpearWater",
+            "modifiers": {
+                "Monster_Drake_DeepSea_FireTailRangeSpearWater_Delay1": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42605028,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 5.0,
+                                    "JKDAHJILGBJ": 4.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 20.0
+                                    },
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Monster_Drake_DeepSea_FireTailRangeSpearWater_Delay2"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_FireTailRangeSpearWater_Delay2": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42605028,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": -5.0,
+                                    "JKDAHJILGBJ": 4.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": -20.0
+                                    },
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_DRAKE_DEEPSEA_WATER_SPECIALPOSE_TYPE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "MoreThan"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_WaterSpearFire",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.5,
+                                    "JKDAHJILGBJ": 3.359999895095825,
+                                    "MJHHBAFNOEG": 5.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42605028,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.5,
+                                    "JKDAHJILGBJ": 3.359999895095825,
+                                    "MJHHBAFNOEG": 5.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 30.0,
+                                        "MJHHBAFNOEG": 90.0
+                                    },
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42605028,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 3.359999895095825,
+                                    "MJHHBAFNOEG": 5.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 90.0
+                                    },
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42605028,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": -0.5,
+                                    "JKDAHJILGBJ": 3.359999895095825,
+                                    "MJHHBAFNOEG": 5.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": -30.0,
+                                        "MJHHBAFNOEG": 90.0
+                                    },
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_WaterSpearFire",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.5,
+                                    "JKDAHJILGBJ": 3.359999895095825,
+                                    "MJHHBAFNOEG": 5.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42605028,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.5,
+                                    "JKDAHJILGBJ": 3.359999895095825,
+                                    "MJHHBAFNOEG": 5.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 30.0,
+                                        "MJHHBAFNOEG": 90.0
+                                    },
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42605028,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 3.359999895095825,
+                                    "MJHHBAFNOEG": 5.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 90.0
+                                    },
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42605028,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": -0.5,
+                                    "JKDAHJILGBJ": 3.359999895095825,
+                                    "MJHHBAFNOEG": 5.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": -30.0,
+                                        "MJHHBAFNOEG": 90.0
+                                    },
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_ChargeAttackWaterSpear",
+            "modifiers": {
+                "Monster_Drake_DeepSea_ChargeAttackWaterSpear": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireSubEmitterEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_ChargeAttackWater",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            }
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": -1.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 5.0,
+                                    "EBADGGHGLKN": 1.2000000476837158
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "ChargeIceAttack",
+                                    "attenuationGroup": "Skirmisher_Fat_SprayGun_Ice",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.6000000238418579,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Blunt",
+                                        "enBreak": 60.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2"
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_ChargeAttackWaterSpear"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_ChargeAttackArea_Water",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ChargeAttack_BS",
+                        "ChargeAttack_Loop",
+                        "ChargeAttack_AS"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_ChargeAttackArea_Water_RemoveEffect"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "ChargeAttack_BS",
+                    "modifierName": "Monster_Drake_DeepSea_ChargeAttackWater_TailEffect_Handler",
+                    "normalizeStart": 0.25999999046325684
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_ChargeAttackWater_TailEffect_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Monster_Drake_DeepSea_ChargeAttackWater_TailEffect"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_ChargeAttackWater_TailEffect": {
+                    "modifierName": "",
+                    "duration": 7.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_ChargeAttackWatercTail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_ChargeAttackArea_Water": {
+                    "modifierName": "",
+                    "duration": 7.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_ChargeAttackWaterArea",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_ChargeAttackArea_Water_RemoveEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "ElementFrozen",
+                                "ElementPetrifaction"
+                            ],
+                            "modifierName": "Monster_Drake_DeepSea_ChargeAttackArea_Stop"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_ChargeAttackArea_Water"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_ChargeAttackWater_TailEffect"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_ChargeAttackArea_Stop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_ChargeAttackArea_Water"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_ChargeAttackWater_TailEffect"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_ChargeAttackArea_Water"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_FireChargeAttackWater",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ChargeAttack_Loop"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_FireChargeAttackWater_Handler"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ChargeAttack_Loop",
+                        "ChargeAttack_AS"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_ChargeAttackArea_Water_RemoveAttack"
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_ChargeAttack_Stop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "OutOfCharge"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_ChargeAttackArea_Water_RemoveAttack": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "RigidBodyFreezeMixin"
+                        },
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "ElementFrozen",
+                                "ElementPetrifaction"
+                            ],
+                            "modifierName": "Monster_Drake_DeepSea_ChargeAttack_Stop"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_FireChargeAttackWater_Random"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_FireChargeAttackWater"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_FireChargeAttackWater_Random": {
+                    "modifierName": "",
+                    "duration": 5.5,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.30000001192092896,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 0.0,
+                                    "DEEJGGKEKNN": 15.0
+                                }
+                            },
+                            "gadgetID": 42605033
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 0.0,
+                                    "DEEJGGKEKNN": 15.0
+                                }
+                            },
+                            "gadgetID": 42605033
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_FireChargeAttackWater_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Monster_Drake_DeepSea_FireChargeAttackWater"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_FireChargeAttackWater": {
+                    "modifierName": "",
+                    "duration": 5.5,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.5,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR15H10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalPos",
+                                    "target": "Target",
+                                    "key": "_DRAKE_DEEPSEA_ICE_CHARGEATTACK_POS",
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "AMCAIHBNPDK": true
+                                    },
+                                    "setTarget": false
+                                },
+                                {
+                                    "$type": "CreateGadget",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "positionKey": "_DRAKE_DEEPSEA_ICE_CHARGEATTACK_POS",
+                                        "directionKey": ""
+                                    },
+                                    "gadgetID": 42605033
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Monster_Drake_DeepSea_FireChargeAttackWater_Random"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR15H10",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalPos",
+                                    "target": "Target",
+                                    "key": "_DRAKE_DEEPSEA_ICE_CHARGEATTACK_POS",
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "AMCAIHBNPDK": true
+                                    },
+                                    "setTarget": false
+                                },
+                                {
+                                    "$type": "CreateGadget",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "positionKey": "_DRAKE_DEEPSEA_ICE_CHARGEATTACK_POS",
+                                        "directionKey": ""
+                                    },
+                                    "gadgetID": 42605033
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_FireHealCharge_WQV42",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ChargeAttack_Loop"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_FireHealWave_Handler"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ChargeAttack_Loop",
+                        "ChargeAttack_AS"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_ChargeAttackArea_Water_RemoveAttack"
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_FireHealCharge_WQV42_Limbo": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_HpThresholdRatio": 0.10000000149011612
+                    },
+                    "state": "Limbo"
+                },
+                "DrakeDeepSea_WQV42_HealHP_TeamHandler": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HealHP",
+                            "target": "CurTeamAvatars",
+                            "PKFLAAKLDFH": 0.05000000074505806,
+                            "cdRatio": ""
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_FireHealCharge_AreaEff": {
+                    "modifierName": "",
+                    "duration": 5.699999809265137,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_Water_ChargeHeal_Area",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_ChargeAttack_Stop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "OutOfCharge"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_ChargeAttackArea_Water_RemoveAttack": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "RigidBodyFreezeMixin"
+                        },
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "ElementFrozen",
+                                "ElementPetrifaction"
+                            ],
+                            "modifierName": "Monster_Drake_DeepSea_ChargeAttack_Stop"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_FireHealWave_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Drake_DeepSea_FireHealCharge_AreaEff"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "HealHP",
+                            "PKFLAAKLDFH": 0.05000000074505806,
+                            "cdRatio": ""
+                        },
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10H10",
+                                "campTargetType": "Alliance",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar",
+                                        "Partner"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "TargetTeam",
+                                    "modifierName": "DrakeDeepSea_WQV42_HealHP_TeamHandler"
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "target": "Target",
+                                    "shieldHP": "Eff_AvatarCommon_Heal",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_Water_ChargeHeal_HealWave",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_FireHealCharge_WQV42_Limbo"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_FireHealCharge_AreaEff"
+                },
+                {
+                    "$type": "Predicated",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "shapeName": "CircleR15H10",
+                        "campTargetType": "Alliance",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Avatar",
+                                "Partner"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "FireEffect",
+                            "target": "Target",
+                            "shieldHP": "Eff_AvatarCommon_Heal",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "HealHP",
+                            "PKFLAAKLDFH": 0.05000000074505806,
+                            "cdRatio": ""
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "TargetTeam",
+                            "modifierName": "DrakeDeepSea_WQV42_HealHP_TeamHandler"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_MagicIceBall_Small",
+            "modifiers": {
+                "Monster_Drake_DeepSea_MagicIceBall_Small": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_IceBall_Small",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_IceBall_Tail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_MagicBall_DecreaseMPAttack": {
+                    "modifierName": "",
+                    "duration": 6.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 0.0,
+                                    "NEFIEFFCJKO": true
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_DRAKE_DEEPSEA_MPATTACK_TIMES",
+                                    "ratio": 0.0,
+                                    "PLDDAFOIEGE": true,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "IEOKJFBHCBD",
+                                            "logic": "Lesser",
+                                            "ratio": 10.0
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_More",
+                                            "effectSlot": "ElementBurst"
+                                        },
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_HPBar",
+                                            "effectSlot": "HPBar"
+                                        },
+                                        {
+                                            "$type": "DungeonFogEffects",
+                                            "target": "Target",
+                                            "muteRemoteAction": true,
+                                            "enable": true,
+                                            "cameraFogEffectName": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_ScreenEffect",
+                                            "playerFogEffectName": ""
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy",
+                                            "effectSlot": "ElementBurst"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "$type": "AttackByEnergy",
+                                    "target": "Target",
+                                    "energy": 10.0,
+                                    "overDamageRatio": 20.0,
+                                    "overDamageMaxHPRatio": 0.14000000059604645
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_DRAKE_DEEPSEA_MPATTACK_TIMES",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicIceBall_Small"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicBall_DecreaseMPAttack"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicIceBall_Small"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_IceBallExplode_Small",
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.05000000074505806,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Ice",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 10.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_FireIceBall_Small",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605037,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "maxAngle": 30.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "MouthFirePoint"
+                    }
+                },
+                {
+                    "$type": "ActCameraShake",
+                    "muteRemoteAction": true,
+                    "cameraShake": {
+                        "shakeRange": 0.10000000149011612,
+                        "shakeTime": 0.10000000149011612,
+                        "shakeDistance": 30.0,
+                        "extension": {
+                            "baseOnCamera": true
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_MagicElectricBall_Small",
+            "modifiers": {
+                "Monster_Drake_DeepSea_MagicElectricBall_Small": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_ElectricBall_Small",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_MagicBall_DecreaseMPAttack": {
+                    "modifierName": "",
+                    "duration": 6.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 0.0,
+                                    "NEFIEFFCJKO": true
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_DRAKE_DEEPSEA_MPATTACK_TIMES",
+                                    "ratio": 0.0,
+                                    "PLDDAFOIEGE": true,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "IEOKJFBHCBD",
+                                            "logic": "Lesser",
+                                            "ratio": 10.0
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_More",
+                                            "effectSlot": "ElementBurst"
+                                        },
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_HPBar",
+                                            "effectSlot": "HPBar"
+                                        },
+                                        {
+                                            "$type": "DungeonFogEffects",
+                                            "target": "Target",
+                                            "muteRemoteAction": true,
+                                            "enable": true,
+                                            "cameraFogEffectName": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy_ScreenEffect",
+                                            "playerFogEffectName": ""
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "FireUIEffect",
+                                            "target": "Target",
+                                            "shieldHP": "Eff_UI_Debuff_BurnBlue_DecreaseEnergy",
+                                            "effectSlot": "ElementBurst"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "$type": "AttackByEnergy",
+                                    "target": "Target",
+                                    "energy": 10.0,
+                                    "overDamageRatio": 20.0,
+                                    "overDamageMaxHPRatio": 0.14000000059604645
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_DRAKE_DEEPSEA_MPATTACK_TIMES",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicElectricBall_Small"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicBall_DecreaseMPAttack"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Monster_Drake_DeepSea_MagicElectricBall_Small"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_ElectricBallExplode_Small",
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.05000000074505806,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 10.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_FireElectricBall_Small",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605038,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "maxAngle": 30.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "MouthFirePoint"
+                    }
+                },
+                {
+                    "$type": "ActCameraShake",
+                    "muteRemoteAction": true,
+                    "cameraShake": {
+                        "shakeRange": 0.10000000149011612,
+                        "shakeTime": 0.10000000149011612,
+                        "shakeDistance": 30.0,
+                        "extension": {
+                            "baseOnCamera": true
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_TaiRangeAttack_IceSpear_Small",
+            "modifiers": {
+                "Monster_Drake_DeepSea_TaiRangeAttack_IceSpear_Small": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_IceSpear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_IceSpearTail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_TaiRangeAttack_IceSpear_Small"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Monster_Drake_DeepSea_TaiRangeAttack_IceSpear_Small"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_IceExplode",
+                    "born": {
+                        "$type": "HANJDCBOIIE",
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "AMCAIHBNPDK": true
+                            },
+                            "EBADGGHGLKN": 0.699999988079071
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "IceSpearAttack",
+                            "attenuationGroup": "Skirmisher_Fat_SprayGun_Ice",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.30000001192092896,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Ice",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 101.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_FireTailRangeSpearIce_Small",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605039,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "TailFirePoint"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605039,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "TailFirePoint"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605039,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "TailFirePoint"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605039,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "TailFirePoint"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_TaiRangeAttack_ElectricSpear_Small",
+            "modifiers": {
+                "Monster_Drake_DeepSea_TaiRangeAttack_ElectricSpear_Small": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_ElectricSpear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_TaiRangeAttack_ElectricSpear_Small"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Monster_Drake_DeepSea_TaiRangeAttack_ElectricSpear_Small"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Drake_DeepSea_TaiRangeAttack_ElectricExplode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 0.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "ElectricSpearAttack",
+                            "attenuationGroup": "Skirmisher_Fat_SprayGun_Ice",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.30000001192092896,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 101.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_FireTailRangeSpearElectric_Small",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605040,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.18000000715255737,
+                            "JKDAHJILGBJ": 1.600000023841858,
+                            "MJHHBAFNOEG": 4.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "CMKPBPBACMP": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 30.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605040,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.18000000715255737,
+                            "JKDAHJILGBJ": 1.600000023841858,
+                            "MJHHBAFNOEG": 4.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "CMKPBPBACMP": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": -30.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42605040,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.18000000715255737,
+                            "JKDAHJILGBJ": 1.600000023841858,
+                            "MJHHBAFNOEG": 4.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "CMKPBPBACMP": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_Ice_Run_Small",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalMove"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_Ice_Run"
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_Ice_Run": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_RushWater_Small",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_Electric_Run_Small",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalMove"
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_Electric_Run"
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_Electric_Run": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Drake_DeepSea_RushWater_Small",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_Small_Mark",
+            "modifiers": {
+                "Monster_Drake_DeepSea_Small_Mark": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_IS_SMALL_DRAKE_DEEPSEA",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Drake_DeepSea_Small_Mark"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_Water_JudgeAlliance",
+            "abilityMixins": [
+                {
+                    "$type": "FieldEntityCountChangeMixin",
+                    "campTargetType": "Alliance",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_IS_SMALL_DRAKE_DEEPSEA",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "onFieldEnter": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ALLIANCE_NUM",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onFieldExit": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_ALLIANCE_NUM",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "simpleCountGlobaValueKey": "",
+                    "simpleCountMaxValue": 0.0,
+                    "simpleCountMinValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_ALLIANCE_NUM",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        10.0
+                    ],
+                    "modifierNameSteps": [
+                        "Monster_Drake_DeepSea_Water_NoAlliance",
+                        "Monster_Drake_DeepSea_Water_HasAlliance"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Monster_Drake_DeepSea_Water_NoAlliance": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "HasAlliance"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_Water_HasAlliance": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "HasAlliance",
+                            "ratio": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Drake_DeepSea_Water_WQ_SpecialPose",
+            "modifiers": {
+                "Monster_Drake_DeepSea_Water_MeleePose": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "MeleePose",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "MeleePose"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_Water_RangePose": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "RangePose",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "RangePose"
+                        }
+                    ]
+                },
+                "Monster_Drake_DeepSea_Water_Special_CheckAlliance": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_DRAKE_DEEPSEA_WQ_CHECK_ALLIANCE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR60",
+                                "campTargetType": "Alliance",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_DRAKE_DEEPSEA_WATER_SPECIALPOSE_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "MoreThan"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_DRAKE_DEEPSEA_WQ_CHECK_ALLIANCE",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_DRAKE_DEEPSEA_WQ_CHECK_ALLIANCE",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "RemoveModifier",
+                                    "modifierName": "Monster_Drake_DeepSea_Water_MeleePose"
+                                },
+                                {
+                                    "$type": "RemoveModifier",
+                                    "modifierName": "Monster_Drake_DeepSea_Water_RangePose"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_DRAKE_DEEPSEA_WATER_SPECIALPOSE_TYPE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_Water_MeleePose"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_DRAKE_DEEPSEA_WATER_SPECIALPOSE_TYPE",
+                            "ratio": 2.0
+                        }
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_Water_RangePose"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_DRAKE_DEEPSEA_WATER_SPECIALPOSE_TYPE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "MoreThan"
+                        }
+                    ],
+                    "modifierName": "Monster_Drake_DeepSea_Water_Special_CheckAlliance"
+                }
+            ]
+        }
+    }
+]

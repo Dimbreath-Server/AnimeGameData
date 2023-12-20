@@ -1,0 +1,1756 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Unique_TwoDObj_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "HideState"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "ActiveState"
+                }
+            ],
+            "modifiers": {
+                "HideState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Root"
+                            ]
+                        }
+                    ]
+                },
+                "ActiveState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Root"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Prop_BubblePlatform_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "KillBySelf"
+                }
+            ],
+            "modifiers": {
+                "Bubble": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "state": "Struggle",
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_BubbleShoot_01_Bubble",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_BubbleShoot_01_Bubble_Die",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "KillBySelf": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_BubbleShoot_01_Bubble_Die",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "hideEntity": true
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Avatar"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Target",
+                            "modifierName": "Bubble"
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "duration": 1.0,
+                            "hideEntity": true
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_DungeonMushroom_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "DefaultState"
+                }
+            ],
+            "modifiers": {
+                "DefaultState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "SetTrampolineAbilityMixin",
+                            "abilityName": "Avatar_Trampoline_Jump_Controller",
+                            "isExcitedState": false,
+                            "HJCLNKECDGN": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_BouncingMushroom_01_Appear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onKill": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_BouncingMushroom_01_Disappear",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_DungeonMushroom_02_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "DefaultState"
+                }
+            ],
+            "modifiers": {
+                "DefaultState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 2.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "SetTrampolineAbilityMixin",
+                            "abilityName": "Avatar_Trampoline_Jump_Controller",
+                            "HJCLNKECDGN": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_BouncingMushroom_01_Appear",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "BreathLight01"
+                        }
+                    ]
+                },
+                "BreathLight01": {
+                    "modifierName": "",
+                    "duration": 1.100000023841858,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "Mat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 2.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Mat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 6.0,
+                            "useCurve": true,
+                            "lerpTime": 1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "BreathLight02"
+                        }
+                    ]
+                },
+                "BreathLight02": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "Mat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 6.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Mat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 2.0,
+                            "useCurve": true,
+                            "lerpTime": 1.0
+                        }
+                    ]
+                }
+            },
+            "onKill": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_BouncingMushroom_01_Disappear",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Prop_SmrEnigmaticSeal_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Dissolve"
+                }
+            ],
+            "modifiers": {
+                "Dissolve": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "Mat",
+                            "patternName": "_DissolveValue",
+                            "ratio": 1.0,
+                            "useCurve": true,
+                            "lerpTime": 1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Prop_Woodenpile_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMutexMixin",
+                    "gadgetStates": [
+                        0,
+                        201
+                    ],
+                    "modifierNames": [
+                        [
+                            "Alive"
+                        ],
+                        [
+                            "Disappear"
+                        ]
+                    ]
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "_IsDelete",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "DeleteHandle"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Alive": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_IsDelete",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Mat",
+                            "patternName": "_DitherAlpha",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Collider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                },
+                "DeleteHandle": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ChangeGadgetState",
+                            "state": 201
+                        }
+                    ]
+                },
+                "Disappear": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "Mat",
+                            "patternName": "_DitherAlpha",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpTime": 1.5
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Collider"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetMaterialParamFloatByTransform",
+                    "predicates": [
+                        {
+                            "$type": "HKDMEKKBAKE",
+                            "gadgetState": 201
+                        }
+                    ],
+                    "matName": "Mat",
+                    "patternName": "_DitherAlpha",
+                    "ratio": 0.0
+                },
+                {
+                    "$type": "ChangeTag",
+                    "isAdd": true,
+                    "tag": "DeleteHanaTarget"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_TighnariBlankDoor_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMutexMixin",
+                    "gadgetStates": [
+                        0,
+                        201
+                    ],
+                    "modifierNames": [
+                        [
+                            "Close"
+                        ],
+                        [
+                            "Open"
+                        ]
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Close": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Mat",
+                            "patternName": "_DitherAlpha",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Airwall"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                },
+                "Open": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "Mat",
+                            "patternName": "_DitherAlpha",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpTime": 1.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Airwall"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_Flying_Orb_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "StartPlay"
+                }
+            ],
+            "modifiers": {
+                "StartPlay": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "PlatformMoveMixin",
+                            "moveModifiers": [
+                                "State_Moving"
+                            ],
+                            "stopModifiers": [
+                                "State_Stop"
+                            ]
+                        }
+                    ]
+                },
+                "State_Moving": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "Moving",
+                            "attachPoint": "",
+                            "type": "Bool",
+                            "value": 1,
+                            "shieldHP": "Eff_SceneObj_Flying_Orb"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "State",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "shieldHP": "Eff_SceneObj_Flying_Orb"
+                        }
+                    ]
+                },
+                "State_Stop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Flying_Orb_Ridicule",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "Moving",
+                            "attachPoint": "",
+                            "type": "Bool",
+                            "shieldHP": "Eff_SceneObj_Flying_Orb"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "State",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "value": 201,
+                            "shieldHP": "Eff_SceneObj_Flying_Orb"
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Avatar"
+                            ]
+                        },
+                        {
+                            "$type": "IAIDEINPHNP"
+                        },
+                        {
+                            "$type": "HKDMEKKBAKE",
+                            "target": "Self",
+                            "gadgetState": 201
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "State",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "value": 203,
+                            "shieldHP": "Eff_SceneObj_Flying_Orb"
+                        },
+                        {
+                            "$type": "ChangeGadgetState",
+                            "state": 202
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_VineDoor_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMutexMixin",
+                    "gadgetStates": [
+                        0,
+                        201
+                    ],
+                    "modifierNames": [
+                        [
+                            "Close"
+                        ],
+                        [
+                            "Open"
+                        ]
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Close": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Airwall"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "gadgetState",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "shieldHP": "Eff_SceneObj_VineDoor_02_Default_Full"
+                        }
+                    ]
+                },
+                "Open": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Airwall"
+                            ]
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "gadgetState",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "value": 201,
+                            "shieldHP": "Eff_SceneObj_VineDoor_02_Default_Full"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_VineDoor_02_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMutexMixin",
+                    "gadgetStates": [
+                        0,
+                        201
+                    ],
+                    "modifierNames": [
+                        [
+                            "Close"
+                        ],
+                        [
+                            "Open"
+                        ]
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Close": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Airwall"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "gadgetState",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "shieldHP": "Eff_SceneObj_VineDoor_02_Default"
+                        }
+                    ]
+                },
+                "Open": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "gadgetState",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "value": 201,
+                            "shieldHP": "Eff_SceneObj_VineDoor_02_Default"
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Airwall"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Prop_FlowerPortal_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "CurLocalAvatarMixinV2",
+                    "modifierName": "FlowerPortal_AvatarState"
+                }
+            ],
+            "modifiers": {
+                "FlowerPortal_AvatarState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AvatarFollowRouteStateChangeMixin",
+                            "KGECBNCMMEL": [
+                                {
+                                    "$type": "SetGlobalValueV2",
+                                    "ratio": 1.0,
+                                    "key": "_FlowerPortal_AvatarRouteMove",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ],
+                            "KICKBHLFAPI": [
+                                {
+                                    "$type": "SetGlobalValueV2",
+                                    "PositionDampTime": true,
+                                    "ratio": 0.0,
+                                    "key": "_FlowerPortal_AvatarRouteMove",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                            "globalValueKey": "_FlowerPortal_AvatarRouteMove",
+                            "valueSteps": [
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "FlowerPortal_StandbyState"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValueV2",
+                            "ratio": 0.0,
+                            "key": "_FlowerPortal_AvatarRouteMove",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onReconnect": [
+                        {
+                            "$type": "SetGlobalValueV2",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_FlowerPortal_AvatarRouteMove",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "FlowerPortal_StandbyState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "DungeonFogEffects",
+                            "PositionDampTime": true,
+                            "enable": true,
+                            "cameraFogEffectName": "Eff_SceneObj_FlowerPortal_CameraAbsorbIn",
+                            "playerFogEffectName": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "DungeonFogEffects",
+                            "PositionDampTime": true,
+                            "cameraFogEffectName": "",
+                            "playerFogEffectName": ""
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TurnDirectionToPos",
+                            "otherTargets": {
+                                "$type": "BGDLPFKMMBG",
+                                "topLimit": 1,
+                                "sortType": "Nearest",
+                                "tag": "SceneLook"
+                            },
+                            "toPos": {
+                                "$type": "EOJBLPNGNCN"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Prop_PlantOperator_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Idle"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Active"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Lock"
+                }
+            ],
+            "modifiers": {
+                "Idle": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_PlantOperator_01_Stay",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Gadget",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 2.0
+                        }
+                    ]
+                },
+                "Active": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_PlantOperator_01_Active",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Gadget",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 4.0
+                        }
+                    ]
+                },
+                "Lock": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_PlantOperator_01_Idle",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Gadget",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_NutTransformPlatform_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Hide"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Show"
+                },
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ChangeGadgetState",
+                            "predicates": [
+                                {
+                                    "$type": "HKDMEKKBAKE",
+                                    "target": "Self",
+                                    "gadgetState": 201
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Hide": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Object"
+                            ]
+                        },
+                        {
+                            "$type": "EnableGadgetInteeMp"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_NutTransformPlatform_Appear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Show": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Object"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnableGadgetInteeMp",
+                            "enable": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_NutTransformPlatform_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_NutTransformPlatform_02_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Hide"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Show"
+                }
+            ],
+            "modifiers": {
+                "Show": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Object"
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_NutTransformPlatform_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hide": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Object"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_NutTransformPlatform_Appear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Prop_ThornsTrap_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Disactive"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Active"
+                }
+            ],
+            "abilitySpecials": {
+                "ElementLevelCo": 1.0,
+                "DamageRatio": 0.6000000238418579
+            },
+            "modifiers": {
+                "Disactive": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "State",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "shieldHP": "Eff_SceneObj_ThornsTrap_05"
+                        }
+                    ]
+                },
+                "Active": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "ThornsTrapRate",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.6000000238418579,
+                                1.600000023841858,
+                                6.099999904632568,
+                                7.099999904632568
+                            ],
+                            "modifierNameSteps": [
+                                "Ready",
+                                "Fire",
+                                "Disappear"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": -1.0,
+                            "key": "ThornsTrapRate",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.5,
+                            "key": "ThornsTrapRate",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Ready": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "State",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "value": 1,
+                            "shieldHP": "Eff_SceneObj_ThornsTrap_05"
+                        }
+                    ]
+                },
+                "Disappear": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": -1.0,
+                            "key": "ThornsTrapRate",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Fire": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "State",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "value": 2,
+                            "shieldHP": "Eff_SceneObj_ThornsTrap_05"
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "PONOPJHLOMA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": -2.5
+                                        }
+                                    },
+                                    "size": {
+                                        "LOGNGLEIFML": 2.5,
+                                        "JKDAHJILGBJ": 2.0,
+                                        "MJHHBAFNOEG": 5.0
+                                    }
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "ExtraAttack",
+                                    "attenuationGroup": "SceneObj_ThunderFloor",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Grass",
+                                        "bonusCriticalHurt": 25.0,
+                                        "ignoreAttackerProperty": true,
+                                        "strikeType": "Default",
+                                        "enBreak": 0.0,
+                                        "attackType": "Range",
+                                        "damageExtra": [
+                                            "ElementLevelCo",
+                                            "DamageRatio",
+                                            "MUL"
+                                        ],
+                                        "trueDamage": true,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3"
+                                    }
+                                }
+                            },
+                            "targetType": "AllExceptSelf"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "PONOPJHLOMA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": -2.5
+                                        }
+                                    },
+                                    "size": {
+                                        "LOGNGLEIFML": 2.5,
+                                        "JKDAHJILGBJ": 2.0,
+                                        "MJHHBAFNOEG": 5.0
+                                    }
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "ExtraAttack",
+                                    "attenuationGroup": "SceneObj_ThunderFloor",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Grass",
+                                        "bonusCriticalHurt": 25.0,
+                                        "ignoreAttackerProperty": true,
+                                        "strikeType": "Default",
+                                        "enBreak": 0.0,
+                                        "attackType": "Range",
+                                        "damageExtra": [
+                                            "ElementLevelCo",
+                                            "DamageRatio",
+                                            "MUL"
+                                        ],
+                                        "trueDamage": true,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3"
+                                    }
+                                }
+                            },
+                            "targetType": "AllExceptSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetSystemValueToOverrideMap",
+                    "PositionDampTime": true,
+                    "key": "ElementLevelCo",
+                    "type": "ElementLevelCo"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Prop_PlantSeal_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Show"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Hide"
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "HasBall",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Ball_Show"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Ball_Show": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_PlantSeal_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Show": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "HasBall",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                },
+                "Hide": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "HasBall",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_PlantSeal_01_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Prop_PlantSeal_02_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Show"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Hide"
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "HasBall",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Ball_Show"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Ball_Show": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_PlantSeal_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Show": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "HasBall",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                },
+                "Hide": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "HasBall",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_PlantSeal_02_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Prop_PlantSeal_03_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Show"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Hide"
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "HasBall",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Ball_Show"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Ball_Show": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_PlantSeal_03",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Show": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "HasBall",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                },
+                "Hide": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "HasBall",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_PlantSeal_03_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_DestructibleVine_01_Ability",
+            "modifiers": {
+                "DestroyOnBeHit": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "DestroyOnBeHit"
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_DestructibleVine_01",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_DestructiblePavement_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "ShowFloor"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "DestroyFloor"
+                }
+            ],
+            "modifiers": {
+                "ShowFloor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Floor"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                },
+                "DestroyFloor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_DestructiblePavement_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Floor"
+                            ]
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ChangeGadgetState",
+                    "state": 201
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_PlantMovingPlatform_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMutexMixin",
+                    "gadgetStates": [
+                        0,
+                        201
+                    ],
+                    "modifierNames": [
+                        [
+                            "Alive"
+                        ],
+                        [
+                            "Disappear"
+                        ]
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Moving": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 3.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_PlantMovingPlatform_Move",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "Mat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "BreathLight01"
+                        }
+                    ]
+                },
+                "BreathLight01": {
+                    "modifierName": "",
+                    "duration": 1.600000023841858,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.5,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "Mat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Mat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 3.5,
+                            "useCurve": true,
+                            "lerpTime": 1.5
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "BreathLight02"
+                        }
+                    ]
+                },
+                "BreathLight02": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "Mat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 3.5
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "Mat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 1.0,
+                            "useCurve": true,
+                            "lerpTime": 1.5
+                        }
+                    ]
+                },
+                "Alive": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "PlatformMoveMixin",
+                            "moveModifiers": [
+                                "Moving"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Collider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                },
+                "Disappear": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "canBeHandledOnRecover": true,
+                            "transformNames": [
+                                "Collider"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]

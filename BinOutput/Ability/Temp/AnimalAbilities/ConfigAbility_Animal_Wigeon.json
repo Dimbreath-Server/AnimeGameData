@@ -1,0 +1,387 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_AIStateInitial",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        1
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                202
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        2
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                101,
+                                102,
+                                103,
+                                104,
+                                201
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_Random",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FlyDown",
+                        "TakeOff",
+                        "FlyUp",
+                        "Disappear"
+                    ],
+                    "modifierName": "Random_MoveSpeedRatio"
+                }
+            ],
+            "abilitySpecials": {
+                "RandomSpeed": 0.0
+            },
+            "modifiers": {
+                "Random_MoveSpeedRatio": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Animator_MoveSpeedRatio": "RandomSpeed"
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetRandomOverrideMapValue",
+                    "valueRangeMax": 0.10000000149011612,
+                    "valueRangeMin": -0.10000000149011612,
+                    "overrideMapKey": "RandomSpeed"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_FlyDown",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FlyDown"
+                    ],
+                    "modifierName": "FlyState_Down"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Land"
+                    ],
+                    "modifierName": "FlyDown_Land"
+                }
+            ],
+            "modifiers": {
+                "FlyState_Down": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "FlyState",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "FlyState"
+                        }
+                    ]
+                },
+                "FlyDown_Land": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -1.9900000095367432
+                    }
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "FlyState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_FlyUp",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "FlyState",
+                    "ratio": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_ToWander",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalMove"
+                    ],
+                    "modifierName": "NormalMove_Effect"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Run"
+                    ],
+                    "modifierName": "Run_Effect"
+                }
+            ],
+            "modifiers": {
+                "NormalMove_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Animal_Wigeon_Ripple_Walk",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Run_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Animal_Wigeon_Ripple_Run",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "WanderState",
+                    "ratio": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_ToIdle",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalIdle",
+                        "Personality_101",
+                        "Personality_102",
+                        "Personality_103",
+                        "ToWander",
+                        "ToIdle",
+                        "Aware",
+                        "Alert",
+                        "SurroundAction"
+                    ],
+                    "modifierName": "NormalIdle_Effect"
+                }
+            ],
+            "modifiers": {
+                "NormalIdle_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Animal_Wigeon_Ripple_Standby",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "WanderState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_Flee",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Run"
+                    ],
+                    "modifierName": "FleeState"
+                }
+            ],
+            "modifiers": {
+                "FleeState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "FleeState"
+                        }
+                    ]
+                },
+                "BeHitDetect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "FleeState",
+                            "ratio": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "BeHitDetect"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "FleeState",
+                    "ratio": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_Hunt_Disappear",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Run"
+                    ],
+                    "modifierName": "DisappearTimer"
+                }
+            ],
+            "modifiers": {
+                "DisappearTimer": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "StartDither",
+                            "duration": 3.0
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "duration": 2.5,
+                            "banDrop": true,
+                            "banExp": true,
+                            "killSelfType": "Disappear"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_Disappear",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Disappear"
+                    ],
+                    "modifierName": "DisappearTimer"
+                }
+            ],
+            "modifiers": {
+                "DisappearTimer": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "StartDither",
+                            "duration": 4.0
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Disappear",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "duration": 3.5,
+                            "banDrop": true,
+                            "banExp": true,
+                            "killSelfType": "Disappear"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Wigeon_FlyEffect",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Animal_Common_Feather",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    }
+]

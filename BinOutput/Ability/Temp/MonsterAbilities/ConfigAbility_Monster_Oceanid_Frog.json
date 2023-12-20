@@ -1,0 +1,632 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Oceanid_Frog_JumpAtkBS",
+            "onAbilityStart": [
+                {
+                    "$type": "ActCameraShake",
+                    "cameraShake": {
+                        "shakeType": "CustomVector",
+                        "shakeRange": 0.05999999865889549,
+                        "shakeTime": 0.15000000596046448,
+                        "shakeDir": {
+                            "y": 1.0
+                        }
+                    }
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Oceanid_Frog_JumpBS",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Oceanid_Frog_JumpAtk_Alert",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "JumpAtk",
+                    "modifierName": "JumpCollider",
+                    "normalizeStart": 0.6299999952316284,
+                    "normalizeEnd": 0.8600000143051147
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "JumpAtk"
+                    ],
+                    "endNormalizedTime": 0.6000000238418579,
+                    "angularSpeed": 90.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                }
+            ],
+            "modifiers": {
+                "JumpCollider": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetCastShadow"
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetCastShadow",
+                            "castShadow": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Oceanid_Frog_JumpAlert",
+                    "born": {
+                        "$type": "MBHKKFPFFAP",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Oceanid_Frog_JumpAtk_Damage",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "height": 2.5,
+                            "EBADGGHGLKN": 10.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 1.0,
+                                "shakeTime": 0.30000001192092896,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Oceanid_Tit_JumpDamage",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Oceanid_Frog_ElementState",
+            "modifiers": {
+                "UNIQUE_ElementState": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 100.0,
+                    "isElementDurabilityMutable": false
+                },
+                "Monster_Oceanid_Frog_CommonEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Oceanid_Frog_CommonEffectLoop",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_ElementState"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceBuffDebuffs": [
+                        "ElementWet",
+                        "Struggle"
+                    ]
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTERAFFIX_OCEANID_ANIMAL_SPMASK",
+                                    "ratio": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTERAFFIX_OCEANID_ANIMAL_FOOTEFFECT_OFF",
+                                    "ratio": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "modifierName": "Monster_Oceanid_Frog_CommonEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Oceanid_Frog_WaterWave",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "WaterWave"
+                    ],
+                    "endNormalizedTime": 0.75,
+                    "angularSpeed": 120.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn"
+                    ],
+                    "endNormalizedTime": 0.8999999761581421,
+                    "angularSpeed": 150.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42005006,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 1.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "NBLKPHLEMGO": "Horizontal",
+                            "maxAngle": 45.0,
+                            "HADFPLAAGIB": ""
+                        }
+                    }
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Oceanid_Frog_WaterWaveBS",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Frog_WaterWave_Damage",
+            "modifiers": {
+                "LifeTime": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf",
+                            "duration": 1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Monster_Oceanid_Frog_WaterWaveLoop",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "LifeTime"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Avatar"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 50.0,
+                                        "attackType": "Range",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Frog_DeathExplode_Damage",
+            "modifiers": {
+                "LifeTimer": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 4.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Oceanid_Frog_DeathWaterBall",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Oceanid_Frog_DeathWaterBallExplode",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "DamageByAttackValue",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR30H3",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "attackInfo": {
+                                "attackTag": "Oceanid_Frog_Explode",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 1.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Water",
+                                    "bonusCriticalHurt": 50.0,
+                                    "strikeType": "Default",
+                                    "enBreak": 1.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV1",
+                                    "hitHaltTimeScale": 0.05000000074505806
+                                },
+                                "forceCameraShake": true,
+                                "cameraShake": {
+                                    "shakeType": "CustomVector",
+                                    "shakeRange": 1.0,
+                                    "shakeTime": 0.30000001192092896,
+                                    "shakeDistance": 50.0
+                                }
+                            }
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "duration": 2.0
+                        }
+                    ]
+                },
+                "Oceanid_Frog_Explode_Watcher": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Oceanid_Frog_Explode"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Target",
+                                    "modifierName": "Frog_Exploded"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Frog_Exploded": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR62",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_STAGE_",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "MoreThanAndEqual"
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Target",
+                                    "modifierName": "Frog_Exploded_Handler"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Frog_Exploded_Handler": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_OCEANID_DEATHEXPLODED_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "LifeTimer"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Oceanid_Frog_Explode_Watcher"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Oceanid_Affix_DeathExplode",
+            "modifiers": {
+                "Oceanid_Affix_DeathExplode_LifeTimer": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 4.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Oceanid_Frog_DeathWaterBall_EffigyChallenge",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Oceanid_Frog_DeathWaterBallExplode_EffigyChallenge",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "DamageByAttackValue",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR7",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "attackInfo": {
+                                "attackTag": "Oceanid_Frog_Explode",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 1.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Water",
+                                    "bonusCriticalHurt": 50.0,
+                                    "strikeType": "Default",
+                                    "enBreak": 1.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV1",
+                                    "hitHaltTimeScale": 0.05000000074505806
+                                },
+                                "forceCameraShake": true,
+                                "cameraShake": {
+                                    "shakeType": "CustomVector",
+                                    "shakeRange": 1.0,
+                                    "shakeTime": 0.30000001192092896,
+                                    "shakeDistance": 50.0
+                                }
+                            }
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "duration": 2.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Oceanid_Affix_DeathExplode_LifeTimer"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Oceanid_Frog_DyingBS",
+            "modifiers": {
+                "UNIQUE_Oceanid_Frog_DeathExplode": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ReplaceEventPatternMixin",
+                            "oldPatterns": [
+                                "Monster_Slime_Fire_02_NormalAttack"
+                            ],
+                            "newPatterns": [
+                                "Monster_Slime_Fire_02_NormalAttack_Fire"
+                            ]
+                        },
+                        {
+                            "$type": "ServerCreateGadgetOnKillMixin",
+                            "gadgetIDList": [
+                                42005007
+                            ],
+                            "campID": 4001,
+                            "campTargetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Oceanid_Frog_DeathExplode"
+                }
+            ]
+        }
+    }
+]

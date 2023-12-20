@@ -1,0 +1,973 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_ExtraAttack",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack"
+                    ],
+                    "modifierName": "ExtraAttack_Damage_Handler"
+                },
+                {
+                    "$type": "ButtonHoldChargeMixin",
+                    "skillID": 10281,
+                    "chargeTime": 0.20000000298023224,
+                    "secondChargeTime": 0.4000000059604645,
+                    "OnBeginUncharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "OnBeginCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 6.0
+                        }
+                    ],
+                    "chargeStateIDs": [
+                        "Attack01",
+                        "Attack02",
+                        "Attack03",
+                        "Attack04",
+                        "Attack05"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "ExtraAttack_FX": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_WhiteBox_RushAttack",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ExtraAttack_Damage_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Fire_Blink_BS",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Fire_Blink_AS",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_HideWeapon",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack",
+                        "ExtraAttack_BS"
+                    ],
+                    "modifierName": "ExtraAttack_HideWeapon_Handler"
+                }
+            ],
+            "modifiers": {
+                "ExtraAttack_HideWeapon_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip01"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_ExtraAttack_TriggerBullet",
+            "modifiers": {
+                "Prototype_ExtraAttack_Blink_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "ExtraAttack"
+                                    ]
+                                }
+                            ],
+                            "triggerID": "Blink"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Prototype_ExtraAttack_Blink_Handler"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41023001,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "FocusAnchor",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "WeaponR"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xiangling_ExtraAttack_Damage",
+            "abilitySpecials": {
+                "ExtraAttack_Damage": 0.800000011920929
+            },
+            "modifiers": {
+                "Xiangling_ExtraAttack_Material": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_WhiteBox_Pole",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Arrow_Fly",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_WhiteBox_RushAttack",
+                            "scale": 0.20000000298023224,
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Xiangling_ExtraAttack_Material"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "DamageByAttackValue",
+                    "target": "Target",
+                    "attackInfo": {
+                        "attackTag": "ExtraAttack",
+                        "attenuationTag": "",
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                            "LIMFCEKGALF": "ExtraAttack_Damage",
+                            "JJGGAPONHOE": 0.0,
+                            "bonusCriticalHurt": 20.0,
+                            "overrideByWeapon": true,
+                            "strikeType": "Slash",
+                            "attackType": "Range",
+                            "damagePercentage": 0.0
+                        },
+                        "hitPattern": {
+                            "onHitEffectName": "default",
+                            "hitLevel": "Heavy",
+                            "JELEFKIMBOD": 180.0,
+                            "hitImpulseY": 0.0,
+                            "hitImpulseType": "",
+                            "hitHaltTimeScale": 0.05000000074505806
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_ExtraAttackHold",
+            "abilityMixins": [
+                {
+                    "$type": "SkillButtonHoldChargeMixin",
+                    "skillID": 10282,
+                    "nextLoopTriggerID": "NextLoopTrigger",
+                    "endHoldTrigger": "EndHoldTrigger",
+                    "beforeStateIDs": [
+                        "SKill_ExtraAttack_BS_01"
+                    ],
+                    "chargeLoopStateIDs": [
+                        "SKill_ExtraAttack_BS_02"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "SKill_ExtraAttack_BS_01",
+                        "SKill_ExtraAttack_BS_02"
+                    ],
+                    "modifierName": "Focus"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "SKill_ExtraAttack"
+                    ],
+                    "modifierName": "Visible_Handler"
+                }
+            ],
+            "modifiers": {
+                "Focus": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarEnterFocus",
+                            "cameraFollowLower": {
+                                "x": 0.5,
+                                "z": -2.5
+                            },
+                            "cameraFollowUpper": {
+                                "x": 0.30000001192092896,
+                                "y": -0.20000000298023224
+                            },
+                            "cameraFastFocusMode": true,
+                            "dragButtonName": "Skill2",
+                            "assistance": {
+                                "ps4": {},
+                                "ps5": {},
+                                "other": {
+                                    "useGyro": true
+                                }
+                            },
+                            "canMove": false,
+                            "HALMPLOGBHJ": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitFocus"
+                        }
+                    ]
+                },
+                "Visible_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Fire_Blink_BS",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Fire_Blink_AS",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Pole_Polespine",
+            "modifiers": {
+                "Pole_Appear": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.10000000149011612,
+                                    "MJHHBAFNOEG": 4.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "gadgetID": 41028001,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": -2.8299999237060547,
+                                    "JKDAHJILGBJ": 0.10000000149011612,
+                                    "MJHHBAFNOEG": 2.8299999237060547
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "gadgetID": 41028001,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 2.8299999237060547,
+                                    "JKDAHJILGBJ": 0.10000000149011612,
+                                    "MJHHBAFNOEG": 2.8299999237060547
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "gadgetID": 41028001,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10283,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Pole_Appear"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_Pole_Attack",
+            "modifiers": {
+                "Pole_Attack_Timer": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Pole_Attack_Hit"
+                        }
+                    ]
+                },
+                "Pole_Attack_Hit": {
+                    "modifierName": "",
+                    "duration": 1.0499999523162842,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Skill",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.5,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Blunt",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitLevel": "Air",
+                                        "JELEFKIMBOD": 0.0,
+                                        "hitImpulseY": 600.0,
+                                        "hitImpulseType": "",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "cameraShake": {}
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_IceExplodeArrow",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_IceSlash_Out",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Pole_Attack_Timer"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_Attack01",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "NMCELACOGBG": true,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 1.2000000476837158,
+                                "JKDAHJILGBJ": 1.0,
+                                "MJHHBAFNOEG": 3.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "atk01",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.27000001072883606,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Spear",
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitLevel": "Heavy",
+                                "JELEFKIMBOD": 280.0,
+                                "hitImpulseY": 0.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.029999999329447746,
+                                "hitHaltTimeScale": 0.009999999776482582,
+                                "canBeDefenceHalt": true
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_Attack02",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "NMCELACOGBG": true,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 1.600000023841858,
+                                "JKDAHJILGBJ": 1.0,
+                                "MJHHBAFNOEG": 3.299999952316284
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "atk02",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.3199999928474426,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Spear",
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitLevel": "Heavy",
+                                "JELEFKIMBOD": 360.0,
+                                "hitImpulseY": 0.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.029999999329447746,
+                                "hitHaltTimeScale": 0.009999999776482582,
+                                "canBeDefenceHalt": true
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_Attack03",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "NMCELACOGBG": true,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 1.2000000476837158,
+                                "JKDAHJILGBJ": 1.0,
+                                "MJHHBAFNOEG": 3.299999952316284
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "atk03",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.25,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Spear",
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitLevel": "Heavy",
+                                "JELEFKIMBOD": 240.0,
+                                "hitImpulseY": 0.0,
+                                "hitImpulseType": "",
+                                "hitHaltTimeScale": 0.009999999776482582,
+                                "canBeDefenceHalt": true
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.029999999329447746,
+                                "shakeTime": 0.05999999865889549
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_Attack03B",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "NMCELACOGBG": true,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 1.2000000476837158,
+                                "JKDAHJILGBJ": 1.0,
+                                "MJHHBAFNOEG": 3.299999952316284
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "atk03",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.3400000035762787,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Pierce",
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitLevel": "Heavy",
+                                "JELEFKIMBOD": 300.0,
+                                "hitImpulseY": 0.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.029999999329447746,
+                                "hitHaltTimeScale": 0.009999999776482582,
+                                "canBeDefenceHalt": true
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_Attack04",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "NMCELACOGBG": true,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 1.2000000476837158,
+                                "JKDAHJILGBJ": 1.0,
+                                "MJHHBAFNOEG": 3.299999952316284
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "atk04",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.14000000059604645,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Spear",
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitLevel": "Heavy",
+                                "JELEFKIMBOD": 120.0,
+                                "hitImpulseY": 0.0,
+                                "hitImpulseType": "",
+                                "hitHaltTimeScale": 0.009999999776482582,
+                                "canBeDefenceHalt": true
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05000000074505806,
+                                "shakeTime": 0.05999999865889549
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_Attack04B",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "NMCELACOGBG": true,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 1.2000000476837158,
+                                "JKDAHJILGBJ": 1.0,
+                                "MJHHBAFNOEG": 3.299999952316284
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "atk04B",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.14000000059604645,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Spear",
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitLevel": "Heavy",
+                                "JELEFKIMBOD": 480.0,
+                                "hitImpulseY": 0.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.029999999329447746,
+                                "hitHaltTimeScale": 0.009999999776482582,
+                                "canBeDefenceHalt": true
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05000000074505806,
+                                "shakeTime": 0.05999999865889549
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_Attack05",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "NMCELACOGBG": true,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 1.399999976158142,
+                                "JKDAHJILGBJ": 1.0,
+                                "MJHHBAFNOEG": 3.299999952316284
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "atk05",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.8999999761581421,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Spear",
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitLevel": "Air",
+                                "JELEFKIMBOD": 680.0,
+                                "hitImpulseY": 480.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.09000000357627869,
+                                "hitHaltTimeScale": 0.029999999329447746,
+                                "canBeDefenceHalt": true
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.11999999731779099,
+                                "shakeTime": 0.18000000715255737
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Prototype_Attack_Extra",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "NMCELACOGBG": true,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 1.399999976158142,
+                                "JKDAHJILGBJ": 1.0,
+                                "MJHHBAFNOEG": 3.299999952316284
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "atk05",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.8999999761581421,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Spear",
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitLevel": "Air",
+                                "JELEFKIMBOD": 50.0,
+                                "hitImpulseY": 480.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.09000000357627869,
+                                "hitHaltTimeScale": 0.029999999329447746,
+                                "canBeDefenceHalt": true
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.11999999731779099,
+                                "shakeTime": 0.18000000715255737
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    }
+]

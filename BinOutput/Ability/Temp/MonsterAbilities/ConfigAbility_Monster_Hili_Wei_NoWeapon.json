@@ -1,0 +1,1426 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Hili_Wei_LifeBarManager",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        1,
+                        9002,
+                        9003,
+                        9004,
+                        9005
+                    ],
+                    "modifierName": "HideLifeBar"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        1001
+                    ],
+                    "modifierName": "ShowLifeBar"
+                }
+            ],
+            "modifiers": {
+                "HideLifeBar": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        },
+                        {
+                            "$type": "ShowUICombatBar",
+                            "canBeHandledOnRecover": true,
+                            "fore": true
+                        }
+                    ]
+                },
+                "ShowLifeBar": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HideUIBillBoard"
+                        },
+                        {
+                            "$type": "ShowUICombatBar",
+                            "canBeHandledOnRecover": true,
+                            "show": true,
+                            "fore": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "HideLifeBar"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_Invincible",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Retreat",
+                        "Dodge"
+                    ],
+                    "modifierName": "Hili_Wei_Invincible"
+                }
+            ],
+            "modifiers": {
+                "Hili_Wei_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_Die",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Die"
+                    ],
+                    "modifierName": "Die_SuitcaseEffect"
+                },
+                {
+                    "$type": "DoActionByAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "SwimDie"
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Hili_Wei_SwimDieEffectTimer"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Die_SuitcaseEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Die_01",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hili_Wei_SwimDieEffectTimer": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_SwimDie_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onKill": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "triggerID": "DieShaderTrigger",
+                    "MPTriggerOnRemote": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_IgnoreControlState",
+            "modifiers": {
+                "Hili_Wei_IgnoreControlState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 13002
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Hili_Wei_IgnoreControlState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_Retreat",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        901
+                    ],
+                    "modifierName": "RetreatState"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Retreat"
+                    ],
+                    "modifierName": "RetreatTimer"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Retreat",
+                    "modifierName": "Retreat_SuitcaseEffect"
+                }
+            ],
+            "modifiers": {
+                "RetreatState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible",
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "RetreatTrigger",
+                            "MPTriggerOnRemote": true
+                        }
+                    ]
+                },
+                "RetreatTimer": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible",
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Retreat",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "SetCanDieImmediately",
+                            "dieImmediately": true
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "duration": 2.5,
+                            "banDrop": true,
+                            "banExp": true,
+                            "banHPPercentageDrop": true,
+                            "killSelfType": "Disappear"
+                        }
+                    ]
+                },
+                "Retreat_SuitcaseEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Retreat_01",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "End",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Retreat_01"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_SleepEffectStart",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Sleep",
+                        "SleepFree01",
+                        "OutOfSleep"
+                    ],
+                    "modifierName": "SleepFxAtOnce"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Hili_Wei_Sleep_SuitcaseEffect": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Sleep_01",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "SleepSuitcasePos",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "End",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Sleep_01"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "EndFx",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Sleep_01"
+                        },
+                        {
+                            "$type": "SetGlobalPos",
+                            "key": "SleepSuitcasePos",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "SleepFxAtOnce": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalPos",
+                            "key": "SleepSuitcasePos",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.8999999761581421
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Hili_Wei_SleepEffectStart"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalPos",
+                    "key": "SleepSuitcasePos",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    }
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Hili_Wei_Sleep_SuitcaseEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_SleepEffectEnd",
+            "modifiers": {
+                "Hili_Wei_Sleep_SuitcaseEffect_DelayedRemove": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Hili_Wei_Sleep_SuitcaseEffect"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Hili_Wei_Sleep_SuitcaseEffect_DelayedRemove"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_SleepState",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "TurnToSleep",
+                        "Sleep",
+                        "SleepFree01",
+                        "OutOfSleep"
+                    ],
+                    "modifierName": "SleepState"
+                }
+            ],
+            "modifiers": {
+                "SleepState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Hili_Wei_SleepEffectEnd"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "EndAtOnce",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Sleep_01"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "EndAtOnceFx",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Sleep_01"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_Attack_Effect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "NoWeapon_Attack",
+                    "modifierName": "Attack_SuitcaseEffect",
+                    "normalizeStart": 0.25,
+                    "normalizeEnd": 0.699999988079071
+                }
+            ],
+            "modifiers": {
+                "Attack_SuitcaseEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Attack_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "End",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Attack_01"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_Alert_Effect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Warning",
+                    "modifierName": "Hili_Wei_Alert_Effect",
+                    "normalizeStart": 0.23000000417232513
+                }
+            ],
+            "modifiers": {
+                "Hili_Wei_Alert_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_Alert_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_NoWeapon_ThrowAttack",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "ThrowPebble"
+                    ],
+                    "startNormalizedTime": 0.550000011920929,
+                    "endNormalizedTime": 0.6200000047683716,
+                    "angularSpeed": 320.0,
+                    "attackTrigger": "",
+                    "attackDistance": 3.75
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Randomed",
+                    "chance": 0.6700000166893005,
+                    "successActions": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42101020,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "NBLKPHLEMGO": "Horizontal",
+                                    "maxAngle": 15.0,
+                                    "HADFPLAAGIB": ""
+                                },
+                                "attachPointName": "WeaponL"
+                            }
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42101021,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "NBLKPHLEMGO": "Horizontal",
+                                    "maxAngle": 15.0,
+                                    "HADFPLAAGIB": ""
+                                },
+                                "attachPointName": "WeaponL"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_ThrowAttack_Effect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ThrowPebble"
+                    ],
+                    "modifierName": "ThrowAttack_Effect_Timer"
+                }
+            ],
+            "modifiers": {
+                "ThrowAttack_Effect_Timer": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "ThrowAttack_SuitcaseEffect"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "ThrowAttack_SuitcaseEffect_DelayedDelete"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "ThrowAttack_SuitcaseEffect_DelayedDelete"
+                        }
+                    ]
+                },
+                "ThrowAttack_SuitcaseEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_01",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ThrowAttack_SuitcaseEffect_DelayedDelete": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "End",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_01"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "ThrowAttack_SuitcaseEffect"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "End",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_01"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_NoWeapon_ThrowAttack_Bullet01_Loop",
+            "modifiers": {
+                "BulletLoop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_Bullet01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_Trail01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "BulletLoop"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 0.10000000149011612,
+                                "JKDAHJILGBJ": 0.10000000149011612,
+                                "MJHHBAFNOEG": 1.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.5,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 40.0,
+                                "attackType": "Range",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Level"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_Bullet01_HitScene",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_Bullet01_Hit",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_NoWeapon_ThrowAttack_Bullet02_Loop",
+            "modifiers": {
+                "BulletLoop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_Bullet02",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_Trail02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "BulletLoop"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 0.10000000149011612,
+                                "JKDAHJILGBJ": 0.10000000149011612,
+                                "MJHHBAFNOEG": 1.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.5,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 40.0,
+                                "attackType": "Range",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_Bullet02_Hit",
+                    "born": {
+                        "$type": "HANJDCBOIIE"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_NoWeapon_ThrowAttack_Bullet03_Loop",
+            "modifiers": {
+                "BulletLoop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_Bullet02",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowAttack01_Trail02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "BulletLoop"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 0.10000000149011612,
+                                "JKDAHJILGBJ": 0.10000000149011612,
+                                "MJHHBAFNOEG": 1.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.5,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 40.0,
+                                "attackType": "Range",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireHitEffect",
+                    "hitEntity": "",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Monster_Hili_None_PebbleBullet_AS",
+                        "surfaceEffect": {
+                            "Water": "Eff_Monster_Hili_None_PebbleBullet_AS_Water"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_ThrowBomb_BombCreate",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "BombCreateAS"
+                    ],
+                    "modifierName": "BombCreate"
+                }
+            ],
+            "modifiers": {
+                "BombCreate": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerCreateGadgetToEquipPart",
+                            "gadgetID": 42101023,
+                            "equipPart": "equip03"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "BombRun",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "equip03",
+                            "value": 1
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_BOMBTHROWED_",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_BombAttack_BombCreate_Effect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "BombCreate",
+                        "BombThrow"
+                    ],
+                    "modifierName": "BombCreate_Effect_Timer"
+                }
+            ],
+            "modifiers": {
+                "BombCreate_Effect": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowBomb01_02",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "BombCreate_Effect_Timer": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "BombCreate_SuitcaseEffect"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "BombCreate_Effect"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "BombCreate_SuitcaseEffect_DelayedDelete"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "BombCreate_SuitcaseEffect_DelayedDelete"
+                        }
+                    ]
+                },
+                "BombCreate_SuitcaseEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowBomb01_01",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "BombCreate_SuitcaseEffect_DelayedDelete": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "End",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowBomb01_01"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "BombCreate_SuitcaseEffect"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "End",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowBomb01_01"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BombCreate_Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_BombAttack_BombThrow",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "BombThrow",
+                    "modifierName": "BombThrowAnimation",
+                    "normalizeEnd": 0.3499999940395355
+                }
+            ],
+            "modifiers": {
+                "BombThrowAnimation": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip03"
+                                ]
+                            },
+                            "abilityName": "Hili_Wei_ThrowAttack_Bullet_NextStateTrigger"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip03"
+                                ]
+                            },
+                            "abilityName": "Hili_Wei_ThrowAttack_Bullet01_BombState"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip03"
+                                ]
+                            },
+                            "abilityName": "Hili_Wei_ThrowAttack_Bullet_FlyTrigger"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip03"
+                                ]
+                            },
+                            "abilityName": "Hili_Wei_ThrowAttack_Bullet_CollisionTrigger"
+                        },
+                        {
+                            "$type": "TriggerThrowEquipPart",
+                            "equipPart": "equip03",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "NBLKPHLEMGO": "Horizontal",
+                                    "maxAngle": 30.0,
+                                    "HADFPLAAGIB": ""
+                                }
+                            }
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "BombRun"
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "equip03"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_BOMBTHROWED_",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 1.0
+                        }
+                    ]
+                }
+            },
+            "onKill": [
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 42101023
+                    },
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_HILI_WEI_BOMB01_THROWED",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "LessAndEqual"
+                        }
+                    ],
+                    "abilityName": "Hili_Wei_ThrowAttack_Bullet01_Explode"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "BombRun"
+                },
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "equip03"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_BOMBTHROWED_",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_BombAttack_BombOnHand",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "BombCreate",
+                        "BombThrow",
+                        "NormalIdle",
+                        "NormalMove",
+                        "Turn_Bomb"
+                    ],
+                    "modifierName": "OnHand"
+                }
+            ],
+            "modifiers": {
+                "OnHand": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip03"
+                                ]
+                            },
+                            "abilityName": "Hili_Wei_ThrowAttack_Bullet01_Explode"
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "equip03"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "BombRun"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -1.0,
+                    "key": "_HILI_WEI_BOMBHOLDING",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_ThrowAttack_Bullet_CollisionTrigger",
+            "onAdded": [
+                {
+                    "$type": "EnableBulletCollisionPluginTrigger"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "EnableBulletCollisionPluginTrigger",
+                    "setEnable": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_ThrowAttack_Bullet_NextStateTrigger",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "triggerID": "Next",
+                    "MPTriggerOnRemote": true
+                },
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "triggerID": "ThrowShader",
+                    "MPTriggerOnRemote": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_ThrowAttack_Bullet_FlyTrigger",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "triggerID": "Fly",
+                    "MPTriggerOnRemote": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_ThrowAttack_Bullet01_BombState",
+            "modifiers": {
+                "TimerModifier": {
+                    "modifierName": "",
+                    "duration": 7.75,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Hili_Wei_ThrowAttack_Bullet01_Explode"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 1.0,
+                    "key": "_HILI_WEI_BOMBHOLDING",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -1.0,
+                    "key": "_HILI_WEI_BOMB01_THROWED",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "TimerModifier"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_HILI_WEI_BOMB01_THROWED",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": -1.0,
+                    "key": "_HILI_WEI_BOMBHOLDING",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Wei_ThrowAttack_Bullet01_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Hili_Wei_NoWeapon_ThrowBomb_Explode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "EBADGGHGLKN": 2.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeRange": 0.20000000298023224,
+                                "shakeTime": 0.15000000596046448,
+                                "shakeDistance": 35.0
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "TriggerSetVisible"
+                }
+            ]
+        }
+    }
+]

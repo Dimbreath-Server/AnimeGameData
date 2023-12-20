@@ -1,0 +1,112 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Raining",
+            "modifiers": {
+                "Raining": {
+                    "modifierName": "",
+                    "duration": 8.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR5",
+                                "campTargetType": "All",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "modifierName": "WetModifier"
+                        }
+                    ]
+                },
+                "WetModifier": {
+                    "modifierName": "",
+                    "duration": 8.0,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 40.0,
+                    "overrideWeaponElement": true,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Element_Wet",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Raining"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Test_KapokFlower_Interact",
+            "modifiers": {
+                "ElementWaterModifier": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Grow"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "predicates": [
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Water"
+                                }
+                            ],
+                            "boolID": "BeHitWater",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "predicates": [
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Water"
+                                }
+                            ],
+                            "modifierName": "ElementWaterModifier"
+                        }
+                    ]
+                },
+                "Grow": {
+                    "modifierName": "",
+                    "duration": 1.100000023841858,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_ItemFlower_Bloom",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerGadgetInteractive"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "ElementWaterModifier"
+                }
+            ]
+        }
+    }
+]

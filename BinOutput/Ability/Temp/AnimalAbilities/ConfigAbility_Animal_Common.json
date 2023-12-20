@@ -1,0 +1,78 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Common_Initial",
+            "onAdded": [
+                {
+                    "$type": "HideUIBillBoard",
+                    "hide": true
+                },
+                {
+                    "$type": "EnableAIStealthy",
+                    "enable": true
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_ANIMAL_ENTITY_TYPE",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Common_HungryCoolDown",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "HungryAction"
+                    ],
+                    "modifierName": "HungryAction"
+                }
+            ],
+            "modifiers": {
+                "HungryAction": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetNeuronEnable",
+                            "neuronName": "HUNGRY"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Homeworld_Common_Initial",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_ANIMAL_ENTITY_TYPE",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 11001
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14001
+                }
+            ]
+        }
+    }
+]

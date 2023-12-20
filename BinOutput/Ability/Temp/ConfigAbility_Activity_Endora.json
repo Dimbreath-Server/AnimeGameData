@@ -1,0 +1,1169 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_Endora_Handler",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ShootBS",
+                        "Shoot",
+                        "FastAim",
+                        "FastAimShoot"
+                    ],
+                    "modifierName": "AimHideEndora"
+                },
+                {
+                    "$type": "StageReadyMixin",
+                    "onStageReady": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_ActivityAbility_Endora_Handler"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_ActivityAbility_Endora_Handler"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_ActivityAbility_Endora_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_ActivityAbility_Endora_RemoveEffect"
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_ActivityAbility_Endora_Effect"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_ActivityAbility_Endora_Effect"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_ActivityAbility_Endora_RemoveEffect"
+                        }
+                    ]
+                },
+                "UNIQUE_ActivityAbility_Endora_Effect": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "PositionDampTime": true,
+                            "shieldHP": "Eff_Activity_Endora",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "UNIQUE_ActivityAbility_Endora_RemoveEffect": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "Die",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Activity_Endora"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_ActivityAbility_Endora_Effect"
+                        }
+                    ]
+                },
+                "AimHideEndora": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "Die",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Activity_Endora"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "Show",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Activity_Endora"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "Team",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_ActivityAbility_Endora_Handler"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_ActivityAbility_Endora_Handler"
+                }
+            ],
+            "onAvatarIn": [
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_ActivityAbility_Endora_Handler"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_Endora_SwtichSkill",
+            "modifiers": {
+                "UNIQUE_ActivityAbility_Endora_AddSkillInfo": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20020
+                        },
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 20020,
+                            "amountByCasterMaxHPRatio": 0.05000000074505806,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "SwitchSkill",
+                            "attachPoint": "",
+                            "type": "Bool",
+                            "value": 1,
+                            "shieldHP": "Eff_Activity_Endora"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "SwitchSkill"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "SwitchSkill",
+                            "attachPoint": "",
+                            "type": "Bool",
+                            "shieldHP": "Eff_Activity_Endora"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "SwitchSkill"
+                        },
+                        {
+                            "$type": "RemoveAvatarSkillInfo",
+                            "PositionDampTime": true,
+                            "skillID": 20020
+                        }
+                    ]
+                },
+                "SwitchSkill": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "SwitchSkillIDMixin",
+                            "priority": "Playmode",
+                            "skillIndex": 1,
+                            "skillID": 20020
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "ChangePlayMode",
+                            "PositionDampTime": true,
+                            "muteRemoteAction": true,
+                            "toPlayMode": "EndoraState"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ChangePlayMode",
+                            "PositionDampTime": true,
+                            "muteRemoteAction": true,
+                            "BOFKGNEHCCF": "EndoraState"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "target": "CurTeamAvatars",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_ActivityAbility_Endora_AddSkillInfo"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_Endora_RemoveSkill",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "CurTeamAvatars",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_ActivityAbility_Endora_AddSkillInfo"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_Endora_Bubble_AimPress",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Channel_BS",
+                        "Channel_Loop"
+                    ],
+                    "modifierName": "CheckChannelLoop"
+                },
+                {
+                    "$type": "ButtonHoldChargeMixin",
+                    "skillID": 20020,
+                    "secondChargeTime": 0.11999999731779099,
+                    "OnReleaseCharged": [
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ActivityAbility_Endora_IsFocus",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "Shoot_Short"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ActivityAbility_Endora_IsFocus",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "modifierName": "Shoot"
+                        }
+                    ],
+                    "OnBeginSecondCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "StartChannelTrigger"
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "LockMotionFlagExitChannel",
+                            "ratio": true
+                        }
+                    ],
+                    "OnReleaseSecondCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "PositionDampTime": true,
+                            "triggerID": "EndChannelTrigger"
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "PositionDampTime": true,
+                            "boolID": "LockMotionFlagExitChannel"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ActivityAbility_Endora_IsFocus",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "modifierName": "Shoot"
+                        }
+                    ],
+                    "chargeStateIDs": [
+                        "Channel_Loop"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Shoot_Short": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 20020,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "Attack_AS",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Activity_Endora"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Activity_Endora_Skill_AS",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalPos",
+                            "target": "Team",
+                            "key": "_ActivityAbility_Endora_Shoot_POS",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "setTarget": false
+                        },
+                        {
+                            "$type": "KillGadget",
+                            "target": "CurTeamAvatars",
+                            "PositionDampTime": true,
+                            "gadgetInfo": {
+                                "configID": 44000103
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 44000102,
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.6499999761581421,
+                                    "JKDAHJILGBJ": 0.4699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "positionKey": "_ActivityAbility_Endora_Shoot_POS",
+                                "directionKey": ""
+                            }
+                        }
+                    ]
+                },
+                "Shoot": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 20020,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Focus"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Charge"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "Attack_AS",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Activity_Endora"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Activity_Endora_Skill_AS",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalPos",
+                            "target": "Team",
+                            "key": "_ActivityAbility_Endora_Shoot_POS",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "setTarget": false
+                        },
+                        {
+                            "$type": "KillGadget",
+                            "target": "CurTeamAvatars",
+                            "PositionDampTime": true,
+                            "gadgetInfo": {
+                                "configID": 44000103
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 44000101,
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.6499999761581421,
+                                    "JKDAHJILGBJ": 0.4699999988079071,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "positionKey": "_ActivityAbility_Endora_Shoot_POS",
+                                "directionKey": ""
+                            }
+                        }
+                    ]
+                },
+                "Focus": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ActivityAbility_Endora_IsFocus",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "Attack_BS",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Activity_Endora"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Activity_Endora_Skill_BS",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Activity_Endora_Skill_Loop",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AvatarEnterFocus",
+                            "cameraFollowLower": {
+                                "x": 0.800000011920929,
+                                "y": 0.20000000298023224,
+                                "z": -1.5
+                            },
+                            "cameraFollowUpper": {
+                                "x": 0.5,
+                                "y": -0.20000000298023224
+                            },
+                            "dragButtonName": "Skill2",
+                            "canMove": false,
+                            "showCrosshair": false,
+                            "disableAnim": true,
+                            "HALMPLOGBHJ": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitFocus",
+                            "PositionDampTime": true,
+                            "keepRotation": true
+                        },
+                        {
+                            "$type": "ClearGlobalValue",
+                            "PositionDampTime": true,
+                            "key": "_ActivityAbility_Endora_IsFocus"
+                        }
+                    ]
+                },
+                "Charge": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 4.0,
+                            "key": "ActivityAbility_Endora_Throw_Range",
+                            "useLimitRange": true,
+                            "maxValue": 20.0,
+                            "minValue": 3.5
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Activity_Endora_Line",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.4000000059604645,
+                            "key": "ActivityAbility_Endora_Throw_Range",
+                            "useLimitRange": true,
+                            "maxValue": 20.0,
+                            "minValue": 3.5
+                        }
+                    ]
+                },
+                "CheckChannelLoop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Focus"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Charge"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "RemovedFocusState"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ActivityAbility_Endora_IsFocus",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "triggerID": "EndChannelTrigger"
+                        }
+                    ]
+                },
+                "RemovedFocusState": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Focus"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Charge"
+                        }
+                    ]
+                }
+            },
+            "onAvatarOut": [
+                {
+                    "$type": "ApplyModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "RemovedFocusState"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Activity_EndoraGadgetSkill_BubbleBullet",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Activity_Endora_Skill_BulletTrail",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "gadgetID": 44000103,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": -0.4000000059604645
+                                }
+                            },
+                            "gadgetID": 44000103,
+                            "campID": 1001,
+                            "campTargetType": "All"
+                        }
+                    ]
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "target": "Caster",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "EBADGGHGLKN": 5.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.0,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "damageExtra": 0.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV0",
+                                "hitHaltTimeScale": 0.009999999776482582,
+                                "muteHitText": true
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Activity_EndoraGadgetSkill_BubbleBulletSpeed_Fix",
+            "abilitySpecials": {
+                "Endora_Bubble_Bullet_SpeedUp": 0.0
+            },
+            "modifiers": {
+                "SpeedUP": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_BulletMoveSpeedRatio": "Endora_Bubble_Bullet_SpeedUp"
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "DJENFLMHMDI": "DummyThrowSpeed",
+                    "isFromOwner": true,
+                    "globalValueKey": "ActivityAbility_Endora_Throw_Range",
+                    "overrideMapKey": "Endora_Bubble_Bullet_SpeedUp"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "SpeedUP"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Activity_EndoraGadgetSkill_BubbleArea",
+            "modifiers": {
+                "TriggerCheck": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.15000000596046448,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Activity_Endora_Skill_BulletArea",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 1,
+                                "entityTypePriority": [
+                                    "Monster",
+                                    "Gadget"
+                                ],
+                                "shapeName": "CircleR2",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Caster",
+                                    "modifierName": "Create_Trigger"
+                                }
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Activity_Oceanid_Bubble_Area_IsTrigger",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "shieldHP": "Eff_Activity_Endora_Skill_BulletArea_AS",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "topLimit": 1,
+                                "entityTypePriority": [
+                                    "Monster",
+                                    "Gadget"
+                                ],
+                                "shapeName": "CircleR2",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Caster",
+                                    "modifierName": "Create_Trigger"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Create_Trigger": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "target": "Caster",
+                            "shieldHP": "Eff_Activity_Endora_Skill_BulletHit",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Activity_Oceanid_Bubble_Area_IsTrigger",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "target": "Caster",
+                            "modifierName": "TriggerCheck"
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "target": "Caster",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "gadgetID": 44000104,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Activity_Endora_Skill_BulletHit",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "TriggerCheck"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Activity_EndoraGadgetSkill_BubbleTrigger",
+            "abilitySpecials": {
+                "Bubble_Struggle_Duration": 5.0
+            },
+            "modifiers": {
+                "TriggerAttack_Event": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_MONSTERAFFIX_OCEANID_ANIMAL_SPMASK",
+                                            "ratio": 1.0
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "RemoveUniqueModifier",
+                                            "target": "Target",
+                                            "modifierName": "UNIQUE_Debuff_Bubble_Struggle_Special"
+                                        },
+                                        {
+                                            "$type": "ApplyModifier",
+                                            "target": "Target",
+                                            "modifierName": "UNIQUE_Debuff_Bubble_Struggle_Special"
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "ClearGlobalValue",
+                                            "key": "_Activity_Oceanid_Bubble_Struggle_OnRemoveKill"
+                                        },
+                                        {
+                                            "$type": "RemoveUniqueModifier",
+                                            "target": "Target",
+                                            "modifierName": "UNIQUE_Debuff_Bubble_Struggle_Normal_Handle"
+                                        },
+                                        {
+                                            "$type": "RemoveUniqueModifier",
+                                            "target": "Target",
+                                            "modifierName": "UNIQUE_Debuff_Bubble_Struggle_Normal"
+                                        },
+                                        {
+                                            "$type": "ApplyModifier",
+                                            "target": "Target",
+                                            "modifierName": "UNIQUE_Debuff_Bubble_Struggle_Normal"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Debuff_Bubble_Struggle_Special": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Bubble_Struggle_Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "CanBeStruggle",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Activity_Endora_Skill_Bubble",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Activity_Oceanid_Bubble_Struggle_OnRemoveKill",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "CanBeStruggle"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Activity_Endora_Skill_Bubble_AS",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Activity_Oceanid_Bubble_Struggle_OnRemoveKill",
+                                    "ratio": 1.0,
+                                    "ACJBNJNEBOC": "MoreThanAndEqual"
+                                }
+                            ],
+                            "JBLBNPAKMEI": [
+                                70000000
+                            ]
+                        },
+                        {
+                            "$type": "ClearGlobalValue",
+                            "key": "_Activity_Oceanid_Bubble_Struggle_OnRemoveKill"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Debuff_Bubble_Struggle_Special"
+                        }
+                    ]
+                },
+                "UNIQUE_Debuff_Bubble_Struggle_Normal": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Bubble_Struggle_Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "Struggle"
+                            ],
+                            "modifierName": "UNIQUE_Debuff_Bubble_Struggle_Normal_Handle"
+                        }
+                    ],
+                    "state": "Struggle"
+                },
+                "UNIQUE_Debuff_Bubble_Struggle_Normal_Handle": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Activity_Endora_Skill_Bubble_Normal",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Activity_Endora_Skill_Bubble_Normal_AS",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Debuff_Bubble_Struggle_Normal"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "TriggerAttack_Event"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 1.2000000476837158
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.0,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "damageExtra": 0.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV1"
+                            },
+                            "canHitHead": true,
+                            "hitHeadPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV0"
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_Endora_AvatarUpBuff",
+            "modifiers": {
+                "UNIQUE_ActivityAbility_Endora_AvatarUpBuff": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_ChargeEfficiencyDelta": 0.30000001192092896,
+                        "Actor_WaterSubHurtDelta": 0.30000001192092896
+                    },
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_ActivityAbility_Endora_AvatarUpBuff"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    }
+]

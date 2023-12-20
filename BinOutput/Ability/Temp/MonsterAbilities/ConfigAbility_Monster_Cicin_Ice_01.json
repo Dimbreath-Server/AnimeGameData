@@ -1,0 +1,1063 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_ResetOrder",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "Order",
+                    "value": 1
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_FireIceSpear",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42606005,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.20000000298023224,
+                            "MJHHBAFNOEG": 1.2000000476837158
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "HADFPLAAGIB": ""
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_IceSpear_Hit",
+            "modifiers": {
+                "Monster_Cicin_IceSpear_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Cicin_Ice_IceSpearBullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Monster_Cicin_IceSpear_Effect"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Monster_Cicin_IceSpear_Effect"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Cicin_Ice_IceSpearHit",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "PositionDampTime": true,
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 0.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Ice",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 20.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_PoseChange",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_MONSTER_CICIN_ICE_IS_SUMMONED",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Monster_Cicin_ChangePoseToAlong",
+                        "Monster_Cicin_ChangePoseToSummoned"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Monster_Cicin_ChangePoseToAlong": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "IsSummoned"
+                        }
+                    ]
+                },
+                "Monster_Cicin_ChangePoseToSummoned": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "IsSummoned",
+                            "ratio": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_RushAttack_UpdateDistance",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Blink",
+                        "Fury",
+                        "RushAtk",
+                        "SPRushAtk",
+                        "IceExplode"
+                    ],
+                    "modifierName": "Monster_Cicin_Ice_AttackEndrue"
+                }
+            ],
+            "abilitySpecials": {
+                "DistanceToTarget": 0.0
+            },
+            "modifiers": {
+                "Monster_Cicin_Ice_AttackEndrue": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    }
+                },
+                "Monster_Cicin_EndRushTrigger": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnablePushColliderName"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Cicin_Ice_Rush",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnablePushColliderName",
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "ReachTarget"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalPos",
+                    "key": "_MONSTER_CICIN_RUSHATTCK_POS",
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    }
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SUMMONNO",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.699999988079071,
+                            "key": "_MONSTER_CICIN_RUSHATTCK_POS_1",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 2.549999952316284,
+                            "key": "_MONSTER_CICIN_RUSHATTCK_POS_2",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SUMMONNO",
+                            "ratio": 2.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -2.25,
+                            "key": "_MONSTER_CICIN_RUSHATTCK_POS_0",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.699999988079071,
+                            "key": "_MONSTER_CICIN_RUSHATTCK_POS_1",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.2899999618530273,
+                            "key": "_MONSTER_CICIN_RUSHATTCK_POS_2",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SUMMONNO",
+                            "ratio": 3.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 2.25,
+                            "key": "_MONSTER_CICIN_RUSHATTCK_POS_0",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.699999988079071,
+                            "key": "_MONSTER_CICIN_RUSHATTCK_POS_1",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.2899999618530273,
+                            "key": "_MONSTER_CICIN_RUSHATTCK_POS_2",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "FixedMonsterRushMove",
+                    "toPos": {
+                        "$type": "DAPJIKNDLLN",
+                        "positionKey": "_MONSTER_CICIN_RUSHATTCK_POS",
+                        "directionKey": ""
+                    },
+                    "timeRange": 0.30000001192092896,
+                    "animatorStateIDs": [
+                        "RushToTarget_BS",
+                        "RushToTarget_Loop",
+                        "RushToTarget_AS"
+                    ],
+                    "overrideMoveCollider": "",
+                    "isInAir": true
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Cicin_EndRushTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_SPRushUpdateDistance",
+            "abilitySpecials": {
+                "DistanceToTarget": 0.0
+            },
+            "modifiers": {
+                "Monster_Cicin_SPEndRushTrigger": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.20000000298023224,
+                    "onAdded": [
+                        {
+                            "$type": "EnablePushColliderName"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Cicin_Ice_Rush",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnablePushColliderName",
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "ReachTarget"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 25.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "retreatType": "ByTangent",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetGlobalPos",
+                    "target": "SelfAttackTarget",
+                    "key": "_MONSTER_CICIN_RUSHATTCK_POS",
+                    "born": {
+                        "$type": "EOJBLPNGNCN"
+                    },
+                    "setTarget": false
+                },
+                {
+                    "$type": "FixedMonsterRushMove",
+                    "toPos": {
+                        "$type": "DAPJIKNDLLN",
+                        "positionKey": "_MONSTER_CICIN_RUSHATTCK_POS",
+                        "directionKey": ""
+                    },
+                    "timeRange": 0.5,
+                    "animatorStateIDs": [
+                        "SPRushAtk_BS",
+                        "SPRushAtk_Loop",
+                        "SPRushAtk_AS"
+                    ],
+                    "overrideMoveCollider": "",
+                    "isInAir": true
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Cicin_SPEndRushTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_BlinkToMaster",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_MONSTER_CICIN_BLINKING",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Empty",
+                        "Monster_Cicin_BlinkTimer"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Empty": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Monster_Cicin_BlinkTimer": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Monster_Cicin_BlinkTime"
+                        }
+                    ]
+                },
+                "Monster_Cicin_BlinkTime": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "ReachTarget"
+                        },
+                        {
+                            "$type": "HideUIBillBoard"
+                        },
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -2.0,
+                            "key": "_MONSTER_CICIN_BLINKING",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SUMMONNO",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.699999988079071,
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SENDPOSTOCICIN_1",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 2.549999952316284,
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SENDPOSTOCICIN_2",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SUMMONNO",
+                            "ratio": 2.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -2.25,
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SENDPOSTOCICIN_0",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.699999988079071,
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SENDPOSTOCICIN_1",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.2899999618530273,
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SENDPOSTOCICIN_2",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SUMMONNO",
+                            "ratio": 3.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 2.25,
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SENDPOSTOCICIN_0",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.699999988079071,
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SENDPOSTOCICIN_1",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.2899999618530273,
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SENDPOSTOCICIN_2",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "TryFindBlinkPointByBorn",
+                    "born": {
+                        "$type": "DAPJIKNDLLN",
+                        "positionKey": "_MONSTER_FATUUS_MAGE_ICE_SENDPOSTOCICIN",
+                        "directionKey": ""
+                    },
+                    "hitSceneType": "BlinkHitSceneTestByThreeSegments",
+                    "limitY": 1.0
+                },
+                {
+                    "$type": "HideUIBillBoard",
+                    "hide": true
+                },
+                {
+                    "$type": "TriggerSetVisible"
+                },
+                {
+                    "$type": "EnablePushColliderName",
+                    "pushColliderNames": [
+                        "PushCollider"
+                    ]
+                },
+                {
+                    "$type": "DoBlink"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_MONSTER_CICIN_BLINKING",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_BlinkToSPRush",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_MONSTER_CICIN_BLINKING",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Empty",
+                        "Monster_Cicin_BlinkTimer"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Empty": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Monster_Cicin_BlinkTimer": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Monster_Cicin_BlinkTime"
+                        }
+                    ]
+                },
+                "Monster_Cicin_BlinkTime": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "ReachTarget"
+                        },
+                        {
+                            "$type": "HideUIBillBoard"
+                        },
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Cicin_Ice_BlinkAS",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -2.0,
+                            "key": "_MONSTER_CICIN_BLINKING",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TryFindBlinkPointByBorn",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SUMMONNO",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": -2.0,
+                            "JKDAHJILGBJ": 0.5,
+                            "MJHHBAFNOEG": 2.0
+                        }
+                    },
+                    "hitSceneTest": false,
+                    "limitY": 1.0
+                },
+                {
+                    "$type": "TryFindBlinkPointByBorn",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SUMMONNO",
+                            "ratio": 2.0
+                        }
+                    ],
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.5,
+                            "MJHHBAFNOEG": 2.0
+                        }
+                    },
+                    "hitSceneTest": false,
+                    "limitY": 1.0
+                },
+                {
+                    "$type": "TryFindBlinkPointByBorn",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_FATUUS_MAGE_ICE_SUMMONNO",
+                            "ratio": 3.0
+                        }
+                    ],
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 2.0,
+                            "JKDAHJILGBJ": 0.5,
+                            "MJHHBAFNOEG": 2.0
+                        }
+                    },
+                    "hitSceneTest": false,
+                    "limitY": 1.0
+                },
+                {
+                    "$type": "HideUIBillBoard",
+                    "hide": true
+                },
+                {
+                    "$type": "TriggerSetVisible"
+                },
+                {
+                    "$type": "EnablePushColliderName",
+                    "pushColliderNames": [
+                        "PushCollider"
+                    ]
+                },
+                {
+                    "$type": "DoBlink"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_MONSTER_CICIN_BLINKING",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_MONSTER_CICIN_DIETYPE",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_IceShieldEnergyGet",
+            "modifiers": {
+                "Monster_Cicin_IceShieldEnergyGet_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Cicin_Ice_ShieldEnergy",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Monster_Cicin_IceShieldEnergyGet_Effect"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ISOWNER",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Cicin_IceShieldEnergyGet_Effect"
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_IceShieldEnergyGetFail",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Cicin_Ice_ShieldEnergyDisappear",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_Steer",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "NormalAtk"
+                    ],
+                    "endNormalizedTime": 0.75,
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Fury"
+                    ],
+                    "endNormalizedTime": 4.0,
+                    "angularSpeed": 120.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "RushAtk"
+                    ],
+                    "endNormalizedTime": 100.0,
+                    "angularSpeed": 360.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "SPRushAtk"
+                    ],
+                    "endNormalizedTime": 100.0,
+                    "angularSpeed": 360.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_Die",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_CICIN_DIETYPE",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "shieldHP": "Eff_Monster_Cicin_Ice_Die",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": -1.0,
+                    "key": "_CICIN_ICE_COUNT",
+                    "useLimitRange": true,
+                    "maxValue": 3.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_GiveEnegy",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42606006,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "trackTarget": "Owner"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Cicin_Ice_CommonEffect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAbilityStateMixin",
+                    "abilityStates": [
+                        "ElementFrozen"
+                    ],
+                    "modifierName": "FrozenDetect"
+                }
+            ],
+            "modifiers": {
+                "FrozenDetect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "renderNames": [
+                                "Wing"
+                            ]
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "CommonEffect"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Frozen",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider_Frozen"
+                            ],
+                            "setEnable": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "renderNames": [
+                                "Wing"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "CommonEffect"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Frozen"
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider_Frozen"
+                            ]
+                        }
+                    ]
+                },
+                "CommonEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Cicin_Ice_BodyElement",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "CommonEffect"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_MONSTER_CICIN_DIETYPE",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    }
+]

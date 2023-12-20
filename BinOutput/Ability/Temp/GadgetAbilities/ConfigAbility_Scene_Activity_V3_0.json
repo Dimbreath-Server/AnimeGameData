@@ -1,0 +1,791 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Prop_Exploration_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Interactable"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Mute"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Active"
+                }
+            ],
+            "modifiers": {
+                "Interactable": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Seeker_ExplorationPoint_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ShowMark"
+                        }
+                    ]
+                },
+                "Mute": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TeasureHuntMarkShow"
+                        }
+                    ]
+                },
+                "Active": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "BeActive"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ShowMark"
+                        }
+                    ]
+                },
+                "BeActive": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Shoot"
+                        },
+                        {
+                            "$type": "ChangeGadgetState",
+                            "state": 202
+                        }
+                    ]
+                },
+                "Shoot": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "BGDLPFKMMBG",
+                                "topLimit": 15,
+                                "sortType": "Nearest",
+                                "tag": "IS_RESEARCH_POINT"
+                            },
+                            "successActions": [
+                                {
+                                    "$type": "SetSelfAttackTarget",
+                                    "target": "Target"
+                                },
+                                {
+                                    "$type": "TriggerBullet",
+                                    "predicates": [
+                                        {
+                                            "$type": "PKCCKMFHFEL"
+                                        }
+                                    ],
+                                    "bulletID": 70290407,
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 2.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "GIAOINGDIPJ": {
+                                            "$type": "POEEGOHIKAM",
+                                            "LPHIFJDFKHI": {
+                                                "LOGNGLEIFML": -45.0,
+                                                "JKDAHJILGBJ": 0.0,
+                                                "MJHHBAFNOEG": 0.0
+                                            },
+                                            "HADFPLAAGIB": ""
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "ShowMark": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TeasureHuntMarkShow",
+                            "show": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Prop_ExplorationBullet_01",
+            "onAbilityStart": [
+                {
+                    "$type": "DamageByAttackValue",
+                    "target": "Target",
+                    "attackInfo": {
+                        "attackTag": "ResearchPointBullet",
+                        "attenuationTag": "",
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                            "LIMFCEKGALF": 0.0,
+                            "JJGGAPONHOE": 0.0,
+                            "bonusCriticalHurt": 100.0,
+                            "ignoreAttackerProperty": true,
+                            "strikeType": "Default",
+                            "ignoreModifyDamage": true,
+                            "damagePercentage": 0.0
+                        },
+                        "hitPattern": {
+                            "onHitEffectName": "default",
+                            "hitImpulseType": "LV7",
+                            "hitHaltTimeScale": 0.05000000074505806,
+                            "muteHitText": true
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ElementParticle_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Mute"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Active"
+                }
+            ],
+            "modifiers": {
+                "Mute": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ChangeGadgetState",
+                            "state": 201
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "ChangeGadgetState",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "ResearchPointBullet"
+                                    ]
+                                }
+                            ],
+                            "state": 201
+                        }
+                    ]
+                },
+                "Active": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_ElementParticle_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "EffectBall": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_ElementParticle_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Pickup": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "FromGroup",
+                            "funcName": "SLC_Activity_TreasureSeelie_PickElementParticle",
+                            "AFEHPHNEJHM": 0.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_ElementParticle_01_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ChangeTag",
+                    "isAdd": true,
+                    "tag": "IS_RESEARCH_POINT"
+                }
+            ],
+            "onFieldEnter": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "IAIDEINPHNP"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "HKDMEKKBAKE",
+                                    "target": "Self",
+                                    "gadgetState": 201
+                                }
+                            ],
+                            "modifierName": "Pickup"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ElementParticle_OnGround_01",
+            "modifiers": {
+                "Pickup": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "CurChallengeGroup",
+                            "funcName": "SLC_Activity_TreasureSeelie_PickElementParticle",
+                            "AFEHPHNEJHM": 0.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_ElementParticle_01_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_SceneObj_ElementParticle_01",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onFieldEnter": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "IAIDEINPHNP"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Pickup"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ElementParticle_Generator_01",
+            "onAdded": [
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true
+                    },
+                    "lifeByOwnerV2": true,
+                    "gadgetID": 70290552
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_EnergyBall_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Active"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Inactive"
+                }
+            ],
+            "modifiers": {
+                "Active": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Seeker_EnergyBall_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Inactive": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Pickup": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "FromGroup",
+                            "funcName": "SLC_Activity_TreasureSeelie_PickEnergyBall",
+                            "AFEHPHNEJHM": 0.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Seeker_EnergyBall_01_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "IAIDEINPHNP"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "HKDMEKKBAKE",
+                                    "target": "Self"
+                                }
+                            ],
+                            "modifierName": "Pickup"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Prop_Excavate_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Interactable"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Mute"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Interacted"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 203,
+                    "modifierName": "Die"
+                }
+            ],
+            "modifiers": {
+                "Interactable": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Excavate_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_SeekerSeelie_03_NoFollow",
+                            "born": {
+                                "$type": "FHMJIAEMJLF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 1.2000000476837158,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ShowMark"
+                        }
+                    ]
+                },
+                "Interacted": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ShowMark"
+                        }
+                    ]
+                },
+                "Mute": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TeasureHuntMarkShow",
+                            "markType": "excavation"
+                        }
+                    ]
+                },
+                "Die": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TeasureHuntMarkShow",
+                            "markType": "excavation"
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "ShowMark": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TeasureHuntMarkShow",
+                            "markType": "excavation",
+                            "show": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Xm_Property_Prop_SeelieFarAway_01",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_SceneObj_SeekerSeelie_03_Follow",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Common_Property_Prop_RemovableCoin_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToGlobalValueMixin",
+                    "globalValueKey": "GV_Picked",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "BePicked"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "CoinMaterial": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_UGCCoin_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_RemovableCoin_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_GlideChampCoin_Hit",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "BePicked": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "CurChallengeGroup",
+                            "funcName": "SLC_Activity_Parkour_PickCoin",
+                            "AFEHPHNEJHM": 0.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "CoinMaterial"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "CoinMaterial"
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_Picked",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ChangeTag",
+                    "isAdd": true,
+                    "tag": "IS_COIN"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Level_Common_Property_Prop_ExpandAccessCoin_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Interactable"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Mute"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_PickRangeBuff": {
+                    "stacking": "RefreshUniqueDurability",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 20.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Team",
+                            "ratio": 1.0,
+                            "key": "GV_CoinRangeLevel",
+                            "useLimitRange": true,
+                            "maxValue": 1000.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Team",
+                            "ratio": -1.0,
+                            "key": "GV_CoinRangeLevel",
+                            "useLimitRange": true,
+                            "maxValue": 1000.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Interactable": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_ExpandAccessCoin_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_ExpandAccessCoin_01_Dis",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Mute": {
+                    "modifierName": "",
+                    "duration": 20.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ChangeGadgetState"
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "IAIDEINPHNP"
+                        },
+                        {
+                            "$type": "HKDMEKKBAKE",
+                            "target": "Self"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Team",
+                            "modifierName": "UNIQUE_PickRangeBuff"
+                        },
+                        {
+                            "$type": "ChangeGadgetState",
+                            "state": 201
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Area_Common_Property_Prop_ParkourOperatorXM_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "ReMove"
+                }
+            ],
+            "modifiers": {
+                "AddEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Challengestarter_02",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "EffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ReMove": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "AddEffect"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "AddEffect"
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,2496 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ExtraAttack",
+            "abilityMixins": [
+                {
+                    "$type": "ButtonHoldChargeMixin",
+                    "skillID": 10441,
+                    "chargeTime": 0.25,
+                    "secondChargeTime": "ExtraAttack_Claymore_MaxTime",
+                    "OnBeginUncharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "ResetAnimatorTrigger",
+                            "triggerID": "EndHoldTrigger"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "SetTrigger"
+                        }
+                    ],
+                    "OnBeginCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 6.0
+                        }
+                    ],
+                    "OnReleaseCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "EndHoldTrigger"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "SetTrigger"
+                        }
+                    ],
+                    "OnBeginSecondCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "EndHoldTrigger"
+                        }
+                    ],
+                    "chargeStateIDs": [
+                        "Attack01_BS",
+                        "Attack01",
+                        "Attack02",
+                        "Attack03",
+                        "Attack04",
+                        "ExtraAttack",
+                        "ExtraAttack1"
+                    ]
+                },
+                {
+                    "$type": "AvatarSteerByCameraMixin",
+                    "stateIDs": [
+                        "ExtraAttack1"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack",
+                        "ExtraAttack1",
+                        "ExtraAttack2",
+                        "ExtraAttack3"
+                    ],
+                    "modifierName": "Camera"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack1"
+                    ],
+                    "modifierName": "Cost"
+                }
+            ],
+            "abilitySpecials": {
+                "ExtraAttack_Claymore_Stamina_Cost": 0.0,
+                "ExtraAttack_Claymore_MaxTime": 0.0
+            },
+            "modifiers": {
+                "SetTrigger": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "EndHoldTrigger"
+                        }
+                    ]
+                },
+                "Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        }
+                    ]
+                },
+                "Cost": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CostStaminaMixin",
+                            "costStaminaRatio": "ExtraAttack_Claymore_Stamina_Cost",
+                            "onStaminaEmpty": [
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "EndHoldTrigger"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalArt_Hit",
+            "abilitySpecials": {
+                "Xinyan_ElementalArt_Damage": 0.0
+            },
+            "modifiers": {
+                "EnemyNumCheck": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_ShieldLevel_Count",
+                                    "ratio": 0.0,
+                                    "PLDDAFOIEGE": true
+                                }
+                            ],
+                            "modifierName": "ShieldLevel_1"
+                        },
+                        {
+                            "$type": "Predicated",
+                            "target": "Caster",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Avatar_Xinyan_Talent_ShieldLevelUp"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_ShieldLevel_Count",
+                                            "ratio": 1.0,
+                                            "PLDDAFOIEGE": true
+                                        }
+                                    ],
+                                    "modifierName": "ShieldLevel_2"
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_ShieldLevel_Count",
+                                            "ratio": 1.0,
+                                            "PLDDAFOIEGE": true
+                                        }
+                                    ],
+                                    "modifierName": "ShieldLevel_1"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "target": "Caster",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Avatar_Xinyan_Talent_ShieldLevelUp"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_ShieldLevel_Count",
+                                            "ratio": 2.0,
+                                            "PLDDAFOIEGE": true
+                                        }
+                                    ],
+                                    "modifierName": "ShieldLevel_3"
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_ShieldLevel_Count",
+                                            "ratio": 2.0,
+                                            "PLDDAFOIEGE": true
+                                        }
+                                    ],
+                                    "modifierName": "ShieldLevel_2"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_ShieldLevel_Count",
+                                    "ratio": 3.0,
+                                    "PLDDAFOIEGE": true
+                                }
+                            ],
+                            "modifierName": "ShieldLevel_3"
+                        }
+                    ]
+                },
+                "ShieldLevel_1": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "Team",
+                            "modifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Avatar_Xinyan_ElementalArt_Shield_1"
+                        }
+                    ],
+                    "isLimitedProperties": true
+                },
+                "ShieldLevel_2": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "Team",
+                            "modifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Avatar_Xinyan_ElementalArt_Shield_2"
+                        }
+                    ],
+                    "isLimitedProperties": true
+                },
+                "ShieldLevel_3": {
+                    "modifierName": "",
+                    "duration": 1.399999976158142,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "Team",
+                            "modifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Avatar_Xinyan_ElementalArt_Shield_3"
+                        }
+                    ],
+                    "isLimitedProperties": true
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Caster",
+                    "modifierName": "EnemyNumCheck"
+                },
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10442,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "height": 1.600000023841858,
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "Elemental_Art",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "Xinyan_ElementalArt_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "elementRank": 1.5,
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 200.0,
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "Eff_Avatar_Girl_Claymore_Xinyan_ElementalArt_Hit",
+                                "hitImpulseType": "LV4",
+                                "hitHaltTime": 0.09000000357627869,
+                                "hitHaltTimeScale": 0.009999999776482582,
+                                "canBeDefenceHalt": true
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.23999999463558197,
+                                "shakeTime": 0.20999999344348907,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "x": 1.0,
+                                    "y": -0.20000000298023224
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalArt",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Xinyan_ElementalArt"
+                    ],
+                    "modifierName": "ShieldLevel_Handler"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Xinyan_ElementalArt"
+                    ],
+                    "modifierName": "Xinyan_ElementalArt_Guitar_1"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Xinyan_ElementalArt",
+                    "modifierName": "Xinyan_ElementalArt_Guitar",
+                    "normalizeEnd": 0.30000001192092896
+                }
+            ],
+            "abilitySpecials": {
+                "Xinyan_Talent_ElementaArtReduceDef_DefDownRate": 0.0,
+                "Xinyan_Talent_ElementaArtReduceDef_Duration": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Xinyan_Talent_ElementaArtReduceDef": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Xinyan_Talent_ElementaArtReduceDef_Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_PhysicalSubHurtDelta": "Xinyan_Talent_ElementaArtReduceDef_DefDownRate"
+                    },
+                    "state": "DefenseDown",
+                    "isLimitedProperties": true
+                },
+                "Avatar_Xinyan_Talent_ElementaArtReduceDef_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Art"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "RemoveUniqueModifier",
+                                    "target": "Target",
+                                    "modifierName": "UNIQUE_Xinyan_Talent_ElementaArtReduceDef"
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Target",
+                                    "modifierName": "UNIQUE_Xinyan_Talent_ElementaArtReduceDef"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "ElementalArt_Ball": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Art"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "ACPHNJGEPAL",
+                                    "strikeType": "Blunt"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "target": "Caster",
+                                    "ratio": 1.0,
+                                    "key": "_ABILITY_ShieldLevel_Count",
+                                    "useLimitRange": true,
+                                    "maxValue": 3.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "Ball_Base"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "ShieldLevel_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "LBFNAOBLLJL": "Avatar_Xinyan_Talent_ElementaArtReduceDef"
+                                }
+                            ],
+                            "modifierName": "Avatar_Xinyan_Talent_ElementaArtReduceDef_Handler"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": -5.0,
+                            "key": "_ABILITY_ShieldLevel_Count",
+                            "useLimitRange": true,
+                            "maxValue": 3.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Ball_Base": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "GenerateElemBall",
+                            "configID": 2017,
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "value": 1.0,
+                            "baseEnergy": 12.0
+                        }
+                    ]
+                },
+                "Xinyan_ElementalArt_Guitar_1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_ElementalArt_Cast",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Xinyan_ElementalArt_Guitar": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Guitar_Scaled",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Guitar_Dissipate_Scaled",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_ShieldLevel_Count",
+                    "useLimitRange": true,
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ElementalArt_Ball"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalArt_Shield_3",
+            "abilitySpecials": {
+                "Xinyan_Talent_ShieldEnhancePhysicalDMG_DMGRate": 0.0,
+                "Xinyan_ShieldDuration": 0.0,
+                "Xinyan_Shield3_BaseDurability": 0.0,
+                "Xinyan_Shield3_DefRatioDurability": 0.0,
+                "Xinyan_ElementalArt_Damage_Percentage": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Xinyan_Skill_S_Shield": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": [
+                        "Xinyan_ShieldDuration",
+                        0.10000000149011612,
+                        "SUB"
+                    ],
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "GlobalMainShieldMixin",
+                            "shieldType": "Avatar_Fire",
+                            "shieldAngle": 360.0,
+                            "HKNBOLFDLAC": [
+                                "Xinyan_Shield3_DefRatioDurability",
+                                "FIGHT_PROP_CUR_DEFENSE",
+                                "MUL",
+                                "Xinyan_Shield3_BaseDurability",
+                                "ADD"
+                            ],
+                            "costShieldRatioName": "",
+                            "showDamageText": "INFO_ELITE_DEFENCE",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_3",
+                            "childShieldModifierName": "UNIQUE_Xinyan_Skill_S_Shield_Child"
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "Team",
+                            "modifierName": "Xinyan_Shield_3_Explosion_Counter"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_3_Break",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "UNIQUE_Xinyan_Skill_S_Shield_Child": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "GlobalSubShieldMixin",
+                            "mainShieldModifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurLocalAvatar",
+                            "modifierName": "UNIQUE_Xinyan_Skill_S_FireBuff"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurLocalAvatar",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "target": "Caster",
+                                    "LBFNAOBLLJL": "Avatar_Xinyan_Talent_ShieldEnhancePhysicalDMG"
+                                }
+                            ],
+                            "modifierName": "Xinyan_Talent_ShieldEnhancePhysicalDMG"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "ENLNAJBJAKE",
+                                    "HJMCHPBKEDN": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Team",
+                                    "modifierName": "Xinyan_Skill_S_Shield_Hit_Handler"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Xinyan_Skill_S_Shield_Hit_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "Hit",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_3"
+                        }
+                    ]
+                },
+                "Xinyan_Talent_ShieldEnhancePhysicalDMG": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_PhysicalAddHurtDelta": "Xinyan_Talent_ShieldEnhancePhysicalDMG_DMGRate"
+                    },
+                    "isLimitedProperties": true
+                },
+                "UNIQUE_Xinyan_Skill_S_FireBuff": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 25.0
+                },
+                "Xinyan_Shield_3_Explosion_Counter": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 2.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "Team",
+                            "modifierName": "Xinyan_Shield_3_Explosion_Damage"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "Team",
+                            "modifierName": "Xinyan_Shield_3_Explosion_Damage"
+                        }
+                    ]
+                },
+                "Xinyan_Shield_3_Explosion_Damage": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Caster",
+                            "abilityName": "Avatar_Xinyan_ElementalArt_Shield_3_Explosion"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "CurLocalAvatar",
+                            "modifierName": "Xinyan_ElementalArt_Shield_3_Explosion"
+                        }
+                    ]
+                },
+                "Xinyan_ElementalArt_Shield_3_Explosion": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "PositionDampTime": true,
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_SoundDummy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Caster",
+                            "PositionDampTime": true,
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": -0.30000001192092896,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 2.200000047683716,
+                                    "EBADGGHGLKN": 3.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Art",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Xinyan_ElementalArt_Damage_Percentage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 50.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_3_WaveImpact_Hit",
+                                        "hitImpulseType": "LV2",
+                                        "retreatType": "ByHitDirection"
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalArt_Shield_3_Explosion"
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalArt_Shield_2",
+            "abilitySpecials": {
+                "Xinyan_Talent_ShieldEnhancePhysicalDMG_DMGRate": 0.0,
+                "Xinyan_ShieldDuration": 0.0,
+                "Xinyan_Shield2_BaseDurability": 0.0,
+                "Xinyan_Shield2_DefRatioDurability": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Xinyan_Skill_S_Shield": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Xinyan_ShieldDuration",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "GlobalMainShieldMixin",
+                            "shieldType": "Avatar_Fire",
+                            "shieldAngle": 360.0,
+                            "HKNBOLFDLAC": [
+                                "Xinyan_Shield2_DefRatioDurability",
+                                "FIGHT_PROP_CUR_DEFENSE",
+                                "MUL",
+                                "Xinyan_Shield2_BaseDurability",
+                                "ADD"
+                            ],
+                            "costShieldRatioName": "",
+                            "showDamageText": "INFO_ELITE_DEFENCE",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_2",
+                            "childShieldModifierName": "UNIQUE_Xinyan_Skill_S_Shield_Child"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_3_Break",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "UNIQUE_Xinyan_Skill_S_Shield_Child": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "GlobalSubShieldMixin",
+                            "mainShieldModifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurLocalAvatar",
+                            "modifierName": "UNIQUE_Xinyan_Skill_S_FireBuff"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurLocalAvatar",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "target": "Caster",
+                                    "LBFNAOBLLJL": "Avatar_Xinyan_Talent_ShieldEnhancePhysicalDMG"
+                                }
+                            ],
+                            "modifierName": "Xinyan_Talent_ShieldEnhancePhysicalDMG"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "ENLNAJBJAKE",
+                                    "HJMCHPBKEDN": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "Xinyan_Skill_S_Shield_Hit_Handler"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Xinyan_Skill_S_Shield_Hit_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "Hit",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_2"
+                        }
+                    ]
+                },
+                "Xinyan_Talent_ShieldEnhancePhysicalDMG": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_PhysicalAddHurtDelta": "Xinyan_Talent_ShieldEnhancePhysicalDMG_DMGRate"
+                    },
+                    "isLimitedProperties": true
+                },
+                "UNIQUE_Xinyan_Skill_S_FireBuff": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 25.0
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalArt_Shield_1",
+            "abilitySpecials": {
+                "Xinyan_Talent_ShieldEnhancePhysicalDMG_DMGRate": 0.0,
+                "Xinyan_ShieldDuration": 0.0,
+                "Xinyan_Shield1_BaseDurability": 0.0,
+                "Xinyan_Shield1_DefRatioDurability": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Xinyan_Skill_S_Shield": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Xinyan_ShieldDuration",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "GlobalMainShieldMixin",
+                            "shieldType": "Avatar_Fire",
+                            "shieldAngle": 360.0,
+                            "HKNBOLFDLAC": [
+                                "Xinyan_Shield1_DefRatioDurability",
+                                "FIGHT_PROP_CUR_DEFENSE",
+                                "MUL",
+                                "Xinyan_Shield1_BaseDurability",
+                                "ADD"
+                            ],
+                            "costShieldRatioName": "",
+                            "showDamageText": "INFO_ELITE_DEFENCE",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_1",
+                            "childShieldModifierName": "UNIQUE_Xinyan_Skill_S_Shield_Child"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_3_Break",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "UNIQUE_Xinyan_Skill_S_Shield_Child": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "GlobalSubShieldMixin",
+                            "mainShieldModifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurLocalAvatar",
+                            "modifierName": "UNIQUE_Xinyan_Skill_S_FireBuff"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurLocalAvatar",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "target": "Caster",
+                                    "LBFNAOBLLJL": "Avatar_Xinyan_Talent_ShieldEnhancePhysicalDMG"
+                                }
+                            ],
+                            "modifierName": "Xinyan_Talent_ShieldEnhancePhysicalDMG"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "ENLNAJBJAKE",
+                                    "HJMCHPBKEDN": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "Xinyan_Skill_S_Shield_Hit_Handler"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Xinyan_Skill_S_Shield_Hit_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "target": "Team",
+                            "parameter": "Hit",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_1"
+                        }
+                    ]
+                },
+                "Xinyan_Talent_ShieldEnhancePhysicalDMG": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_PhysicalAddHurtDelta": "Xinyan_Talent_ShieldEnhancePhysicalDMG_DMGRate"
+                    },
+                    "isLimitedProperties": true
+                },
+                "UNIQUE_Xinyan_Skill_S_FireBuff": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 25.0
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                },
+                {
+                    "$type": "SendEffectTrigger",
+                    "target": "Caster",
+                    "parameter": "Eff_Ani_Noel_Skill_S_Loop_Show",
+                    "attachPoint": "",
+                    "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Shield_1"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalBurst_Initiate",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Xinyan_ElementalBurst"
+                    ],
+                    "modifierName": "Invincible"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Xinyan_ElementalBurst",
+                        "Xinyan_ElementalBurst_AS"
+                    ],
+                    "modifierName": "WeatherChange"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Xinyan_ElementalBurst"
+                    ],
+                    "modifierName": "Xinyan_ElementalBurst_Guitar"
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Xinyan_ElementalBurst_AS",
+                    "modifierName": "Xinyan_ElementalBurst_Guitar_1",
+                    "normalizeEnd": 0.15000000596046448
+                }
+            ],
+            "modifiers": {
+                "WeatherChange": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerWeatherMixin",
+                            "type": "Skill",
+                            "weatherPattern": "Weather_Xinyan_ElementalBurst",
+                            "transDuration": 1.0,
+                            "duration": 2.0
+                        }
+                    ]
+                },
+                "Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible",
+                    "onAdded": [
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 11002
+                        }
+                    ]
+                },
+                "Xinyan_ElementalBurst_Guitar": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Guitar",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Xinyan_ElementalBurst_Guitar_1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Guitar",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_Guitar_Dissipate",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_ElementalBurst_Initiate",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10443,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalBurst_Hit",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Xinyan_ElementalBurst",
+                    "modifierName": "Xinyan_ElementalBurst_Hit",
+                    "normalizeStart": 0.25
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Xinyan_ElementalBurst",
+                    "modifierName": "Avatar_Xinyan_Talent_ElementalBurstInitShield",
+                    "normalizeStart": 0.30000001192092896
+                }
+            ],
+            "abilitySpecials": {
+                "Xinyan_ElementalBurst_PhysicalDamage": 0.0,
+                "Xinyan_Talent_CritWhenElementalBurst_CritRate": 0.0
+            },
+            "modifiers": {
+                "Xinyan_ElementalBurst_Hit": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 1.600000023841858,
+                                    "EBADGGHGLKN": 3.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Burst",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Xinyan_ElementalBurst_PhysicalDamage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 100.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 300.0,
+                                        "bonusCritical": "Xinyan_Talent_CritWhenElementalBurst_CritRate",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "canBeDefenceHalt": true
+                                    },
+                                    "forceCameraShake": true,
+                                    "cameraShake": {
+                                        "shakeType": "CustomVector",
+                                        "shakeRange": 0.23999999463558197,
+                                        "shakeTime": 0.30000001192092896,
+                                        "shakeDistance": 45.0,
+                                        "shakeDir": {
+                                            "y": 1.0
+                                        }
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "Avatar_Xinyan_Talent_ElementalBurstInitShield": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "Team",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "target": "Caster",
+                                    "LBFNAOBLLJL": "Avatar_Xinyan_Talent_ElementalBurstInitShield"
+                                }
+                            ],
+                            "modifierName": "UNIQUE_Xinyan_Skill_S_Shield"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "predicates": [
+                                {
+                                    "$type": "GMADPHKDMCK",
+                                    "target": "Caster",
+                                    "LBFNAOBLLJL": "Avatar_Xinyan_Talent_ElementalBurstInitShield"
+                                }
+                            ],
+                            "abilityName": "Avatar_Xinyan_ElementalArt_Shield_3"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetGlobalPos",
+                    "key": "_ABILITY_Xinyan_ElementalBurst_Pos",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "AMCAIHBNPDK": true
+                    },
+                    "setTarget": false
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_ElementalBurst_Hit",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalBurst_Effect",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_ElementalBurst_Shockwave",
+                    "born": {
+                        "$type": "DAPJIKNDLLN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 2.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "positionKey": "_ABILITY_Xinyan_ElementalBurst_Pos",
+                        "directionKey": ""
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Avatar_Girl_Claymore_Xinyan_ElementalBurst_Firework",
+                    "born": {
+                        "$type": "DAPJIKNDLLN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 2.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        },
+                        "positionKey": "_ABILITY_Xinyan_ElementalBurst_Pos",
+                        "directionKey": ""
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalBurst_Fire",
+            "abilitySpecials": {
+                "Xinyan_ElementalBurst_FireDamage": 0.0
+            },
+            "modifiers": {
+                "Xinyan_ElementalBurst_Fire": {
+                    "modifierName": "",
+                    "duration": 1.7999999523162842,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.30000001192092896,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 2.0
+                                        },
+                                        "positionKey": "_ABILITY_Xinyan_ElementalBurst_Pos",
+                                        "directionKey": ""
+                                    },
+                                    "height": 1.600000023841858,
+                                    "EBADGGHGLKN": 4.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Burst",
+                                    "attenuationTag": "Elemental_Burst_Fire",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Xinyan_ElementalBurst_FireDamage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 50.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV5",
+                                        "overrideHitImpulse": {
+                                            "hitLevel": "Air",
+                                            "JELEFKIMBOD": 0.0,
+                                            "hitImpulseY": 600.0
+                                        },
+                                        "canBeDefenceHalt": true
+                                    },
+                                    "forceCameraShake": true,
+                                    "cameraShake": {
+                                        "shakeType": "CustomVector",
+                                        "shakeRange": 0.36000001430511475,
+                                        "shakeTime": 0.30000001192092896,
+                                        "shakeDistance": 45.0,
+                                        "shakeDir": {
+                                            "y": 1.0
+                                        }
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 2.0
+                                        },
+                                        "positionKey": "_ABILITY_Xinyan_ElementalBurst_Pos",
+                                        "directionKey": ""
+                                    },
+                                    "height": 1.600000023841858,
+                                    "EBADGGHGLKN": 4.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Burst",
+                                    "attenuationTag": "Elemental_Burst_Fire",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Xinyan_ElementalBurst_FireDamage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 50.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2"
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Xinyan_ElementalBurst_Fire"
+                },
+                {
+                    "$type": "ActCameraRadialBlur",
+                    "cameraRadialBlur": {
+                        "power": 1.5,
+                        "blurTime": 0.25,
+                        "fadeTime": 0.30000001192092896
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_HideWeapon",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Xinyan_ElementalArt",
+                        "Xinyan_ElementalBurst"
+                    ],
+                    "modifierName": "HideWeapon"
+                }
+            ],
+            "modifiers": {
+                "HideWeapon": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01",
+                                "equip02",
+                                "sheathPoint"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "PositionDampTime": true,
+                            "visible": true,
+                            "partNames": [
+                                "equip01",
+                                "equip02",
+                                "sheathPoint"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_ElementalBurst_CameraExit",
+            "modifiers": {
+                "ExitCamera": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarEnterCameraShot",
+                            "cameraMoveCfgPath": "CameraElementalBurst_Out_Xinyan"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "AvatarCameraParam",
+                            "cameraParam": {
+                                "forceRadius": 6.0,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ExitCamera"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_FallingAnthem",
+            "abilityMixins": [
+                {
+                    "$type": "AvatarChangeSkillMixin",
+                    "jumpSkillID": 5044010,
+                    "flySkillID": 5044010
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_BS_Material"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "FallingAnthem_Loop_Normal"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS_2",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_Loop_Low"
+                    ],
+                    "modifierName": "FallingAnthem_LoopDamage"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_BS_VelocityForce_Initialize"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_Height_Detect"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_FallingDamageImmune_01"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "Inertia"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_OverHead_Camera"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_ClearVelocityForce"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS_2",
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "FallingAnthem_AttachSelfEffect"
+                }
+            ],
+            "abilitySpecials": {
+                "FallingAnthem_Normal_Loop_Damage": 0.0,
+                "FallingAnthem_Normal_Rank_1_Damage": 0.0,
+                "FallingAnthem_Normal_Rank_2_Damage": 0.0,
+                "FallingAnthem_Altitude_Lv0": 20.0,
+                "FallingAnthem_Altitude_Lv1": 40.0,
+                "FallingAnthem_Altitude_Lv2": 60.0,
+                "FallingAnthem_Altitude_Lv3": 100.0,
+                "FallingAnthem_Altitude_Lv4": 200.0,
+                "FallingAnthem_FallingDamageRatio_Lv0": -1.0,
+                "FallingAnthem_FallingDamageRatio_Lv1": -1.0,
+                "FallingAnthem_FallingDamageRatio_Lv2": -0.8999999761581421,
+                "FallingAnthem_FallingDamageRatio_Lv3": -0.800000011920929,
+                "FallingAnthem_FallingDamageRatio_Lv4": -0.6000000238418579,
+                "FallingAnthem_FallingDamageRatio": 0.0
+            },
+            "modifiers": {
+                "FallingAnthem_AttachSelfEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_BS_Material": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_BS",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_BS_VelocityForce_Initialize": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_LoopDamage": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.30000001192092896,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 1.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "FallingAttack",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "FallingAnthem_Normal_Loop_Damage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "overrideByWeapon": true,
+                                        "strikeType": "Slash",
+                                        "enBreak": 35.0,
+                                        "attackType": "Melee",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ClearGlobalValue",
+                            "key": "_ABILITY_FallingAttack_Altitude"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv0"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv1"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv0"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv2"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv1"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv3"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv2"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv3"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "FallingAnthem_FallingDamageImmune_02"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_ABILITY_FallingAttack_Altitude",
+                            "overrideMapKey": "FallingAnthem_FallingDamageRatio"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "FallingAnthem_FallingDamageImmune_03"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_03": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
+                    }
+                },
+                "FallingAnthem_Loop_Normal": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -1.0,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "FallingAnthem_Loop_Normal_Rank_1",
+                                "FallingAnthem_Loop_Normal_Rank_2"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_Loop_Normal_Rank_1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Loop_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_Loop_Normal_Rank_2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Loop_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Inertia": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ApplyInertiaVelocityMixin",
+                            "useXZ": false,
+                            "useY": false
+                        }
+                    ]
+                },
+                "FallingAnthem_Height_Detect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "ratio": 0.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "ratio": 5.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "FallingAnthem_OverHead_Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarCameraParam",
+                            "predicates": [
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Equal",
+                                    "ratio": 1.0,
+                                    "parameter": "FallingAnthem_UseCamera"
+                                }
+                            ],
+                            "cameraParam": {
+                                "forceRadius": 4.5,
+                                "forceRadiusDuration": 0.20000000298023224,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "FallingAnthem_OverHead_Camera_Remover": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        }
+                    ]
+                },
+                "FallingAnthem_Landed_Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarCameraParam",
+                            "predicates": [
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Equal",
+                                    "ratio": 1.0,
+                                    "parameter": "FallingAnthem_UseCamera"
+                                }
+                            ],
+                            "cameraParam": {
+                                "forceRadius": 6.0,
+                                "forceRadiusDuration": 0.10000000149011612,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "FallingAnthem_ClearVelocityForce": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType",
+                                "InertiaType"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "FallingAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_1_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 25.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Blunt",
+                                "enBreak": 150.0,
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV4",
+                                "hitHaltTimeScale": 0.10000000149011612
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.23999999463558197,
+                                "shakeTime": 0.11999999731779099,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.23999999463558197,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 5.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "FallingAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_2_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 25.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Blunt",
+                                "enBreak": 200.0,
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV7",
+                                "overrideHitImpulse": {
+                                    "hitLevel": "Air",
+                                    "JELEFKIMBOD": 0.0,
+                                    "hitImpulseY": 800.0
+                                },
+                                "hitHaltTimeScale": 0.10000000149011612
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.5,
+                                "shakeTime": 0.20000000298023224,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0,
+                                    "z": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.4000000059604645,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_01",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_02",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_NormalAttack_DamageHandler",
+            "abilityMixins": [
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK01"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_01_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK02"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_02_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK03"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_03_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK04"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_04_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ExtraAttack1"
+                    ],
+                    "LIMFCEKGALF": "ExtraAttack_Loop_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ExtraAttack2"
+                    ],
+                    "LIMFCEKGALF": "ExtraAttack_End_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                }
+            ],
+            "abilitySpecials": {
+                "NormalAttack_01_DamagePercentage": 0.0,
+                "NormalAttack_02_DamagePercentage": 0.0,
+                "NormalAttack_03_DamagePercentage": 0.0,
+                "NormalAttack_04_DamagePercentage": 0.0,
+                "ExtraAttack_Loop_DamagePercentage": 0.0,
+                "ExtraAttack_End_DamagePercentage": 0.0
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_Talent_CritEnhanceAtkSpeed",
+            "abilitySpecials": {
+                "Avatar_Xinyan_Talent_CritEnhanceAtkSpeed_AttackSpeedRatio": 0.0,
+                "Avatar_Xinyan_Talent_CritEnhanceAtkSpeed_Duration": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Xinyan_Talent_CritEnhanceAtkSpeed_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NFJJBDBAGGO"
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "UNIQUE_Xinyan_Talent_CritEnhanceAtkSpeed_Buff"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Xinyan_Talent_CritEnhanceAtkSpeed_Buff": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Avatar_Xinyan_Talent_CritEnhanceAtkSpeed_Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToStateIDMixin",
+                            "stateIDs": [
+                                "ExtraAttack",
+                                "ExtraAttack1",
+                                "ExtraAttack2",
+                                "ExtraAttack3"
+                            ],
+                            "modifierName": "Xinyan_Talent_CritEnhanceAtkSpeed"
+                        }
+                    ],
+                    "properties": {
+                        "Animator_AttackSpeedRatio": "Avatar_Xinyan_Talent_CritEnhanceAtkSpeed_AttackSpeedRatio"
+                    },
+                    "state": "AttackUp",
+                    "isLimitedProperties": true,
+                    "buffID": 10001
+                },
+                "Xinyan_Talent_CritEnhanceAtkSpeed": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Animator_OverallSpeedRatio": "Avatar_Xinyan_Talent_CritEnhanceAtkSpeed_AttackSpeedRatio"
+                    },
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Xinyan_Talent_CritEnhanceAtkSpeed_Handler"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xinyan_Talent_EnhanceExtraAttack",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack",
+                        "ExtraAttack1",
+                        "ExtraAttack2",
+                        "ExtraAttack3",
+                        "ExtraAttack_BS"
+                    ],
+                    "modifierName": "Avatar_Xinyan_Talent_EnhanceExtraAttack"
+                }
+            ],
+            "abilitySpecials": {
+                "Xinyan_Talent_EnhanceExtraAttack_StaminaCost": 0.0,
+                "Xinyan_Talent_EnhanceExtraAttack_DefPer": 0.0
+            },
+            "modifiers": {
+                "Avatar_Xinyan_Talent_EnhanceExtraAttack": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_CostStaminaRatio": "Xinyan_Talent_EnhanceExtraAttack_StaminaCost",
+                        "Actor_AttackExtraDelta": [
+                            "Xinyan_Talent_EnhanceExtraAttack_DefPer",
+                            "FIGHT_PROP_NONEXTRA_DEFENSE",
+                            "MUL"
+                        ]
+                    },
+                    "isLimitedProperties": true
+                }
+            },
+            "isDynamicAbility": true
+        }
+    }
+]

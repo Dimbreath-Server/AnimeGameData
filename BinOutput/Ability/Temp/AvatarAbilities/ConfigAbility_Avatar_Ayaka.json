@@ -1,0 +1,4012 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_ExtraAttack",
+            "abilityMixins": [
+                {
+                    "$type": "ButtonHoldChargeMixin",
+                    "skillID": 10024,
+                    "chargeTime": 0.11999999731779099,
+                    "secondChargeTime": 0.20000000298023224,
+                    "OnBeginUncharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "predicates": [
+                                {
+                                    "$type": "NNBKBBILDGO",
+                                    "predicates": [
+                                        {
+                                            "$type": "NEGFJPNFCFN",
+                                            "logic": "Equal",
+                                            "ratio": 0,
+                                            "parameter": "ComboCount"
+                                        },
+                                        {
+                                            "$type": "NEGFJPNFCFN",
+                                            "logic": "Equal",
+                                            "ratio": 5,
+                                            "parameter": "ComboCount"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "intID": "SkillID",
+                            "ratio": 99.0
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "IsCharging"
+                        }
+                    ],
+                    "OnReleaseUncharged": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "OnBeginCharged": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "IsCharging",
+                            "ratio": true
+                        }
+                    ],
+                    "OnReleaseCharged": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "IsCharging"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "OnBeginSecondCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "predicates": [
+                                {
+                                    "$type": "HJCCDFHBLJH",
+                                    "logic": "GreaterOrEqual",
+                                    "DGJADIEFBMC": [
+                                        "ExtraAttack_Sword_Stamina_Cost",
+                                        "Flexible_Stamina",
+                                        "ADD"
+                                    ]
+                                }
+                            ],
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "predicates": [
+                                {
+                                    "$type": "HJCCDFHBLJH",
+                                    "logic": "GreaterOrEqual",
+                                    "DGJADIEFBMC": [
+                                        "ExtraAttack_Sword_Stamina_Cost",
+                                        "Flexible_Stamina",
+                                        "ADD"
+                                    ]
+                                }
+                            ],
+                            "intID": "SkillID",
+                            "ratio": 6.0
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "IsCharging"
+                        }
+                    ],
+                    "chargeStateIDs": [
+                        "Attack01",
+                        "Attack02",
+                        "Attack03",
+                        "Attack04",
+                        "Run"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack"
+                    ],
+                    "modifierName": "ExtraAttack_StaminaCost"
+                }
+            ],
+            "abilitySpecials": {
+                "ExtraAttack_Sword_Stamina_Cost": 0.0,
+                "Flexible_Stamina": -2.0
+            },
+            "modifiers": {
+                "ExtraAttack_StaminaCost": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 10001,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": "ExtraAttack_Sword_Stamina_Cost"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_ExtraAttack_Damage",
+            "onAbilityStart": [
+                {
+                    "$type": "SetTargetNumToGlobalValue",
+                    "srcOtherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "shapeName": "CircleR5",
+                        "campTargetType": "Enemy",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "srcPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster",
+                                "Gadget"
+                            ]
+                        }
+                    ],
+                    "dstTarget": "Self",
+                    "key": "_Ability_Ayaka_ExtarAttack_AttackeeCount",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "CreateGadget",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "topLimit": 5,
+                        "entityTypePriority": [
+                            "Monster",
+                            "Gadget"
+                        ],
+                        "shapeName": "CircleR4",
+                        "IKJGFEDGMGF": "SelfAttackTarget",
+                        "campTargetType": "Enemy",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Gadget",
+                                "Monster"
+                            ]
+                        },
+                        {
+                            "$type": "PKCCKMFHFEL"
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Ability_Ayaka_ExtarAttack_AttackeeCount",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "MoreThan"
+                        }
+                    ],
+                    "born": {
+                        "$type": "HEHOFJMHGFN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "gadgetID": 41002006,
+                    "campID": 1001,
+                    "campTargetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "target": "SelfAttackTarget",
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Gadget",
+                                "Monster"
+                            ]
+                        },
+                        {
+                            "$type": "PKCCKMFHFEL"
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Ability_Ayaka_ExtarAttack_AttackeeCount",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 3.700000047683716
+                        }
+                    },
+                    "gadgetID": 41002006,
+                    "campID": 1001,
+                    "campTargetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "target": "SelfAttackTarget",
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Gadget",
+                                "Monster"
+                            ],
+                            "reject": true
+                        },
+                        {
+                            "$type": "PKCCKMFHFEL"
+                        }
+                    ],
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 3.700000047683716
+                        }
+                    },
+                    "gadgetID": 41002006,
+                    "campID": 1001,
+                    "campTargetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "PKCCKMFHFEL"
+                                }
+                            ]
+                        }
+                    ],
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 3.700000047683716
+                        }
+                    },
+                    "gadgetID": 41002006,
+                    "campID": 1001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_ExtraAttack_Damage_Gadget",
+            "abilitySpecials": {
+                "Ayaka_ExtraAttack_Damage": 0.0
+            },
+            "modifiers": {
+                "Avatar_Ayaka_ExtraAttack_Damage_Handler": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "OriginOwner",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.5,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "ExtraAttack",
+                                    "attenuationTag": "ExtraAttack",
+                                    "attenuationGroup": "Ayaka_ExtraAttack",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Ayaka_ExtraAttack_Damage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 25.0,
+                                        "overrideByWeapon": true,
+                                        "strikeType": "Slash",
+                                        "enBreak": 40.0,
+                                        "attackType": "Melee",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "retreatType": "ByOriginOwner",
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Ayaka_ExtraAttack_HitCombo",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Ayaka_ExtraAttack_HitCombo",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "modifierName": "Avatar_Ayaka_ExtraAttack_Damage_Gadget_1"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Ayaka_ExtraAttack_HitCombo",
+                                    "ratio": 2.0
+                                }
+                            ],
+                            "modifierName": "Avatar_Ayaka_ExtraAttack_Damage_Gadget_2"
+                        }
+                    ]
+                },
+                "Avatar_Ayaka_ExtraAttack_Damage_Gadget_1": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "OriginOwner",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.5,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "ExtraAttack",
+                                    "attenuationTag": "ExtraAttack",
+                                    "attenuationGroup": "Ayaka_ExtraAttack",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Ayaka_ExtraAttack_Damage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 25.0,
+                                        "overrideByWeapon": true,
+                                        "strikeType": "Slash",
+                                        "enBreak": 40.0,
+                                        "attackType": "Melee",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "retreatType": "ByOriginOwner",
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "Avatar_Ayaka_ExtraAttack_Damage_Gadget_2": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "OriginOwner",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.5,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "ExtraAttack",
+                                    "attenuationTag": "ExtraAttack",
+                                    "attenuationGroup": "Ayaka_ExtraAttack",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Ayaka_ExtraAttack_Damage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 25.0,
+                                        "overrideByWeapon": true,
+                                        "strikeType": "Slash",
+                                        "enBreak": 40.0,
+                                        "attackType": "Melee",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "retreatType": "ByOriginOwner",
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    },
+                                    "cameraShake": {
+                                        "shakeType": "CustomVector",
+                                        "shakeRange": 0.15000000596046448,
+                                        "shakeTime": 0.10000000149011612,
+                                        "shakeDir": {
+                                            "x": 1.0,
+                                            "y": -1.0
+                                        }
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_ABILITY_Ayaka_Constellation_6_IsCharged",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_ExtraAttack_00",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_ABILITY_Ayaka_Constellation_6_IsCharged",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Ayaka_Constellation_6"
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_ExtraAttack_Constellation_6",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "PositionDampTime": true,
+                    "ratio": 0.0,
+                    "key": "_ABILITY_Ayaka_ExtraAttack_HitCombo",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Avatar_Ayaka_ExtraAttack_Damage_Handler"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_NormalAttack05_CreateBullet",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41002007,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "attachPointName": "RootNode"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_NormalAttack05_Bullet",
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "MonsterEquip"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "target": "Target",
+                            "attackInfo": {
+                                "attackTag": "NormalAttack_05",
+                                "attenuationTag": "ExtraAttack",
+                                "attenuationGroup": "Avatar_Pole_ExtraAttack",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.7300000190734863,
+                                    "JJGGAPONHOE": 0.0,
+                                    "bonusCriticalHurt": 25.0,
+                                    "overrideByWeapon": true,
+                                    "strikeType": "Slash",
+                                    "enBreak": 74.0999984741211,
+                                    "attackType": "Melee",
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV7",
+                                    "hitHaltTimeScale": 0.009999999776482582
+                                },
+                                "cameraShake": {
+                                    "shakeType": "CustomVector",
+                                    "shakeRange": 0.36000001430511475,
+                                    "shakeTime": 0.11999999731779099,
+                                    "shakeDistance": 30.0,
+                                    "shakeDir": {
+                                        "x": -1.0
+                                    }
+                                },
+                                "canBeModifiedBy": "OriginOwner"
+                            }
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "OriginOwner",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "NMCELACOGBG": true,
+                                    "born": {
+                                        "$type": "HANJDCBOIIE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 0.800000011920929
+                                },
+                                "attackInfo": {
+                                    "attackTag": "NormalAttack_05",
+                                    "attenuationTag": "NormalAttack",
+                                    "attenuationGroup": "Avatar_Pole_ExtraAttack",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.7300000190734863,
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 25.0,
+                                        "overrideByWeapon": true,
+                                        "strikeType": "Slash",
+                                        "enBreak": 74.0999984741211,
+                                        "attackType": "Melee",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV7",
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    },
+                                    "cameraShake": {
+                                        "shakeType": "CustomVector",
+                                        "shakeRange": 0.36000001430511475,
+                                        "shakeTime": 0.11999999731779099,
+                                        "shakeDistance": 30.0,
+                                        "shakeDir": {
+                                            "x": -1.0
+                                        }
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_IceSlash",
+            "abilityMixins": [
+                {
+                    "$type": "SkillButtonHoldChargeMixin",
+                    "skillID": 10024,
+                    "nextLoopTriggerID": "NextLoopTrigger",
+                    "endHoldTrigger": "EndHoldTrigger",
+                    "beforeStateIDs": [
+                        "Attack01"
+                    ],
+                    "chargeLoopStateIDs": [
+                        "IceSlash_Charge1",
+                        "IceSlash_Charge2"
+                    ],
+                    "chargeLoopDurations": [
+                        1.0
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "IceSlash_Charge1"
+                    ],
+                    "modifierName": "Charge1"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "IceSlash_Charge2"
+                    ],
+                    "modifierName": "Charge2"
+                }
+            ],
+            "modifiers": {
+                "Charge1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Charge2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "AttackDust": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_LiquidStrike_Spray",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Liquid_TriggerAbility",
+            "abilityMixins": [
+                {
+                    "$type": "SkillButtonHoldChargeMixin",
+                    "skillID": 10013,
+                    "nextLoopTriggerID": "NextLoopTrigger",
+                    "endHoldTrigger": "EndHoldTrigger",
+                    "beforeStateIDs": [
+                        "LiquidStrike_BS"
+                    ],
+                    "chargeLoopStateIDs": [
+                        "LiquidStrike_BS1",
+                        "LiquidStrike_Move",
+                        "LiquidStrike_MoveStandby"
+                    ],
+                    "chargeLoopDurations": [
+                        0.009999999776482582,
+                        60.0
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_Move"
+                    ],
+                    "modifierName": "LiquidStrike_SetAnimatorTrigger"
+                }
+            ],
+            "abilitySpecials": {
+                "StaminaStartCost": 0.0
+            },
+            "modifiers": {
+                "LiquidStrike_SetAnimatorTrigger": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "predicates": [
+                                {
+                                    "$type": "HJCCDFHBLJH",
+                                    "logic": "LesserOrEqual",
+                                    "DGJADIEFBMC": 1.0
+                                }
+                            ],
+                            "triggerID": "EndHoldTrigger"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10013,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": "StaminaStartCost"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_LiquidStrike",
+            "abilityMixins": [
+                {
+                    "$type": "AvatarSteerByCameraMixin",
+                    "stateIDs": [
+                        "LiquidStrike_BS_0",
+                        "LiquidStrike_BS",
+                        "LiquidStrike_BS1",
+                        "LiquidStrike_Move",
+                        "LiquidStrike_MoveStandby",
+                        "LiquidStrike_FatalMove",
+                        "LiquidStrike_FatalStandby"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_BS1",
+                        "LiquidStrike_Move",
+                        "LiquidStrike_FatalMove",
+                        "LiquidStrike_FatalStandby"
+                    ],
+                    "modifierName": "MoveLoop"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_BS",
+                        "LiquidStrike_BS1",
+                        "LiquidStrike_Move",
+                        "LiquidStrike_MoveStandby",
+                        "LiquidStrike_FatalMove",
+                        "LiquidStrike_FatalStandby"
+                    ],
+                    "modifierName": "MoveLoop_SetVisible"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_MoveStandby"
+                    ],
+                    "modifierName": "MoveStandby_CostStamina"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_AS",
+                        "LiquidStrike_AS_OnWater"
+                    ],
+                    "modifierName": "SetVisible"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_AS",
+                        "LiquidStrike_AS_OnWater"
+                    ],
+                    "modifierName": "Ice_Bloom"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_Move",
+                        "LiquidStrike_FatalMove"
+                    ],
+                    "modifierName": "Move_Eff"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_MoveStandby",
+                        "LiquidStrike_FatalStandby"
+                    ],
+                    "modifierName": "MoveStandby_Eff"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_BS"
+                    ],
+                    "modifierName": "LiquidStrike_SkinLayer_Controller"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_AS",
+                        "LiquidStrike_AS_OnWater"
+                    ],
+                    "modifierName": "LiquidStrike_AS_SkinLayer_Controller"
+                }
+            ],
+            "abilitySpecials": {
+                "HP": 99999.0,
+                "HPRatio": 0.30000001192092896,
+                "LiquidStrike_MoveSpeedRatio": 0.0,
+                "Ice_Bloom_Radius": 2.0,
+                "StaminaCost": 0.0,
+                "IceModifier_Duration": 0.0
+            },
+            "modifiers": {
+                "MoveLoop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CostStaminaMixin",
+                            "costStaminaRatio": "StaminaCost",
+                            "onStaminaEmpty": [
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "EndHoldTrigger"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "MoveLoop_SetVisible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "PositionDampTime": true,
+                            "visible": true
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip03"
+                            ]
+                        }
+                    ]
+                },
+                "MoveStandby_CostStamina": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CostStaminaMixin",
+                            "costStaminaRatio": 0.10000000149011612,
+                            "onStaminaEmpty": [
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "EndHoldTrigger"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Move_Eff": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Animator_MoveSpeedRatio": "LiquidStrike_MoveSpeedRatio"
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_LiquidStrike_Spray",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_LiquidStrike_Spray_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "isLimitedProperties": true
+                },
+                "MoveStandby_Eff": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_LiquidStrike_Idle",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "SetVisible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "PositionDampTime": true,
+                            "visible": true
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip03"
+                            ]
+                        }
+                    ]
+                },
+                "Ice_Bloom": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.10000000149011612
+                                        }
+                                    },
+                                    "EBADGGHGLKN": "Ice_Bloom_Radius"
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Ice_Bloom",
+                                    "attenuationTag": "Ice_Bloom",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "bonusCriticalHurt": 25.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    },
+                                    "cameraShake": {}
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01",
+                                    "sheathPoint"
+                                ]
+                            },
+                            "modifierName": "IceModifier"
+                        }
+                    ]
+                },
+                "LiquidStrike_SkinLayer_Controller": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "SkinActive_1"
+                        }
+                    ]
+                },
+                "LiquidStrike_AS_SkinLayer_Controller": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "SkinActive_2"
+                        }
+                    ]
+                },
+                "IceModifier": {
+                    "modifierName": "",
+                    "duration": "IceModifier_Duration",
+                    "elementType": "Ice",
+                    "bonusCriticalHurt": 25.0,
+                    "overrideWeaponElement": true,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Weapon_Buff",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_LiquidStrike_YayoiKaeshi",
+            "abilitySpecials": {
+                "FatalStrike_Damage": 3.0
+            },
+            "onAdded": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 0.10000000149011612
+                        },
+                        "attackInfo": {
+                            "attackTag": "ExtraAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FatalStrike_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Ice",
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Slash",
+                                "enBreak": 300.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV7",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.30000001192092896,
+                                "shakeTime": 0.10000000149011612,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "x": -1.0,
+                                    "y": -1.0
+                                }
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_EndLiquidStrike",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "triggerID": "NextSkillTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Icespine",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Icespine",
+                        "Icespine_Out"
+                    ],
+                    "modifierName": "Sensu_Appear_Remover"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Sensu_Appear": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 2.799999952316284,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Icespine_Field_Sensu",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Sensu_Appear_Remover": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_Sensu_Appear"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10018,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10020,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Sensu_Appear"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Icespine_Field",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true
+                    },
+                    "gadgetID": 41002002,
+                    "campID": 1001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Icespine_Sensu_Remover",
+            "modifiers": {
+                "UNIQUE_Sensu_Appear": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 2.799999952316284,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Icespine_Field_Sensu",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_Sensu_Appear"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Icespine_Strike_New",
+            "abilitySpecials": {
+                "Icespine_Damage": 0.0
+            },
+            "modifiers": {
+                "Icespine_Strike_Delay": {
+                    "modifierName": "",
+                    "duration": 0.47999998927116394,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": -0.5,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 2.5,
+                                    "EBADGGHGLKN": 4.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Art",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "Icespine_Damage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 110.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV7",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "GenerateElemBall_Icespine": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Art"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "DropBall_Base"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "DropBall_Base": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Randomed",
+                            "chance": 0.5,
+                            "successActions": [
+                                {
+                                    "$type": "GenerateElemBall",
+                                    "configID": 2022,
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 1.0
+                                        }
+                                    },
+                                    "value": 4.0,
+                                    "baseEnergy": 3.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "GenerateElemBall",
+                                    "configID": 2022,
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 1.0
+                                        }
+                                    },
+                                    "value": 5.0,
+                                    "baseEnergy": 3.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "GenerateElemBall_Icespine"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Icespine_Strike_Delay"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_SkillStart",
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10019,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10021,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenWindmill",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41002001,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.7999999523162842,
+                            "MJHHBAFNOEG": 0.800000011920929
+                        },
+                        "AMCAIHBNPDK": true
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Avatar_Ayaka_Oboro"
+                        }
+                    ],
+                    "bulletID": 41002005,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 2.0,
+                            "JKDAHJILGBJ": 1.0,
+                            "MJHHBAFNOEG": 1.2000000476837158
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 30.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Avatar_Ayaka_Oboro"
+                        }
+                    ],
+                    "bulletID": 41002005,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": -2.0,
+                            "JKDAHJILGBJ": 1.0,
+                            "MJHHBAFNOEG": 1.2000000476837158
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": -30.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "ActCameraShake",
+                    "cameraShake": {
+                        "shakeRange": 0.11999999731779099,
+                        "shakeTime": 0.30000001192092896,
+                        "shakeDistance": 5.0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Windmill_CameraController",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FrozenWindmill"
+                    ],
+                    "modifierName": "Windmill_Camera_Protection_Ghost"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FrozenWindmill"
+                    ],
+                    "modifierName": "Windmill_Camera_Protection_Invincible"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FrozenWindmill"
+                    ],
+                    "modifierName": "Windmill_Camera_Handler"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FrozenWindmill",
+                        "FrozenWindmill_AS"
+                    ],
+                    "modifierName": "Windmill_Weather_Handler"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FrozenWindmill",
+                        "FrozenWindmill_AS"
+                    ],
+                    "modifierName": "Windmill_Camera_Remover"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FrozenWindmill",
+                        "FrozenWindmill_AS"
+                    ],
+                    "modifierName": "Windmill_HidingWeapon"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FrozenWindmill",
+                        "FrozenWindmill_AS"
+                    ],
+                    "modifierName": "Windmill_Sensu_Remover"
+                }
+            ],
+            "modifiers": {
+                "Windmill_Camera_Protection_Ghost": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 11002
+                        }
+                    ]
+                },
+                "Windmill_Camera_Protection_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "Windmill_Camera_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "WindZoneMixin",
+                            "shapeName": "CircleR3",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "KJCCGILPGFE": -3.0,
+                            "attenuation": 2.0,
+                            "DPIFCMEMHDF": 0.0,
+                            "targetType": "Enemy",
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster",
+                                        "Grass"
+                                    ]
+                                },
+                                {
+                                    "$type": "FCCCAHINIHD",
+                                    "logic": "LesserOrEqual",
+                                    "EEHFIGKIJPE": 250.0
+                                }
+                            ],
+                            "modifierName": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "DungeonFogEffects",
+                            "muteRemoteAction": true,
+                            "enable": true,
+                            "cameraFogEffectName": "Eff_Avatar_Girl_Sword_Ayaka_ElementalBurst_DungeonEffect",
+                            "playerFogEffectName": ""
+                        }
+                    ]
+                },
+                "Windmill_Weather_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerWeatherMixin",
+                            "type": "Skill",
+                            "weatherPattern": "Weather_Ayaka_Windmill",
+                            "transDuration": 0.699999988079071,
+                            "duration": 1.399999976158142
+                        }
+                    ]
+                },
+                "Windmill_Camera_Remover": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ControlEmotion",
+                            "toggleEmoSync": false,
+                            "toggleBlink": false,
+                            "toggleEyeKey": false
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "DungeonFogEffects",
+                            "PositionDampTime": true,
+                            "cameraFogEffectName": "",
+                            "playerFogEffectName": ""
+                        },
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "AvatarCameraParam",
+                            "PositionDampTime": true,
+                            "cameraParam": {
+                                "forceRadius": 6.0,
+                                "forceRadiusDuration": 0.0,
+                                "shouldKeepForceRadius": true
+                            }
+                        },
+                        {
+                            "$type": "ControlEmotion",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "EnableHeadControl",
+                            "PositionDampTime": true,
+                            "enable": true
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "AvatarCameraParam",
+                            "PositionDampTime": true,
+                            "cameraParam": {
+                                "forceRadius": 6.0,
+                                "forceRadiusDuration": 0.0,
+                                "shouldKeepForceRadius": true
+                            }
+                        },
+                        {
+                            "$type": "ControlEmotion",
+                            "PositionDampTime": true
+                        },
+                        {
+                            "$type": "EnableHeadControl",
+                            "PositionDampTime": true,
+                            "enable": true
+                        }
+                    ]
+                },
+                "Windmill_HidingWeapon": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "PositionDampTime": true,
+                            "visible": true,
+                            "partNames": [
+                                "equip01"
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Windmill_Sensu_Appear": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Windmill_Sensu",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Windmill_WeaponDither",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Windmill_Sensu_Remover": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_Windmill_Sensu_Appear"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "EnableHeadControl",
+                    "blend": false
+                },
+                {
+                    "$type": "AvatarEnterCameraShot",
+                    "predicates": [
+                        {
+                            "$type": "FNMENDNJDPL",
+                            "attackPattern": {
+                                "$type": "FPEIAHONPIH",
+                                "triggerType": "TriggerNoRepeat",
+                                "born": {
+                                    "$type": "PBDNLGHAMHE",
+                                    "offset": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 1.5,
+                                        "MJHHBAFNOEG": 0.0
+                                    }
+                                },
+                                "height": 0.4000000059604645,
+                                "MJBOOGOHDKH": 30.0,
+                                "EBADGGHGLKN": 1.399999976158142
+                            },
+                            "PKJLIIMOKLG": true
+                        },
+                        {
+                            "$type": "FMJPAFDCABA",
+                            "ACJBNJNEBOC": "LessAndEqual",
+                            "PCJDBGELMLA": 0.5
+                        }
+                    ],
+                    "cameraMoveCfgPath": "Camera_Ayaka_Windmill"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Windmill_Sensu_Appear"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Windmill_Sensu_Remover",
+            "modifiers": {
+                "UNIQUE_Windmill_Sensu_Appear": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Windmill_Sensu",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Windmill_WeaponDither",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_Windmill_Sensu_Appear"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Material",
+            "modifiers": {
+                "FrozenWindmill_Ice": {
+                    "modifierName": "",
+                    "elementType": "Frozen",
+                    "bonusCriticalHurt": 100.0
+                },
+                "FrozenWindmill_ResistFrozen": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 14002
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_IceButterfly_Bullet",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FrozenWindmill_Ice"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FrozenWindmill_ResistFrozen"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenWindmillDamage",
+            "abilitySpecials": {
+                "FrozenWindmill_SliceDamage": 0.0
+            },
+            "modifiers": {
+                "FrozenWindmill_Damage": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.25,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.30000001192092896,
+                                            "MJHHBAFNOEG": 0.30000001192092896
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 3.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Burst",
+                                    "attenuationTag": "Elemental_Burst",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "FrozenWindmill_SliceDamage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Slash",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "cameraShake": {},
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FrozenWindmill_Damage"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenWindmillDissipate",
+            "abilitySpecials": {
+                "FrozenWindmill_BlastDamage": 0.0
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_IceButterfly_Bullet_AS",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "FCLNLLGDNHB": true,
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -1.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 5.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "Elemental_Burst",
+                            "attenuationTag": "Elemental_Burst",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FrozenWindmill_BlastDamage",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Ice",
+                                "elementRank": 1.5,
+                                "bonusCriticalHurt": 25.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.15000000596046448,
+                                "shakeTime": 0.10000000149011612,
+                                "shakeDistance": 30.0
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Material",
+            "modifiers": {
+                "FrozenWindmill_Sub_Ice": {
+                    "modifierName": "",
+                    "elementType": "Frozen",
+                    "bonusCriticalHurt": 100.0
+                },
+                "FrozenWindmill_Sub_ResistFrozen": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 14002
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_IceButterfly_Sub_Bullet",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FrozenWindmill_Sub_Ice"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FrozenWindmill_Sub_ResistFrozen"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Damage",
+            "abilitySpecials": {
+                "FrozenWindmill_SliceDamage": 0.0,
+                "FrozenWindmill_SubFactor": 0.20000000298023224
+            },
+            "modifiers": {
+                "FrozenWindmill_Sub_Damage": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.25,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.30000001192092896,
+                                            "MJHHBAFNOEG": 0.30000001192092896
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Elemental_Burst",
+                                    "attenuationTag": "Elemental_Burst",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": [
+                                            "FrozenWindmill_SliceDamage",
+                                            "FrozenWindmill_SubFactor",
+                                            "MUL"
+                                        ],
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "elementRank": 1.5,
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Slash",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV3",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "cameraShake": {},
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "DamageByAttackValue",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR1",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Grass",
+                                        "Water"
+                                    ]
+                                }
+                            ],
+                            "attackInfo": {
+                                "attackTag": "Elemental_Burst",
+                                "attenuationTag": "Elemental_Burst",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Ice",
+                                    "elementRank": 3.0,
+                                    "bonusCriticalHurt": 25.0,
+                                    "enBreak": 0.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "none",
+                                    "hitImpulseType": "LV0",
+                                    "hitHaltTimeScale": 0.05000000074505806,
+                                    "muteHitText": true
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FrozenWindmill_Sub_Damage"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Dissipate",
+            "abilitySpecials": {
+                "FrozenWindmill_BlastDamage": 0.0,
+                "FrozenWindmill_SubFactor": 0.20000000298023224
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_IceButterfly_Sub_Bullet_AS",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -1.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "Elemental_Burst",
+                            "attenuationTag": "Elemental_Burst",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": [
+                                    "FrozenWindmill_BlastDamage",
+                                    "FrozenWindmill_SubFactor",
+                                    "MUL"
+                                ],
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Ice",
+                                "elementRank": 1.5,
+                                "bonusCriticalHurt": 25.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.15000000596046448,
+                                "shakeTime": 0.10000000149011612,
+                                "shakeDistance": 30.0
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenButterfly_Area",
+            "abilityMixins": [
+                {
+                    "$type": "ChangeFieldMixin"
+                }
+            ],
+            "modifiers": {
+                "FrozenButterfly_Area_Enchanted": {
+                    "modifierName": "",
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Enchanted_Ice"
+                        }
+                    ]
+                },
+                "Enchanted_Ice": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "elementType": "Ice",
+                    "bonusCriticalHurt": 20.0,
+                    "overrideWeaponElement": true
+                },
+                "FrozenButterfly_Area_Debuff": {
+                    "modifierName": "",
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Ice",
+                                    "bonusCriticalHurt": 25.0,
+                                    "strikeType": "Default",
+                                    "enBreak": 0.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "",
+                                    "hitImpulseType": "LV0",
+                                    "hitHaltTimeScale": 0.009999999776482582,
+                                    "muteHitText": true
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Equip"
+                            ]
+                        }
+                    ],
+                    "modifierName": "FrozenButterfly_Area_Enchanted"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster"
+                            ]
+                        }
+                    ],
+                    "modifierName": "FrozenButterfly_Area_Debuff"
+                }
+            ],
+            "onFieldExit": [
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Equip"
+                            ]
+                        }
+                    ],
+                    "modifierName": "FrozenButterfly_Area_Enchanted"
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Monster"
+                            ]
+                        }
+                    ],
+                    "modifierName": "FrozenButterfly_Area_Debuff"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrozenButterfly_Area_Material",
+            "modifiers": {
+                "Area_Material": {
+                    "modifierName": "",
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Area_Material"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FrostFall",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FrostFall_Idle",
+                        "FrostFall_Attack"
+                    ],
+                    "modifierName": "InFrostFall"
+                }
+            ],
+            "modifiers": {
+                "InFrostFall": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerWitchTimeMixin",
+                            "ignoreTargetType": "SelfCamp",
+                            "openEffectPattern": "",
+                            "closeEffectPattern": "",
+                            "weatherPattern": "Weather_Ayaka_FrostFall"
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AvatarEnterFocus",
+                            "cameraFollowLower": {
+                                "x": -0.30000001192092896,
+                                "z": -2.0
+                            },
+                            "cameraFollowUpper": {
+                                "x": -0.30000001192092896
+                            },
+                            "cameraFastFocusMode": true,
+                            "dragButtonName": "Skill1",
+                            "assistance": {
+                                "ps4": {},
+                                "ps5": {},
+                                "other": {
+                                    "useGyro": true
+                                }
+                            },
+                            "canMove": false,
+                            "HALMPLOGBHJ": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitFocus"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_ReattachWeapon",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalStandby",
+                        "NormalMove",
+                        "NormalMoveWeaponOver",
+                        "Climb",
+                        "ClimbTransient",
+                        "Ladder",
+                        "Slip",
+                        "Swim",
+                        "Fly",
+                        "Jump",
+                        "Fall",
+                        "Attack04",
+                        "Attack05",
+                        "Icespine",
+                        "Icespine_Out",
+                        "FrozenWindmill",
+                        "LiquidStrike_IS_AS",
+                        "LiquidStrike_IS_Out_AS",
+                        "LiquidStrike_FW_AS"
+                    ],
+                    "modifierName": "ShowSheath"
+                }
+            ],
+            "modifiers": {
+                "ShowSheath": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip03"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip03"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_MagicSheathe_Add",
+            "modifiers": {
+                "UNIQUE_MagicSheathe_Material": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_ExtraAttack_Spark_Sheath",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_MagicSheathe_Material"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_MagicSheathe_Remove",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ExtraAttack",
+                        "ExtraAttack_AS"
+                    ],
+                    "modifierName": "MagicSheathe_Remover"
+                }
+            ],
+            "modifiers": {
+                "MagicSheathe_Remover": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_MagicSheathe_Material"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_MagicSheathe_Material"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_MagicSheathe_Attack05_Add",
+            "modifiers": {
+                "UNIQUE_MagicSheathe_Attack05_Material": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Attack05_Spark_Sheath",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_MagicSheathe_Attack05_Material"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_MagicSheathe_NormalAttack_Remove",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Attack05"
+                    ],
+                    "modifierName": "MagicSheathe_Attack05_Remover"
+                }
+            ],
+            "modifiers": {
+                "MagicSheathe_Attack05_Remover": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_MagicSheathe_Attack05_Material"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_MagicSheathe_Attack05_Material"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_ChangeMainSkill"
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_CloseCollider",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Attack05",
+                    "modifierName": "Ayaka_NormalAttack_CloseCollider",
+                    "normalizeEnd": 0.10000000149011612
+                },
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "LiquidStrike_Strike",
+                    "modifierName": "Ayaka_LiquidStrike_Strike_CloseCollider",
+                    "normalizeEnd": 0.5
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "LiquidStrike_Move",
+                        "LiquidStrike_MoveStandby",
+                        "LiquidStrike_FatalMove",
+                        "LiquidStrike_FatalStandby"
+                    ],
+                    "modifierName": "Ayaka_LiquidStrike_CloseCollider"
+                }
+            ],
+            "modifiers": {
+                "Ayaka_NormalAttack_CloseCollider": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "passThrough": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "HJEPAPGHHBH": "Default"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "enable": true,
+                            "HJEPAPGHHBH": "Default"
+                        }
+                    ]
+                },
+                "Ayaka_LiquidStrike_Strike_CloseCollider": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "passThrough": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "HJEPAPGHHBH": "Default"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "canBeHandledOnRecover": true,
+                            "enable": true,
+                            "HJEPAPGHHBH": "Default"
+                        }
+                    ]
+                },
+                "Ayaka_LiquidStrike_CloseCollider": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "passThrough": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "HJEPAPGHHBH": "Default"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetPassThrough",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true
+                        },
+                        {
+                            "$type": "EnableHDMesh",
+                            "canBeHandledOnRecover": true,
+                            "enable": true,
+                            "HJEPAPGHHBH": "Default"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Talent_IceDance",
+            "abilitySpecials": {
+                "IceDance_AttackUp_Duration": 0.0,
+                "IceDance_AttackUp_Ratio": 0.0
+            },
+            "modifiers": {
+                "Ayaka_Talent_IceDance_AttackUp": {
+                    "modifierName": "",
+                    "duration": "IceDance_AttackUp_Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ModifyDamageMixin",
+                            "attackTags": [
+                                "NormalAttack_01",
+                                "NormalAttack_02",
+                                "NormalAttack_03",
+                                "NormalAttack_04",
+                                "NormalAttack_05",
+                                "ExtraAttack"
+                            ],
+                            "JJGGAPONHOE": "IceDance_AttackUp_Ratio"
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_IceDance_AttackUp",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "GMADPHKDMCK",
+                            "LBFNAOBLLJL": "Ayaka_Talent_IceDance"
+                        }
+                    ],
+                    "modifierName": "Ayaka_Talent_IceDance_AttackUp"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_PermanentSkill_2",
+            "abilitySpecials": {
+                "ReviveStaminaValue": 0.0,
+                "Actor_IceAddHurtDelta": 0.0,
+                "IceAddHurt_Duration": 0.0
+            },
+            "modifiers": {
+                "Ayaka_PermanentSkill_2_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Ice_Bloom"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "PositionDampTime": true,
+                                    "modifierName": "ReviveStamina_CD"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "ReviveStamina_CD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ReviveStamina",
+                            "ratio": "ReviveStaminaValue"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Ayaka_PermanentSkill_2_IceAddHurt"
+                        }
+                    ]
+                },
+                "Ayaka_PermanentSkill_2_IceAddHurt": {
+                    "modifierName": "",
+                    "duration": "IceAddHurt_Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_IceAddHurtDelta": "Actor_IceAddHurtDelta"
+                    },
+                    "state": "AttackUp",
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "Ayaka_PermanentSkill_2_Handler"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Constellation_1",
+            "abilitySpecials": {
+                "Constellation_1_Chance": 0.0,
+                "ReduceElementalArt_CD": 0.0,
+                "cdDelta": 0.0
+            },
+            "modifiers": {
+                "Ayaka_Constellation_1_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "PositionDampTime": true,
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "NormalAttack_01",
+                                        "NormalAttack_02",
+                                        "NormalAttack_03",
+                                        "NormalAttack_04",
+                                        "NormalAttack_05",
+                                        "ExtraAttack"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Ice"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "Randomed",
+                                    "chance": "Constellation_1_Chance",
+                                    "successActions": [
+                                        {
+                                            "$type": "ApplyModifier",
+                                            "PositionDampTime": true,
+                                            "modifierName": "ReduceElementalArtCD_Handler"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "ReduceElementalArtCD_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": "ReduceElementalArt_CD",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ModifyAvatarSkillCD",
+                            "PositionDampTime": true,
+                            "skillID": 10018,
+                            "cdMin": "cdDelta"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "Ayaka_Constellation_1_Handler"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Talent_HyouShin",
+            "abilitySpecials": {
+                "EnergyCostDelta": -10.0
+            },
+            "modifiers": {
+                "HyouShin_EnergyCostReduction": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EnergyCostDelta": "EnergyCostDelta"
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "HyouShin_EnergyCostReduction"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Constellation_4",
+            "abilitySpecials": {
+                "Constellation_4_Duration": 0.0,
+                "Constellation_4_DefenceDown_Ratio": 0.0
+            },
+            "modifiers": {
+                "Ayaka_Constellation_4_DefenceDown_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "PositionDampTime": true,
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Elemental_Burst"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "RemoveUniqueModifier",
+                                    "target": "Target",
+                                    "PositionDampTime": true,
+                                    "modifierName": "UNIQUE_Ayaka_Constellation_4_DefenceDown"
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Target",
+                                    "PositionDampTime": true,
+                                    "modifierName": "UNIQUE_Ayaka_Constellation_4_DefenceDown"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Ayaka_Constellation_4_DefenceDown": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Constellation_4_Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_DefenceRatio": "Constellation_4_DefenceDown_Ratio"
+                    },
+                    "state": "DefenseDown",
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "Ayaka_Constellation_4_DefenceDown_Handler"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_Constellation_6",
+            "abilitySpecials": {
+                "Constellation_6_Period": 0.0,
+                "Constellation_6_DamagePercentageRatio": 0.0
+            },
+            "modifiers": {
+                "Ayaka_Constellation_6_ExtraAttackDamageUp_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Ayaka_Constellation_6_ExtraAttackDamageUp"
+                        }
+                    ],
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "PositionDampTime": true,
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "ExtraAttack"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_Ayaka_Constellation_6_IsCharged",
+                                    "ratio": 1.0,
+                                    "PLDDAFOIEGE": true
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "PositionDampTime": true,
+                                    "modifierName": "Ayaka_Constellation_6_DamageUp_Remover"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Ayaka_Constellation_6_DamageUp_Remover": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Ayaka_Constellation_6_ExtraAttackDamageUp_Timer"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Ayaka_Constellation_6_ExtraAttackDamageUp"
+                        }
+                    ]
+                },
+                "Ayaka_Constellation_6_ExtraAttackDamageUp_Timer": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": "Constellation_6_Period",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Ayaka_Constellation_6_ExtraAttackDamageUp"
+                        }
+                    ]
+                },
+                "Ayaka_Constellation_6_ExtraAttackDamageUp": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.800000011920929,
+                    "modifierMixins": [
+                        {
+                            "$type": "ModifyDamageMixin",
+                            "attackTags": [
+                                "ExtraAttack"
+                            ],
+                            "JJGGAPONHOE": "Constellation_6_DamagePercentageRatio"
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_ABILITY_Ayaka_Constellation_6_IsCharged",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Ayaka_Constellation_6_ExtraAttackDamageUp_Fx"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Constellation_6_Watch",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": -1.0,
+                            "key": "_ABILITY_Ayaka_Constellation_6_IsCharged",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "PositionDampTime": false,
+                            "modifierName": "Ayaka_Constellation_6_ExtraAttackDamageUp_Fx"
+                        }
+                    ],
+                    "onAvatarIn": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Ayaka_Constellation_6_ExtraAttackDamageUp_Fx"
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Ayaka_Constellation_6_ExtraAttackDamageUp_Fx"
+                        }
+                    ]
+                },
+                "Ayaka_Constellation_6_ExtraAttackDamageUp_Fx": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "PositionDampTime": true,
+                            "shieldHP": "Eff_Avatar_Girl_Sword_Ayaka_Constellation_6_WatchTrail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "Ayaka_Constellation_6_ExtraAttackDamageUp_Handler"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_NormalAttack_DamageHandler",
+            "abilityMixins": [
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK01"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_01_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK02"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_02_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK03"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_03_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK04_1"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_04_1_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK04_2"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_04_2_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "animEventNames": [
+                        "ATK04_3"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_04_3_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                },
+                {
+                    "$type": "ModifyDamageMixin",
+                    "attackTags": [
+                        "NormalAttack_05"
+                    ],
+                    "LIMFCEKGALF": "NormalAttack_05_DamagePercentage",
+                    "JJGGAPONHOE": 0.0
+                }
+            ],
+            "abilitySpecials": {
+                "NormalAttack_01_DamagePercentage": 0.0,
+                "NormalAttack_02_DamagePercentage": 0.0,
+                "NormalAttack_03_DamagePercentage": 0.0,
+                "NormalAttack_04_1_DamagePercentage": 0.0,
+                "NormalAttack_04_2_DamagePercentage": 0.0,
+                "NormalAttack_04_3_DamagePercentage": 0.0,
+                "NormalAttack_05_DamagePercentage": 0.0
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Ayaka_FallingAnthem",
+            "abilityMixins": [
+                {
+                    "$type": "AvatarChangeSkillMixin",
+                    "jumpSkillID": 5002010,
+                    "flySkillID": 5002010
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_BS_Material"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_Loop_Normal"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS_2",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_Loop_Low"
+                    ],
+                    "modifierName": "FallingAnthem_LoopDamage"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_BS_VelocityForce_Initialize"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_Height_Detect"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_FallingDamageImmune_01"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "Inertia"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop",
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_OverHead_Camera"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS"
+                    ],
+                    "modifierName": "FallingAnthem_ClearVelocityForce"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_AS_1",
+                        "FallingAnthem_AS_2"
+                    ],
+                    "modifierName": "FallingAnthem_ClearVelocityForce_AS"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS",
+                        "FallingAnthem_Loop"
+                    ],
+                    "modifierName": "FallingAnthem_AttachWeaponEffect"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FallingAnthem_BS_2"
+                    ],
+                    "modifierName": "FallingAnthem_CameraRadialBlur"
+                }
+            ],
+            "abilitySpecials": {
+                "FallingAnthem_Normal_Loop_Damage": 0.0,
+                "FallingAnthem_Normal_Rank_1_Damage": 0.0,
+                "FallingAnthem_Normal_Rank_2_Damage": 0.0,
+                "FallingAnthem_Altitude_Lv0": 20.0,
+                "FallingAnthem_Altitude_Lv1": 40.0,
+                "FallingAnthem_Altitude_Lv2": 60.0,
+                "FallingAnthem_Altitude_Lv3": 100.0,
+                "FallingAnthem_Altitude_Lv4": 200.0,
+                "FallingAnthem_FallingDamageRatio_Lv0": -1.0,
+                "FallingAnthem_FallingDamageRatio_Lv1": -1.0,
+                "FallingAnthem_FallingDamageRatio_Lv2": -0.8999999761581421,
+                "FallingAnthem_FallingDamageRatio_Lv3": -0.800000011920929,
+                "FallingAnthem_FallingDamageRatio_Lv4": -0.6000000238418579,
+                "FallingAnthem_FallingDamageRatio": 0.0
+            },
+            "modifiers": {
+                "FallingAnthem_AttachWeaponEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Sword_FallAnthem_Self_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_CameraRadialBlur": {
+                    "modifierName": "",
+                    "duration": 0.23000000417232513,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CameraBlurMixin",
+                            "cameraRadialBlur": {
+                                "power": 0.30000001192092896,
+                                "fadeTime": 0.15000000596046448
+                            }
+                        }
+                    ]
+                },
+                "FallingAnthem_BS_Material": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_Sword_FallAnthem_BS",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_BS_VelocityForce_Initialize": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_LoopDamage": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.30000001192092896,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 1.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "FallingAttack",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "FallingAnthem_Normal_Loop_Damage",
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "overrideByWeapon": true,
+                                        "strikeType": "Slash",
+                                        "enBreak": 25.0,
+                                        "attackType": "Melee",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ClearGlobalValue",
+                            "key": "_ABILITY_FallingAttack_Altitude"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv0"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv1"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv0"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv2"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv1"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": "FallingAnthem_Altitude_Lv3"
+                                },
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv2"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": "FallingAnthem_Altitude_Lv3"
+                                }
+                            ],
+                            "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+                            "key": "_ABILITY_FallingAttack_Altitude",
+                            "useLimitRange": true,
+                            "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
+                            "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "FallingAnthem_FallingDamageImmune_02"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "_ABILITY_FallingAttack_Altitude",
+                            "overrideMapKey": "FallingAnthem_FallingDamageRatio"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "FallingAnthem_FallingDamageImmune_03"
+                        }
+                    ]
+                },
+                "FallingAnthem_FallingDamageImmune_03": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
+                    }
+                },
+                "FallingAnthem_Loop_Normal": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -1.0,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "FallingAnthem_Loop_Normal_Rank_1",
+                                "FallingAnthem_Loop_Normal_Rank_2"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_Loop_Normal_Rank_1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Sword_FallAnthem_Loop_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FallingAnthem_Loop_Normal_Rank_2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Sword_FallAnthem_Loop_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Inertia": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ApplyInertiaVelocityMixin",
+                            "useXZ": false,
+                            "useY": false
+                        }
+                    ]
+                },
+                "FallingAnthem_Height_Detect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "ratio": 0.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "ratio": 5.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "logic": "LesserOrEqual",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "predicates": [
+                                {
+                                    "$type": "HJCILPNMECC",
+                                    "ratio": 2.4000000953674316
+                                }
+                            ],
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "floatID": "FallingAnthem_UseCamera",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "FallingAnthem_OverHead_Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarCameraParam",
+                            "predicates": [
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Equal",
+                                    "ratio": 1.0,
+                                    "parameter": "FallingAnthem_UseCamera"
+                                }
+                            ],
+                            "cameraParam": {
+                                "forceRadius": 4.5,
+                                "forceRadiusDuration": 0.20000000298023224,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "FallingAnthem_OverHead_Camera_Remover": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarExitCameraShot",
+                            "PositionDampTime": true
+                        }
+                    ]
+                },
+                "FallingAnthem_Landed_Camera": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarCameraParam",
+                            "predicates": [
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Equal",
+                                    "ratio": 1.0,
+                                    "parameter": "FallingAnthem_UseCamera"
+                                }
+                            ],
+                            "cameraParam": {
+                                "forceRadius": 6.0,
+                                "forceRadiusDuration": 0.10000000149011612,
+                                "shouldKeepForceRadius": true
+                            }
+                        }
+                    ]
+                },
+                "FallingAnthem_ClearVelocityForce": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType",
+                                "InertiaType"
+                            ]
+                        }
+                    ]
+                },
+                "FallingAnthem_ClearVelocityForce_AS": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": [
+                                "RushMoveType",
+                                "InertiaType"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "FallingAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_1_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 25.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Blunt",
+                                "enBreak": 100.0,
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV4",
+                                "hitHaltTimeScale": 0.10000000149011612
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.23999999463558197,
+                                "shakeTime": 0.11999999731779099,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.23999999463558197,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -0.5,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 5.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "FallingAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_2_Damage",
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 25.0,
+                                "overrideByWeapon": true,
+                                "strikeType": "Blunt",
+                                "enBreak": 150.0,
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV7",
+                                "hitHaltTimeScale": 0.10000000149011612
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.5,
+                                "shakeTime": 0.20000000298023224,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0,
+                                    "z": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.4000000059604645,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Sword_FallAnthem_Strike_01",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_FallingAnthem_UseCamera",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "shieldHP": "Eff_Avatar_Sword_FallAnthem_Strike_02",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    }
+]

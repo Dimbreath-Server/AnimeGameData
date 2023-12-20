@@ -1,0 +1,842 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "TargetShooting_Cannon_Init",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_CURRENT_AMMO_NUMBER",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        30.5
+                    ],
+                    "modifierNameSteps": [
+                        "Reload_Listener"
+                    ]
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_CURRENT_AMMO_NUMBER",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        5.5,
+                        30.5
+                    ],
+                    "modifierNameSteps": [
+                        "TargetShooting_MaterialStateSwitch_LackAmmo",
+                        "TargetShooting_MaterialStateSwitch_EnoughAmmoMaterial"
+                    ]
+                },
+                {
+                    "$type": "RotationFollowCameraMixin",
+                    "CDBMAEONNCM": "VerticalRotateBone",
+                    "FLFDKGPIACA": -12.0,
+                    "HGHKEFBGAPL": "HorizontalRotateBone",
+                    "HJEEJDCDEMD": [
+                        "Cannon"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "TargetShooting_MaterialStateSwitch_LackAmmo": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShaderStateMachineSwitchMixin",
+                            "HPJJAKOLMIC": 1,
+                            "CEIFKFCFIIL": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Cannon_09",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "TargetShooting_MaterialStateSwitch_EnoughAmmoMaterial": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShaderStateMachineSwitchMixin",
+                            "CEIFKFCFIIL": ""
+                        }
+                    ]
+                },
+                "Reload_Listener": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_CURRENT_AMMO_NUMBER",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5
+                            ],
+                            "modifierNameSteps": [
+                                "Auto_Trigger_Reload"
+                            ]
+                        }
+                    ]
+                },
+                "Auto_Trigger_Reload": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "TargetShooting_Reload"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_LOCAL_MAX_AMMO",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_LOCAL_MAX_AMMO",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_AMMO_RELOADING",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "TargetShooting_MaterialStateSwitch_EnoughAmmoMaterial"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "TargetShooting_Reload",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "SGV_TARGETSHOOTING_BUFF_ACTIVE",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToGlobalValueMixin",
+                    "globalValueTarget": "Team",
+                    "globalValueKey": "SGV_TARGETSHOOTING_BUFF_ACTIVE",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "TARGETSHOOTING_BURSTBUFF_ACTIVE"
+                    ],
+                    "EEEHPOEMFKM": true
+                }
+            ],
+            "modifiers": {
+                "Reload_Cannon_Ball": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_LOCAL_MAX_AMMO",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                10.5,
+                                15.5,
+                                20.5,
+                                25.5,
+                                30.5
+                            ],
+                            "modifierNameSteps": [
+                                "Basic_Reload",
+                                "Reload_1_Extra_Mag",
+                                "Reload_2_Extra_Mag",
+                                "Reload_3_Extra_Mag",
+                                "Reload_Full_Extra_Mag"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_AMMO_RELOADING",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Cannon_08",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_AMMO_RELOADING",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "TargetShooting_Remove_Burst_Delay": {
+                    "modifierName": "",
+                    "duration": 0.44999998807907104,
+                    "bonusCriticalHurt": 100.0
+                },
+                "TARGETSHOOTING_BURSTBUFF_ACTIVE": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_LOCAL_MAX_AMMO",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                10.5,
+                                15.5,
+                                20.5,
+                                25.5,
+                                30.5
+                            ],
+                            "modifierNameSteps": [
+                                "Basic_Reload",
+                                "Reload_1_Extra_Mag",
+                                "Reload_2_Extra_Mag",
+                                "Reload_3_Extra_Mag",
+                                "Reload_Full_Extra_Mag"
+                            ]
+                        },
+                        {
+                            "$type": "ShaderStateMachineSwitchMixin",
+                            "CEIFKFCFIIL": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Cannon_05",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_AMMO_RELOADING",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "TargetShooting_Remove_Burst_Delay"
+                        }
+                    ]
+                },
+                "Basic_Reload": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Reload_1_Extra_Mag": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 15.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Reload_2_Extra_Mag": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 20.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Reload_3_Extra_Mag": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 25.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Reload_Full_Extra_Mag": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 30.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Reload_Cannon_Ball"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "TargetShooting_Extra_Magzine",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "SGV_TARGETSHOOTING_BULLET_MAX",
+                    "useLimitRange": true,
+                    "maxValue": 30.0,
+                    "minValue": 10.0
+                },
+                {
+                    "$type": "AttachModifierToGlobalValueMixin",
+                    "globalValueTarget": "Team",
+                    "globalValueKey": "SGV_TARGETSHOOTING_BULLET_MAX",
+                    "valueSteps": [
+                        9.5,
+                        10.5,
+                        15.5,
+                        20.5,
+                        25.5,
+                        30.5
+                    ],
+                    "modifierNameSteps": [
+                        "Base_Magzine",
+                        "One_Extra_Mag",
+                        "Two_Extra_Mag",
+                        "Three_Extra_Mag",
+                        "Full_Magzine"
+                    ],
+                    "EEEHPOEMFKM": true
+                }
+            ],
+            "modifiers": {
+                "Base_Magzine": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_LOCAL_MAX_AMMO",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "One_Extra_Mag": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 15.0,
+                            "key": "_LOCAL_MAX_AMMO",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 5.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "useLimitRange": true,
+                            "maxValue": 15.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Two_Extra_Mag": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 20.0,
+                            "key": "_LOCAL_MAX_AMMO",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 5.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "useLimitRange": true,
+                            "maxValue": 20.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Three_Extra_Mag": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 25.0,
+                            "key": "_LOCAL_MAX_AMMO",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 5.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "useLimitRange": true,
+                            "maxValue": 25.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Full_Magzine": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 30.0,
+                            "key": "_LOCAL_MAX_AMMO",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 5.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "useLimitRange": true,
+                            "maxValue": 30.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "TargetShooting_Cannon_Shot",
+            "abilitySpecials": {
+                "Auto_Reload_CD": 1.5,
+                "Manual_Reload_CD": 1.5
+            },
+            "modifiers": {
+                "TargetShooting_ExplosiveShootDelay": {
+                    "modifierName": "",
+                    "duration": 0.009999999776482582,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Cannon_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Cannon_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ActCameraShake",
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.5,
+                                "shakeTime": 0.3499999940395355,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.5,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 70291152,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.10000000149011612
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "IFCIPHAJFNA"
+                                },
+                                "COAICNDKEMA": true,
+                                "attachPointName": "ShootPoint"
+                            },
+                            "ownerIs": "CurLocalAvatar",
+                            "propOwnerIs": "CurLocalAvatar"
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "ExplosiveShot"
+                        }
+                    ]
+                },
+                "TargetShooting_ShootDelay": {
+                    "modifierName": "",
+                    "duration": 0.009999999776482582,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Cannon_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Cannon_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_CURRENT_AMMO_NUMBER",
+                            "useLimitRange": true,
+                            "maxValue": 30.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ActCameraShake",
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.5,
+                                "shakeTime": 0.3499999940395355,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.5,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 0.30000001192092896
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 70291151,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.10000000149011612
+                                },
+                                "GIAOINGDIPJ": {
+                                    "$type": "IFCIPHAJFNA"
+                                },
+                                "COAICNDKEMA": true,
+                                "attachPointName": "ShootPoint"
+                            },
+                            "ownerIs": "OriginOwner",
+                            "propOwnerIs": "OriginOwner"
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "Shot"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_AMMO_RELOADING",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_CURRENT_AMMO_NUMBER",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "MoreThan"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Team",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "SGV_TARGETSHOOTING_BUFF_ACTIVE",
+                                            "ratio": 0.0,
+                                            "ACJBNJNEBOC": "MoreThan"
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "ApplyModifier",
+                                            "modifierName": "TargetShooting_ExplosiveShootDelay"
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "ApplyModifier",
+                                            "modifierName": "TargetShooting_ShootDelay"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Bullet_TargetShooting_CannonBall",
+            "abilitySpecials": {
+                "DamagePercentage": 0.0,
+                "LevelEntity_AvatarDot_SystemValue": 1.0
+            },
+            "modifiers": {
+                "BulletEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Cannon_03",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BulletEffect"
+                },
+                {
+                    "$type": "SetSystemValueToOverrideMap",
+                    "key": "LevelEntity_AvatarDot_SystemValue",
+                    "type": "ElementLevelCo"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 3.299999952316284
+                        },
+                        "attackInfo": {
+                            "attackTag": "TargetShootingCannon",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 0.0,
+                                "ignoreAttackerProperty": true,
+                                "strikeType": "Blunt",
+                                "enBreak": 0.0,
+                                "damageExtra": [
+                                    "LevelEntity_AvatarDot_SystemValue",
+                                    "DamagePercentage",
+                                    "MUL"
+                                ],
+                                "trueDamage": true,
+                                "ignoreModifyDamage": true,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "",
+                                "hitImpulseType": "LV4",
+                                "hitHaltTimeScale": 0.05000000074505806,
+                                "muteHitText": true
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "AllExceptSelf"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Cannon_04",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Bullet_TargetShooting_ExplosiveCannonBall",
+            "abilitySpecials": {
+                "DamagePercentage": 0.0,
+                "LevelEntity_AvatarDot_SystemValue": 1.0
+            },
+            "modifiers": {
+                "BulletEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Cannon_06",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BulletEffect"
+                },
+                {
+                    "$type": "SetSystemValueToOverrideMap",
+                    "key": "LevelEntity_AvatarDot_SystemValue",
+                    "type": "ElementLevelCo"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 15.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "TargetShootingCannonMax",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 0.0,
+                                "ignoreAttackerProperty": true,
+                                "strikeType": "Blunt",
+                                "enBreak": 0.0,
+                                "damageExtra": [
+                                    "LevelEntity_AvatarDot_SystemValue",
+                                    "DamagePercentage",
+                                    "MUL"
+                                ],
+                                "trueDamage": true,
+                                "ignoreModifyDamage": true,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "",
+                                "hitImpulseType": "LV4",
+                                "hitHaltTimeScale": 0.05000000074505806,
+                                "muteHitText": true
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "AllExceptSelf"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_SceneObj_Cannon_07",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    }
+]

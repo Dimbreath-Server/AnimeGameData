@@ -1,0 +1,1934 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_Arrow_FX",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Aim",
+                        "FastAim"
+                    ],
+                    "modifierName": "Aquaria_Arrow_FX"
+                }
+            ],
+            "modifiers": {
+                "Aquaria_Arrow_FX": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Bow_Arrow",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_PressShoot",
+            "abilityMixins": [
+                {
+                    "$type": "ButtonHoldChargeMixin",
+                    "skillID": 10251,
+                    "chargeTime": 0.4000000059604645,
+                    "secondChargeTime": 999999.0,
+                    "OnBeginUncharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 100.0
+                        }
+                    ],
+                    "OnReleaseUncharged": [
+                        {
+                            "$type": "SetCameraLockTime",
+                            "lockTime": 0.5
+                        },
+                        {
+                            "$type": "EntityDoSkill",
+                            "skillID": 10253,
+                            "isHold": true
+                        }
+                    ],
+                    "OnBeginCharged": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DoSkill"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "SkillID",
+                            "ratio": 101.0
+                        }
+                    ],
+                    "OnReleaseCharged": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 10251,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 10252,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "EntityDoSkill",
+                            "skillID": 10253,
+                            "isHold": true
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "AimEnd"
+                        }
+                    ],
+                    "chargeStateIDs": [
+                        "ShootBS",
+                        "Shoot",
+                        "FastAim",
+                        "FastAimShoot"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FastAim",
+                        "FastAimShoot"
+                    ],
+                    "modifierName": "KeepFastAiming"
+                }
+            ],
+            "modifiers": {
+                "KeepFastAiming": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarEnterFocus",
+                            "cameraFollowLower": {
+                                "x": 0.800000011920929,
+                                "y": 0.20000000298023224,
+                                "z": -1.5
+                            },
+                            "cameraFollowUpper": {
+                                "x": 0.800000011920929,
+                                "y": 0.4000000059604645,
+                                "z": -1.2000000476837158
+                            },
+                            "cameraFastFocusMode": true,
+                            "dragButtonName": "Skill1",
+                            "assistance": {
+                                "ps4": {
+                                    "useFocusSticky": true
+                                },
+                                "ps5": {
+                                    "useFocusSticky": true
+                                },
+                                "other": {
+                                    "useFocusSticky": true,
+                                    "useGyro": true
+                                }
+                            },
+                            "HALMPLOGBHJ": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitFocus"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_AimPressShoot",
+            "abilityMixins": [
+                {
+                    "$type": "ButtonHoldChargeMixin",
+                    "skillID": 10252,
+                    "secondChargeTime": 999999.0,
+                    "OnReleaseCharged": [
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 10251,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "AvatarSkillStart",
+                            "skillID": 10252,
+                            "amountByCasterMaxHPRatio": 1.0,
+                            "costStaminaDelta": 1.0
+                        },
+                        {
+                            "$type": "EntityDoSkill",
+                            "skillID": 10253,
+                            "isHold": true
+                        }
+                    ],
+                    "chargeStateIDs": [
+                        "Aim",
+                        "AimShoot"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Aim",
+                        "AimShoot"
+                    ],
+                    "modifierName": "KeepAiming"
+                }
+            ],
+            "modifiers": {
+                "KeepAiming": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AvatarEnterFocus",
+                            "cameraFollowLower": {
+                                "x": 0.800000011920929,
+                                "y": 0.20000000298023224,
+                                "z": -1.5
+                            },
+                            "cameraFollowUpper": {
+                                "x": 0.800000011920929,
+                                "y": 0.4000000059604645,
+                                "z": -1.2000000476837158
+                            },
+                            "cameraFastFocusMode": true,
+                            "changeMainSkillID": true,
+                            "dragButtonName": "Skill1",
+                            "assistance": {
+                                "ps4": {
+                                    "useFocusSticky": true
+                                },
+                                "ps5": {
+                                    "useFocusSticky": true
+                                },
+                                "other": {
+                                    "useFocusSticky": true,
+                                    "useGyro": true
+                                }
+                            },
+                            "HALMPLOGBHJ": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AvatarExitFocus"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_01",
+            "modifiers": {
+                "ShootArrow_Fx": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Common_ShootArrow_Small",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponL"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41022008,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "FocusAnchor",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "WeaponL"
+                    }
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ShootArrow_Fx"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_02",
+            "modifiers": {
+                "ShootArrow_Fx": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Common_ShootArrow",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponL"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41022009,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "FocusAnchor",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "WeaponL"
+                    }
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ShootArrow_Fx"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_03",
+            "modifiers": {
+                "ShootArrow_Fx": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Common_ShootArrow",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponL"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41022010,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "FocusAnchor",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "WeaponL"
+                    }
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ShootArrow_Fx"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_04",
+            "modifiers": {
+                "ShootArrow_Fx": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Common_ShootArrow_Small",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponL"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41022011,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "FocusAnchor",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "WeaponL"
+                    }
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ShootArrow_Fx"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_05",
+            "modifiers": {
+                "ShootArrow_Fx": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Common_ShootArrow",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponL"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41022012,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "FocusAnchor",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "WeaponL"
+                    }
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ShootArrow_Fx"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_06",
+            "modifiers": {
+                "ShootArrow_Fx": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Common_ShootArrow",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "WeaponL"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41022013,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "FocusAnchor",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "WeaponL"
+                    }
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ShootArrow_Fx"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_Aiming",
+            "abilityMixins": [
+                {
+                    "$type": "ModifySkillCDByModifierCountMixin",
+                    "targetType": "Self",
+                    "modifierName": "Hurricane_Counter",
+                    "skillID": 10251,
+                    "cdMin": "cdDelta"
+                },
+                {
+                    "$type": "ModifySkillCDByModifierCountMixin",
+                    "targetType": "Self",
+                    "modifierName": "Hurricane_Counter",
+                    "skillID": 10252,
+                    "cdMin": "cdDelta"
+                }
+            ],
+            "abilitySpecials": {
+                "cdDelta": -0.6000000238418579
+            },
+            "modifiers": {
+                "AimChargeMark": {
+                    "stacking": "MultipleRefreshNoRemove",
+                    "stackingOption": {
+                        "abilitySpecialName": "",
+                        "maxModifierNumForMultipleType": 5.0
+                    },
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Enchanted_Time",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Hurricane_Counter": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "fireEventWhenApply": true
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Enchanted_Time",
+                            "ratio": 4.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        }
+                    ],
+                    "bulletID": 41022004,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 1.0
+                        },
+                        "attachPointName": "FocusAnchor"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Enchanted_Time",
+                            "ratio": 3.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "LessAndEqual"
+                        }
+                    ],
+                    "bulletID": 41022005,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 1.0
+                        },
+                        "attachPointName": "FocusAnchor"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Enchanted_Time",
+                            "ratio": 4.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        }
+                    ],
+                    "bulletID": 41022006,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 1.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 4.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        },
+                        "attachPointName": "FocusAnchor"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Enchanted_Time",
+                            "ratio": 3.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "LessAndEqual"
+                        }
+                    ],
+                    "bulletID": 41022007,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 1.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 4.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        },
+                        "attachPointName": "FocusAnchor"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Enchanted_Time",
+                            "ratio": 4.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        }
+                    ],
+                    "bulletID": 41022006,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 1.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": -4.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        },
+                        "attachPointName": "FocusAnchor"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Enchanted_Time",
+                            "ratio": 3.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "LessAndEqual"
+                        }
+                    ],
+                    "bulletID": 41022007,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 1.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "IPAGJMPLLIN",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": -4.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        },
+                        "attachPointName": "FocusAnchor"
+                    }
+                },
+                {
+                    "$type": "ActCameraShake"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_WindMagic_Arrow_Onshooting",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.8999999761581421
+                        },
+                        "attachPointName": "WeaponR"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Enhanced_Hurricane_Mark",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "modifierName": "Hurricane_Counter"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_Light_Material",
+            "onAdded": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Arrow_Fly_Small",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireHitEffect",
+                    "hitEntity": "Eff_Arrow_Hit_Monster",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Arrow_Hit_Earth",
+                        "surfaceEffect": {
+                            "Water": "Eff_Arrow_Hit_Water"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_Heavy_Material",
+            "onAdded": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Arrow_Fly",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireHitEffect",
+                    "hitEntity": "Eff_Arrow_Hit_Monster",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Arrow_Hit_Earth",
+                        "surfaceEffect": {
+                            "Water": "Eff_Arrow_Hit_Water"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_Enchanted_Wind",
+            "abilitySpecials": {
+                "DamageWithWind": 2.0
+            },
+            "modifiers": {
+                "ShootArrow_Enchanted_Wind": {
+                    "modifierName": "",
+                    "elementType": "Wind",
+                    "bonusCriticalHurt": 50.0
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ShootArrow_Enchanted_Wind"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "LOIMAGKHLJA",
+                            "element": "Wind"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "JLALLFJFHMN": "Both",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": -0.5
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 0.10000000149011612,
+                                "JKDAHJILGBJ": 0.10000000149011612,
+                                "MJHHBAFNOEG": 1.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "DamageWithWind",
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Wind",
+                                "bonusCriticalHurt": 20.0,
+                                "strikeType": "Pierce",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "",
+                                "hitLevel": "Light",
+                                "JELEFKIMBOD": 0.0,
+                                "hitImpulseY": 0.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.11999999731779099,
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "canHitHead": true,
+                            "hitHeadPattern": {
+                                "onHitEffectName": "Eff_Arrow_Hit_Head",
+                                "hitLevel": "Air",
+                                "JELEFKIMBOD": 200.0,
+                                "hitImpulseY": 200.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.11999999731779099,
+                                "hitHaltTimeScale": 0.009999999776482582
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootArrow_Enchanted_WithoutWind",
+            "abilitySpecials": {
+                "DamageWithoutWind": 1.5
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "JLALLFJFHMN": "Both",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": -0.5
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 0.10000000149011612,
+                                "JKDAHJILGBJ": 0.10000000149011612,
+                                "MJHHBAFNOEG": 1.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": "DamageWithoutWind",
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Pierce",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "",
+                                "hitLevel": "Light",
+                                "JELEFKIMBOD": 0.0,
+                                "hitImpulseY": 0.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.11999999731779099,
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "canHitHead": true,
+                            "hitHeadPattern": {
+                                "onHitEffectName": "Eff_Arrow_Hit_Head",
+                                "hitLevel": "Air",
+                                "JELEFKIMBOD": 200.0,
+                                "hitImpulseY": 200.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.11999999731779099,
+                                "hitHaltTimeScale": 0.009999999776482582
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootAimingArrow_Charge",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Aim",
+                        "FastAim"
+                    ],
+                    "modifierName": "ShootAimingArrow_Charge_Handler"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FastAim",
+                        "FastAimShoot"
+                    ],
+                    "modifierName": "ShowAimingEffect"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Aim",
+                        "FastAim",
+                        "FastAimShoot",
+                        "AimShoot"
+                    ],
+                    "modifierName": "ShootAimingArrow_Charge_Remove"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Aim",
+                        "AimShoot"
+                    ],
+                    "modifierName": "ShowAimingEffect"
+                }
+            ],
+            "modifiers": {
+                "ShootAimingArrow_Charge_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.30000001192092896,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "AimChargeMark"
+                        }
+                    ]
+                },
+                "ShootAimingArrow_Charge_Remove": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -5.0,
+                            "key": "_Enchanted_Time",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "AimChargeMark"
+                        }
+                    ]
+                },
+                "AimChargeMark": {
+                    "stacking": "MultipleRefreshNoRemove",
+                    "stackingOption": {
+                        "abilitySpecialName": "",
+                        "maxModifierNumForMultipleType": 5.0
+                    },
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Enchanted_Time",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "ShowAimingEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "WindMagic_Arrow_Glow_WithoutWind_Once"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "WindMagic_Arrow_Glow_Once"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "WindMagic_Arrow_Glow_WithoutWind_Once"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Enchanted_Time",
+                                    "ratio": 4.0,
+                                    "PLDDAFOIEGE": true,
+                                    "ACJBNJNEBOC": "MoreThanAndEqual"
+                                }
+                            ],
+                            "modifierName": "WindMagic_Arrow_Glow_Once"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "WindMagic_Arrow_Glow_WithoutWind_Once"
+                        }
+                    ]
+                },
+                "WindMagic_Arrow_Glow_Once": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_WindMagic_Arrow_Glow_Once_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "WindMagic_Arrow_Glow_WithoutWind_Once": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_WindMagic_Arrow_Glow_Once_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -5.0,
+                    "key": "_Enchanted_Time",
+                    "useLimitRange": true,
+                    "maxValue": 5.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "AimChargeMark"
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "WindMagic_Arrow_Glow_Once"
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "WindMagic_Arrow_Glow_WithoutWind_Once"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootAimingArrow_Material",
+            "modifiers": {
+                "ArrowEffectModifier": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Magic_Arrow",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_WindMagic_Arrow_Fly_Particle",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_WindMagic_Arrow_Fly_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "ArrowEffectModifier"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireHitEffect",
+                    "predicates": [
+                        {
+                            "$type": "LOIMAGKHLJA",
+                            "element": "Wind"
+                        }
+                    ],
+                    "hitEntity": "Eff_WindMagic_Arrow_Hit",
+                    "hitScene": {
+                        "defaultEffect": "Eff_WindMagic_Arrow_Hit",
+                        "surfaceEffect": {
+                            "Water": "Eff_Arrow_Fire_Hit_Water"
+                        }
+                    }
+                },
+                {
+                    "$type": "FireHitEffect",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Wind"
+                                }
+                            ]
+                        }
+                    ],
+                    "hitEntity": "Eff_Arrow_Hit_Monster",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Arrow_Hit_Earth",
+                        "surfaceEffect": {
+                            "Water": "Eff_Arrow_Hit_Water"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ShootAimingArrowWithoutWind_Material",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Talent_Arrow_Fly_Trail",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Talent_Arrow_Fly_Partcle",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireHitEffect",
+                    "hitEntity": "Eff_Arrow_Hit_Monster",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Arrow_Hit_Earth",
+                        "surfaceEffect": {
+                            "Water": "Eff_Arrow_Hit_Water"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_ChangeMainSkill",
+            "abilityMixins": [
+                {
+                    "$type": "AvatarChangeSkillMixin",
+                    "aimSkillID": 10252
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_Hurricane"
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_Icespine",
+            "modifiers": {
+                "Icespine_Appear": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.10000000149011612,
+                                    "MJHHBAFNOEG": 4.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "gadgetID": 40000115,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": -2.8299999237060547,
+                                    "JKDAHJILGBJ": 0.10000000149011612,
+                                    "MJHHBAFNOEG": 2.8299999237060547
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "gadgetID": 40000115,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 2.8299999237060547,
+                                    "JKDAHJILGBJ": 0.10000000149011612,
+                                    "MJHHBAFNOEG": 2.8299999237060547
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "gadgetID": 40000115,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarSkillStart",
+                    "skillID": 10254,
+                    "amountByCasterMaxHPRatio": 1.0,
+                    "costStaminaDelta": 1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Icespine_Appear"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_Icespine_Strike",
+            "modifiers": {
+                "Icespine_Strike_Timer": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Icespine_Strike_Hit"
+                        }
+                    ]
+                },
+                "Icespine_Strike_Hit": {
+                    "modifierName": "",
+                    "duration": 1.0499999523162842,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Skill",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.5,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Blunt",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitLevel": "Air",
+                                        "JELEFKIMBOD": 360.0,
+                                        "hitImpulseY": 900.0,
+                                        "hitImpulseType": "",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "cameraShake": {}
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_IceExplodeArrow",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Avatar_IceSlash_Out",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Icespine_Strike_Timer"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_IceVirus",
+            "modifiers": {
+                "IceVirus_Disable_MainInterface": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableMainInterface"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableMainInterface",
+                            "enable": true
+                        }
+                    ],
+                    "onAvatarIn": [
+                        {
+                            "$type": "EnableMainInterface",
+                            "PositionDampTime": true,
+                            "enable": true
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "EnableMainInterface",
+                            "PositionDampTime": true,
+                            "enable": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 41025001,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.2000000476837158,
+                            "MJHHBAFNOEG": 1.0
+                        }
+                    }
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "IceVirus_Disable_MainInterface"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_IceVirus_Bullet",
+            "modifiers": {
+                "IceVirus_Bullet_Ice": {
+                    "modifierName": "",
+                    "elementType": "Frozen",
+                    "bonusCriticalHurt": 100.0
+                },
+                "IceVirus_Bullet_ResistFrozen": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 14002
+                        }
+                    ]
+                },
+                "IceVirus_Bullet_Detect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Target",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "IceVirus_Ein"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "IceVirus_Affected_Ein"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Target",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "IceVirus_Ein"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "IceVirus_Affected_Ein_Affection"
+                        }
+                    ]
+                },
+                "IceVirus_Affected_Ein": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Boy_Claymore_Razor_ClawMark_Mark_3",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.20000000298023224,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 3.200000047683716
+                                },
+                                "attackInfo": {
+                                    "attackTag": "IceVirus_Zwei",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.800000011920929,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "bonusCriticalHurt": 30.0,
+                                        "strikeType": "Blunt",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitLevel": "Heavy",
+                                        "JELEFKIMBOD": 360.0,
+                                        "hitImpulseY": 0.0,
+                                        "hitImpulseType": "",
+                                        "hitHaltTime": 0.11999999731779099,
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    }
+                                }
+                            },
+                            "targetType": "SelfCamp"
+                        }
+                    ]
+                },
+                "IceVirus_Affected_Ein_Affection": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Other",
+                            "predicates": [
+                                {
+                                    "$type": "JFAJHKINFDM",
+                                    "isTarget": false,
+                                    "MEGGHKBHBEH": ""
+                                },
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "IceVirus_Zwei"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "IceVirus_Affected_Zwei"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Other",
+                            "predicates": [
+                                {
+                                    "$type": "JFAJHKINFDM",
+                                    "isTarget": false,
+                                    "MEGGHKBHBEH": ""
+                                },
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "IceVirus_Zwei"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "IceVirus_Affected_Zwei_Affection"
+                        }
+                    ]
+                },
+                "IceVirus_Affected_Zwei": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Boy_Claymore_Razor_ClawMark_Mark_2",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.20000000298023224,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 2.4000000953674316
+                                },
+                                "attackInfo": {
+                                    "attackTag": "IceVirus_Drei",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.4000000059604645,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Blunt",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitLevel": "Heavy",
+                                        "JELEFKIMBOD": 360.0,
+                                        "hitImpulseY": 0.0,
+                                        "hitImpulseType": "",
+                                        "hitHaltTime": 0.11999999731779099,
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    }
+                                }
+                            },
+                            "targetType": "SelfCamp"
+                        }
+                    ]
+                },
+                "IceVirus_Affected_Zwei_Affection": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Other",
+                            "predicates": [
+                                {
+                                    "$type": "JFAJHKINFDM",
+                                    "isTarget": false,
+                                    "MEGGHKBHBEH": ""
+                                },
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "IceVirus_Drei"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "IceVirus_Affected_Drei"
+                        }
+                    ]
+                },
+                "IceVirus_Affected_Drei": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Boy_Claymore_Razor_ClawMark_Mark_1",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.20000000298023224,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.600000023841858
+                                },
+                                "attackInfo": {
+                                    "attackTag": "IceVirus_Vier",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.20000000298023224,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "bonusCriticalHurt": 15.0,
+                                        "strikeType": "Blunt",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitLevel": "Heavy",
+                                        "JELEFKIMBOD": 360.0,
+                                        "hitImpulseY": 0.0,
+                                        "hitImpulseType": "",
+                                        "hitHaltTime": 0.11999999731779099,
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    }
+                                }
+                            },
+                            "targetType": "SelfCamp"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "IceVirus_Bullet_Ice"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "IceVirus_Bullet_ResistFrozen"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "IceVirus_Bullet_Detect"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 4.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "IceVirus_Ein",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.5,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Ice",
+                                "bonusCriticalHurt": 40.0,
+                                "strikeType": "Blunt",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitLevel": "Heavy",
+                                "JELEFKIMBOD": 360.0,
+                                "hitImpulseY": 0.0,
+                                "hitImpulseType": "",
+                                "hitHaltTime": 0.11999999731779099,
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "cameraShake": {}
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_IceVirus_Bullet_Material",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_WhiteBox_WaterBall",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Aquaria_WindBlink",
+            "abilityMixins": [
+                {
+                    "$type": "AvatarChangeSkillMixin",
+                    "index": 1,
+                    "flySkillID": 10257
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "AvatarDoBlink",
+                    "PreferInput": true,
+                    "Distance": 6.0
+                }
+            ]
+        }
+    }
+]

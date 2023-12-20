@@ -1,0 +1,1146 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_WindEffect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Born",
+                        "NormalIdle",
+                        "Turn",
+                        "NormalMove",
+                        "Warning",
+                        "RandomWalk",
+                        "HurricaneRush_Drop"
+                    ],
+                    "modifierName": "WindEffect"
+                }
+            ],
+            "modifiers": {
+                "WindEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Lesser",
+                                    "ratio": 200.0,
+                                    "parameter": "PoseID"
+                                }
+                            ],
+                            "shieldHP": "Eff_Monster_Elemental_Wind_Idle",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_FlyState",
+            "modifiers": {
+                "UNIQUE_Elemental_Wind_FlyState": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "State"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "WeakTrigger"
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "State",
+                            "value": 1
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Elemental_Wind_Die"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Elemental_Wind_FlyState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_Die",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Elemental_Wind_FlyState"
+                },
+                {
+                    "$type": "ResetAnimatorTrigger",
+                    "triggerID": "WeakTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_WeakStart",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Weak_Start"
+                    ],
+                    "modifierName": "WeakStart"
+                }
+            ],
+            "modifiers": {
+                "WeakStart": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Entity_WeightRatio": 0.20000000298023224,
+                        "Actor_EndureDelta": 1.0
+                    },
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "State",
+                            "value": 2
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Elemental_Wind_WeakTimer"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "WeakStart"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_WeakTimer",
+            "modifiers": {
+                "WeakTimer": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Entity_WeightRatio": 0.20000000298023224,
+                        "Actor_EndureDelta": 1.0
+                    },
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "WeakEndTrigger"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "WeakTimer"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_RandomWalk",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "RandomWalk"
+                    ],
+                    "angularSpeed": 150.0,
+                    "attackTrigger": ""
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_HurricaneRush_Drop",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "HurricaneRush_Drop",
+                        "HurricaneRush_BS",
+                        "HurricaneRush_Loop",
+                        "HurricaneRush_AS"
+                    ],
+                    "modifierName": "HurricaneRush_State"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "HurricaneRush_Drop"
+                    ],
+                    "modifierName": "HurricaneRush_Drop"
+                }
+            ],
+            "modifiers": {
+                "HurricaneRush_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "SkillDrop",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "SkillDrop"
+                        }
+                    ]
+                },
+                "HurricaneRush_Drop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -1.0
+                    }
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_HurricaneRush",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "HurricaneRush_BS"
+                    ],
+                    "angularSpeed": 150.0,
+                    "attackTrigger": ""
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "HurricaneRush_BS"
+                    ],
+                    "modifierName": "HurricaneRush_BS"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "HurricaneRush_Loop"
+                    ],
+                    "modifierName": "HurricaneRush_Loop"
+                }
+            ],
+            "modifiers": {
+                "HurricaneRush_BS": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Elemental_Wind_Shock_BS",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "HurricaneRush_Loop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Elemental_Wind_HurricaneRush_Loop",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "ResetAnimatorTrigger",
+                            "triggerID": "AttackLanded"
+                        },
+                        {
+                            "$type": "Predicated",
+                            "target": "SelfAttackTarget",
+                            "targetPredicates": [
+                                {
+                                    "$type": "OMMNCGCCJEK",
+                                    "logic": "Lesser",
+                                    "ratio": 12.5
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetAnimatorBool",
+                                    "boolID": "DistanceFaraway"
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "SetAnimatorBool",
+                                    "boolID": "DistanceFaraway",
+                                    "ratio": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": -5.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "height": 10.0,
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Wind",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "retreatType": "ByTangent",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.1599999964237213,
+                                "shakeTime": 0.11999999731779099,
+                                "shakeDistance": 35.0
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_Shock_BS",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Shock_BS"
+                    ],
+                    "modifierName": "Shock_BS"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Shock_Fall"
+                    ],
+                    "modifierName": "Shock_Fall"
+                }
+            ],
+            "modifiers": {
+                "Shock_BS": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "WindZoneMixin",
+                            "shapeName": "CircleR10",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "AMCAIHBNPDK": true
+                            },
+                            "KJCCGILPGFE": 3.75,
+                            "attenuation": 1.0,
+                            "DPIFCMEMHDF": 0.5,
+                            "targetType": "All",
+                            "predicates": [
+                                {
+                                    "$type": "FCCCAHINIHD",
+                                    "logic": "LesserOrEqual",
+                                    "EEHFIGKIJPE": 100.0
+                                }
+                            ],
+                            "modifierName": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Elemental_Wind_Shock_BS",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Elemental_Wind_Shock_BS_OnGround",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "AMCAIHBNPDK": true
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Elemental_Wind_Shock_Alert",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "AMCAIHBNPDK": true
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Elemental_Wind_FlyState"
+                        }
+                    ]
+                },
+                "Shock_Fall": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": 12.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_Shock_AS",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Shock_Fall",
+                        "Shock_AS",
+                        "Shock_Up"
+                    ],
+                    "modifierName": "Shock_Drop"
+                }
+            ],
+            "modifiers": {
+                "Shock_Drop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "SkillDrop",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "SkillDrop"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Elemental_Wind_Shock_Wave",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "AMCAIHBNPDK": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 5.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Wind",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeRange": 0.1599999964237213,
+                                "shakeTime": 0.11999999731779099,
+                                "shakeDistance": 35.0
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_EarthWrath_BS",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "EarthWrath_BS"
+                    ],
+                    "modifierName": "EarthWrath_BS"
+                }
+            ],
+            "modifiers": {
+                "EarthWrath_BS": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Elemental_Wind_EarthWrath_BS",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "EarthWrath_BS_Ground"
+                        }
+                    ]
+                },
+                "EarthWrath_BS_Ground": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.25,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Elemental_Wind_EarthWrath_BS_01",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "AMCAIHBNPDK": true
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": -9.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 10.0,
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Group1",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.10000000149011612,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Wind",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Pierce",
+                                        "enBreak": 100.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV5",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "forceCameraShake": true,
+                                    "cameraShake": {
+                                        "shakeType": "HitVector",
+                                        "shakeRange": 0.1599999964237213,
+                                        "shakeTime": 0.15000000596046448,
+                                        "shakeDistance": 35.0,
+                                        "shakeDir": {
+                                            "y": 1.0
+                                        }
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "UNIQUE_EarthWrath_Airflow": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.5,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "SelfAttackTarget",
+                            "targetPredicates": [
+                                {
+                                    "$type": "OMMNCGCCJEK",
+                                    "logic": "GreaterOrEqual",
+                                    "ratio": 7.0
+                                },
+                                {
+                                    "$type": "OMMNCGCCJEK",
+                                    "logic": "Lesser",
+                                    "ratio": 12.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "target": "SelfAttackTarget",
+                                    "lifeByOwnerIsAlive": true,
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "JCADOOKNCPM": {
+                                            "$type": "DDBMEHNLPBF",
+                                            "MNPPBODHINO": 0.75,
+                                            "DEEJGGKEKNN": 2.25
+                                        },
+                                        "AMCAIHBNPDK": true
+                                    },
+                                    "checkGround": {
+                                        "enable": true,
+                                        "raycastDownHeight": 10.0
+                                    },
+                                    "gadgetID": 42002001,
+                                    "campID": 4001,
+                                    "campTargetType": "All"
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "SelfAttackTarget",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "OMMNCGCCJEK",
+                                            "logic": "Lesser",
+                                            "ratio": 7.0
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "CreateGadget",
+                                            "lifeByOwnerIsAlive": true,
+                                            "born": {
+                                                "$type": "EOJBLPNGNCN",
+                                                "JCADOOKNCPM": {
+                                                    "$type": "DDBMEHNLPBF",
+                                                    "MNPPBODHINO": 6.0,
+                                                    "DEEJGGKEKNN": 6.0
+                                                },
+                                                "AMCAIHBNPDK": true
+                                            },
+                                            "checkGround": {
+                                                "enable": true,
+                                                "raycastDownHeight": 10.0
+                                            },
+                                            "gadgetID": 42002001,
+                                            "campID": 4001,
+                                            "campTargetType": "All"
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "Predicated",
+                                            "target": "SelfAttackTarget",
+                                            "targetPredicates": [
+                                                {
+                                                    "$type": "OMMNCGCCJEK",
+                                                    "logic": "GreaterOrEqual",
+                                                    "ratio": 12.0
+                                                }
+                                            ],
+                                            "successActions": [
+                                                {
+                                                    "$type": "CreateGadget",
+                                                    "target": "SelfAttackTarget",
+                                                    "lifeByOwnerIsAlive": true,
+                                                    "born": {
+                                                        "$type": "EOJBLPNGNCN",
+                                                        "AMCAIHBNPDK": true
+                                                    },
+                                                    "checkGround": {
+                                                        "enable": true,
+                                                        "raycastDownHeight": 10.0
+                                                    },
+                                                    "gadgetID": 42002001,
+                                                    "campID": 4001,
+                                                    "campTargetType": "All"
+                                                }
+                                            ],
+                                            "failActions": [
+                                                {
+                                                    "$type": "CreateGadget",
+                                                    "lifeByOwnerIsAlive": true,
+                                                    "born": {
+                                                        "$type": "EOJBLPNGNCN",
+                                                        "JCADOOKNCPM": {
+                                                            "$type": "DDBMEHNLPBF",
+                                                            "MNPPBODHINO": 5.0,
+                                                            "DEEJGGKEKNN": 10.0
+                                                        },
+                                                        "AMCAIHBNPDK": true
+                                                    },
+                                                    "checkGround": {
+                                                        "enable": true,
+                                                        "raycastDownHeight": 10.0
+                                                    },
+                                                    "gadgetID": 42002001,
+                                                    "campID": 4001,
+                                                    "campTargetType": "All"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "CreateGadget",
+                            "lifeByOwnerIsAlive": true,
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 5.0,
+                                    "DEEJGGKEKNN": 10.0
+                                },
+                                "AMCAIHBNPDK": true
+                            },
+                            "checkGround": {
+                                "enable": true,
+                                "raycastDownHeight": 10.0
+                            },
+                            "gadgetID": 42002001,
+                            "campID": 4001,
+                            "campTargetType": "All"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "CreateGadget",
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": -10.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true
+                    },
+                    "gadgetID": 42002002,
+                    "campID": 4001,
+                    "campTargetType": "All"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "EarthWrath_BS_Ground"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_EarthWrath_Airflow"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_EarthWrath_Over",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "EarthWrath_BS",
+                        "EarthWrath_Burst"
+                    ],
+                    "modifierName": "EarthWrath_State"
+                }
+            ],
+            "modifiers": {
+                "EarthWrath_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_EarthWrath_Airflow"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42002002
+                            },
+                            "parameter": "EarthWrathEnd",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Elemental_Wind_EarthWrath_Area"
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42002002
+                            },
+                            "duration": 1.5
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42002001
+                            }
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Elemental_Wind_FlyState"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "EarthWrath_State"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_EarthWrath_Airflow"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_EarthWrath_Area",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Monster_Elemental_Wind_EarthWrath_Area",
+                    "effectTempleteID": -1.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.5
+                                }
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.20000000298023224,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Wind",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV4",
+                                "retreatType": "ByHitDirection",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeType": "HitVector",
+                                "shakeRange": 0.1599999964237213,
+                                "shakeTime": 0.15000000596046448,
+                                "shakeDistance": 35.0,
+                                "shakeDir": {
+                                    "y": 1.0
+                                }
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_EarthWrath_Burst",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "EarthWrath_Burst"
+                    ],
+                    "modifierName": "EarthWrath_Burst_State"
+                }
+            ],
+            "modifiers": {
+                "EarthWrath_Burst_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "EarthWrath_Burst"
+                        }
+                    ]
+                },
+                "EarthWrath_Burst": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Elemental_Wind_EarthWrath_Burst",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "AMCAIHBNPDK": true
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": -9.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 7.0,
+                                    "EBADGGHGLKN": 15.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Group1",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.10000000149011612,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Wind",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 1.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV0",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": -9.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 15.0,
+                                    "EBADGGHGLKN": 3.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.10000000149011612,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Wind",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV0",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "EarthWrath_Burst"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Elemental_Wind_AirflowField_Create",
+            "modifiers": {
+                "AirflowField_Create": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AirFlowMixin",
+                            "gadgetID": 42002003,
+                            "campTargetType": "All",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "AirflowField_Create"
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,198 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Team_TeamChargeMark",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_Ability_TeamChargeMark",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        19.5,
+                        20.5
+                    ],
+                    "modifierNameSteps": [
+                        "Blank"
+                    ],
+                    "actionQueues": [
+                        [
+                            {
+                                "$type": "AddGlobalValue",
+                                "ratio": 1.0,
+                                "key": "_Ability_TeamFullChargeMark",
+                                "useLimitRange": true,
+                                "maxValue": 1.0,
+                                "minValue": 0.0
+                            },
+                            {
+                                "$type": "AddGlobalValue",
+                                "ratio": -20.0,
+                                "key": "_Ability_TeamChargeMark",
+                                "useLimitRange": true,
+                                "maxValue": 20.0,
+                                "minValue": 0.0
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_Ability_TeamFullChargeMark",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Blank",
+                        "Blank"
+                    ],
+                    "actionQueues": [
+                        [
+                            {
+                                "$type": "RemoveModifier",
+                                "target": "CurTeamAvatars",
+                                "PositionDampTime": true,
+                                "modifierName": "TeamFullChargeEffect"
+                            }
+                        ],
+                        [
+                            {
+                                "$type": "ApplyModifier",
+                                "target": "CurLocalAvatar",
+                                "modifierName": "TeamFullChargeEffect"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_Ability_AvatarFullChargeMark",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Blank",
+                        "Blank"
+                    ],
+                    "actionQueues": [
+                        [
+                            {
+                                "$type": "RemoveModifier",
+                                "target": "CurTeamAvatars",
+                                "PositionDampTime": true,
+                                "modifierName": "AvatarFullChargeEffect"
+                            }
+                        ],
+                        [
+                            {
+                                "$type": "ApplyModifier",
+                                "target": "CurTeamAvatars",
+                                "PositionDampTime": true,
+                                "modifierName": "AvatarFullChargeEffect"
+                            }
+                        ]
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Blank": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0
+                },
+                "TeamChargeMark_Decay": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 5.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_Ability_TeamChargeMark",
+                            "useLimitRange": true,
+                            "maxValue": 20.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "TeamFullChargeEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "PositionDampTime": true,
+                            "shieldHP": "Eff_Avatar_WhiteBox_TeamChargeMark",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "AvatarFullChargeEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "PositionDampTime": true,
+                            "shieldHP": "",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "TeamChargeMark_Decay"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "TeamAbility_Reset_Crystal_Mark",
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_CrystalSeed_Electric_Shield_Mark",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_CrystalSeed_Ice_Shield_Mark",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_CrystalSeed_Fire_Shield_Mark",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_CrystalSeed_Water_Shield_Mark",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    }
+]

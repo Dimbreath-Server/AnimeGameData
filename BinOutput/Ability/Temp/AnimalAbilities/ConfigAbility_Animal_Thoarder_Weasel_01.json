@@ -1,0 +1,502 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Thoarder_Weasel_Alert",
+            "modifiers": {
+                "SetSelfAttackTarget": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetSelfAttackTarget",
+                            "target": "Caster"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_IS_WEASEL",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_Invisible"
+                },
+                {
+                    "$type": "AttachEffect",
+                    "PositionDampTime": true,
+                    "shieldHP": "Eff_Animal_Thoarder_Weasel_Jump",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "AMCAIHBNPDK": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "Predicated",
+                    "otherTargets": {
+                        "$type": "ODOCBBCLHLC",
+                        "value": 2
+                    },
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_IS_MOLE_HOLE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Target",
+                            "modifierName": "SetSelfAttackTarget"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Thoarder_Weasel_Drill",
+            "modifiers": {
+                "UNIQUE_Blink_Actions": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Blink_Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Blink_DenyLockOn"
+                        },
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        }
+                    ]
+                },
+                "Blink_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "Blink_DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                },
+                "TriggerGadgetState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ExecuteGadgetLua",
+                            "param1": 203
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_IS_WEASEL",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Blink_Actions"
+                },
+                {
+                    "$type": "Predicated",
+                    "otherTargets": {
+                        "$type": "ODOCBBCLHLC",
+                        "value": 2
+                    },
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_IS_MOLE_HOLE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Target",
+                            "modifierName": "TriggerGadgetState"
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Disappear",
+                            "ratio": true
+                        }
+                    ]
+                },
+                {
+                    "$type": "KillSelf",
+                    "banDrop": true,
+                    "banExp": true,
+                    "killSelfType": "Disappear"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Thoarder_Weasel_Drill_Exit",
+            "modifiers": {
+                "Disappear_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "Disappear_DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                },
+                "Disappear_Display": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Disappear_Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Disappear_DenyLockOn"
+                        },
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Disappear_Display"
+                },
+                {
+                    "$type": "KillSelf",
+                    "banDrop": true,
+                    "banExp": true,
+                    "killSelfType": "Disappear"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Thoarder_Weasel_Jump",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        3
+                    ],
+                    "modifierName": "UNIQUE_Invisible"
+                }
+            ],
+            "modifiers": {
+                "Invisible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Invisible"
+                        }
+                    ]
+                },
+                "UNIQUE_Invisible": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "DenyLockOn"
+                        },
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        }
+                    ]
+                },
+                "Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Thoarder_Weasel_Flee",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        901,
+                        911
+                    ],
+                    "modifierName": "DropMora"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Run",
+                        "Disappear",
+                        "Walk",
+                        "Standby_Walk"
+                    ],
+                    "modifierName": "Effect"
+                },
+                {
+                    "$type": "DoActionByAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Disappear"
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Disappear"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Animal_Thoarder_Weasel_Walk",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "DropMora": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onThinkInterval": [
+                        {
+                            "$type": "DropSubfield",
+                            "subfieldName": "MoraDrop"
+                        }
+                    ]
+                },
+                "Disappear": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "StartDither",
+                            "duration": 3.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "DropMora"
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "banDrop": true,
+                            "banExp": true,
+                            "killSelfType": "Disappear"
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Disappear",
+                            "ratio": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Thoarder_Weasel_ToWander",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Wander",
+                    "ratio": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Thoarder_Weasel_ToIdle",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Wander"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_Thoarder_Weasel_State",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        1,
+                        2,
+                        3,
+                        101,
+                        102,
+                        9
+                    ],
+                    "modifierName": "LockHp"
+                }
+            ],
+            "modifiers": {
+                "LockHp": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "LockHP"
+                },
+                "HideUIBillBoard": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "HideUIBillBoard"
+                },
+                {
+                    "$type": "AttachEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_THOARDER_WEASEL_LEVEL01",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "shieldHP": "Eff_Animal_Thoarder_Weasel_Bag01",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "AttachEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_THOARDER_WEASEL_LEVEL02",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "shieldHP": "Eff_Animal_Thoarder_Weasel_Bag02",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "AttachEffect",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_THOARDER_WEASEL_LEVEL03",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "shieldHP": "Eff_Animal_Thoarder_Weasel_Bag03",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    }
+]

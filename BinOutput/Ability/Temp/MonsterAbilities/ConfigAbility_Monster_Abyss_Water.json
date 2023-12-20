@@ -1,0 +1,2606 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Abyss_Water_SpecialsState",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByStateIDMixin",
+                    "stateIDs": [
+                        "Sacrifice",
+                        "TurnToSacrifice"
+                    ],
+                    "enterPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "exitPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD",
+                            "ratio": 0.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Abyss_Water_ElementShield_Remove_NoBroken"
+                        }
+                    ],
+                    "exitActions": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "ElementState",
+                            "value": 2
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Abyss_Water_ElementShield"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Abyss_Water_ElementShield_Effect"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ElementShield_Remove_NoBroken",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Abyss_Water_ElementShield"
+                },
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "ElementState",
+                    "value": 2
+                },
+                {
+                    "$type": "ResetAnimatorTrigger",
+                    "triggerID": "ShiledBrokenTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_SacrificeAlert",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "ElementState",
+                    "value": 2
+                },
+                {
+                    "$type": "TriggerAbility",
+                    "abilityName": "Abyss_Water_ElementShield"
+                },
+                {
+                    "$type": "TriggerAbility",
+                    "abilityName": "Abyss_Water_ElementShield_Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_WeaponElement",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        201,
+                        300,
+                        301
+                    ],
+                    "modifierName": "WeaponEffect"
+                }
+            ],
+            "modifiers": {
+                "WeaponEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_WeaponElement",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "WeaponEffect"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ElementShield",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        300,
+                        301,
+                        302
+                    ],
+                    "modifierName": "Abyss_Water_ElementShield_RecoverHandler"
+                }
+            ],
+            "abilitySpecials": {
+                "ElementShield_DurabilityImprove": 0.0
+            },
+            "modifiers": {
+                "Abyss_Water_ElementShield_RecoverHandler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onReconnect": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_ElementShield"
+                        }
+                    ]
+                },
+                "UNIQUE_MonsterEliteAffix_DefaultState": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "UseSkillEliteSet",
+                            "skillEliteSetID": 1
+                        }
+                    ]
+                },
+                "UNIQUE_Abyss_Water_ElementShield": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": [
+                        300.0,
+                        "ElementShield_DurabilityImprove",
+                        "MUL",
+                        300.0,
+                        "ADD"
+                    ],
+                    "modifierMixins": [
+                        {
+                            "$type": "ElementShieldMixin",
+                            "elementType": "Water",
+                            "showDamageText": "",
+                            "shieldAngle": 360.0,
+                            "maxShieldByHPRatio": 1.0,
+                            "damageRatio": 0.20000000298023224,
+                            "onShieldSuccess": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Avatar",
+                                                "Partner"
+                                            ]
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "SetGlobalDir",
+                                            "target": "Target",
+                                            "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD_HIT",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "GIAOINGDIPJ": {
+                                                    "$type": "IODLJEIOAPP"
+                                                }
+                                            },
+                                            "setTarget": false
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "SetGlobalDir",
+                                            "target": "TargetOriginOwner",
+                                            "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD_HIT",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "GIAOINGDIPJ": {
+                                                    "$type": "IODLJEIOAPP"
+                                                }
+                                            },
+                                            "setTarget": false
+                                        }
+                                    ]
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Abyss_Water_ElementShield_Hit_Invalid",
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "GIAOINGDIPJ": {
+                                            "$type": "NNLPINDGCEC",
+                                            "directionKey": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD_HIT"
+                                        }
+                                    },
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "SendEffectTrigger",
+                                    "parameter": "BeHitInvalid",
+                                    "attachPoint": "",
+                                    "shieldHP": "Eff_Monster_Abyss_Water_ElementShield_BS"
+                                }
+                            ],
+                            "onShieldFailed": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Avatar",
+                                                "Partner"
+                                            ]
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "SetGlobalDir",
+                                            "target": "Target",
+                                            "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD_HIT",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "GIAOINGDIPJ": {
+                                                    "$type": "IODLJEIOAPP"
+                                                }
+                                            },
+                                            "setTarget": false
+                                        }
+                                    ],
+                                    "failActions": [
+                                        {
+                                            "$type": "SetGlobalDir",
+                                            "target": "TargetOriginOwner",
+                                            "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD_HIT",
+                                            "born": {
+                                                "$type": "PBDNLGHAMHE",
+                                                "GIAOINGDIPJ": {
+                                                    "$type": "IODLJEIOAPP"
+                                                }
+                                            },
+                                            "setTarget": false
+                                        }
+                                    ]
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Abyss_Water_ElementShield_Hit",
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "GIAOINGDIPJ": {
+                                            "$type": "NNLPINDGCEC",
+                                            "directionKey": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD_HIT"
+                                        }
+                                    },
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "SendEffectTrigger",
+                                    "parameter": "BeHit",
+                                    "attachPoint": "",
+                                    "shieldHP": "Eff_Monster_Abyss_Water_ElementShield_BS"
+                                },
+                                {
+                                    "$type": "KillSelf",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_MONSTER_ForCharAmusement_Shield",
+                                            "ratio": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "useMutiPlayerFixData": true,
+                            "updateShieldByMaxHp": true
+                        },
+                        {
+                            "$type": "VelocityForceMixin",
+                            "excludeForces": [
+                                "WindZoneType"
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_MoveOnWaterHandler"
+                        },
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 14001
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "ShiledBrokenTrigger"
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "ElementState"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_RETURNTOBORN_TAG_",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "UNIQUE_Abyss_Water_MoveOnWaterHandler"
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_ElementShield_Effect"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "target": "Target",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ELITEAFFIX_DEFENCE_ENHANCE",
+                                    "ratio": 1.0,
+                                    "PLDDAFOIEGE": true
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                },
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "target": "Caster",
+                                    "logic": "GreaterOrEqual",
+                                    "ratio": 301.0,
+                                    "parameter": "PoseID"
+                                }
+                            ],
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Water",
+                                    "bonusCriticalHurt": 25.0,
+                                    "enBreak": 0.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "none",
+                                    "hitImpulseType": "LV0",
+                                    "muteHitText": true
+                                }
+                            }
+                        },
+                        {
+                            "$type": "DamageByAttackValue",
+                            "target": "TargetOwner",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ELITEAFFIX_DEFENCE_ENHANCE",
+                                    "ratio": 1.0,
+                                    "PLDDAFOIEGE": true
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                },
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "target": "Caster",
+                                    "logic": "GreaterOrEqual",
+                                    "ratio": 301.0,
+                                    "parameter": "PoseID"
+                                }
+                            ],
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Water",
+                                    "bonusCriticalHurt": 25.0,
+                                    "enBreak": 0.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "none",
+                                    "hitImpulseType": "LV0",
+                                    "muteHitText": true
+                                }
+                            }
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_ElementShield"
+                        }
+                    ]
+                },
+                "UNIQUE_Abyss_Water_MoveOnWaterHandler": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "EnableCharacterMoveOnWaterMixin"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "globalValueKey": "_MONSTERAFFIX_ELEMENTSHIELD_DURABILITYIMPROVE",
+                    "overrideMapKey": "ElementShield_DurabilityImprove"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_TAG",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "modifierName": "UNIQUE_MonsterEliteAffix_DefaultState"
+                },
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "ElementState",
+                    "value": 2
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Abyss_Water_ElementShield"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "ElementState",
+                    "value": 2
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Abyss_Water_ElementShield"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ElementShield_Effect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        300,
+                        301,
+                        302
+                    ],
+                    "modifierName": "Abyss_Water_ElementShield_Effect_RecoverHandler"
+                }
+            ],
+            "modifiers": {
+                "Abyss_Water_ElementShield_Effect_RecoverHandler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onReconnect": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_ElementShield_Effect"
+                        }
+                    ]
+                },
+                "UNIQUE_Abyss_Water_ElementShield_Effect": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox_ElementShield"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ]
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider_ElementShield"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_ElementShield_BS",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox_ElementShield"
+                            ]
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider_ElementShield"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Abyss_Water_ElementShield_Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ElementShield_Remove",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Abyss_Water_ElementShield"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_DizzyTimer",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        100,
+                        101
+                    ],
+                    "modifierName": "Abyss_Water_DizzyTimer_Handler"
+                }
+            ],
+            "abilitySpecials": {
+                "ElementShield_GapReduce": 0.0
+            },
+            "modifiers": {
+                "Abyss_Water_DizzyTimer_Handler": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_DizzyTimer"
+                        }
+                    ],
+                    "onReconnect": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_DizzyTimer"
+                        }
+                    ]
+                },
+                "UNIQUE_Abyss_Water_DizzyTimer": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": [
+                        12.0,
+                        "ElementShield_GapReduce",
+                        "MUL",
+                        12.0,
+                        "ADD"
+                    ],
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EndureDelta": 3.0
+                    },
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseInt",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "intID": "ElementState",
+                            "value": 1
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "globalValueKey": "_MONSTERAFFIX_ELEMENTSHIELD_GAPREDUCE",
+                    "overrideMapKey": "ElementShield_GapReduce"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_GatherStart",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "GatherStart",
+                        "GatherLoop",
+                        "GatherSuccess_Alert"
+                    ],
+                    "modifierName": "GatherState"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        201
+                    ],
+                    "modifierName": "GatherEndure"
+                }
+            ],
+            "modifiers": {
+                "GatherEndure": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EndureDelta": 0.4000000059604645
+                    }
+                },
+                "GatherState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_ABYSS_WATER_GATHER",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_GATHERFAILEDSTATE_",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseInt",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "intID": "ElementState"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42201004
+                            },
+                            "abilityName": "Abyss_Water_WaterBall_Explode"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42201005
+                            },
+                            "abilityName": "Abyss_Water_Bubble_Explode"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_GatherLoop",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "GatherLoop"
+                    ],
+                    "modifierName": "GatherLoop_Effect"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "GatherLoop"
+                    ],
+                    "modifierName": "Gather_CreateBall"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "GatherLoop"
+                    ],
+                    "modifierName": "Gather_CreateBubble"
+                }
+            ],
+            "modifiers": {
+                "GatherLoop_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Gather",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_WeaponElement",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Gather_CreateBall": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetGlobalPos",
+                            "key": "Gather_BallPos",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 1.0,
+                                    "DEEJGGKEKNN": 7.0
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42201004,
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "GIAOINGDIPJ": {
+                                    "$type": "OONECEOHBMB",
+                                    "eularAngles": {
+                                        "x": -90.0
+                                    }
+                                },
+                                "positionKey": "Gather_BallPos",
+                                "directionKey": ""
+                            }
+                        }
+                    ]
+                },
+                "Gather_CreateBubble": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetGlobalPos",
+                            "key": "Gather_BubblePos",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 2.0,
+                                    "DEEJGGKEKNN": 6.0
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42201005,
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "GIAOINGDIPJ": {
+                                    "$type": "OONECEOHBMB",
+                                    "eularAngles": {
+                                        "x": -90.0
+                                    }
+                                },
+                                "positionKey": "Gather_BubblePos",
+                                "directionKey": ""
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_GatherAlert",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "GatherSuccess_Alert"
+                    ],
+                    "modifierName": "GatherAlert"
+                }
+            ],
+            "modifiers": {
+                "GatherAlert": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Gather_Alert",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_GatherSuccess",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Abyss_Water_DizzyTimer"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Gather_AS_Hor",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.75,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 5.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 2.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Gather_AS_Ver",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 5.0,
+                                    "MJHHBAFNOEG": -0.5
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 1.0,
+                                "JKDAHJILGBJ": 10.0,
+                                "MJHHBAFNOEG": 1.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 2.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "ActCameraShake",
+                    "cameraShake": {
+                        "shakeType": "CustomVector",
+                        "shakeRange": 0.1599999964237213,
+                        "shakeTime": 0.30000001192092896,
+                        "shakeDistance": 25.0,
+                        "shakeDir": {
+                            "y": 1.0
+                        },
+                        "extension": {
+                            "rangeAttenuation": 0.8999999761581421
+                        }
+                    }
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_GATHERFAILEDSTATE_",
+                    "useLimitRange": true,
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "DoWatcherSystemAction",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Self",
+                            "key": "_GATHERFAILEDSTATE_",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "watcherId": 82006,
+                    "inThreatListOnly": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_BlinkEffect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Blink"
+                    ],
+                    "modifierName": "Blink_State"
+                }
+            ],
+            "modifiers": {
+                "Blink_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Blink_Shield"
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Blink_Actions"
+                        }
+                    ]
+                },
+                "UNIQUE_Blink_Shield": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_ElementShield_Effect"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_ABYSS_WATER_ELEMENTSHIELD",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "abilityName": "Abyss_Water_ElementShield_Effect"
+                        }
+                    ]
+                },
+                "UNIQUE_Blink_Actions": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ELITEAFFIX_AGILITY_ENHANCE",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_Monster_Abyss_Water_Blink_AS",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.6499999761581421,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ELITEAFFIX_AGILITY_ENHANCE",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "abilityName": "Abyss_Water_DoBlink_Damage"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Blink_Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Blink_DenyLockOn"
+                        },
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ]
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard"
+                        }
+                    ]
+                },
+                "Blink_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "Blink_DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Blink_Shield"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Blink_Actions"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Blink_BS",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ClearLockTarget",
+                    "target": "CurLocalAvatar"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_BlinkPoint",
+            "onAbilityStart": [
+                {
+                    "$type": "TryFindBlinkPoint",
+                    "target": "SelfAttackTarget",
+                    "forwardAngle": 30.0,
+                    "minRange": 5.0,
+                    "maxRange": 7.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Blink",
+                    "born": {
+                        "$type": "HPMHPFGMPLH"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_DoBlink",
+            "onAbilityStart": [
+                {
+                    "$type": "DoBlink"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_DoBlink_Visible",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Blink_AS",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.6499999761581421,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Blink_Actions"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_DoBlink_Damage",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "height": 2.0,
+                            "EBADGGHGLKN": 2.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_Blink_AS",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Blink_Shield"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ForceDefend",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        101
+                    ],
+                    "modifierName": "ForceDefend"
+                }
+            ],
+            "modifiers": {
+                "ForceDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "BeHit",
+                                "BeHitThrow"
+                            ],
+                            "defendTriggerID": "DefendTrigger",
+                            "defendProbability": 0.20000000298023224,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 8.0,
+                            "alwaysRecover": false,
+                            "defendCountInterval": 0,
+                            "onDefendSucceded": [
+                                {
+                                    "$type": "TriggerAbility",
+                                    "abilityName": "Abyss_Water_ForceBlink"
+                                },
+                                {
+                                    "$type": "ClearLockTarget",
+                                    "target": "CurLocalAvatar"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ForceBlink",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ForceBlink"
+                    ],
+                    "modifierName": "ForceBlink_State"
+                }
+            ],
+            "modifiers": {
+                "ForceBlink_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_ForceBlink_Actions"
+                        }
+                    ]
+                },
+                "UNIQUE_ForceBlink_Actions": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ForceBlink_Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ForceBlink_DenyLockOn"
+                        },
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ]
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard"
+                        }
+                    ]
+                },
+                "ForceBlink_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "ForceBlink_DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Abyss_Water_DizzyTimer"
+                },
+                {
+                    "$type": "TryFindBlinkPoint",
+                    "target": "SelfAttackTarget",
+                    "forwardAngle": 30.0,
+                    "minRange": 9.0,
+                    "maxRange": 12.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_ForceBlink_Actions"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Blink_BS",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ForceBlink_DoBlink",
+            "onAbilityStart": [
+                {
+                    "$type": "DoBlink"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Blink_AS",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "RootNode"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ForceBlink_Visible",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_ForceBlink_Actions"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ForceBlink_AS",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "ElementState",
+                    "value": 1
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ReturnToBorn",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "ReturnToBorn"
+                    ],
+                    "modifierName": "ReturnToBorn_Disappear"
+                }
+            ],
+            "modifiers": {
+                "ReturnToBorn_Disappear": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_RETURNTOBORN_TAG_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "UNIQUE_ReturnToBorn_Shield"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "UNIQUE_ReturnToBorn_Actions"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "UNIQUE_ReturnToBorn_Dizzy"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Blink_BS",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_RETURNTOBORN_TAG_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_ReturnToBorn_Shield": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_ElementShield"
+                        },
+                        {
+                            "$type": "ResetAnimatorTrigger",
+                            "triggerID": "ShiledBrokenTrigger"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ReturnToBorn_Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ReturnToBorn_DenyLockOn"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "ElementState",
+                            "value": 2
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Abyss_Water_ElementShield_Effect"
+                        }
+                    ]
+                },
+                "UNIQUE_ReturnToBorn_Dizzy": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Abyss_Water_DizzyTimer"
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "ElementState",
+                            "value": 2
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Abyss_Water_ElementShield"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Abyss_Water_ElementShield_Effect"
+                        }
+                    ]
+                },
+                "UNIQUE_ReturnToBorn_Actions": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible"
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox",
+                                "HitBox_ElementShield"
+                            ]
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider",
+                                "PushCollider_ElementShield"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "visible": true
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                },
+                "ReturnToBorn_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "ReturnToBorn_DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_RETURNTOBORN_TAG_",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ReturnToBorn_AS",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Blink_AS",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.6499999761581421,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_ReturnToBorn_Dizzy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ReturnToBorn_Visible",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_ReturnToBorn_Actions"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_ReturnToBorn_ElementShield",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_ReturnToBorn_Shield"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_WaterBall",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "NormalAtk"
+                    ],
+                    "modifierName": "Normal_WeaponEffect"
+                }
+            ],
+            "modifiers": {
+                "Normal_WeaponEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Normal_WeaponElement",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_WeaponElement",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Normal_WeaponEffect"
+                },
+                {
+                    "$type": "SetAnimatorInt",
+                    "intID": "RandomFlag",
+                    "ratio": 300.0
+                },
+                {
+                    "$type": "SetAnimatorInt",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_AGILITY_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "intID": "RandomFlag",
+                    "ratio": 400.0
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42201001,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.5,
+                            "MJHHBAFNOEG": 1.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "HADFPLAAGIB": ""
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_WaterBall_Loop",
+            "modifiers": {
+                "UNIQUE_WaterBall_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 50.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Bullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_WaterBall_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_WaterBall_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_WaterBall_Loop"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Gather_WaterBall_Loop"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Bullet_AS",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.25,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 80.0,
+                                "attackType": "Range",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_Gather_WaterBall_Loop",
+            "modifiers": {
+                "UNIQUE_Gather_WaterBall_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 50.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_BulletFloat",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Gather_WaterBall_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_Gather_Bubble_Loop",
+            "modifiers": {
+                "UNIQUE_Gather_Bubble_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Bubble_Missle_Float",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "TriggerAbility",
+                            "predicates": [
+                                {
+                                    "$type": "GEDGJJJGFMM",
+                                    "EOIMJCLAFON": 0.0
+                                }
+                            ],
+                            "abilityName": "Abyss_Water_Bubble_Explode"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Gather_Bubble_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_Bubble_BS",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Abyss_Water_Bubble_Missle_BS",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "SetAnimatorInt",
+                    "intID": "RandomFlag",
+                    "ratio": 300.0
+                },
+                {
+                    "$type": "SetAnimatorInt",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_AGILITY_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "intID": "RandomFlag",
+                    "ratio": 500.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_Bubble",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "SpecialAtk"
+                    ],
+                    "modifierName": "Special_WeaponEffect"
+                }
+            ],
+            "modifiers": {
+                "Special_WeaponEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Special_WeaponElement",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_WeaponElement",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_ABILITY_ABYSS_WATER_GATHER",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Special_WeaponEffect"
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42201002,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 1.5,
+                            "MJHHBAFNOEG": 2.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "HADFPLAAGIB": ""
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_Bubble_Loop",
+            "modifiers": {
+                "UNIQUE_Bubble_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Bubble_Missle",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "TriggerAbility",
+                            "predicates": [
+                                {
+                                    "$type": "GEDGJJJGFMM",
+                                    "EOIMJCLAFON": 0.0
+                                }
+                            ],
+                            "abilityName": "Abyss_Water_Bubble_Explode"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Bubble_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_Bubble_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Bubble_Loop"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Gather_Bubble_Loop"
+                },
+                {
+                    "$type": "Predicated",
+                    "target": "Owner",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ABILITY_ABYSS_WATER_GATHER",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Bubble_Missle_Float_AS",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Bubble_Missle_AS",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "OriginOwner",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_BUBBLE_TRIGGER_TAG",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "bulletID": 42201016,
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    }
+                },
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_BUBBLE_EXPLODE_BEINGHIT_",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_BUBBLE_EXPLODE_BEINGHIT_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 1.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 100.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 100.0,
+                                        "attackType": "Range",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_Bubble_Surround",
+            "modifiers": {
+                "Bubble_Surround_Reject": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Owner",
+                            "modifierName": "Bubble_Surround"
+                        }
+                    ]
+                },
+                "Bubble_AntiGravity": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -7.5
+                    }
+                },
+                "Bubble_Surround": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "state": "Struggle",
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Bubble_AntiGravity"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Bubble",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Abyss_Water_Bubble_AS",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "RootNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "JFAJHKINFDM",
+                                    "isTarget": false,
+                                    "MEGGHKBHBEH": ""
+                                },
+                                {
+                                    "$type": "GEDGJJJGFMM",
+                                    "EOIMJCLAFON": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "RemoveModifier",
+                                    "modifierName": "Bubble_Surround"
+                                }
+                            ]
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Bubble_Surround"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "NNBKBBILDGO",
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Gadget"
+                                    ]
+                                },
+                                {
+                                    "$type": "FCCCAHINIHD",
+                                    "EEHFIGKIJPE": 100.0
+                                }
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Abyss_Water_Bubble_Explode"
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Abyss_Water_Bubble_Explode"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Target",
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Equip",
+                                        "MonsterEquip"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "Bubble_Surround_Reject"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Target",
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar",
+                                        "Monster",
+                                        "Partner"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "Bubble_Surround"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_Bubble_Still",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_BUBBLE_TRIGGER_TAG",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Abyss_Water_AnimationSteer",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "NormalAtk"
+                    ],
+                    "angularSpeed": 360.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "SpecialAtk"
+                    ],
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "RandomAction"
+                    ],
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                }
+            ]
+        }
+    }
+]

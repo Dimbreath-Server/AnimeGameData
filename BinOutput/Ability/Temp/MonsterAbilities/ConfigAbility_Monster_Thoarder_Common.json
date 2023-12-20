@@ -1,0 +1,2300 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Alert",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Armed"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Think"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Search"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Sit"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Sleep"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Chat"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Threat"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Afraid"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Laugh"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Mining01"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "Mining02"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_SpecialsState_Weapon",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        9002,
+                        9003,
+                        9004,
+                        9005,
+                        9006,
+                        9007,
+                        9008,
+                        9009,
+                        9101,
+                        9102
+                    ],
+                    "modifierName": "SpecialsState"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        9004,
+                        9005
+                    ],
+                    "modifierName": "SleepStateManager"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        9101,
+                        9102
+                    ],
+                    "modifierName": "Mining_Axe_Display"
+                }
+            ],
+            "modifiers": {
+                "SleepStateManager": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_IS_CLUB_01",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                0.8999999761581421,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "SleepState_Club"
+                            ],
+                            "removeAppliedModifier": false
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_IS_SHIELD_01",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                0.8999999761581421,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "SleepState_Shield"
+                            ],
+                            "removeAppliedModifier": false
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_IS_CROSSBOW_01",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                0.8999999761581421,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "SleepState_CrossBow"
+                            ],
+                            "removeAppliedModifier": false
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "SleepState_Club"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "SleepState_Shield"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "SleepState_CrossBow"
+                        }
+                    ]
+                },
+                "SpecialsState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Entity_MassRatio": 9999.0,
+                        "Entity_WeightRatio": 5.0
+                    },
+                    "onBeingHit": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Armed"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Think"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Search"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Sit"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Sleep"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Chat"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Threat"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Afraid"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Laugh"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Mining01"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Mining02"
+                        }
+                    ]
+                },
+                "SleepState_Club": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetWeaponBindState",
+                            "place": true,
+                            "equipPartName": "equip01",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 1.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 0.0,
+                                    "DEEJGGKEKNN": 0.5
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            }
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetWeaponBindState",
+                            "equipPartName": "equip01"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetWeaponBindState",
+                            "equipPartName": "equip01"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "SleepState_Shield": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetWeaponBindState",
+                            "place": true,
+                            "equipPartName": "equip02",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": -1.25,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 0.0,
+                                    "DEEJGGKEKNN": 0.5
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            }
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetWeaponBindState",
+                            "equipPartName": "equip02"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetWeaponBindState",
+                            "equipPartName": "equip02"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "SleepState_CrossBow": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetWeaponBindState",
+                            "place": true,
+                            "equipPartName": "equip01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.10000000149011612,
+                                    "MJHHBAFNOEG": 1.25
+                                },
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 0.0,
+                                    "DEEJGGKEKNN": 0.25
+                                },
+                                "AMCAIHBNPDK": true,
+                                "COAICNDKEMA": true,
+                                "attachPointName": "SetWeaponBindAttachPoint"
+                            }
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetWeaponBindState",
+                            "equipPartName": "equip01"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetWeaponBindState",
+                            "equipPartName": "equip01"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "shieldHP": "Eff_Monster_Weapon_Disappear",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Mining_Axe_Display": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Common_Pickaxe",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_EndureModifier",
+            "modifiers": {
+                "EndureModifier": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EndureDelta": 0.44999998807907104
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "EndureModifier"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_SteerMove",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn"
+                    ],
+                    "endNormalizedTime": 100.0,
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 3.75
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Die_SmokeBombInHandR_Start",
+            "modifiers": {
+                "UNIQUE_SmokeBombInHandR": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_SmokeBombInHandR"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Die_SmokeBombInHandL_Start",
+            "modifiers": {
+                "UNIQUE_SmokeBombInHandL": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_SmokeBombInHandL"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Die_SmokeBombEffect_End",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_SmokeBombInHandR"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_SmokeBombInHandL"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_ReturnToBorn",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        901
+                    ],
+                    "modifierName": "ReturnToBorn_Start"
+                }
+            ],
+            "modifiers": {
+                "ReturnToBorn_Start": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "SheathWeaponTrigger"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_SkillEliteSet_Default",
+            "modifiers": {
+                "UNIQUE_Thoarder_SkillEliteSet_Default": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "UseSkillEliteSet",
+                            "skillEliteSetID": 1
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_AFFIX_ALTSKILLSET101_TAG",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Thoarder_SkillEliteSet_Default"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_WeaponOnBack",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        1,
+                        2,
+                        9002,
+                        9003,
+                        9006,
+                        9008,
+                        9009
+                    ],
+                    "modifierName": "UNIQUE_WeaponOnBack"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_WeaponOnBack": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetWeaponAttachPointRealName",
+                            "partName": "equip01",
+                            "realName": "WeaponOnBack"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_WeaponOnBack"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_DrawWeapon",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        1001,
+                        1002,
+                        3,
+                        4,
+                        9007
+                    ],
+                    "modifierName": "UNIQUE_DrawWeapon"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_DrawWeapon": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_SheathWeapon"
+                        },
+                        {
+                            "$type": "SetWeaponAttachPointRealName",
+                            "partName": "equip01",
+                            "realName": ""
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_DrawWeapon"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_SheathWeapon",
+            "modifiers": {
+                "UNIQUE_SheathWeapon": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_DrawWeapon"
+                        },
+                        {
+                            "$type": "SetWeaponAttachPointRealName",
+                            "partName": "equip01",
+                            "realName": "WeaponOnBack"
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_SheathWeapon"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_HideWeapon",
+            "modifiers": {
+                "UNIQUE_HideWeapon": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_UnhideWeapon"
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_HideWeapon"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_UnhideWeapon",
+            "modifiers": {
+                "UNIQUE_UnhideWeapon": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_HideWeapon"
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip01"
+                                ]
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_UnhideWeapon"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_HatchetThrow_Loop",
+            "modifiers": {
+                "HatchetThrow_Loop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_HatchetThrowBullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "HatchetThrow_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_HatchetThrow_Damage",
+            "onAbilityStart": [
+                {
+                    "$type": "FireHitEffect",
+                    "hitEntity": "",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Monster_Thoarder_HatchetThrowBullet_HitScene",
+                        "surfaceEffect": {
+                            "Water": "Eff_Arrow_Fire_Hit_Water"
+                        }
+                    }
+                },
+                {
+                    "$type": "Predicated",
+                    "target": "Target",
+                    "targetPredicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Avatar",
+                                "Monster",
+                                "Gadget",
+                                "Bullet"
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "PONOPJHLOMA",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": -0.4000000059604645
+                                        },
+                                        "AMCAIHBNPDK": true,
+                                        "OLIAGPMOBLE": true
+                                    },
+                                    "size": {
+                                        "LOGNGLEIFML": 0.800000011920929,
+                                        "JKDAHJILGBJ": 0.800000011920929,
+                                        "MJHHBAFNOEG": 1.600000023841858
+                                    }
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.75,
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "strikeType": "Slash",
+                                        "enBreak": 100.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "cameraShake": {
+                                        "shakeRange": 0.05999999865889549,
+                                        "shakeTime": 0.09000000357627869
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_MuddyBullet_Loop",
+            "modifiers": {
+                "MuddyBullet_Loop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_MuddyBullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "MuddyBullet_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_MuddyBullet_OnHit",
+            "modifiers": {
+                "MuddyBullet_ScreenEffect": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerPostProcessEffectMixin",
+                            "postEffectAssetName": "PostEffect_Monster_Thoarder_MuddyBullet_ScreenEffect",
+                            "duration": 5.0
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "DungeonFogEffects",
+                            "muteRemoteAction": true,
+                            "enable": true,
+                            "cameraFogEffectName": "Eff_Monster_Thoarder_MuddyBullet_ScreenEffect",
+                            "playerFogEffectName": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "DungeonFogEffects",
+                            "cameraFogEffectName": "",
+                            "playerFogEffectName": ""
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "DungeonFogEffects",
+                            "cameraFogEffectName": "",
+                            "playerFogEffectName": ""
+                        }
+                    ]
+                },
+                "MuddyBullet_ScreenEffectApplier": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "MuddyBulletAttack"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Target",
+                                    "modifierName": "MuddyBullet_ScreenEffect"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "MuddyBullet_ScreenEffectApplier"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Thoarder_MuddyBullet_Hit",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.25,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 0.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "MuddyBulletAttack",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.0,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 0.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_Loop",
+            "modifiers": {
+                "BombThrow_Loop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_BombBullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "BombThrow_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Thoarder_BombBullet_Explode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "EBADGGHGLKN": 1.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.75,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 0.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_MolotovCocktail_Loop",
+            "modifiers": {
+                "UNIQUE_MolotovCocktail_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 50.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_MolotovCocktailBullet",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_MolotovCocktailBullet_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_MolotovCocktail_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_MolotovCocktail_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_MolotovCocktail_Loop"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Thoarder_MolotovCocktailBullet_Explode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.25,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "EBADGGHGLKN": 1.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.699999988079071,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "gadgetID": 42501007,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_Water_01_Loop",
+            "modifiers": {
+                "UNIQUE_Bomb_Water_01_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 50.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Bomb_Water_01_Bullet",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Bomb_Water_01_Bullet_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Bomb_Water_01_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_Water_01_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Bomb_Water_01_Loop"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Thoarder_Bomb_Water_01_Explode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.25,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "EBADGGHGLKN": 1.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.699999988079071,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Water",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "gadgetID": 42501008,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_Ice_01_Loop",
+            "modifiers": {
+                "UNIQUE_Bomb_Ice_01_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 50.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Bomb_Ice_01_Bullet",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Bomb_Ice_01_Bullet_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Bomb_Ice_01_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_Ice_01_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Bomb_Ice_01_Loop"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Thoarder_Bomb_Ice_01_Explode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.25,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "EBADGGHGLKN": 1.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.699999988079071,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Ice",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "gadgetID": 42501009,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_Electric_01_Loop",
+            "modifiers": {
+                "UNIQUE_Bomb_Electric_01_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 50.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Bomb_Electric_01_Bullet",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Bomb_Electric_01_Bullet_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Bomb_Electric_01_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_Electric_01_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Bomb_Electric_01_Loop"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Thoarder_Bomb_Electric_01_Explode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.25,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "EBADGGHGLKN": 1.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.699999988079071,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "gadgetID": 42501010,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_ElementalEffect_Fire",
+            "modifiers": {
+                "ElementalEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_MolotovCocktailBullet_Remains_Loop",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Group1",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.30000001192092896,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 25.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "",
+                                        "hitImpulseType": "LV1",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ElementalEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_ElementalEffect_Water",
+            "modifiers": {
+                "ElementalEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Bomb_Water_01_Remains_Loop",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Group1",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.30000001192092896,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Water",
+                                        "bonusCriticalHurt": 25.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "",
+                                        "hitImpulseType": "LV1",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ElementalEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_ElementalEffect_Ice",
+            "modifiers": {
+                "ElementalEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Bomb_Ice_01_Remains_Loop",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Group1",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.30000001192092896,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Ice",
+                                        "bonusCriticalHurt": 25.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "",
+                                        "hitImpulseType": "LV1",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ElementalEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_Bomb_ElementalEffect_Electric",
+            "modifiers": {
+                "ElementalEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Thoarder_Bomb_Electric_01_Remains_Loop",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Group1",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.30000001192092896,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 25.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "",
+                                        "hitImpulseType": "LV1",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ElementalEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_ThrowingKnife_Effect",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Monster_Thoarder_ThrowingKnife_Trail",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonsterAffix_Activity_Thoarder_Elite_Tag",
+            "modifiers": {
+                "MonsterAffix_Activity_Thoarder_Elite_Tag": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_THOARDER_ELITE_TAG_",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "MonsterAffix_Activity_Thoarder_Elite_Tag"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Thoarder_SneakV42_TauntEachOther",
+            "modifiers": {
+                "SneakV42_TauntEachOther": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 5.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerTaunt",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10H8",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_SNEAKV42_TAUNTEACHOTHER",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "careValue": 100.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerTaunt",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR10H8",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_SNEAKV42_TAUNTEACHOTHER",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "careValue": 100.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "SneakV42_TauntEachOther"
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_ABILITY_SNEAKV42_TAUNTEACHOTHER",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    }
+]

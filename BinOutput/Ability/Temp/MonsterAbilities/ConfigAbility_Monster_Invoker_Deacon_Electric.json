@@ -1,0 +1,1570 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_AnimatorSteer",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Alert"
+                    ],
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "NormalAtk"
+                    ],
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "RangeAtk"
+                    ],
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "MeleeAtk"
+                    ],
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "ChargeAtk"
+                    ],
+                    "angularSpeed": 180.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_Disappear",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        901,
+                        902,
+                        903
+                    ],
+                    "modifierName": "Invoker_Deacon_Electric_DisappearController"
+                }
+            ],
+            "modifiers": {
+                "Invoker_Deacon_Electric_DisappearController": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_DISAPPEAR",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Invoker_Deacon_Electric_ElementShield"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "ElementState"
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTERAFFIX_QUEST_RETURNTOBORN",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AttachModifier",
+                                    "modifierName": "Invoker_Deacon_Electric_ReturnToBornController"
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "AttachModifier",
+                                    "modifierName": "Invoker_Deacon_Electric_Disappear"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Invoker_Deacon_Electric_Disappear_Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Invoker_Deacon_Electric_Disappear_DenyLockOn"
+                        }
+                    ]
+                },
+                "Invoker_Deacon_Electric_Disappear_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "Invoker_Deacon_Electric_Disappear_DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                },
+                "Invoker_Deacon_Electric_Disappear": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "DisappearState",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "SetCanDieImmediately",
+                            "dieImmediately": true
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "banDrop": true,
+                            "banExp": true,
+                            "banHPPercentageDrop": true,
+                            "killSelfType": "Disappear"
+                        }
+                    ]
+                },
+                "Invoker_Deacon_Electric_ReturnToBornController": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToPoseIDMixin",
+                            "poseIDs": [
+                                902,
+                                903
+                            ],
+                            "modifierName": "Invoker_Deacon_Electric_ReturnToBorn"
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_HIDE_MODEL_",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "Invoker_Show_Model",
+                                "Invoker_Blink_Disappear"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "WanderState",
+                            "ratio": true
+                        }
+                    ]
+                },
+                "Invoker_Blink_Disappear": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "canBeHandledOnRecover": true
+                        }
+                    ]
+                },
+                "Invoker_Show_Model": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetVisible",
+                            "canBeHandledOnRecover": true,
+                            "visible": true
+                        }
+                    ]
+                },
+                "Invoker_Deacon_Electric_ReturnToBorn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachActionToModifierMixin",
+                            "onAdded": [
+                                {
+                                    "$type": "HideUIBillBoard",
+                                    "hide": true
+                                },
+                                {
+                                    "$type": "EnableHitBoxByName",
+                                    "hitBoxNames": [
+                                        "HitBox",
+                                        "HeadBox"
+                                    ]
+                                },
+                                {
+                                    "$type": "EnablePushColliderName",
+                                    "pushColliderNames": [
+                                        "PushCollider"
+                                    ]
+                                }
+                            ],
+                            "onRemoved": [
+                                {
+                                    "$type": "HideUIBillBoard"
+                                },
+                                {
+                                    "$type": "EnableHitBoxByName",
+                                    "hitBoxNames": [
+                                        "HitBox",
+                                        "HeadBox"
+                                    ],
+                                    "setEnable": true
+                                },
+                                {
+                                    "$type": "EnablePushColliderName",
+                                    "pushColliderNames": [
+                                        "PushCollider"
+                                    ],
+                                    "setEnable": true
+                                }
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Invoker_BornHigh",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_HIDE_MODEL_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Invoker_BornHigh",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_HIDE_MODEL_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_NormalAtk",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByStateIDMixin",
+                    "stateIDs": [
+                        "NormalAtk"
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_NORMALATK",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetOverrideMapValue",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_STATE",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "ratio": 1.0,
+                            "overrideMapKey": "Invoker_Deacon_Electric_NormalAtk_Count",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetOverrideMapValue",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_STATE",
+                                    "ratio": 2.0
+                                }
+                            ],
+                            "ratio": 2.0,
+                            "overrideMapKey": "Invoker_Deacon_Electric_NormalAtk_Count",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetOverrideMapValue",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_STATE",
+                                    "ratio": 3.0
+                                }
+                            ],
+                            "ratio": 3.0,
+                            "overrideMapKey": "Invoker_Deacon_Electric_NormalAtk_Count",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetOverrideMapValue",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_STATE",
+                                    "ratio": 4.0
+                                }
+                            ],
+                            "ratio": 4.0,
+                            "overrideMapKey": "Invoker_Deacon_Electric_NormalAtk_Count",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "AttackContinue",
+                            "ratio": true
+                        }
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "Invoker_Deacon_Electric_NormalAtk_Count": 1.0
+            },
+            "modifiers": {
+                "Invoker_Deacon_Electric_NormalAtk": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalPos",
+                            "target": "SelfAttackTarget",
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_NORMALATK_POS",
+                            "born": {
+                                "$type": "AKKLFFBMMHL",
+                                "AMCAIHBNPDK": true,
+                                "DOHGLKAMJKA": 0.5
+                            },
+                            "setTarget": false
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_NormalAtk01_Alert",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "_MONSTER_INVOKER_DEACON_ELECTRIC_NORMALATK_POS",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_NormalAtk01_Damage",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "_MONSTER_INVOKER_DEACON_ELECTRIC_NORMALATK_POS",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "positionKey": "_MONSTER_INVOKER_DEACON_ELECTRIC_NORMALATK_POS",
+                                        "directionKey": ""
+                                    },
+                                    "height": 2.0,
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.6660000085830688,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 100.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4"
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Invoker_Deacon_Electric_NormalAtk"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_NORMALATK",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetAnimatorBool",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_NORMALATK",
+                            "ratio": "Invoker_Deacon_Electric_NormalAtk_Count",
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        }
+                    ],
+                    "boolID": "AttackContinue"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_RangeAtk",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "target": "SelfAttackTarget",
+                    "bulletID": 42203001,
+                    "born": {
+                        "$type": "DPGGDGMPAMI",
+                        "offset": {
+                            "LOGNGLEIFML": -6.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "NBLKPHLEMGO": "Horizontal",
+                            "HADFPLAAGIB": ""
+                        },
+                        "ELLKCOEGCOP": -12.0,
+                        "PGJOKPGKPJA": 0.0,
+                        "LMODECPJPGO": 50.0
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "target": "SelfAttackTarget",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_STATE",
+                            "ratio": 2.0,
+                            "PLDDAFOIEGE": true,
+                            "ACJBNJNEBOC": "MoreThan"
+                        }
+                    ],
+                    "bulletID": 42203001,
+                    "born": {
+                        "$type": "DPGGDGMPAMI",
+                        "offset": {
+                            "LOGNGLEIFML": 6.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "NBLKPHLEMGO": "Horizontal",
+                            "HADFPLAAGIB": ""
+                        },
+                        "ELLKCOEGCOP": -12.0,
+                        "PGJOKPGKPJA": 0.0,
+                        "LMODECPJPGO": 50.0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_RangeAtk_Bullet",
+            "modifiers": {
+                "Invoker_Deacon_Electric_RangeAtk_Bullet": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.15000000596046448,
+                    "onAdded": [
+                        {
+                            "$type": "FireSubEmitterEffect",
+                            "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_RangeAtk01_Damage",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "AMCAIHBNPDK": true
+                            }
+                        },
+                        {
+                            "$type": "TriggerAudio",
+                            "operation": {
+                                "$type": "KKNAPGLMMPI",
+                                "operation": {
+                                    "text": "Play_sfx_monster_lnvoker_deacon_electric_vfx_rangeAtk01_damage"
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "AMCAIHBNPDK": true
+                                    },
+                                    "height": 4.0,
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Invoker_Deacon_Attenuation_1",
+                                    "attenuationGroup": "Monster_Invoker_Deacon_Attenuation_1",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.5329999923706055,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 100.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4"
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "FireSubEmitterEffect",
+                            "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_RangeAtk01_Damage",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "AMCAIHBNPDK": true
+                            }
+                        },
+                        {
+                            "$type": "TriggerAudio",
+                            "operation": {
+                                "$type": "KKNAPGLMMPI",
+                                "operation": {
+                                    "text": "Play_sfx_monster_lnvoker_deacon_electric_vfx_rangeAtk01_damage"
+                                }
+                            }
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "AMCAIHBNPDK": true
+                                    },
+                                    "height": 4.0,
+                                    "EBADGGHGLKN": 1.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Invoker_Deacon_Attenuation_1",
+                                    "attenuationGroup": "Monster_Invoker_Deacon_Attenuation_1",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.5329999923706055,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 100.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4"
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Invoker_Deacon_Electric_RangeAtk_Bullet"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_ChargeAtk_Detect",
+            "modifiers": {
+                "Invoker_Deacon_Electric_ChargeAtk_Detect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Invoker_Deacon_Electric_ChargeAtk"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                },
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "TargetTeam",
+                                    "modifierName": "UNIQUE_Invoker_Deacon_Electric_ChargeAtk"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Invoker_Deacon_Electric_ChargeAtk": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "target": "CurLocalAvatar",
+                            "shieldHP": "Eff_Monster_Invoker_Debuff_Hit_Electric",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "ReviveElemEnergy",
+                            "target": "CurTeamAvatars",
+                            "PositionDampTime": true,
+                            "ratio": -20.0
+                        },
+                        {
+                            "$type": "FireUIEffect",
+                            "shieldHP": "Eff_UI_Debuff_DecreaseEnergy_Invoker_Electric",
+                            "effectSlot": "ElementBurst"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Invoker_Deacon_Electric_ChargeAtk_Detect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_ChargeAtk01",
+            "modifiers": {
+                "Invoker_Deacon_Electric_ChargeAtk01_01": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42203002,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "HADFPLAAGIB": ""
+                                },
+                                "attachPointName": "ChargeAtk01_01"
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Invoker_Deacon_Electric_ChargeAtk01_02"
+                        }
+                    ]
+                },
+                "Invoker_Deacon_Electric_ChargeAtk01_02": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42203002,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "HADFPLAAGIB": ""
+                                },
+                                "attachPointName": "ChargeAtk01_02"
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Invoker_Deacon_Electric_ChargeAtk01_03"
+                        }
+                    ]
+                },
+                "Invoker_Deacon_Electric_ChargeAtk01_03": {
+                    "modifierName": "",
+                    "duration": 0.30000001192092896,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42203002,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "HADFPLAAGIB": ""
+                                },
+                                "attachPointName": "ChargeAtk01_03"
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Invoker_Deacon_Electric_ChargeAtk01_01"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_ChargeAtk02",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42203003,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": 2.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42203003,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 1.5,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 45.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42203003,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 2.0,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 90.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42203003,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 1.5,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": -1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 135.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42203003,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": -2.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 180.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42203003,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": -1.5,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": -1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 225.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42203003,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": -2.0,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 270.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42203003,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": -1.5,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 315.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_ChargeAtk01_Bullet",
+            "modifiers": {
+                "Invoker_Deacon_Electric_ChargeAtk01_Bullet": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_ChargeAtk01_Bullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Invoker_Deacon_Electric_ChargeAtk01_Bullet"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_ChargeAtk01_Explosion",
+                    "born": {
+                        "$type": "HANJDCBOIIE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 1.7999999523162842
+                        },
+                        "attackInfo": {
+                            "attackTag": "Invoker_Deacon_Electric_ChargeAtk",
+                            "attenuationTag": "Invoker_Deacon_Attenuation_2",
+                            "attenuationGroup": "Monster_Invoker_Deacon_Attenuation_2",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.3330000042915344,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV4"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_ChargeAtk01_Explosion",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_ChargeAtk01_Explosion",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "EBADGGHGLKN": 1.7999999523162842
+                        },
+                        "attackInfo": {
+                            "attackTag": "Invoker_Deacon_Electric_ChargeAtk",
+                            "attenuationTag": "Invoker_Deacon_Attenuation_2",
+                            "attenuationGroup": "Monster_Invoker_Deacon_Attenuation_2",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.3330000042915344,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV4"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_ChargeAtk02_Bullet",
+            "modifiers": {
+                "Invoker_Deacon_Electric_ChargeAtk02_Bullet": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_ChargeAtk02_Bullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Invoker_Deacon_Electric_ChargeAtk02_Bullet"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 0.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "Invoker_Deacon_Electric_ChargeAtk",
+                            "attenuationTag": "Invoker_Deacon_Attenuation_2",
+                            "attenuationGroup": "Monster_Invoker_Deacon_Attenuation_2",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.3330000042915344,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV4"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_ChargeAtk02_Explosion",
+            "onAbilityStart": [
+                {
+                    "$type": "FireSubEmitterEffect",
+                    "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_ChargeAtk02_Explosion"
+                },
+                {
+                    "$type": "TriggerAudio",
+                    "operation": {
+                        "$type": "KKNAPGLMMPI",
+                        "operation": {
+                            "text": "Play_sfx_monster_lnvoker_deacon_electric_vfx_chargeAtk02_explosion"
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "EBADGGHGLKN": 5.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "Invoker_Deacon_Electric_ChargeAtk",
+                            "attenuationTag": "Invoker_Deacon_Attenuation_2",
+                            "attenuationGroup": "Monster_Invoker_Deacon_Attenuation_2",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.3330000042915344,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Electric",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV4"
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_StateControl",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToHPPercentMixin",
+                    "valueSteps": [
+                        0.6000000238418579,
+                        0.20000000298023224
+                    ],
+                    "modifierNameSteps": [
+                        "Invoker_Empty",
+                        "UNIQUE_Invoker_Deacon_Electric_Normal",
+                        "UNIQUE_Invoker_Deacon_Electric_Element"
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        301
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_STATE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        302
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 2.0,
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_STATE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        401
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 3.0,
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_STATE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        402
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 4.0,
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_STATE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Invoker_Deacon_Electric_Limbo": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_HpThresholdRatio": 0.15000000596046448
+                    },
+                    "state": "Limbo",
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Invoker_Deacon_Electric_Standby",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Invoker_Empty": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "UNIQUE_Invoker_Deacon_Electric_Normal": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "NormalStage",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "NormalStage"
+                        }
+                    ]
+                },
+                "UNIQUE_Invoker_Deacon_Electric_Element": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "ElementState",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "ClearEndura"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Invoker_Deacon_Electric_Limbo"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Invoker_Deacon_Electric_Transform",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        401,
+                        402
+                    ],
+                    "modifierName": "Invoker_Deacon_Electric_Transform"
+                }
+            ],
+            "abilitySpecials": {
+                "ElementShield_DurabilityImprove": 0.0
+            },
+            "modifiers": {
+                "Invoker_Deacon_Electric_Transform": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 5.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "TransformTrigger",
+                            "MPTriggerOnRemote": true
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Invoker_Deacon_Electric_Transform_LockHP"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Invoker_Deacon_Electric_Transform_NoHeal"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_ELEMENTSTATE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "UNIQUE_Invoker_Deacon_Electric_ElementShield"
+                        }
+                    ],
+                    "onReconnect": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Invoker_Deacon_Electric_ElementShield"
+                        }
+                    ]
+                },
+                "Invoker_Deacon_Electric_Transform_LockHP": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "LockHP"
+                },
+                "Invoker_Deacon_Electric_Transform_NoHeal": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "NoHeal"
+                },
+                "UNIQUE_Invoker_Deacon_Electric_ElementShield": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Electric",
+                    "bonusCriticalHurt": [
+                        900.0,
+                        "ElementShield_DurabilityImprove",
+                        "MUL",
+                        900.0,
+                        "ADD"
+                    ],
+                    "modifierMixins": [
+                        {
+                            "$type": "ElementShieldMixin",
+                            "elementType": "Electric",
+                            "showDamageText": "",
+                            "shieldAngle": 360.0,
+                            "maxShieldByHPRatio": 1.0,
+                            "damageRatio": 0.20000000298023224,
+                            "useMutiPlayerFixData": true
+                        },
+                        {
+                            "$type": "VelocityForceMixin",
+                            "excludeForces": [
+                                "WindZoneType"
+                            ]
+                        },
+                        {
+                            "$type": "AttachModifierToElementDurabilityMixin",
+                            "valueSteps": [
+                                0.5,
+                                [
+                                    300.0,
+                                    "ElementShield_DurabilityImprove",
+                                    "MUL",
+                                    300.0,
+                                    "ADD"
+                                ],
+                                [
+                                    900.0,
+                                    "ElementShield_DurabilityImprove",
+                                    "MUL",
+                                    900.0,
+                                    "ADD"
+                                ]
+                            ],
+                            "modifierNameSteps": [
+                                "UNIQUE_Invoker_Deacon_Electric_Transform",
+                                "Invoker_Empty"
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_ELEMENTSTATE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_DISAPPEAR",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 14001
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42203003
+                            }
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_ELEMENTSTATE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "ElementState"
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_INVOKER_DEACON_ELECTRIC_DISAPPEAR",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Invoker_Empty": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "UNIQUE_Invoker_Deacon_Electric_Transform": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "TransformStage",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "TransformStage"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "globalValueKey": "_MONSTERAFFIX_ELEMENTSHIELD_DURABILITYIMPROVE",
+                    "overrideMapKey": "ElementShield_DurabilityImprove"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Invoker_Deacon_Electric_ElementShield"
+                }
+            ]
+        }
+    }
+]

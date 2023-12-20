@@ -1,0 +1,374 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Amber_GoldenAmber",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "GoldenAmber"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "HideMesh"
+                }
+            ],
+            "modifiers": {
+                "HideMesh": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ]
+                        }
+                    ]
+                },
+                "GoldenAmber": {
+                    "modifierName": "",
+                    "elementType": "Rock",
+                    "bonusCriticalHurt": 50.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShieldBarMixin",
+                            "showDamageText": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ],
+                            "setEnable": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Object_Amber_Destory",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "Collider"
+                            ]
+                        },
+                        {
+                            "$type": "ExecuteGadgetLua",
+                            "param1": 201
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Amber_RockAmberBroken",
+            "modifiers": {
+                "RockAmberBuff": {
+                    "modifierName": "",
+                    "duration": 60.0,
+                    "elementType": "Rock",
+                    "bonusCriticalHurt": 10.0,
+                    "properties": {
+                        "Entity_WeightRatio": 2.0
+                    }
+                },
+                "Broken": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR5",
+                                "campTargetType": "All",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "modifierName": "RockAmberBuff"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Amber_Rock_Hit",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.30000001192092896,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "RemoveModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 1.0
+                                }
+                            ],
+                            "modifierName": "Broken"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Broken"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Amber_WaterAmberBroken",
+            "modifiers": {
+                "Broken": {
+                    "modifierName": "",
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 50.0,
+                    "onRemoved": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "gadgetID": 70270002,
+                            "campID": 5001,
+                            "campTargetType": "All"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Amber_Water_Hit",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.30000001192092896,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "RemoveModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 0.0
+                                }
+                            ],
+                            "modifierName": "Broken"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Broken"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Amber_WindAmberBroken",
+            "modifiers": {
+                "Broken": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "gadgetID": 70270003,
+                            "campID": 1001,
+                            "campTargetType": "All"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Amber_Wind_Hit",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.30000001192092896,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "RemoveModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 1.0
+                                }
+                            ],
+                            "modifierName": "Broken"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Broken"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Amber_WindAmberBroken_02",
+            "modifiers": {
+                "Broken": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "gadgetID": 70270007,
+                            "campID": 1001,
+                            "campTargetType": "All"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Amber_Wind_Hit",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.30000001192092896,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "RemoveModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "PCPOFDGBGNB": 1.0
+                                }
+                            ],
+                            "modifierName": "Broken"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Broken"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14005
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 14002
+                }
+            ]
+        }
+    }
+]

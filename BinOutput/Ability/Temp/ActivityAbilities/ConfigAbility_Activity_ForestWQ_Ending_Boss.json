@@ -1,0 +1,286 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_ForestWQ_AssistAttack",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToGlobalValueMixin",
+                    "globalValueTarget": "Team",
+                    "globalValueKey": "SGV_Ability_ForestWQ",
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Blank",
+                        "UNIQUE_Ability_ForestWQ_StartHandle"
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "GenerateCDTime": 0.0,
+                "DamageValue": 0.0,
+                "DamageSystemValue": 0.0,
+                "Grass_Slash_RandomDir": 0.0,
+                "HealHPRatio": 0.0,
+                "HealHPInterval": 0.0,
+                "ReviveElemEnergyValue": 0.0
+            },
+            "modifiers": {
+                "Blank": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "UNIQUE_Ability_ForestWQ_StartHandle": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_Ability_ForestWQ_AssistAttack"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_Ability_ForestWQ_RecoverHP"
+                        }
+                    ]
+                },
+                "UNIQUE_Ability_ForestWQ_AssistAttack": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Other",
+                            "PositionDampTime": true,
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Team",
+                                    "key": "GeneratePurpleState",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "NBGPPHOPDNC",
+                                    "target": "Other",
+                                    "PCPOFDGBGNB": 0.0
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ANIMAL_ENTITY_TYPE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Other",
+                                    "PositionDampTime": true,
+                                    "modifierName": "Ability_ForestWQ_AssistAttack_Delay"
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Team",
+                                    "PositionDampTime": true,
+                                    "modifierName": "UNIQUE_Ability_ForestWQ_AssistAttack_CD"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "target": "Other",
+                            "PositionDampTime": true,
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Team",
+                                    "key": "GeneratePurpleState",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Gadget"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_IS_WeakMode",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Other",
+                                    "PositionDampTime": true,
+                                    "modifierName": "Ability_ForestWQ_AssistAttack_Delay"
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Team",
+                                    "PositionDampTime": true,
+                                    "modifierName": "UNIQUE_Ability_ForestWQ_AssistAttack_CD"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Ability_ForestWQ_AssistAttack_Delay": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetRandomOverrideMapValue",
+                            "PositionDampTime": true,
+                            "valueRangeMax": 100.0,
+                            "overrideMapKey": "Grass_Slash_RandomDir"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": "Grass_Slash_RandomDir",
+                            "key": "_ABILITY_WitheredForest_Grass_Slash_RandomDir",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Activity_WitheredForest_Grass_Slash",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "EMPHHFJEKMM"
+                                },
+                                "attachPointName": "Fx_ChestNode",
+                                "OINJEIEFIBB": "Self"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "target": "Applier",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 4.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": "DamageValue",
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Grass",
+                                        "bonusCriticalHurt": 10.0,
+                                        "enBreak": 0.0,
+                                        "attackType": "Melee",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "UNIQUE_Ability_ForestWQ_AssistAttack_CD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "GenerateCDTime",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": -1.0,
+                            "key": "GeneratePurpleState",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "GeneratePurpleState",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Ability_ForestWQ_RecoverHP": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": "HealHPInterval",
+                    "properties": {
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "DeathZoneGV_ExtraHeal",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "HealHP",
+                            "PKFLAAKLDFH": "HealHPRatio",
+                            "cdRatio": ""
+                        },
+                        {
+                            "$type": "ReviveElemEnergy",
+                            "ratio": "ReviveElemEnergyValue"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "DeathZoneGV_ExtraHeal",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "isLimitedProperties": true
+                }
+            },
+            "isDynamicAbility": true
+        }
+    }
+]

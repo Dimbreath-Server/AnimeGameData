@@ -1,0 +1,4187 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_Fruit_Begin",
+            "abilityMixins": [
+                {
+                    "$type": "RejectAttackMixin",
+                    "attackTag": "BurningDamage"
+                }
+            ],
+            "modifiers": {
+                "CreateFruit_Delayed": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_REGISVINE_ISKILLED",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "LessAndEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "lifeByOwnerIsAlive": true,
+                                    "gadgetID": 42602017,
+                                    "campID": 4001,
+                                    "byServer": true
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_MONSTER_REGISVINE_FRUIT",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "ShowReminder",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_MONSTER_REGISVINE_FRUIT_BORNTIMESCOUNT",
+                                            "ratio": 1.0,
+                                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                                        }
+                                    ],
+                                    "id": 31040001
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_MONSTER_REGISVINE_FRUIT_BORNTIMESCOUNT",
+                                    "useLimitRange": true,
+                                    "maxValue": 2.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "TriggerAbility",
+                                    "abilityName": "Regisvine_Fire_Core_End"
+                                },
+                                {
+                                    "$type": "SetAnimatorInt",
+                                    "intID": "Shader_FruitLower_State",
+                                    "ratio": 2.0
+                                },
+                                {
+                                    "$type": "SetAnimatorInt",
+                                    "intID": "Shader_FruitUpper_State",
+                                    "ratio": 1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 10.0,
+                    "key": "_MONSTER_REGISVINE_TAG_FIRE",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_ISKILLED",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_FRUIT",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_FRUIT_REVIVING",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_FRUIT_BORNTIMESCOUNT",
+                    "useLimitRange": true,
+                    "maxValue": 2.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "PositionDampTime": true,
+                    "ratio": 0.0,
+                    "key": "_MONSTER_REGISVINE_FRUIT_ISBROKEN",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_FRUIT",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "LessAndEqual"
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_FRUIT_REVIVING",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_Fruit_PowerOn",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "CreateFruit_Delayed"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUITCOVERED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 10.0,
+                    "key": "_MONSTER_REGISVINE_ISKILLED",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "DoWatcherSystemAction",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Self",
+                            "key": "_REGISVINE_HEADCOREBROKENED_",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "watcherId": 82064,
+                    "inThreatListOnly": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_Fruit_Open",
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_FRUIT",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUITCOVERED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602017
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602017
+                            }
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_FruitTempClosed"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_Fruit_Close",
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_FRUIT",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_MONSTER_REGISVINE_FRUITCOVERED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602017
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602017
+                            },
+                            "hide": true
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_Fruit_TempClose",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_MONSTER_REGISVINE_FRUIT_HITCOUNT",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -1.0,
+                        4.5,
+                        5.5
+                    ],
+                    "modifierNameSteps": [
+                        "Temp",
+                        "Temp"
+                    ],
+                    "actionQueues": [
+                        [],
+                        []
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        1002
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                203
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Temp": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "UNIQUE_FruitTempClosed": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Regisvine_Fire_Fruit_Open"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAbility",
+                    "abilityName": "Regisvine_Fire_Fruit_Close"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_FruitTempClosed"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_Fruit_End",
+            "modifiers": {
+                "Regisvine_Fire_Fruit_KillSelf": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "KillSelf",
+                            "JBLBNPAKMEI": [
+                                42602017
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_FRUIT",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_MONSTER_REGISVINE_FRUITCOVERED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602017
+                            },
+                            "hide": true
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602017
+                            },
+                            "modifierName": "Regisvine_Fire_Fruit_KillSelf"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUIT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "Shader_FruitLower_State",
+                            "ratio": 1.0
+                        }
+                    ]
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Regisvine_Fire_Fruit_Revive"
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "HideUIBillBoard",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 42602017
+                    },
+                    "hide": true
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 42602017
+                    },
+                    "modifierName": "Regisvine_Fire_Fruit_KillSelf"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_FRUIT",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetAnimatorInt",
+                    "intID": "Shader_FruitLower_State",
+                    "ratio": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_Core_Begin",
+            "modifiers": {
+                "CreateCore_Delayed": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "CreateGadget",
+                            "lifeByOwnerIsAlive": true,
+                            "gadgetID": 42602018,
+                            "campID": 4001,
+                            "byServer": true
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_MONSTER_REGISVINE_CORE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_CANBORNCORE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ShowReminder",
+                            "id": 31040002
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "Shader_FruitUpper_State",
+                            "ratio": 2.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_CORE",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "PositionDampTime": true,
+                    "ratio": 0.0,
+                    "key": "_MONSTER_REGISVINE_CORE_ISBROKEN",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "PositionDampTime": true,
+                    "ratio": 1.0,
+                    "key": "_MONSTER_REGISVINE_CANBORNCORE",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_CANBORNCORE",
+                            "ratio": 1.0,
+                            "ACJBNJNEBOC": "MoreThanAndEqual"
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_FRUIT",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "LessAndEqual"
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_CORE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "LessAndEqual"
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "CreateCore_Delayed"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_Core_PowerOn",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_Core_Open",
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_CORE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602018
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602018
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_Core_Close",
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_CORE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602018
+                            },
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602018
+                            },
+                            "hide": true
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_Core_End",
+            "modifiers": {
+                "Regisvine_Fire_Core_KillSelf": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "KillSelf",
+                            "JBLBNPAKMEI": [
+                                42602018
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_CORE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "HideUIBillBoard",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602018
+                            },
+                            "hide": true
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42602018
+                            },
+                            "modifierName": "Regisvine_Fire_Core_KillSelf"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_CORE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "Shader_FruitUpper_State",
+                            "ratio": 1.0
+                        }
+                    ]
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "HideUIBillBoard",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 42602018
+                    },
+                    "hide": true
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 42602018
+                    },
+                    "modifierName": "Regisvine_Fire_Core_KillSelf"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_CORE",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetAnimatorInt",
+                    "intID": "Shader_FruitUpper_State",
+                    "ratio": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_Faint_Fruit",
+            "modifiers": {
+                "UNIQUE_FaintState_Fruit": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Monster_Regisvine_FlowerPushColliderOff"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT_FRUIT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                501
+                            ]
+                        },
+                        {
+                            "$type": "AttachBulletAimPoint",
+                            "bulletAimPoint": "Core"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "RevengeAttackTrigger",
+                            "MPTriggerOnRemote": true
+                        },
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                401,
+                                204
+                            ]
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT_FRUIT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_MONSTER_REGISVINE_CANBORNCORE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider_Faint01",
+                                "PushCollider_Faint01_Extra"
+                            ]
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT_FRUIT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "forceSyncToRemote": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "PositionDampTime": true,
+                    "ratio": 0.0,
+                    "key": "_MONSTER_REGISVINE_ISFAINT",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "PositionDampTime": true,
+                    "ratio": 0.0,
+                    "key": "_MONSTER_REGISVINE_ISFAINT_FRUIT",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_FaintState_Fruit"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_Faint_Core",
+            "modifiers": {
+                "UNIQUE_FaintState_Core": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Monster_Regisvine_FlowerPushColliderOff"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT_CORE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                501
+                            ]
+                        },
+                        {
+                            "$type": "AttachBulletAimPoint",
+                            "bulletAimPoint": "Core"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "target": "Owner",
+                            "intID": "Shader_FruitUpper_State",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT_CORE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider_Faint01",
+                                "PushCollider_Faint01_Extra"
+                            ]
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_ISFAINT_CORE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "forceSyncToRemote": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "PositionDampTime": true,
+                    "ratio": 0.0,
+                    "key": "_MONSTER_REGISVINE_ISFAINT_CORE",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_FaintState_Core"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_MeleeAttack01_FireWave",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42602020,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 1.5,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 7.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 15.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42602020,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 7.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42602020,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": -1.5,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 7.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": -15.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_MeeleeAttack03_CreateFireArea",
+            "onAbilityStart": [
+                {
+                    "$type": "CreateGadget",
+                    "gadgetID": 42602021,
+                    "campID": 4001
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_WillOWisp",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 42602028
+                    },
+                    "abilityName": "Regisvine_Fire_WillOWispLauncher_Launch"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_WillOWisp_1st",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_RangedAttack01_02",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "BulletSourceL"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_RangedAttack01_02",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "BulletSourceR"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "CreateGadget",
+                    "ownerIsTarget": true,
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 4.900000095367432,
+                            "JKDAHJILGBJ": 4.039999961853027,
+                            "MJHHBAFNOEG": 5.699999809265137
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 0.0,
+                            "DEEJGGKEKNN": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "gadgetID": 42602028,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "ownerIsTarget": true,
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": -4.630000114440918,
+                            "JKDAHJILGBJ": 5.679999828338623,
+                            "MJHHBAFNOEG": 5.699999809265137
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 0.0,
+                            "DEEJGGKEKNN": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "gadgetID": 42602028,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_WillOWisp_2nd",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_RangedAttack01_02",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "BulletSourceL"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_RangedAttack01_02",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "BulletSourceR"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "CreateGadget",
+                    "ownerIsTarget": true,
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 3.2100000381469727,
+                            "JKDAHJILGBJ": 5.590000152587891,
+                            "MJHHBAFNOEG": 5.699999809265137
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 0.0,
+                            "DEEJGGKEKNN": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "gadgetID": 42602028,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "ownerIsTarget": true,
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": -3.119999885559082,
+                            "JKDAHJILGBJ": 3.819999933242798,
+                            "MJHHBAFNOEG": 5.699999809265137
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 0.0,
+                            "DEEJGGKEKNN": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "gadgetID": 42602028,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_WillOWisp_3rd",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_RangedAttack01_02",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "BulletSourceL"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_RangedAttack01_02",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "BulletSourceR"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "CreateGadget",
+                    "ownerIsTarget": true,
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 2.069999933242798,
+                            "JKDAHJILGBJ": 3.6600000858306885,
+                            "MJHHBAFNOEG": 5.699999809265137
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 0.0,
+                            "DEEJGGKEKNN": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "gadgetID": 42602028,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "ownerIsTarget": true,
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": -2.0399999618530273,
+                            "JKDAHJILGBJ": 5.420000076293945,
+                            "MJHHBAFNOEG": 5.699999809265137
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 0.0,
+                            "DEEJGGKEKNN": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "gadgetID": 42602028,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_WillOWisp_4th",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_RangedAttack01_02",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "BulletSourceL"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_RangedAttack01_02",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "BulletSourceR"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "CreateGadget",
+                    "ownerIsTarget": true,
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.7799999713897705,
+                            "JKDAHJILGBJ": 5.099999904632568,
+                            "MJHHBAFNOEG": 5.699999809265137
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 0.0,
+                            "DEEJGGKEKNN": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "gadgetID": 42602028,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                },
+                {
+                    "$type": "CreateGadget",
+                    "ownerIsTarget": true,
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": -0.7599999904632568,
+                            "JKDAHJILGBJ": 4.03000020980835,
+                            "MJHHBAFNOEG": 5.5
+                        },
+                        "JCADOOKNCPM": {
+                            "$type": "DDBMEHNLPBF",
+                            "MNPPBODHINO": 0.0,
+                            "DEEJGGKEKNN": 1.5
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "gadgetID": 42602028,
+                    "campID": 4001,
+                    "campTargetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_RapidFire01_Fire",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "RapidFire01_Fire"
+                    ],
+                    "modifierName": "Monster_Regisvine_Fire_RapidFire01"
+                }
+            ],
+            "modifiers": {
+                "Monster_Regisvine_Fire_RapidFire01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.33000001311302185,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_RapidFire_02",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "BulletSourceL"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_RapidFire_02",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "BulletSourceR"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42602023,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "LPHIFJDFKHI": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 0.0
+                                    },
+                                    "FEPHPHMCGAG": 2.5,
+                                    "NBHGGNLDGDH": 2.5,
+                                    "maxAngle": 60.0,
+                                    "HADFPLAAGIB": ""
+                                },
+                                "attachPointName": "BulletSourceL"
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42602023,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "LPHIFJDFKHI": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 0.0
+                                    },
+                                    "FEPHPHMCGAG": 2.5,
+                                    "NBHGGNLDGDH": 2.5,
+                                    "maxAngle": 60.0,
+                                    "HADFPLAAGIB": ""
+                                },
+                                "attachPointName": "BulletSourceR"
+                            }
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_RapidFire_02",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "BulletSourceL"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_RapidFire_02",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "BulletSourceR"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42602023,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "LPHIFJDFKHI": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 0.0
+                                    },
+                                    "FEPHPHMCGAG": 2.5,
+                                    "NBHGGNLDGDH": 2.5,
+                                    "maxAngle": 30.0,
+                                    "HADFPLAAGIB": ""
+                                },
+                                "attachPointName": "BulletSourceL"
+                            }
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 42602023,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "POEEGOHIKAM",
+                                    "LPHIFJDFKHI": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 0.0
+                                    },
+                                    "FEPHPHMCGAG": 2.5,
+                                    "NBHGGNLDGDH": 2.5,
+                                    "maxAngle": 30.0,
+                                    "HADFPLAAGIB": ""
+                                },
+                                "attachPointName": "BulletSourceR"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_FruitGadget",
+            "modifiers": {
+                "UNIQUE_Regisvine_Fire_Fruit": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 300.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShieldBarMixin",
+                            "onShieldBroken": [
+                                {
+                                    "$type": "ActCameraShake",
+                                    "cameraShake": {
+                                        "shakeRange": 0.20000000298023224,
+                                        "shakeTime": 0.11999999731779099,
+                                        "shakeDistance": 30.0,
+                                        "extension": {
+                                            "baseOnCamera": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_Fruit_Break",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE"
+                                    },
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "TriggerAbility",
+                                    "target": "Owner",
+                                    "abilityName": "Monster_Regisvine_Fire_Faint_Fruit"
+                                },
+                                {
+                                    "$type": "SetPoseBool",
+                                    "target": "Owner",
+                                    "boolID": "Faint_Fruit",
+                                    "ratio": true
+                                },
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "target": "Owner",
+                                    "triggerID": "FaintTrigger",
+                                    "MPTriggerOnRemote": true
+                                },
+                                {
+                                    "$type": "SetAnimatorInt",
+                                    "target": "Owner",
+                                    "intID": "Shader_FruitLower_State",
+                                    "ratio": 0.0
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "Owner",
+                                    "PositionDampTime": true,
+                                    "ratio": 1.0,
+                                    "key": "_MONSTER_REGISVINE_FRUIT_ISBROKEN",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "target": "Owner",
+                                    "ratio": 10.0,
+                                    "key": "_MONSTER_REGISVINE_FRUITCOVERED",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                }
+                            ],
+                            "showDamageText": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Owner",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_FRUIT_ISBROKEN",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "target": "Owner",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_Fruit_Normal",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Owner",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUIT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Regisvine_Fire_Fruit"
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NNBKBBILDGO",
+                                    "predicates": [
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Water"
+                                        },
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Electric"
+                                        },
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Ice"
+                                        },
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Wind"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_Hit_Weakness",
+                                    "born": {
+                                        "$type": "AJEIONFOHLC"
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "target": "Owner",
+                            "triggerID": "FruitWeaknessBeHit",
+                            "MPTriggerOnRemote": true
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Regisvine_Fire_Fruit"
+                        }
+                    ],
+                    "forceSyncToRemote": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Regisvine_Fire_Fruit"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_FRUITCOVERED",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "EnableHitBoxByName",
+                    "hitBoxNames": [
+                        "HitBox"
+                    ],
+                    "setEnable": true
+                },
+                {
+                    "$type": "HideUIBillBoard"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_FruitAndCoreReviveManager",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        2001
+                    ],
+                    "modifierName": "UNIQUE_CoreRiviveManager"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        2002
+                    ],
+                    "modifierName": "UNIQUE_FruitRiviveManager"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_CoreRiviveManager": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0
+                },
+                "UNIQUE_FruitRiviveManager": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_Regisvine_Fire_Fruit_Revive"
+                        }
+                    ]
+                },
+                "UNIQUE_Regisvine_Fire_Fruit_Revive": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 62.08000183105469,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUIT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_MONSTER_REGISVINE_FRUIT_REVIVING",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_REGISVINE_ISFAINT",
+                                    "ratio": 0.0
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_REGISVINE_ISOUTOFIGHT",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "TriggerAbility",
+                                    "abilityName": "Regisvine_Fire_Fruit_Begin"
+                                },
+                                {
+                                    "$type": "TriggerAbility",
+                                    "abilityName": "Regisvine_Fire_Fruit_Open"
+                                },
+                                {
+                                    "$type": "SetAnimatorInt",
+                                    "intID": "Shader_FruitLower_State",
+                                    "ratio": 2.0
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": -10.0,
+                                    "key": "_MONSTER_REGISVINE_FRUITCOVERED",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": -10.0,
+                                    "key": "_MONSTER_REGISVINE_FRUIT_REVIVING",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_MONSTER_REGISVINE_FRUIT_REVIVEDELAYED",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "forceSyncToRemote": true
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_FRUIT_REVIVEDELAYED",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Regisvine_Fire_Fruit_Begin"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Regisvine_Fire_Fruit_Open"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "Shader_FruitLower_State",
+                            "ratio": 2.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUITCOVERED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUIT_REVIVING",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUIT_REVIVEDELAYED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUIT_REVIVING",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FRUIT_REVIVEDELAYED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_CoreGadget",
+            "modifiers": {
+                "UNIQUE_Regisvine_Fire_Core": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 150.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShieldBarMixin",
+                            "onShieldBroken": [
+                                {
+                                    "$type": "ActCameraShake",
+                                    "cameraShake": {
+                                        "shakeRange": 0.20000000298023224,
+                                        "shakeTime": 0.11999999731779099,
+                                        "shakeDistance": 30.0,
+                                        "extension": {
+                                            "baseOnCamera": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_Core_Break",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE"
+                                    },
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "TriggerAbility",
+                                    "target": "Owner",
+                                    "abilityName": "Monster_Regisvine_Fire_Faint_Core"
+                                },
+                                {
+                                    "$type": "EnableHitBoxByName",
+                                    "target": "Owner",
+                                    "hitBoxNames": [
+                                        "HitBox_Core"
+                                    ]
+                                },
+                                {
+                                    "$type": "EnableHitBoxByName",
+                                    "target": "Owner",
+                                    "hitBoxNames": [
+                                        "HitBox_Core_Lockable"
+                                    ]
+                                },
+                                {
+                                    "$type": "EnableHitBoxByName",
+                                    "target": "Owner",
+                                    "hitBoxNames": [
+                                        "HitBox_Core_Critical"
+                                    ],
+                                    "setEnable": true
+                                },
+                                {
+                                    "$type": "SetAnimatorInt",
+                                    "target": "Owner",
+                                    "intID": "Shader_FruitUpper_State",
+                                    "ratio": 0.0
+                                },
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "target": "Owner",
+                                    "triggerID": "FaintTrigger",
+                                    "MPTriggerOnRemote": true
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Owner",
+                                    "modifierName": "UNIQUE_Regisvine_Fire_CoreShattered"
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "Owner",
+                                    "PositionDampTime": true,
+                                    "ratio": 1.0,
+                                    "key": "_MONSTER_REGISVINE_CORE_ISBROKEN",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "Owner",
+                                    "ratio": 1.0,
+                                    "key": "_REGISVINE_HEADCOREBROKENED_",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "DoWatcherSystemAction",
+                                    "target": "Owner",
+                                    "watcherId": 82059,
+                                    "inThreatListOnly": true
+                                }
+                            ],
+                            "showDamageText": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Owner",
+                            "PositionDampTime": true,
+                            "ratio": 0.0,
+                            "key": "_MONSTER_REGISVINE_CORE_ISBROKEN",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "target": "Owner",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_Core_Normal",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "Predicated",
+                            "target": "Owner",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_REGISVINE_CORE_ISSHATTERED",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AttachEffect",
+                                    "target": "Owner",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_Core_Broken_Normal",
+                                    "effectTempleteID": -1.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "AttachEffect",
+                                    "target": "Owner",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_Core_Normal",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Owner",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_CORE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Regisvine_Fire_Core"
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NNBKBBILDGO",
+                                    "predicates": [
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Water"
+                                        },
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Electric"
+                                        },
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Ice"
+                                        },
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Wind"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_Hit_Weakness",
+                                    "born": {
+                                        "$type": "AJEIONFOHLC"
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "target": "Owner",
+                            "triggerID": "CoreWeaknessBeHit",
+                            "MPTriggerOnRemote": true
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Regisvine_Fire_Core"
+                        }
+                    ],
+                    "forceSyncToRemote": true
+                },
+                "UNIQUE_Regisvine_Fire_CoreShattered": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "renderNames": [
+                                "Core"
+                            ]
+                        },
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "renderNames": [
+                                "Core_Broken"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_MONSTER_REGISVINE_CORE_ISSHATTERED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "renderNames": [
+                                "Core"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "renderNames": [
+                                "Core_Broken"
+                            ]
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_CORE_ISSHATTERED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Regisvine_Fire_Core"
+                },
+                {
+                    "$type": "EnableHitBoxByName",
+                    "hitBoxNames": [
+                        "HitBox"
+                    ],
+                    "setEnable": true
+                },
+                {
+                    "$type": "HideUIBillBoard"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_WillOWisp_Loop",
+            "modifiers": {
+                "UNIQUE_Regisvine_Fire_WillOWisp_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_WillOWisp_Bullet_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Regisvine_Fire_WillOWisp_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_WillOWisp_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_WillOWisp_Bullet_Explode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Regisvine_Fire_WillOWisp_Loop"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "OLIAGPMOBLE": true
+                            },
+                            "EBADGGHGLKN": 1.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.125,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 25.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_WillOWispLauncher_Loop",
+            "modifiers": {
+                "UNIQUE_Regisvine_Fire_WillOWispLauncher_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_WillOWispLauncher_Effect",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Regisvine_Fire_WillOWispLauncher_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_WillOWispLauncher_Launch",
+            "onAbilityStart": [
+                {
+                    "$type": "SetSelfAttackTarget",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "topLimit": 1,
+                        "sortType": "Nearest",
+                        "shapeName": "CircleR50",
+                        "campTargetType": "AllExceptSelf",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Avatar"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42602019,
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "ownerIs": "Owner"
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_SurroundingFire_Effect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "MissileAttack_Loop"
+                    ],
+                    "modifierName": "Effect"
+                }
+            ],
+            "modifiers": {
+                "Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Shader_Skill_MissileAttack_Loop",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_MissileAttack_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Shader_Skill_MissileAttack_Loop"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_SurroundingFire_Skill",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "MissileAttack_Loop"
+                    ],
+                    "modifierName": "SurroundingFire_Ring01"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "MissileAttack_Loop"
+                    ],
+                    "modifierName": "SurroundingFire_Ring02"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "MissileAttack_Loop"
+                    ],
+                    "modifierName": "SurroundingFire_Ring03"
+                }
+            ],
+            "modifiers": {
+                "SurroundingFire_Ring01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 2.799999952316284,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_ABILITY_REGISVINE_FIRE_SURROUNDINGFIRE_HIT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "Repeated",
+                            "repeatTimes": 1,
+                            "actions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "otherTargets": {
+                                        "$type": "JGOEKECMJLH",
+                                        "shapeName": "CircleR8",
+                                        "campTargetType": "Enemy",
+                                        "OHJFACHECDC": 1.0
+                                    },
+                                    "predicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Avatar"
+                                            ]
+                                        },
+                                        {
+                                            "$type": "OMMNCGCCJEK",
+                                            "logic": "GreaterOrEqual",
+                                            "ratio": 3.0
+                                        },
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "target": "Self",
+                                            "key": "_ABILITY_REGISVINE_FIRE_SURROUNDINGFIRE_HIT",
+                                            "ratio": 0.0,
+                                            "PLDDAFOIEGE": true
+                                        }
+                                    ],
+                                    "lifeByOwnerIsAlive": true,
+                                    "born": {
+                                        "$type": "AKKLFFBMMHL",
+                                        "JCADOOKNCPM": {
+                                            "$type": "DDBMEHNLPBF",
+                                            "MNPPBODHINO": 0.0,
+                                            "DEEJGGKEKNN": 1.0
+                                        },
+                                        "AMCAIHBNPDK": true
+                                    },
+                                    "gadgetID": 42602022,
+                                    "campID": 4001
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "SurroundingFire_Ring02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "Repeated",
+                            "repeatTimes": 2,
+                            "actions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "lifeByOwnerIsAlive": true,
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "JCADOOKNCPM": {
+                                            "$type": "DDBMEHNLPBF",
+                                            "MNPPBODHINO": 16.0,
+                                            "DEEJGGKEKNN": 25.0
+                                        },
+                                        "AMCAIHBNPDK": true
+                                    },
+                                    "gadgetID": 42602022,
+                                    "campID": 4001
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Repeated",
+                            "repeatTimes": 1,
+                            "actions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "otherTargets": {
+                                        "$type": "JGOEKECMJLH",
+                                        "shapeName": "CircleR15",
+                                        "campTargetType": "Enemy",
+                                        "OHJFACHECDC": 1.0
+                                    },
+                                    "predicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Avatar"
+                                            ]
+                                        },
+                                        {
+                                            "$type": "OMMNCGCCJEK",
+                                            "logic": "GreaterOrEqual",
+                                            "ratio": 8.0
+                                        },
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "target": "Self",
+                                            "key": "_ABILITY_REGISVINE_FIRE_SURROUNDINGFIRE_HIT",
+                                            "ratio": 0.0,
+                                            "PLDDAFOIEGE": true
+                                        }
+                                    ],
+                                    "lifeByOwnerIsAlive": true,
+                                    "born": {
+                                        "$type": "AKKLFFBMMHL",
+                                        "JCADOOKNCPM": {
+                                            "$type": "DDBMEHNLPBF",
+                                            "MNPPBODHINO": 0.0,
+                                            "DEEJGGKEKNN": 1.0
+                                        },
+                                        "AMCAIHBNPDK": true,
+                                        "DOHGLKAMJKA": 0.5
+                                    },
+                                    "gadgetID": 42602022,
+                                    "campID": 4001
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "SurroundingFire_Ring03": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.6000000238418579,
+                    "onThinkInterval": [
+                        {
+                            "$type": "Repeated",
+                            "repeatTimes": 1,
+                            "actions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "lifeByOwnerIsAlive": true,
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "JCADOOKNCPM": {
+                                            "$type": "DDBMEHNLPBF",
+                                            "MNPPBODHINO": 15.0,
+                                            "DEEJGGKEKNN": 25.0
+                                        },
+                                        "AMCAIHBNPDK": true
+                                    },
+                                    "gadgetID": 42602022,
+                                    "campID": 4001
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Repeated",
+                            "repeatTimes": 1,
+                            "actions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "otherTargets": {
+                                        "$type": "JGOEKECMJLH",
+                                        "shapeName": "CircleR25",
+                                        "campTargetType": "Enemy",
+                                        "OHJFACHECDC": 1.0
+                                    },
+                                    "predicates": [
+                                        {
+                                            "$type": "GOIBMIJJIFC",
+                                            "entityTypes": [
+                                                "Avatar"
+                                            ]
+                                        },
+                                        {
+                                            "$type": "OMMNCGCCJEK",
+                                            "logic": "GreaterOrEqual",
+                                            "ratio": 15.0
+                                        },
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "target": "Self",
+                                            "key": "_ABILITY_REGISVINE_FIRE_SURROUNDINGFIRE_HIT",
+                                            "ratio": 0.0,
+                                            "PLDDAFOIEGE": true
+                                        }
+                                    ],
+                                    "lifeByOwnerIsAlive": true,
+                                    "born": {
+                                        "$type": "AKKLFFBMMHL",
+                                        "JCADOOKNCPM": {
+                                            "$type": "DDBMEHNLPBF",
+                                            "MNPPBODHINO": 0.0,
+                                            "DEEJGGKEKNN": 1.0
+                                        },
+                                        "AMCAIHBNPDK": true,
+                                        "DOHGLKAMJKA": 0.5
+                                    },
+                                    "gadgetID": 42602022,
+                                    "campID": 4001
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_SurroundingFire",
+            "modifiers": {
+                "SurroundingFire": {
+                    "modifierName": "",
+                    "duration": 0.6000000238418579,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_SurroundingFire_Warning",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_SurroundingFire_Explode",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "SurroundingFire_Damage"
+                        }
+                    ]
+                },
+                "SurroundingFire_Damage": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "height": 3.0,
+                                    "EBADGGHGLKN": 0.75
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 100.0,
+                                        "attackType": "Range",
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV7",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "forceCameraShake": true,
+                                    "cameraShake": {
+                                        "shakeType": "CustomVector",
+                                        "shakeRange": 0.03999999910593033,
+                                        "shakeTime": 0.11999999731779099,
+                                        "shakeDir": {
+                                            "y": 1.0
+                                        },
+                                        "extension": {}
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ],
+                    "onAttackLanded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Owner",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_REGISVINE_FIRE_SURROUNDINGFIRE_HIT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "SurroundingFire_HitDelay"
+                        }
+                    ]
+                },
+                "SurroundingFire_HitDelay": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Owner",
+                            "ratio": -1.0,
+                            "key": "_ABILITY_REGISVINE_FIRE_SURROUNDINGFIRE_HIT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "SurroundingFire"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_SurroundingFire_CloseField",
+            "onFieldEnter": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 1.0,
+                    "key": "_ABILITY_REGISVINE_FIRE_SURROUNDINGFIRE_CLOSEFIELD_TARGET",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onFieldExit": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": -1.0,
+                    "key": "_ABILITY_REGISVINE_FIRE_SURROUNDINGFIRE_CLOSEFIELD_TARGET",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_FireWave",
+            "modifiers": {
+                "Regisvine_Fire_FireWave_Delay": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Regisvine_Fire_FireWave_Normal"
+                        }
+                    ]
+                },
+                "Regisvine_Fire_FireWave_Normal": {
+                    "modifierName": "",
+                    "duration": 1.600000023841858,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.20000000298023224,
+                    "onThinkInterval": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_MeleeAttack01_FireWave_Explode",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "height": 3.0,
+                                    "EBADGGHGLKN": 2.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Regisvine_Fire_FireWave",
+                                    "attenuationGroup": "Regisvine_Common",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.5,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 25.0,
+                                        "strikeType": "Blunt",
+                                        "enBreak": 100.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV7",
+                                        "retreatType": "ByHitDirection",
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_MeleeAttack01_FireWave_Explode",
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "EBADGGHGLKN": 2.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "Regisvine_Fire_FireWave",
+                            "attenuationGroup": "Regisvine_Common",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.5,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "bonusCriticalHurt": 25.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV7",
+                                "retreatType": "ByHitDirection",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Regisvine_Fire_FireWave_Delay"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_MeleeAttack03_FireArea",
+            "modifiers": {
+                "FireArea": {
+                    "modifierName": "",
+                    "duration": 10.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_MeleeAttack03_FireArea",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "Disappear",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_MeleeAttack03_FireArea"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 8.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Regisvine_Fire_FireArea",
+                                    "attenuationGroup": "Regisvine_Common",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.30000001192092896,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 25.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "",
+                                        "hitImpulseType": "LV1",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FireArea"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_FireBullet_Loop",
+            "modifiers": {
+                "UNIQUE_Monster_Regisvine_Fire_FireBullet_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_FireBullet_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Monster_Regisvine_Fire_FireBullet_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_FireBullet_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_FireBullet_Explode",
+                    "born": {
+                        "$type": "HANJDCBOIIE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Monster_Regisvine_Fire_FireBullet_Loop"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 0.75
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.20000000298023224,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 25.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_SummonBlazeSeed",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "SummonBlazeSeed_Loop",
+                        "SummonBlazeSeed_AS"
+                    ],
+                    "modifierName": "Monster_Regisvine_Fire_SummonBlazeSeed_SummonEffect"
+                }
+            ],
+            "modifiers": {
+                "Monster_Regisvine_Fire_SummonBlazeSeed_SummonEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_SummonBlazeSeed_02",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_SummonBlazeSeed_03",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "EnablePartControl",
+                    "partRootNames": [
+                        "BlazeSeedSource"
+                    ],
+                    "enable": true
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_SummonBlazeSeed_Summon",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 2.0,
+                            "MJHHBAFNOEG": 4.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "EMPHHFJEKMM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 2.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            }
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42602026,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "BlazeSeedSource"
+                    }
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 42602024
+                    },
+                    "abilityName": "Monster_Regisvine_Fire_BlazeSeed_Neutralize"
+                },
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 42602025
+                    },
+                    "abilityName": "Regisvine_Fire_BlazeSeed_FireArea_Kill"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_CreateBlazeSeedGadget",
+            "onAbilityStart": [
+                {
+                    "$type": "CreateGadget",
+                    "lifeByOwnerIsAlive": true,
+                    "born": {
+                        "$type": "DAPJIKNDLLN",
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true,
+                        "positionKey": "_MONSTER_REGISVINE_FIRE_BLAZESEEDLANDEDPOS",
+                        "directionKey": ""
+                    },
+                    "gadgetID": 42602024,
+                    "campID": 4001,
+                    "campTargetType": "Enemy",
+                    "byServer": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_CreateBlazeSeedFireArea",
+            "onAbilityStart": [
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "DAPJIKNDLLN",
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true,
+                        "positionKey": "_MONSTER_REGISVINE_FIRE_BLAZESEEDFIREAREAPOS",
+                        "directionKey": ""
+                    },
+                    "gadgetID": 42602025,
+                    "campID": 4001,
+                    "campTargetType": "Enemy",
+                    "byServer": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_BlazeSeed_Bullet_Loop",
+            "modifiers": {
+                "UNIQUE_Monster_Regisvine_Fire_BlazeSeed_Bullet_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Bullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Monster_Regisvine_Fire_BlazeSeed_Bullet_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_BlazeSeed_Bullet_Landed",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Bullet_Landed",
+                    "born": {
+                        "$type": "HANJDCBOIIE",
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            },
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.25,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Default",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV6",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "SetGlobalPos",
+                    "target": "Owner",
+                    "key": "_MONSTER_REGISVINE_FIRE_BLAZESEEDLANDEDPOS",
+                    "born": {
+                        "$type": "HANJDCBOIIE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "AMCAIHBNPDK": true,
+                        "OLIAGPMOBLE": true
+                    }
+                },
+                {
+                    "$type": "TriggerAbility",
+                    "target": "Owner",
+                    "abilityName": "Monster_Regisvine_Fire_CreateBlazeSeedGadget"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Monster_Regisvine_Fire_BlazeSeed_Bullet_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_BlazeSeedGadget",
+            "modifiers": {
+                "UNIQUE_Regisvine_Fire_BlazeSeedShieldBar": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 50.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShieldBarMixin",
+                            "onShieldBroken": [
+                                {
+                                    "$type": "ActCameraShake",
+                                    "cameraShake": {
+                                        "shakeRange": 0.20000000298023224,
+                                        "shakeTime": 0.11999999731779099,
+                                        "shakeDistance": 30.0,
+                                        "extension": {
+                                            "baseOnCamera": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 10.0,
+                                    "key": "_MONSTER_REGISVINE_BLAZESEED_NEUTRALIZED",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "NeutralizeTrigger",
+                                    "MPTriggerOnRemote": true
+                                },
+                                {
+                                    "$type": "SetAnimatorFloat",
+                                    "floatID": "AnimationSpeed",
+                                    "ratio": 0.0
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Neutralized",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "KillSelf",
+                                    "duration": 2.0
+                                },
+                                {
+                                    "$type": "DoWatcherSystemAction",
+                                    "target": "Owner",
+                                    "watcherId": 82080,
+                                    "inThreatListOnly": true
+                                }
+                            ],
+                            "showDamageText": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "ResetAnimatorTrigger",
+                            "triggerID": "NeutralizeTrigger"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Regisvine_Fire_BlazeSeed_Stage01"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Regisvine_Fire_BlazeSeed_Stage02"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Regisvine_Fire_BlazeSeed_Stage03"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Monster_Regisvine_Fire_BlazeSeed_ReadyToExplode"
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Regisvine_Fire_BlazeSeedShieldBar"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NNBKBBILDGO",
+                                    "predicates": [
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Wind"
+                                        },
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Water"
+                                        },
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Ice"
+                                        },
+                                        {
+                                            "$type": "AJLPGCJJKMO",
+                                            "element": "Electric"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Hit_Effective",
+                                    "born": {
+                                        "$type": "AJEIONFOHLC",
+                                        "GIAOINGDIPJ": {
+                                            "$type": "IODNHKHNBCJ"
+                                        }
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Hit_Ineffective",
+                                    "born": {
+                                        "$type": "AJEIONFOHLC",
+                                        "GIAOINGDIPJ": {
+                                            "$type": "IODNHKHNBCJ"
+                                        }
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Monster_Regisvine_Fire_BlazeSeed_Stage01": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 6.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Stage01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_REGISVINE_BLAZESEED_NEUTRALIZED",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "modifierName": "Monster_Regisvine_Fire_BlazeSeed_Stage02"
+                        }
+                    ]
+                },
+                "Monster_Regisvine_Fire_BlazeSeed_Stage02": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 6.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Grow_01",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Stage02",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "NextStageTrigger",
+                            "MPTriggerOnRemote": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_REGISVINE_BLAZESEED_NEUTRALIZED",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "modifierName": "Monster_Regisvine_Fire_BlazeSeed_Stage03"
+                        }
+                    ]
+                },
+                "Monster_Regisvine_Fire_BlazeSeed_Stage03": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 6.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Grow_02",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Stage03",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "NextStageTrigger",
+                            "MPTriggerOnRemote": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_REGISVINE_BLAZESEED_NEUTRALIZED",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "modifierName": "Monster_Regisvine_Fire_BlazeSeed_ReadyToExplode"
+                        }
+                    ]
+                },
+                "Monster_Regisvine_Fire_BlazeSeed_ReadyToExplode": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 3.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Warning",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "NextStageTrigger",
+                            "MPTriggerOnRemote": true
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "NextStageTrigger",
+                            "MPTriggerOnRemote": true
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Explode",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "AMCAIHBNPDK": true,
+                                        "OLIAGPMOBLE": true
+                                    },
+                                    "height": 2.0,
+                                    "EBADGGHGLKN": 3.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.5,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 200.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV6",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "SetGlobalPos",
+                            "target": "Owner",
+                            "key": "_MONSTER_REGISVINE_FIRE_BLAZESEEDFIREAREAPOS",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "AMCAIHBNPDK": true,
+                                "OLIAGPMOBLE": true
+                            }
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Owner",
+                            "abilityName": "Monster_Regisvine_Fire_CreateBlazeSeedFireArea"
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ]
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox"
+                            ]
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Monster_Regisvine_Fire_TargettedTimer": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Target",
+                            "ratio": 10.0,
+                            "key": "_ABILITY_REGISVINE_FIRE_BLAZESEED_TARGETTED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Target",
+                            "ratio": -10.0,
+                            "key": "_ABILITY_REGISVINE_FIRE_BLAZESEED_TARGETTED",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Regisvine_Fire_BlazeSeedShieldBar"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Regisvine_Fire_BlazeSeed_Stage01"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_BLAZESEED_NEUTRALIZED",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 10.0,
+                    "key": "_MONSTER_REGISVINE_BLAZESEED",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetAnimatorFloat",
+                    "floatID": "AnimationSpeed",
+                    "ratio": 1.0
+                },
+                {
+                    "$type": "EnablePushColliderName",
+                    "pushColliderNames": [
+                        "PushCollider"
+                    ],
+                    "setEnable": true
+                },
+                {
+                    "$type": "EnableHitBoxByName",
+                    "hitBoxNames": [
+                        "HitBox"
+                    ],
+                    "setEnable": true
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "EnablePushColliderName",
+                    "pushColliderNames": [
+                        "PushCollider"
+                    ]
+                },
+                {
+                    "$type": "EnableHitBoxByName",
+                    "hitBoxNames": [
+                        "HitBox"
+                    ]
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Regisvine_Fire_BlazeSeedShieldBar"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_BlazeSeed_Neutralize",
+            "onAbilityStart": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 10.0,
+                    "key": "_MONSTER_REGISVINE_BLAZESEED_NEUTRALIZED",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "triggerID": "NeutralizeTrigger",
+                    "MPTriggerOnRemote": true
+                },
+                {
+                    "$type": "SetAnimatorFloat",
+                    "floatID": "AnimationSpeed",
+                    "ratio": 0.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Neutralized",
+                    "born": {
+                        "$type": "PBDNLGHAMHE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_BlazeSeed_FireArea",
+            "modifiers": {
+                "FireArea": {
+                    "modifierName": "",
+                    "duration": 35.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "FPEIAHONPIH",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 7.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "Regisvine_Fire_FireArea",
+                                    "attenuationGroup": "Regisvine_Common",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.30000001192092896,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Fire",
+                                        "bonusCriticalHurt": 25.0,
+                                        "enBreak": 0.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "",
+                                        "hitImpulseType": "LV1",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "FireArea_Effect": {
+                    "modifierName": "",
+                    "duration": 37.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 35.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_FireArea",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "Disappear",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_FireArea"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FireArea"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FireArea_Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_BlazeSeed_FireArea_Kill",
+            "modifiers": {
+                "FireArea_Kill": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "Disappear",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_FireArea"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FireArea_Kill"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Regisvine_Fire_SetShaderIsBurning",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueMixin",
+                    "globalValueKey": "_MONSTER_REGISVINE_FIRE_SHADERISBURNINING",
+                    "GVInTalk": 0.0,
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "Temp",
+                        "Regisvine_Fire_ShaderIsBurning"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Temp": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Regisvine_Fire_ShaderIsBurning": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Shader_IsBurning",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Shader_IsBurning"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": -10.0,
+                    "key": "_MONSTER_REGISVINE_FIRE_SHADERISBURNINING",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetAnimatorBool",
+                    "boolID": "Shader_IsBurning"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTER_REGISVINE_FIRE_SHADERISBURNINING",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_MONSTER_REGISVINE_FIRE_SHADERISBURNINING",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "failActions": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_MONSTER_REGISVINE_FIRE_SHADERISBURNINING",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Regisvine_Fire_BeHitEffect",
+            "modifiers": {
+                "UNIQUE_Regisvine_Fire_BeHitEffect": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "JHAGMCCBELA",
+                                    "hitBoxNames": [
+                                        "HitBox_Core_Critical"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_REGISVINE_CORE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "LessAndEqual"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_MONSTER_REGISVINE_CORE_ISSHATTERED",
+                                    "ratio": 1.0,
+                                    "ACJBNJNEBOC": "MoreThanAndEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_Hit_Weakness",
+                                    "born": {
+                                        "$type": "AJEIONFOHLC"
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Regisvine_Fire_BlazeSeed_Hit_Ineffective",
+                                    "born": {
+                                        "$type": "AJEIONFOHLC",
+                                        "GIAOINGDIPJ": {
+                                            "$type": "IODNHKHNBCJ"
+                                        }
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Regisvine_Fire_BeHitEffect"
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,987 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Dehya_LaserGenerator",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMutexMixin",
+                    "gadgetStates": [
+                        202,
+                        0,
+                        201
+                    ],
+                    "modifierNames": [
+                        [
+                            "lock"
+                        ],
+                        [
+                            "purpleLaser"
+                        ],
+                        [
+                            "orangeLaser"
+                        ]
+                    ]
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "SGV_MoveIndex",
+                    "valueSteps": [
+                        0.0,
+                        1.5,
+                        2.5,
+                        3.5
+                    ],
+                    "modifierNameSteps": [
+                        "Point1",
+                        "Point2",
+                        "Point3"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Point1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "MoveState",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "DelayUpdateOptions"
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "mat_up",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "mat_middle",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "mat_down",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 4.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        }
+                    ]
+                },
+                "Point2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "MoveState",
+                            "ratio": 2.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "DelayUpdateOptions"
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "mat_up",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "mat_middle",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 4.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "mat_down",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        }
+                    ]
+                },
+                "Point3": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "MoveState",
+                            "ratio": 3.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "DelayUpdateOptions"
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "mat_up",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 4.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "mat_middle",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "canBeHandledOnRecover": true,
+                            "matName": "mat_down",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 1.0
+                        }
+                    ]
+                },
+                "DelayUpdateOptions": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "FromGroup",
+                            "funcName": "SLC_UpdateLaserOption",
+                            "AFEHPHNEJHM": 0.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        }
+                    ]
+                },
+                "lock": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "purpleLaser": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "LaserMixin",
+                            "shieldHP": "Eff_SceneObj_LightEmitter_P_Line",
+                            "IDMFANEJJDE": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_IS_DEHAYA_LASERTARGET",
+                                            "ratio": 1.0
+                                        },
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_IS_DEHAYA_Rune_Purple",
+                                            "ratio": 1.0
+                                        },
+                                        {
+                                            "$type": "BAMBPOIJFPG",
+                                            "predicates": [
+                                                {
+                                                    "$type": "HKDMEKKBAKE",
+                                                    "gadgetState": 203
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "AttachModifier",
+                                            "target": "Target",
+                                            "modifierName": "UNIQUE_SetDehayaLaserRevOn"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "FEHLIIJNHOK": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_IS_DEHAYA_LASERTARGET",
+                                            "ratio": 1.0
+                                        },
+                                        {
+                                            "$type": "BAMBPOIJFPG",
+                                            "predicates": [
+                                                {
+                                                    "$type": "HKDMEKKBAKE",
+                                                    "gadgetState": 203
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "RemoveModifier",
+                                            "target": "Target",
+                                            "modifierName": "UNIQUE_SetDehayaLaserRevOn"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "AddBlueLaserEffect"
+                        }
+                    ]
+                },
+                "AddBlueLaserEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "ColorType",
+                            "ratio": 0.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_LightEmitter_P_Idle",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "ShootPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_LightEmitter_P_Line",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "ShootPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_LightEmitter_P_Bottom",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RootNode",
+                                "OINJEIEFIBB": "Self"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "orangeLaser": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "LaserMixin",
+                            "shieldHP": "Eff_SceneObj_LightEmitter_Y_Line",
+                            "IDMFANEJJDE": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_IS_DEHAYA_LASERTARGET",
+                                            "ratio": 1.0
+                                        },
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_IS_DEHAYA_Rune_Orange",
+                                            "ratio": 1.0
+                                        },
+                                        {
+                                            "$type": "BAMBPOIJFPG",
+                                            "predicates": [
+                                                {
+                                                    "$type": "HKDMEKKBAKE",
+                                                    "gadgetState": 203
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "AttachModifier",
+                                            "target": "Target",
+                                            "modifierName": "UNIQUE_SetDehayaLaserRevOn"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "FEHLIIJNHOK": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Target",
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_IS_DEHAYA_LASERTARGET",
+                                            "ratio": 1.0
+                                        },
+                                        {
+                                            "$type": "BAMBPOIJFPG",
+                                            "predicates": [
+                                                {
+                                                    "$type": "HKDMEKKBAKE",
+                                                    "gadgetState": 203
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "RemoveModifier",
+                                            "target": "Target",
+                                            "modifierName": "UNIQUE_SetDehayaLaserRevOn"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "AddOrangeLaserEffect"
+                        }
+                    ]
+                },
+                "AddOrangeLaserEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "ColorType",
+                            "ratio": 1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_LightEmitter_Y_Idle",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "ShootPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_LightEmitter_Y_Line",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "ShootPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_LightEmitter_Y_Bottom",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "COAICNDKEMA": true,
+                                "attachPointName": "RootNode",
+                                "OINJEIEFIBB": "Self"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "UNIQUE_SetDehayaLaserRevOn": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "BAMBPOIJFPG",
+                                    "predicates": [
+                                        {
+                                            "$type": "HKDMEKKBAKE",
+                                            "target": "Self",
+                                            "gadgetState": 203
+                                        }
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ChangeGadgetState",
+                                    "state": 201
+                                }
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "BAMBPOIJFPG",
+                                    "predicates": [
+                                        {
+                                            "$type": "HKDMEKKBAKE",
+                                            "target": "Self",
+                                            "gadgetState": 203
+                                        }
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ChangeGadgetState"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Dehya_LaserRune",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMutexMixin",
+                    "gadgetStates": [
+                        0,
+                        201,
+                        203
+                    ],
+                    "modifierNames": [
+                        [
+                            "default"
+                        ],
+                        [
+                            "activated"
+                        ],
+                        [
+                            "alwaysActivated"
+                        ]
+                    ]
+                },
+                {
+                    "$type": "LaserReceiveMixin",
+                    "shieldHP": "Eff_SceneObj_LightEmitter_P_Line",
+                    "HLMCKLEACEO": ""
+                },
+                {
+                    "$type": "LaserReceiveMixin",
+                    "shieldHP": "Eff_SceneObj_LightEmitter_Y_Line",
+                    "HLMCKLEACEO": ""
+                }
+            ],
+            "modifiers": {
+                "default": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "GlowMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 1.5,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 0.5
+                        }
+                    ]
+                },
+                "activated": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "GlowMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 4.5,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 0.5
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_IS_DEHAYA_Rune_Purple",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_SceneObj_ObstaclePillar_Hit_Active_P",
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_SceneObj_LightReceiver_Hit_Loop_P",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_IS_DEHAYA_Rune_Orange",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_SceneObj_ObstaclePillar_Hit_Active_Y",
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_SceneObj_LightReceiver_Hit_Loop_Y",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onReconnect": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "BAMBPOIJFPG",
+                                    "predicates": [
+                                        {
+                                            "$type": "HKDMEKKBAKE",
+                                            "target": "Self",
+                                            "gadgetState": 203
+                                        }
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ChangeGadgetState"
+                                },
+                                {
+                                    "$type": "RemoveUniqueModifier",
+                                    "modifierName": "UNIQUE_SetDehayaLaserRevOn"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "alwaysActivated": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "GlowMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 4.5,
+                            "useCurve": true,
+                            "lerpCurveIndex": 1,
+                            "lerpTime": 0.5
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_SetDehayaLaserRevOn"
+                        },
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "collider"
+                            ]
+                        },
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "Mat",
+                            "patternName": "_DitherAlpha",
+                            "ratio": 0.0,
+                            "useCurve": true,
+                            "lerpTime": 1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_IS_DEHAYA_LASERTARGET",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Dehya_ProgressBar",
+            "modifiers": {
+                "Controller": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CustomizeProgressBarMixin",
+                            "maxValue": 100.0,
+                            "ratio": "SGV_DEHYA_CUR_PROGRESS",
+                            "JLAMCKHBOEF": "",
+                            "EKFJJFDCJPO": [
+                                "ProgressPoint1",
+                                "ProgressPoint2",
+                                "ProgressPoint3",
+                                "ProgressPoint4",
+                                "ProgressPoint5"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "ProgressPoint1",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 25.0,
+                    "key": "ProgressPoint2",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 50.0,
+                    "key": "ProgressPoint3",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 75.0,
+                    "key": "ProgressPoint4",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 100.0,
+                    "key": "ProgressPoint5",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Controller"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Dehya_Rune_Attribute_Purple",
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_IS_DEHAYA_Rune_Purple",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Dehya_Rune_Attribute_Orange",
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_IS_DEHAYA_Rune_Orange",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Dehya_LaserStoneBlocker",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Controller"
+                }
+            ],
+            "modifiers": {
+                "Controller": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Dehya_LaserReceiver",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMutexMixin",
+                    "gadgetStates": [
+                        0,
+                        201,
+                        203
+                    ],
+                    "modifierNames": [
+                        [
+                            "default"
+                        ],
+                        [
+                            "activated"
+                        ],
+                        [
+                            "alwaysActivated"
+                        ]
+                    ]
+                },
+                {
+                    "$type": "LaserReceiveMixin",
+                    "shieldHP": "Eff_SceneObj_LightEmitter_P_Line",
+                    "HLMCKLEACEO": ""
+                },
+                {
+                    "$type": "LaserReceiveMixin",
+                    "shieldHP": "Eff_SceneObj_LightEmitter_Y_Line",
+                    "HLMCKLEACEO": ""
+                }
+            ],
+            "modifiers": {
+                "default": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "GlowMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 1.5
+                        }
+                    ]
+                },
+                "activated": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "GlowMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 4.5
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_IS_DEHAYA_Rune_Purple",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_SceneObj_ObstaclePillar_Hit_Active_P",
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_SceneObj_LightReceiver_Hit_Loop_P",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_IS_DEHAYA_Rune_Orange",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_SceneObj_ObstaclePillar_Hit_Active_Y",
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_SceneObj_LightReceiver_Hit_Loop_Y",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onReconnect": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "BAMBPOIJFPG",
+                                    "predicates": [
+                                        {
+                                            "$type": "HKDMEKKBAKE",
+                                            "target": "Self",
+                                            "gadgetState": 203
+                                        }
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ChangeGadgetState"
+                                },
+                                {
+                                    "$type": "RemoveUniqueModifier",
+                                    "modifierName": "UNIQUE_SetDehayaLaserRevOn"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "alwaysActivated": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetMaterialParamFloatByTransform",
+                            "matName": "GlowMat",
+                            "patternName": "_EmissionStrength",
+                            "ratio": 4.5
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_IS_DEHAYA_Rune_Purple",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_SceneObj_LightReceiver_Hit_Loop_P",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_IS_DEHAYA_Rune_Orange",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_SceneObj_LightReceiver_Hit_Loop_Y",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_IS_DEHAYA_LASERTARGET",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    }
+]

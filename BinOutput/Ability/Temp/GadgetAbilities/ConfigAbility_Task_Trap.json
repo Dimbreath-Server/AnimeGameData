@@ -1,0 +1,273 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Task_HuntTrap_GlobalValue",
+            "onAdded": [
+                {
+                    "$type": "HideUIBillBoard",
+                    "hide": true
+                },
+                {
+                    "$type": "EnableAIStealthy",
+                    "enable": true
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_Is_Hunt_Trap",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Task_TrapHunter",
+            "modifiers": {
+                "RunToEscape": {
+                    "modifierName": "",
+                    "duration": 7.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "DebugLog",
+                            "content": "onRunAdd Start!!!!!!"
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "FleeState",
+                            "value": -1
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "NearTrap",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "FleeState"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "NearTrap"
+                        }
+                    ]
+                },
+                "HuntBuff": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "HuntBuff"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR50",
+                                "campTargetType": "All",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Is_Hunt_Animal",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "modifierName": "RunToEscape"
+                        }
+                    ]
+                },
+                "Suicide180": {
+                    "modifierName": "",
+                    "duration": 180.0,
+                    "bonusCriticalHurt": 180.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Quest_SiteInteract",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf",
+                            "JBLBNPAKMEI": [
+                                70300080
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Suicide180"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "HuntBuff"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Trap_Hunt_Attack",
+            "modifiers": {
+                "MonsterSkill": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR3",
+                                "campTargetType": "All",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Is_Hunt_Trap",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "modifierName": "Trap_Suicide"
+                        },
+                        {
+                            "$type": "DamageByAttackValue",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 1.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "bonusCriticalHurt": 20.0,
+                                    "strikeType": "Blunt",
+                                    "enBreak": 500.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV3",
+                                    "overrideHitImpulse": {
+                                        "hitLevel": "Heavy",
+                                        "JELEFKIMBOD": 0.0,
+                                        "hitImpulseY": 0.0
+                                    },
+                                    "hitHaltTimeScale": 0.05000000074505806,
+                                    "muteHitText": true
+                                }
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "DebugLog",
+                            "content": "onMonster_Suicide Start!!!!!!"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR3",
+                                "campTargetType": "All",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_Is_Hunt_Trap",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "modifierName": "Trap_Suicide"
+                        },
+                        {
+                            "$type": "DamageByAttackValue",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 1.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "bonusCriticalHurt": 20.0,
+                                    "strikeType": "Blunt",
+                                    "enBreak": 500.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV3",
+                                    "overrideHitImpulse": {
+                                        "hitLevel": "Heavy",
+                                        "JELEFKIMBOD": 0.0,
+                                        "hitImpulseY": 0.0
+                                    },
+                                    "hitHaltTimeScale": 0.05000000074505806,
+                                    "muteHitText": true
+                                }
+                            }
+                        }
+                    ]
+                },
+                "Trap_Suicide": {
+                    "modifierName": "",
+                    "duration": 0.800000011920929,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "DebugLog",
+                            "content": "onKILL_Trap Start!!!!!!"
+                        },
+                        {
+                            "$type": "DropSubfield",
+                            "subfieldName": "MonsterMeat"
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "JBLBNPAKMEI": [
+                                70300080
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "shapeName": "CircleR3",
+                        "campTargetType": "All",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_Is_Hunt_Animal",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "MonsterSkill"
+                }
+            ]
+        }
+    }
+]

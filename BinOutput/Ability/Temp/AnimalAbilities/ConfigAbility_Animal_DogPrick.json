@@ -1,0 +1,408 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_DogPrick_SitDown",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "ActionState",
+                    "value": 1
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_DogPrick_Prone",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "ActionState",
+                    "value": 2
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_DogPrick_StandUp",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "ActionState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_DogPrick_AIStateInitial",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn"
+                    ],
+                    "endNormalizedTime": 99.0,
+                    "angularSpeed": 90.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        1
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                101,
+                                102,
+                                103
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        101
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                111,
+                                112,
+                                113
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        2
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                201,
+                                202,
+                                203,
+                                204
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        201
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                211,
+                                212,
+                                213,
+                                214,
+                                215
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        3
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                301
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        301
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                311
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$type": "DoActionByAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Standby"
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                111
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Invincible": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Invincible"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "DenyLockOn"
+                },
+                {
+                    "$type": "AttachAbilityStateResistance",
+                    "resistanceListID": 11001
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_DogPrick_BeHit",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        1,
+                        2,
+                        3,
+                        101,
+                        201,
+                        301
+                    ],
+                    "modifierName": "BeHitDetect"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Disappear"
+                    ],
+                    "modifierName": "Disappear"
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Bark"
+                    ],
+                    "endNormalizedTime": 0.5,
+                    "angularSpeed": 30.0,
+                    "attackTrigger": "",
+                    "attackDistance": 1.5
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        4,
+                        5,
+                        401,
+                        501
+                    ],
+                    "modifierName": "MuteAIHitFeeling"
+                },
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        6,
+                        601
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "FleeCountDown"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "BeHitDetect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar",
+                                        "Monster",
+                                        "Gadget",
+                                        "Bullet"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetPoseBool",
+                                    "boolID": "FleeHasTarget",
+                                    "ratio": true
+                                },
+                                {
+                                    "$type": "SetPoseBool",
+                                    "boolID": "FleeCommon",
+                                    "ratio": true
+                                },
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "BeHitTrigger"
+                                },
+                                {
+                                    "$type": "SetAnimatorBool",
+                                    "boolID": "FleeState",
+                                    "ratio": true
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "SetPoseBool",
+                                    "boolID": "FleeNoTarget",
+                                    "ratio": true
+                                },
+                                {
+                                    "$type": "SetPoseBool",
+                                    "boolID": "FleeCommon",
+                                    "ratio": true
+                                },
+                                {
+                                    "$type": "SetAnimatorBool",
+                                    "boolID": "FleeState",
+                                    "ratio": true
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "ActionState"
+                        }
+                    ]
+                },
+                "Disappear": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "StartDither",
+                            "duration": 3.0
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "duration": 2.5,
+                            "banDrop": true,
+                            "banExp": true,
+                            "killSelfType": "Disappear"
+                        }
+                    ]
+                },
+                "MuteAIHitFeeling": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAIHitFeeling"
+                        }
+                    ]
+                },
+                "FleeCountDown": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 30.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "FleeCommon"
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "FleeState"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorBool",
+                    "boolID": "FleeState",
+                    "ratio": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Animal_DogPrick_DogFeedPointRegister",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "HungryAction",
+                        "HungryAfterAction"
+                    ],
+                    "modifierName": "DogFeedPointRegister"
+                }
+            ],
+            "modifiers": {
+                "DogFeedPointRegister": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RegisterAIActionPoint",
+                            "pointType": "DogFeedPoint"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ReleaseAIActionPoint",
+                            "pointType": "DogFeedPoint"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "ReleaseAIActionPoint",
+                            "pointType": "DogFeedPoint"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]

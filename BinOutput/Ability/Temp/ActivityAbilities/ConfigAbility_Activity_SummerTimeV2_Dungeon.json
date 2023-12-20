@@ -1,0 +1,2965 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Test",
+            "modifiers": {
+                "Eff_Test": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DoActionByStateIDMixin",
+                            "stateIDs": [
+                                "FallingAnthem_AS_1",
+                                "ElementalArt_FallingAttack_Strike"
+                            ],
+                            "enterActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_EnergyDisk_ElementalBurst_Wave_R40",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Eff_Test"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_BoatRace",
+            "abilityMixins": [
+                {
+                    "$type": "VehicleSkillDepotChangeMixin",
+                    "targetVehicleIDs": [
+                        45001001,
+                        45001002
+                    ],
+                    "skillDepotId": 99001001
+                },
+                {
+                    "$type": "CurLocalAvatarMixinV2",
+                    "modifierName": "BoatRace_Skiff_Sprint_Watcher_GrandHandler"
+                }
+            ],
+            "modifiers": {
+                "BoatRace_Skiff_ClearGV_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "Vehicle",
+                            "PositionDampTime": true,
+                            "modifierName": "BoatRace_Skiff_ClearGV"
+                        }
+                    ],
+                    "onVehicleIn": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "Vehicle",
+                            "PositionDampTime": true,
+                            "modifierName": "BoatRace_Skiff_ClearGV"
+                        }
+                    ]
+                },
+                "BoatRace_Skiff_ClearGV": {
+                    "modifierName": "",
+                    "duration": 0.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_Skiff_SprintValue",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "BoatRace_Skiff_Sprint_Watcher_GrandHandler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "Vehicle",
+                            "PositionDampTime": true,
+                            "modifierName": "BoatRace_Skiff_Sprint_Watcher_Handler"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "Vehicle",
+                            "PositionDampTime": true,
+                            "modifierName": "BoatRace_Skiff_Sprint_Watcher_Handler"
+                        }
+                    ],
+                    "onVehicleIn": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "Vehicle",
+                            "PositionDampTime": true,
+                            "modifierName": "BoatRace_Skiff_Sprint_Watcher_Handler"
+                        }
+                    ]
+                },
+                "BoatRace_Skiff_Sprint_Watcher_Handler": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToStateIDMixin",
+                            "stateIDs": [
+                                "Sprint"
+                            ],
+                            "modifierName": "BoatRace_Skiff_Sprint_Watcher"
+                        }
+                    ]
+                },
+                "BoatRace_Skiff_Sprint_Watcher": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 20.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "CurGalleryControlGroup",
+                            "funcName": "SLC_BoatRaceV2_Counter",
+                            "paramNum": 1,
+                            "AFEHPHNEJHM": 1.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "target": "CurLocalAvatar",
+                    "PositionDampTime": true,
+                    "modifierName": "BoatRace_Skiff_ClearGV_Handler"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_IgnoreFallDamage",
+            "modifiers": {
+                "UNIQUE_SummerTimeV2_Avatar_FallingDamage": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_FallingDamageRatio": -1.0
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_SummerTimeV2_Avatar_FallingDamage"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_KazuhaAOE",
+            "abilitySpecials": {
+                "ImpactDamageSystemValue": 0.0,
+                "ImpactDamageValue": 0.0,
+                "ImpactDamageValue2": 0.0,
+                "ImpactDamageValue3": 0.0,
+                "ImpactDamageValue4": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_KazuhaAOE": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerPostProcessEffectMixin",
+                            "postEffectAssetName": "postEffect_Activity_SummerTimeV2_Kazuha_ScreenEffect",
+                            "duration": 1.5
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SummerTimeV2_Dungeon_Kazuha_Slash",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 10.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "ignoreAttackerProperty": true,
+                                        "enBreak": 0.0,
+                                        "attackType": "Melee",
+                                        "damageExtra": [
+                                            "ImpactDamageValue",
+                                            "ImpactDamageSystemValue",
+                                            "MUL"
+                                        ],
+                                        "trueDamage": true,
+                                        "ignoreModifyDamage": true,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_KazuhaAOE_2": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerPostProcessEffectMixin",
+                            "postEffectAssetName": "postEffect_Activity_SummerTimeV2_Kazuha_ScreenEffect",
+                            "duration": 1.5
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SummerTimeV2_Dungeon_Kazuha_Slash",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 10.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "ignoreAttackerProperty": true,
+                                        "enBreak": 0.0,
+                                        "attackType": "Melee",
+                                        "damageExtra": [
+                                            "ImpactDamageValue2",
+                                            "ImpactDamageSystemValue",
+                                            "MUL"
+                                        ],
+                                        "trueDamage": true,
+                                        "ignoreModifyDamage": true,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_KazuhaAOE_3": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerPostProcessEffectMixin",
+                            "postEffectAssetName": "postEffect_Activity_SummerTimeV2_Kazuha_ScreenEffect",
+                            "duration": 1.5
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SummerTimeV2_Dungeon_Kazuha_Slash",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 10.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "ignoreAttackerProperty": true,
+                                        "enBreak": 0.0,
+                                        "attackType": "Melee",
+                                        "damageExtra": [
+                                            "ImpactDamageValue3",
+                                            "ImpactDamageSystemValue",
+                                            "MUL"
+                                        ],
+                                        "trueDamage": true,
+                                        "ignoreModifyDamage": true,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_KazuhaAOE_4": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "TriggerPostProcessEffectMixin",
+                            "postEffectAssetName": "postEffect_Activity_SummerTimeV2_Kazuha_ScreenEffect",
+                            "duration": 1.5
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SummerTimeV2_Dungeon_Kazuha_Slash",
+                            "born": {
+                                "$type": "PBDNLGHAMHE"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 10.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "ignoreAttackerProperty": true,
+                                        "enBreak": 0.0,
+                                        "attackType": "Melee",
+                                        "damageExtra": [
+                                            "ImpactDamageValue4",
+                                            "ImpactDamageSystemValue",
+                                            "MUL"
+                                        ],
+                                        "trueDamage": true,
+                                        "ignoreModifyDamage": true,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ShowExtraAbility",
+                    "skillID": 20016
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 100.0,
+                    "key": "AVATAR_SummerTimeV2_KazuhaAOE",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetExtraAbilityEnable",
+                    "enable": true
+                },
+                {
+                    "$type": "SetSystemValueToOverrideMap",
+                    "PositionDampTime": true,
+                    "key": "ImpactDamageSystemValue",
+                    "type": "ElementLevelCo"
+                },
+                {
+                    "$type": "ServerLuaCall",
+                    "luaCallType": "CurChallengeGroup",
+                    "funcName": "SLC_Get_PlayerCount",
+                    "AFEHPHNEJHM": 0.0,
+                    "param2": 0.0,
+                    "param3": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "target": "Team",
+                    "ratio": 0.0,
+                    "key": "CUR_TEAM_NUM",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onRemoved": [
+                {
+                    "$type": "ShowExtraAbility"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "SetExtraAbilityState"
+                },
+                {
+                    "$type": "ServerLuaCall",
+                    "luaCallType": "CurChallengeGroup",
+                    "funcName": "SLC_Get_PlayerCount",
+                    "AFEHPHNEJHM": 0.0,
+                    "param2": 0.0,
+                    "param3": 0.0
+                },
+                {
+                    "$type": "ServerLuaCall",
+                    "luaCallType": "CurChallengeGroup",
+                    "funcName": "SLC_DLActivityDungeon_Exhi_TSkill",
+                    "AFEHPHNEJHM": 0.0,
+                    "param2": 0.0,
+                    "param3": 0.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "CurLocalAvatar",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Team",
+                            "key": "SGV_DLDungeon_PlayerNum",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_KazuhaAOE"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "CurLocalAvatar",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Team",
+                            "key": "SGV_DLDungeon_PlayerNum",
+                            "ratio": 2.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_KazuhaAOE_2"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "CurLocalAvatar",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Team",
+                            "key": "SGV_DLDungeon_PlayerNum",
+                            "ratio": 3.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_KazuhaAOE_3"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "CurLocalAvatar",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Team",
+                            "key": "SGV_DLDungeon_PlayerNum",
+                            "ratio": 4.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_KazuhaAOE_4"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Kazuha_CDManager_Team",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_SKILL_CD",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_ULTIMATESKILL_CD",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_FALLINGATK_CD",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "abilitySpecials": {
+                "CDDown_Value1": 0.0,
+                "CDDown_Value2": 0.0,
+                "CDDown_Value3": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Kazuha_CDManager_SkillCD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DoActionOnGlobalValueChangeMixin",
+                            "globalValueKey": "GV_SKILL_CD",
+                            "actions": [
+                                {
+                                    "$type": "ModifyExtraSkillCD",
+                                    "skillID": 20016,
+                                    "cdMin": [
+                                        0.0,
+                                        1.0,
+                                        "CDDown_Value1",
+                                        "MUL",
+                                        "SUB"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Kazuha_CDManager_UltimateSkillCD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DoActionOnGlobalValueChangeMixin",
+                            "globalValueKey": "GV_ULTIMATESKILL_CD",
+                            "actions": [
+                                {
+                                    "$type": "ModifyExtraSkillCD",
+                                    "skillID": 20016,
+                                    "cdMin": [
+                                        0.0,
+                                        1.0,
+                                        "CDDown_Value2",
+                                        "MUL",
+                                        "SUB"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Kazuha_CDManager_FallingAttackCD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DoActionOnGlobalValueChangeMixin",
+                            "globalValueKey": "GV_FALLINGATK_CD",
+                            "actions": [
+                                {
+                                    "$type": "ModifyExtraSkillCD",
+                                    "skillID": 20016,
+                                    "cdMin": [
+                                        0.0,
+                                        1.0,
+                                        "CDDown_Value3",
+                                        "MUL",
+                                        "SUB"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_SKILL_CD",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_ULTIMATESKILL_CD",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_FALLINGATK_CD",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Kazuha_CDManager_SkillCD"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Kazuha_CDManager_UltimateSkillCD"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Kazuha_CDManager_FallingAttackCD"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_FallingAttackLand_CDDown",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_KAZUHA_BUFF1",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_KAZUHA_BUFF1",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Decision_FallingDamageLand_Handler"
+                    ]
+                },
+                {
+                    "$type": "LocalAvatarsMixin",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingDamageLand_CDDown_Decition_BuffExist"
+                },
+                {
+                    "$type": "CurLocalAvatarMixinV2",
+                    "modifierName": "UNIQUE_FallingDamageLand_CDDown_Effect_Handler"
+                }
+            ],
+            "abilitySpecials": {
+                "CDDownValue": 0.0,
+                "CDDown_Interval": 0.0,
+                "CDDown_Duration": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Decision_FallingDamageLand_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Team",
+                            "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingDamageLand_CDDown_Duration"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "GV_KAZUHA_BUFF1",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingDamageLand_CDDown_Decition_BuffExist": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToGlobalValueMixin",
+                            "globalValueTarget": "Team",
+                            "globalValueKey": "FallAttackCDDown_ON",
+                            "valueSteps": [
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Decision_FallingDamageLand"
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_FallingDamageLand_CDDown_Effect_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToGlobalValueMixin",
+                            "globalValueTarget": "Team",
+                            "globalValueKey": "FallAttackCDDown_ON",
+                            "valueSteps": [
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "FallingDamageLand_CDDown_Effect"
+                            ]
+                        }
+                    ]
+                },
+                "FallingDamageLand_CDDown_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_DIK_BUFFB_01_Buff",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingDamageLand_CDDown_Duration": {
+                    "stacking": "MultipleAllRefresh",
+                    "stackingOption": {
+                        "abilitySpecialName": "",
+                        "maxModifierNumForMultipleType": 1.0,
+                        "enableMixedUnique": true
+                    },
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "CDDown_Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 1.0,
+                            "key": "FallAttackCDDown_ON",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "FallAttackCDDown_ON",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Decision_FallingDamageLand": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableRocketJump",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true,
+                            "type": "DungeonJump",
+                            "enable": true,
+                            "extention": {
+                                "xzMultiplier": 2.0,
+                                "yMultiplier": 3.0
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableRocketJump",
+                            "PositionDampTime": true,
+                            "type": "DungeonJump"
+                        }
+                    ],
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Other",
+                            "PositionDampTime": true,
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "FallingAttack"
+                                    ]
+                                },
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Team",
+                                    "key": "CDDownState",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "DebugLog",
+                                    "content": "##：下落攻击减少CD"
+                                },
+                                {
+                                    "$type": "ServerLuaCall",
+                                    "luaCallType": "CurChallengeGroup",
+                                    "funcName": "SLC_DLActivityDungeon_TCoolDown",
+                                    "paramNum": 1,
+                                    "AFEHPHNEJHM": 2.0,
+                                    "param2": 0.0,
+                                    "param3": 0.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Team",
+                                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Decision_FallingDamageLand_CD"
+                                }
+                            ]
+                        }
+                    ],
+                    "onAvatarIn": [
+                        {
+                            "$type": "EnableRocketJump",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true,
+                            "type": "DungeonJump",
+                            "enable": true,
+                            "extention": {
+                                "xzMultiplier": 2.0,
+                                "yMultiplier": 3.0
+                            }
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Decision_FallingDamageLand_CD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "CDDown_Interval",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": -1.0,
+                            "key": "CDDownState",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "CDDownState",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_KAZUHA_BUFF1",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "target": "Team",
+                    "ratio": 0.0,
+                    "key": "FallAttackCDDown_ON",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onRemoved": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_KAZUHA_BUFF1",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "target": "Team",
+                    "ratio": 0.0,
+                    "key": "FallAttackCDDown_ON",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingDamageLand_CDDown_Duration"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_SkillCDMinusRatioUp",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_KAZUHA_BUFF2",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_KAZUHA_BUFF2",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_SkillCDMinusRatioUp_Handler"
+                    ]
+                },
+                {
+                    "$type": "LocalAvatarsMixin",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_SkillCDMinusRatioUp_Decition_BuffExist"
+                },
+                {
+                    "$type": "CurLocalAvatarMixinV2",
+                    "modifierName": "UNIQUE_SkillCDMinusRatioUp_Effect_Handler"
+                }
+            ],
+            "abilitySpecials": {
+                "DecreaseCDDuration": 0.0,
+                "SkillCDMinusRatioUp": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_SkillCDMinusRatioUp_Handler": {
+                    "stacking": "Multiple",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Team",
+                            "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_SkillCDMinusRatioUp_Duration"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "GV_KAZUHA_BUFF2",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_SkillCDMinusRatioUp_Decition_BuffExist": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToGlobalValueMixin",
+                            "globalValueTarget": "Team",
+                            "globalValueKey": "SkillCDMinusRatioUp_ON",
+                            "valueSteps": [
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "UNIQUE_Activity_SummerTimeV2_Dungeon_SkillCDMinusRatioUp"
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_SkillCDMinusRatioUp_Effect_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToGlobalValueMixin",
+                            "globalValueTarget": "Team",
+                            "globalValueKey": "SkillCDMinusRatioUp_ON",
+                            "valueSteps": [
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "SkillCDMinusRatioUp_Effect"
+                            ]
+                        }
+                    ]
+                },
+                "SkillCDMinusRatioUp_Effect": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_DIK_BUFFC_01_Buff",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_SkillCDMinusRatioUp_Duration": {
+                    "stacking": "MultipleAllRefresh",
+                    "stackingOption": {
+                        "abilitySpecialName": "",
+                        "maxModifierNumForMultipleType": 1.0,
+                        "enableMixedUnique": true
+                    },
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "DecreaseCDDuration",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 1.0,
+                            "key": "SkillCDMinusRatioUp_ON",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "SkillCDMinusRatioUp_ON",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_SkillCDMinusRatioUp": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_SkillCDMinusRatio": "SkillCDMinusRatioUp"
+                    },
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_KAZUHA_BUFF2",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "SkillCDMinusRatioUp_ON",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onRemoved": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "SkillCDMinusRatioUp_ON",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_KAZUHA_BUFF2",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_SkillCDMinusRatioUp_Duration"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Kazuha_DamageUp",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_KAZUHA_BUFF3",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_KAZUHA_BUFF3",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_Kazuha_IncreaseDamage_Handler"
+                    ]
+                },
+                {
+                    "$type": "LocalAvatarsMixin",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_RefreshModifier"
+                },
+                {
+                    "$type": "CurLocalAvatarMixinV2",
+                    "modifierName": "UNIQUE_Kazuha_DamageUp_Effect_Handle"
+                }
+            ],
+            "abilitySpecials": {
+                "IncreaseDamageDuration": 0.0,
+                "DamageUpRate": 0.0,
+                "DamageUpLevel": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_Kazuha_IncreaseDamage_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_UNIQUE_Activity_SummerTimeV2_Dungeon_ClearLevel"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Team",
+                            "ratio": 1.0,
+                            "key": "DAMAGEUP_LEVEL",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Team",
+                            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Kazuha_DamageUp"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "GV_KAZUHA_BUFF3",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_UNIQUE_Activity_SummerTimeV2_Dungeon_ClearLevel": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "IncreaseDamageDuration",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "DAMAGEUP_LEVEL",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Team",
+                            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Kazuha_DamageUp"
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_RefreshModifier": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Kazuha_DamageUp"
+                        }
+                    ]
+                },
+                "UNIQUE_Kazuha_DamageUp_Effect_Handle": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToGlobalValueMixin",
+                            "globalValueTarget": "Team",
+                            "globalValueKey": "DAMAGEUP_LEVEL",
+                            "valueSteps": [
+                                0.5,
+                                3.5
+                            ],
+                            "modifierNameSteps": [
+                                "UNIQUE_Kazuha_DamageUp_Effect"
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Kazuha_DamageUp_Effect": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "state": "AttackUp",
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_DIK_BUFFA_01_Buff",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_IncreaseDamage": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ModifyDamageMixin",
+                            "ignoreEventInfo": true,
+                            "JJGGAPONHOE": [
+                                "DamageUpRate",
+                                "DamageUpLevel",
+                                "MUL"
+                            ]
+                        }
+                    ],
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_KAZUHA_BUFF3",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onRemoved": [
+                {
+                    "$type": "SetGlobalValue",
+                    "target": "Team",
+                    "ratio": 0.0,
+                    "key": "DAMAGEUP_LEVEL",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "Team",
+                    "modifierName": "UNIQUE_UNIQUE_Activity_SummerTimeV2_Dungeon_ClearLevel"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "target": "Team",
+                    "PositionDampTime": true,
+                    "globalValueKey": "DAMAGEUP_LEVEL",
+                    "overrideMapKey": "DamageUpLevel"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "CurTeamAvatars",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_IncreaseDamage"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "target": "CurTeamAvatars",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_IncreaseDamage"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Trigger_Skill_UltimateSkill_CDDown",
+            "abilityMixins": [
+                {
+                    "$type": "LocalAvatarsMixin",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Decision_Trigger_Skill_UltimateSkill"
+                }
+            ],
+            "abilitySpecials": {
+                "SkillCD": 3.0,
+                "UltimateSkillCD": 3.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Decision_Trigger_Skill_UltimateSkill": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "OnAvatarUseSkillMixin",
+                            "onTriggerSkill": [
+                                {
+                                    "$type": "ServerLuaCall",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "target": "Team",
+                                            "key": "Skill_CD",
+                                            "ratio": 0.0,
+                                            "ACJBNJNEBOC": "NoneOrEqual"
+                                        }
+                                    ],
+                                    "luaCallType": "CurChallengeGroup",
+                                    "funcName": "SLC_DLActivityDungeon_TCoolDown",
+                                    "paramNum": 1,
+                                    "AFEHPHNEJHM": 1.0,
+                                    "param2": 0.0,
+                                    "param3": 0.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Team",
+                                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Action_Trigger_Skill_CD"
+                                }
+                            ],
+                            "onTriggerUltimateSkill": [
+                                {
+                                    "$type": "ServerLuaCall",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "target": "Team",
+                                            "key": "UltimateSkill_CD",
+                                            "ratio": 0.0,
+                                            "ACJBNJNEBOC": "NoneOrEqual"
+                                        }
+                                    ],
+                                    "luaCallType": "CurChallengeGroup",
+                                    "funcName": "SLC_DLActivityDungeon_TCoolDown",
+                                    "paramNum": 1,
+                                    "AFEHPHNEJHM": 1.0,
+                                    "param2": 0.0,
+                                    "param3": 0.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Team",
+                                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Action_Trigger_UltimateSkill_CD"
+                                }
+                            ],
+                            "clearSkillIdDelay": 0.20000000298023224
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Action_Trigger_Skill_CD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "SkillCD",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": -1.0,
+                            "key": "Skill_CD",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "Skill_CD",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_CDDown_Action_Trigger_UltimateSkill_CD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "UltimateSkillCD",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": -1.0,
+                            "key": "UltimateSkill_CD",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "UltimateSkill_CD",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_AttackFrozenEnemy_IncreaseDamage",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_MONA_BUFF2",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_MONA_BUFF2",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_AttackFrozenEnemy_IncreaseDamage_Handler"
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "DamageUpDuration": 0.0,
+                "DamageUpRate": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_AttackFrozenEnemy_IncreaseDamage_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_AttackFrozenEnemy_IncreaseDamage"
+                        },
+                        {
+                            "$type": "DebugLog",
+                            "content": "####### Mona Buff 2 #######"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "GV_MONA_BUFF2",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_AttackFrozenEnemy_IncreaseDamage": {
+                    "stacking": "MultipleAllRefresh",
+                    "stackingOption": {
+                        "abilitySpecialName": "",
+                        "maxModifierNumForMultipleType": 1.0,
+                        "enableMixedUnique": true
+                    },
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "DamageUpDuration",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ModifyDamageMixin",
+                            "ignoreEventInfo": true,
+                            "JJGGAPONHOE": "DamageUpRate",
+                            "predicates": [
+                                {
+                                    "$type": "JBLCLKCBLLO",
+                                    "abilityState": "ElementFrozen"
+                                }
+                            ]
+                        }
+                    ],
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_MONA_BUFF2",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_WhosYourDaddy",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_MONA_BUFF1",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_MONA_BUFF1",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_WhosYourDaddy_Handler"
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "Duration": 6.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_WhosYourDaddy_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Team",
+                            "modifierName": "UNIQUE_MonaBuff_WhosYourDaddy_Timer"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "GV_MONA_BUFF1",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_MonaBuff_WhosYourDaddy_Timer": {
+                    "stacking": "MultipleAllRefresh",
+                    "stackingOption": {
+                        "abilitySpecialName": "",
+                        "maxModifierNumForMultipleType": 1.0,
+                        "enableMixedUnique": true
+                    },
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CurLocalAvatarMixinV2",
+                            "modifierName": "Activity_SummerTimeV2_Dungeon_WhosYourDaddy"
+                        }
+                    ]
+                },
+                "MonaBuff_WhosYourDaddy_Attack": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "MonaBuff_Deny_Hit",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Activity_SummerTimeV2_Dungeon_WhosYourDaddy": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.10000000149011612,
+                    "state": "Invincible",
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "PositionDampTime": true,
+                            "shieldHP": "Eff_SceneObj_ShieldPower_01_Buff",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachAbilityStateResistance",
+                            "resistanceListID": 11002
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR2H8",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "MonaBuff_Deny_Hit",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ServerLuaCall",
+                                    "luaCallType": "CurChallengeGroup",
+                                    "funcName": "SLC_DLActivityDungeon_Exhi_MonaPush",
+                                    "AFEHPHNEJHM": 0.0,
+                                    "param2": 0.0,
+                                    "param3": 0.0
+                                },
+                                {
+                                    "$type": "DamageByAttackValue",
+                                    "target": "Other",
+                                    "attackInfo": {
+                                        "attackTag": "",
+                                        "attenuationTag": "",
+                                        "attenuationGroup": "default",
+                                        "attackProperty": {
+                                            "LIMFCEKGALF": 0.0,
+                                            "JJGGAPONHOE": 0.0,
+                                            "bonusCriticalHurt": 0.0,
+                                            "strikeType": "Blunt",
+                                            "enBreak": 99999.0,
+                                            "ignoreLevelDiff": true,
+                                            "damagePercentage": 0.0
+                                        },
+                                        "hitPattern": {
+                                            "onHitEffectName": "none",
+                                            "hitImpulseType": "LV6",
+                                            "hitHaltTimeScale": 0.009999999776482582,
+                                            "muteHitText": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Other",
+                                    "modifierName": "MonaBuff_WhosYourDaddy_Attack"
+                                }
+                            ]
+                        }
+                    ],
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_MONA_BUFF1",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onRemoved": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "UNIQUE_MonaBuff_WhosYourDaddy_Timer"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Mona_StruggleBubble",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_MONA_BUFF3",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_MONA_BUFF3",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_Create_Bubble"
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "BubbleDuration": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_Create_Bubble": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "BubbleDuration",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_AddGravityScale": -2.0
+                    },
+                    "state": "Struggle",
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Avatar_Girl_Catalyst_Mona_StarChart_Bubble",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "DebugLog",
+                            "content": "####### Mona Buff 3 #######"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "GV_MONA_BUFF3",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "JFAJHKINFDM",
+                                    "isTarget": false,
+                                    "MEGGHKBHBEH": ""
+                                },
+                                {
+                                    "$type": "GEDGJJJGFMM",
+                                    "EOIMJCLAFON": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "RemoveUniqueModifier",
+                                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_Create_Bubble"
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "target": "Team",
+                                    "ratio": 0.0,
+                                    "key": "GV_MONA_BUFF3",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_Create_Bubble"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "GV_MONA_BUFF3",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_MONA_BUFF3",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Mona_DamageUp",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_MONA_BUFF3",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_MONA_BUFF3",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_Mona_IncreaseDamage_Handler"
+                    ]
+                },
+                {
+                    "$type": "LocalAvatarsMixin",
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_RefreshModifier"
+                }
+            ],
+            "abilitySpecials": {
+                "IncreaseDamageDuration": 8.0,
+                "DamageUpRate": 0.3499999940395355,
+                "DamageUpLevel": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_Mona_IncreaseDamage_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "UNIQUE_UNIQUE_Activity_SummerTimeV2_Dungeon_ClearLevel"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 1.0,
+                            "key": "DAMAGEUP_LEVEL",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Team",
+                            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Mona_DamageUp"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "GV_MONA_BUFF3",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_UNIQUE_Activity_SummerTimeV2_Dungeon_ClearLevel": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "IncreaseDamageDuration",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "DAMAGEUP_LEVEL",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Team",
+                            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Mona_DamageUp"
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_RefreshModifier": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToGlobalValueMixin",
+                            "globalValueTarget": "Team",
+                            "globalValueKey": "DAMAGEUP_LEVEL",
+                            "valueSteps": [
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "UNIQUE_Activity_SummerTimeV2_Dungeon_IncreaseDamage_Eff"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Mona_DamageUp"
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_IncreaseDamage_Eff": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "state": "AttackUp"
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_IncreaseDamage": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ModifyDamageMixin",
+                            "ignoreEventInfo": true,
+                            "JJGGAPONHOE": [
+                                "DamageUpRate",
+                                "DamageUpLevel",
+                                "MUL"
+                            ]
+                        }
+                    ],
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_MONA_BUFF3",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "target": "Team",
+                    "PositionDampTime": true,
+                    "globalValueKey": "DAMAGEUP_LEVEL",
+                    "overrideMapKey": "DamageUpLevel"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "CurTeamAvatars",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_IncreaseDamage"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "target": "CurTeamAvatars",
+                    "PositionDampTime": true,
+                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_IncreaseDamage"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Create_ElectricZone",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_CREATE_ELECTRICZONE",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_CREATE_ELECTRICZONE",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_Create_ElectricZone_Handler"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_Create_ElectricZone_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_Create_ElectricZone"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "GV_CREATE_ELECTRICZONE",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_Create_ElectricZone": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "gadgetID": 44000429,
+                            "campID": 1001,
+                            "campTargetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "target": "Team",
+                    "ratio": 0.0,
+                    "key": "GV_CREATE_ELECTRICZONE",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_ElectricZone",
+            "abilitySpecials": {
+                "LevelEntity_SystemValue": 0.0,
+                "Duration": 0.0,
+                "Attack_Interval": 0.0,
+                "Damage": 0.0
+            },
+            "modifiers": {
+                "Life_Timer": {
+                    "modifierName": "",
+                    "duration": "Duration",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "target": "Self",
+                                    "attackTags": [
+                                        "FISHCL_ELECTRIC_WAVE"
+                                    ]
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "ElecWave_Land",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ServerLuaCall",
+                                    "luaCallType": "CurChallengeGroup",
+                                    "funcName": "SLC_DLActivityDungeon_Exhi_FischlElecShock",
+                                    "AFEHPHNEJHM": 0.0,
+                                    "param2": 0.0,
+                                    "param3": 0.0
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "modifierName": "UNIQUE_Electric_Wave_Land_CD"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Electric_Wave_Land_CD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": -1.0,
+                            "key": "ElecWave_Land",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "ElecWave_Land",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "SummerTimeV2_Dungeon_ElectricZone_Damage": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": "Attack_Interval",
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SummerTimeV2_Dungeon_ShockWave_Expand_Electric_Loop",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "AMCAIHBNPDK": true
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SummerTimeV2_Dungeon_ShockWave_Expand_Electric_Once",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "GIAOINGDIPJ": {
+                                    "$type": "FEHBLBBGFEA",
+                                    "range": 3
+                                }
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 3.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "FISHCL_ELECTRIC_WAVE",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 25.0,
+                                        "ignoreAttackerProperty": true,
+                                        "strikeType": "Default",
+                                        "enBreak": 0.0,
+                                        "damageExtra": [
+                                            "Damage",
+                                            "LevelEntity_SystemValue",
+                                            "MUL"
+                                        ],
+                                        "trueDamage": true,
+                                        "ignoreModifyDamage": true,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetSystemValueToOverrideMap",
+                    "key": "LevelEntity_SystemValue",
+                    "type": "ElementLevelCo"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Life_Timer"
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "SummerTimeV2_Dungeon_ElectricZone_Damage"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Fischl_ResetUltimateSkill",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_FISCHL_BUFF3",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_FISCHL_BUFF3",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_Fischl_ResetUltimateSkill_Handler"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_Fischl_ResetUltimateSkill_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ReviveElemEnergy",
+                            "target": "CurLocalAvatar",
+                            "ratio": 100.0
+                        },
+                        {
+                            "$type": "ModifyAvatarSkillCD",
+                            "target": "CurLocalAvatar",
+                            "skillSlot": [
+                                5
+                            ],
+                            "amountByCasterMaxHPRatio": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "GV_FISCHL_BUFF3",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "GV_FISCHL_BUFF3",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Fishcl_Crow",
+            "abilitySpecials": {
+                "Crow_LifeTime": 0.0,
+                "Crow_AttackInterval": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_Crow_AutoAttack": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Crow_LifeTime",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": "Crow_AttackInterval",
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Fishcl_Crow"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Fischl_S_Skill_Summon",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "Spine"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Fischl_S_Skill_Death",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "Spine"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Fishcl_Crow"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Activity_Crow_AutoAttack"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "SetSelfAttackTarget",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "topLimit": 1,
+                        "entityTypePriority": [
+                            "Monster",
+                            "Gadget"
+                        ],
+                        "sortType": "HigherScore",
+                        "shapeName": "CircleR11",
+                        "campTargetType": "Enemy",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Gadget",
+                                "Monster"
+                            ]
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ANIMAL_ENTITY_TYPE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "turnToTargetImmediately": true
+                },
+                {
+                    "$type": "Predicated",
+                    "target": "SelfAttackTarget",
+                    "targetPredicates": [
+                        {
+                            "$type": "PKCCKMFHFEL"
+                        },
+                        {
+                            "$type": "OMMNCGCCJEK",
+                            "target": "SelfAttackTarget",
+                            "logic": "LesserOrEqual",
+                            "ACJBNJNEBOC": "XYZ",
+                            "ratio": 10.0
+                        },
+                        {
+                            "$type": "LPIGPPFMEGA",
+                            "MMAHJJLOCKK": 0.0
+                        },
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "DBOIPJFLGJO"
+                                }
+                            ]
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Fischl_Skill_S_Crow_NormalAttackOnShooting",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "Mouth"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerBullet",
+                            "bulletID": 44000432,
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "EMPHHFJEKMM",
+                                    "LPHIFJDFKHI": {
+                                        "LOGNGLEIFML": 1.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 0.0
+                                    },
+                                    "FEPHPHMCGAG": 45.0
+                                },
+                                "attachPointName": "AP1"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_Fishcl_Crow_Bullet",
+            "abilitySpecials": {
+                "ImpactDamageSystemValue": 0.0,
+                "BulletDamage": 0.0
+            },
+            "modifiers": {
+                "FirstAttack": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "PositionDampTime": true,
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "PONOPJHLOMA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "JLALLFJFHMN": "Both",
+                                    "born": {
+                                        "$type": "HANJDCBOIIE",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.0,
+                                            "MJHHBAFNOEG": -0.5
+                                        }
+                                    },
+                                    "size": {
+                                        "LOGNGLEIFML": 0.10000000149011612,
+                                        "JKDAHJILGBJ": 0.10000000149011612,
+                                        "MJHHBAFNOEG": 1.0
+                                    }
+                                },
+                                "attackInfo": {
+                                    "attackTag": "Dungeon_OZ_Attack",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 25.0,
+                                        "ignoreAttackerProperty": true,
+                                        "strikeType": "Pierce",
+                                        "enBreak": 10.0,
+                                        "damageExtra": [
+                                            "BulletDamage",
+                                            "ImpactDamageSystemValue",
+                                            "MUL"
+                                        ],
+                                        "trueDamage": true,
+                                        "ignoreModifyDamage": true,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "Eff_Fischl_Skill_S_Crow_NormalHit",
+                                        "hitImpulseType": "LV1",
+                                        "hitHaltTimeScale": 0.009999999776482582
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Fischl_Skill_S_Crow_NormalAttackTrail",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "SetSystemValueToOverrideMap",
+                    "PositionDampTime": true,
+                    "key": "ImpactDamageSystemValue",
+                    "type": "ElementLevelCo"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "FirstAttack"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_Dungeon_FallingAttack_Impact",
+            "abilityMixins": [
+                {
+                    "$type": "ServerUpdateGlobalValueMixin",
+                    "key": "GV_XINYAN_BUFF",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "GV_XINYAN_BUFF",
+                    "valueSteps": [
+                        0.5,
+                        1.5
+                    ],
+                    "modifierNameSteps": [
+                        "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingAttack_Impact_Handler"
+                    ]
+                }
+            ],
+            "abilitySpecials": {
+                "ImpactDamageValue": 0.0,
+                "ImpactDamageSystemValue": 0.0,
+                "BuffDuration": 0.0,
+                "ImpactCD": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingAttack_Impact_Handler": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "LocalAvatarsMixin",
+                            "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingAttack_Impact_Decsion_FallingAttackEnd"
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingAttack_Impact_Decsion_FallingAttackEnd"
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingAttack_Impact_Decsion_FallingAttackEnd": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DoActionByStateIDMixin",
+                            "stateIDs": [
+                                "FallingAnthem_AS_1",
+                                "ElementalArt_FallingAttack_Strike"
+                            ],
+                            "exitActions": [
+                                {
+                                    "$type": "ApplyModifier",
+                                    "PositionDampTime": true,
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "target": "Team",
+                                            "key": "ImpactState",
+                                            "ratio": 0.0,
+                                            "ACJBNJNEBOC": "NoneOrEqual"
+                                        }
+                                    ],
+                                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingAttack_Impact_Action_Impact"
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Team",
+                                    "PositionDampTime": true,
+                                    "modifierName": "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingAttack_Impact_CD"
+                                }
+                            ]
+                        }
+                    ],
+                    "onHittingOther": [
+                        {
+                            "$type": "Predicated",
+                            "PositionDampTime": true,
+                            "targetPredicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "target": "Self",
+                                    "attackTags": [
+                                        "XINYAN_DUNGEON_IMPACT"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ServerLuaCall",
+                                    "PositionDampTime": true,
+                                    "luaCallType": "CurChallengeGroup",
+                                    "funcName": "SLC_DLActivityDungeon_Exhi_XinyanFallAttack",
+                                    "AFEHPHNEJHM": 0.0,
+                                    "param2": 0.0,
+                                    "param3": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingAttack_Impact_CD": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "ImpactCD",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": -1.0,
+                            "key": "ImpactState",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "ratio": 0.0,
+                            "key": "ImpactState",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_SummerTimeV2_Dungeon_FallingAttack_Impact_Action_Impact": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 0.05000000074505806,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "PositionDampTime": true,
+                            "shieldHP": "Eff_EnergyDisk_ElementalBurst_Wave_R40",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "PositionDampTime": true,
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE"
+                                    },
+                                    "EBADGGHGLKN": 4.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "XINYAN_DUNGEON_IMPACT",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 0.0,
+                                        "ignoreAttackerProperty": true,
+                                        "enBreak": 0.0,
+                                        "attackType": "Melee",
+                                        "damageExtra": [
+                                            "ImpactDamageValue",
+                                            "ImpactDamageSystemValue",
+                                            "MUL"
+                                        ],
+                                        "trueDamage": true,
+                                        "ignoreModifyDamage": true,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV2",
+                                        "hitHaltTimeScale": 0.019999999552965164
+                                    },
+                                    "canBeModifiedBy": "OriginOwner"
+                                }
+                            },
+                            "targetType": "Enemy"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetSystemValueToOverrideMap",
+                    "PositionDampTime": true,
+                    "key": "ImpactDamageSystemValue",
+                    "type": "ElementLevelCo"
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "target": "Team",
+                    "ratio": 0.0,
+                    "key": "GV_XINYAN_BUFF",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_SummerTimeV2_BeHit_HasShield",
+            "modifiers": {
+                "UNIQUE_Ability_SummerTimeV2_BeHit_HasShield": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "predicates": [
+                                {
+                                    "$type": "HCAKGLDBCMA",
+                                    "target": "Self",
+                                    "type": "All",
+                                    "JGNKHBCEEIH": true,
+                                    "ADBIBAPAOKA": "Rock"
+                                }
+                            ],
+                            "luaCallType": "CurChallengeGroup",
+                            "funcName": "SLC_DLActivityDungeon_Exhi_XinyanEnbreak",
+                            "AFEHPHNEJHM": 0.0,
+                            "param2": 0.0,
+                            "param3": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Ability_SummerTimeV2_BeHit_HasShield"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    }
+]

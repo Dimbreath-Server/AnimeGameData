@@ -1,0 +1,3002 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Interior_Md_Decoration_Fireplace_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Fire_State"
+                        }
+                    ]
+                },
+                "Fire_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Homeworld_Cooking",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "Fire_Off",
+                                "Fire_On"
+                            ]
+                        }
+                    ]
+                },
+                "Fire_Off": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Fire"
+                                }
+                            ],
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Fire_On": {
+                    "modifierName": "",
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 25.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Griller_FireCook_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "FirePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_FireBasin_Smoke",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "FirePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Decoration_Junk_06_Ability",
+            "modifiers": {
+                "LimboState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Limbo"
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "LimboState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Decoration_Stake_01_Ability",
+            "modifiers": {
+                "LimboState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Limbo"
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "LimboState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Thing_Field_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "FarmSeeding"
+                            ]
+                        }
+                    ]
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "FarmState",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                1.5,
+                                2.5,
+                                3.5
+                            ],
+                            "modifierNameSteps": [
+                                "FarmState0",
+                                "FarmState1",
+                                "FarmState2",
+                                "FarmState3"
+                            ]
+                        }
+                    ]
+                },
+                "FarmState0": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "CurLocalAvatar",
+                            "targetPredicates": [
+                                {
+                                    "$type": "JOPKLAAKJAK",
+                                    "LLMFMHIFHOD": true
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "EnableGadgetIntee"
+                                },
+                                {
+                                    "$type": "ChangeGadgetUIInteractHint",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_HomeField_Mark",
+                                            "ratio": 1.0
+                                        }
+                                    ],
+                                    "hintTextMapId": "UI_HOMEWORLD_FARMFIELD_BUTTONA"
+                                },
+                                {
+                                    "$type": "ChangeGadgetUIInteractHint",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_HomeField_Mark",
+                                            "ratio": 2.0
+                                        }
+                                    ],
+                                    "hintTextMapId": "UI_HOMEWORLD_FARMFIELD_BUTTONB"
+                                },
+                                {
+                                    "$type": "ChangeGadgetUIInteractHint",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "_ABILITY_HomeField_Mark",
+                                            "ratio": 3.0
+                                        }
+                                    ],
+                                    "hintTextMapId": "UI_HOMEWORLD_FARMFIELD_BUTTONC"
+                                },
+                                {
+                                    "$type": "EnableGadgetIntee",
+                                    "enable": true
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "FarmSeeding"
+                            ]
+                        }
+                    ]
+                },
+                "FarmState1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "CurLocalAvatar",
+                            "targetPredicates": [
+                                {
+                                    "$type": "JOPKLAAKJAK",
+                                    "LLMFMHIFHOD": true
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "EnableGadgetIntee"
+                                },
+                                {
+                                    "$type": "EnableGadgetIntee",
+                                    "enable": true
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "FarmSeeding"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_HomeField_Mark",
+                                    "ratio": 3.0
+                                }
+                            ],
+                            "shieldHP": "Eff_SceneObj_Homeworld_Field_01_WaterBubble",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FarmState2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "CurLocalAvatar",
+                            "targetPredicates": [
+                                {
+                                    "$type": "JOPKLAAKJAK",
+                                    "LLMFMHIFHOD": true
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "EnableGadgetIntee"
+                                },
+                                {
+                                    "$type": "EnableGadgetIntee",
+                                    "enable": true
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "FarmSeeding"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_HomeField_Mark",
+                                    "ratio": 3.0
+                                }
+                            ],
+                            "shieldHP": "Eff_SceneObj_Homeworld_Field_01_WaterBubble",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FarmState3": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "CurLocalAvatar",
+                            "targetPredicates": [
+                                {
+                                    "$type": "JOPKLAAKJAK",
+                                    "LLMFMHIFHOD": true
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "EnableGadgetIntee"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "EnableSceneTransformByName",
+                            "transformNames": [
+                                "FarmSeeding"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_HomeField_Mark",
+                                    "ratio": 3.0
+                                }
+                            ],
+                            "shieldHP": "Eff_SceneObj_Homeworld_Field_01_WaterBubble",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Thing_Field_01_Mark",
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_ABILITY_HomeField_Mark",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Thing_Field_02_Mark",
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 2.0,
+                    "key": "_ABILITY_HomeField_Mark",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Thing_Field_03_Mark",
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 3.0,
+                    "key": "_ABILITY_HomeField_Mark",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Thing_Teleporter_01_Ability",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_SceneObj_PortableTeleport_02",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Decoration_Harp_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "CloseIntee"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "CloseIntee": {
+                    "modifierName": "",
+                    "duration": 3.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableGadgetIntee"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Harp_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetIntee",
+                            "enable": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_GuQin_01",
+            "abilityMixins": [
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "CloseIntee"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "CloseIntee": {
+                    "modifierName": "",
+                    "duration": 8.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableGadgetIntee"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_ScenObj_Homeworld_Exterior_Ly_Decoration_Prop_Guqin_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAudio",
+                            "operation": {
+                                "$type": "KKNAPGLMMPI",
+                                "operation": {
+                                    "text": "Play_amb_sceneObj_music_guqin"
+                                }
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetIntee",
+                            "enable": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Ly_Build_Lift_01",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldServerEventMixin",
+                    "editorModifierNames": [
+                        "ShowMode"
+                    ],
+                    "worldModifierNames": [
+                        "HideMode"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "KillMovePlat": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "KillSelf",
+                            "JBLBNPAKMEI": [
+                                77200117
+                            ]
+                        }
+                    ]
+                },
+                "ShowMode": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "PositionDampTime": true,
+                            "renderNames": [
+                                "Homeworld_Exterior_Ly_Build_Lift_02_Vo"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 77200117
+                            },
+                            "modifierName": "KillMovePlat"
+                        }
+                    ]
+                },
+                "HideMode": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerSetRenderersEnable",
+                            "PositionDampTime": true,
+                            "renderNames": [
+                                "Homeworld_Exterior_Ly_Build_Lift_02_Vo"
+                            ]
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "lifeByOwnerIsAlive": true,
+                            "gadgetID": 77200117,
+                            "byServer": true
+                        }
+                    ]
+                }
+            },
+            "onKill": [
+                {
+                    "$type": "ApplyModifier",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "configID": 77200117
+                    },
+                    "modifierName": "KillMovePlat"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Ly_Build_Lift_02",
+            "abilityMixins": [
+                {
+                    "$type": "UGCTimeControlMixin"
+                }
+            ],
+            "modifiers": {
+                "InMove": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 18.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerUGCGadgetMove"
+                        }
+                    ]
+                }
+            },
+            "onFieldEnter": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "InMove"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Thing_Prop_Bonfire_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Bonfire_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Md_Thing_Prop_KleeOven_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Fire_State"
+                        }
+                    ]
+                },
+                "Fire_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Homeworld_Cooking",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "Fire_Off",
+                                "Fire_On"
+                            ]
+                        }
+                    ]
+                },
+                "Fire_Off": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Fire"
+                                }
+                            ],
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Fire_On": {
+                    "modifierName": "",
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 25.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_ScenObj_Homeworld_Exterior_Md_Thing_Prop_KleeOven_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_FireBasin_Smoke",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "FirePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Interior_Md_Lamp_Light_MonaStar_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Interior_MonaStar_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Interior_Xm_Thing_Prop_Kettle_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Xm_Thing_Kettle_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Xm_Build_Dreams_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Xm_Build_Dreams_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Xm_Decoration_Prop_Brazier_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_FireBasin_Xm_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Xm_Decoration_Prop_Smhuopen_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Smhuopen_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Xm_Decoration_Prop_Smhuopen_02_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Smhuopen_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Fd_Decoration_Prop_Huopen_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Huopen_01_Fire",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Interior_Xm_Thing_Prop_CafeStove_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Smoke_Barbecue_03",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Xm_Thing_Prop_Blueball_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Blueball_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Interior_Xm_Thing_Build_Stove_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Stove_Fire_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Interior_Xm_Thing_Prop_BarbecueOven_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Smoke_Xm_XKC_Dpkaorou_01_Vo",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Interior_Xm_Thing_Prop_BarbecueOven_02_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Smoke_Xm_Indoor_Barbecue_02_Vo",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Xm_Decoration_Prop_Swing_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Decoration_Swing_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Ly_Thing_Prop_Soundflower_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_ScenObj_Homeworld_Exterior_Ly_Thing_Prop_Soundflower_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Ani_Interior_Xm_Decoration_Prop_Baozhu_01",
+            "abilityMixins": [
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Baozhu_Intee"
+                        }
+                    ]
+                },
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Baozhu_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_GLOBALVALUE_BaozhuState",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "Baozhu_Off",
+                                "Baozhu_On"
+                            ]
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_GLOBALVALUE_BaozhuEffectShow",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "Baozhu_EffectOff",
+                                "Baozhu_EffectOn"
+                            ]
+                        }
+                    ]
+                },
+                "Baozhu_Intee": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableGadgetIntee"
+                        },
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_GLOBALVALUE_BaozhuState",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_GLOBALVALUE_BaozhuState",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 0.0,
+                                    "key": "_GLOBALVALUE_BaozhuState",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetIntee",
+                            "enable": true
+                        }
+                    ]
+                },
+                "Baozhu_Off": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ChangeGadgetUIInteractHint",
+                            "hintTextMapId": "UI_HOMEWORLD_BAOZHU_TURN_ON_BUTTON"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_GLOBALVALUE_BaozhuEffectShow",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Baozhu_On": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ChangeGadgetUIInteractHint",
+                            "hintTextMapId": "UI_HOMEWORLD_BAOZHU_TURN_OFF_BUTTON"
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_GLOBALVALUE_BaozhuEffectShow",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Baozhu_EffectOff": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Baozhu_EffectOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_TrainerCompetitionBead_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "EffectNode"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_GLOBALVALUE_BaozhuEffectShow",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "_GLOBALVALUE_BaozhuState",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "ratio": 1.0,
+                            "key": "_GLOBALVALUE_BaozhuEffectShow",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_GLOBALVALUE_BaozhuState",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Baozhu_State"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Dq_Thing_Prop_Shipsoul_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "ShipsoulShow"
+                        },
+                        {
+                            "$type": "EnableGadgetIntee"
+                        }
+                    ]
+                },
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "ShipsoulShow": {
+                    "modifierName": "",
+                    "duration": 7.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Shipsoul_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetIntee",
+                            "enable": true
+                        }
+                    ]
+                },
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Shipsoul_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Ly_Thing_Prop_Fireworks_01",
+            "abilityMixins": [
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "FireHanabi_Pre"
+                        },
+                        {
+                            "$type": "EnableGadgetIntee"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Empty": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Hanabi01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Ly_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": -8.0
+                                    }
+                                },
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hanabi02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Ly_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": -4.0
+                                    }
+                                },
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hanabi03": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Ly_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hanabi04": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Ly_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 4.0
+                                    }
+                                },
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hanabi05": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Ly_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 8.0
+                                    }
+                                },
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FireHanabi_Pre": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Ly_Fireworks_01_Pre",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "PreEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "FireHanabi"
+                        }
+                    ]
+                },
+                "FireHanabi": {
+                    "modifierName": "",
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 3.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Fire_Count",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                0.0,
+                                0.5,
+                                1.5,
+                                2.5,
+                                3.5,
+                                4.5,
+                                5.5
+                            ],
+                            "modifierNameSteps": [
+                                "Empty",
+                                "Hanabi01",
+                                "Hanabi02",
+                                "Hanabi03",
+                                "Hanabi04",
+                                "Hanabi05"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Fire_Count",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetIntee",
+                            "enable": true
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_Fire_Count",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Fire_Count",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_Fire_Count",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Dq_Thing_Prop_Fireworks_01",
+            "abilityMixins": [
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "FireHanabi_Pre"
+                        },
+                        {
+                            "$type": "EnableGadgetIntee"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Empty": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Hanabi01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Dq_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": -8.0
+                                    }
+                                },
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hanabi02": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Dq_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": -4.0
+                                    }
+                                },
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hanabi03": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Dq_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hanabi04": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Dq_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 4.0
+                                    }
+                                },
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Hanabi05": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Dq_Fireworks_01_Fire",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "GIAOINGDIPJ": {
+                                    "$type": "IPAGJMPLLIN",
+                                    "CMKPBPBACMP": {
+                                        "LOGNGLEIFML": 0.0,
+                                        "JKDAHJILGBJ": 0.0,
+                                        "MJHHBAFNOEG": 8.0
+                                    }
+                                },
+                                "attachPointName": "FireEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "FireHanabi_Pre": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Dq_Fireworks_01_Pre",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "PreEffectPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "FireHanabi"
+                        }
+                    ]
+                },
+                "FireHanabi": {
+                    "modifierName": "",
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 3.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Fire_Count",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                0.0,
+                                0.5,
+                                1.5,
+                                2.5,
+                                3.5,
+                                4.5,
+                                5.5
+                            ],
+                            "modifierNameSteps": [
+                                "Empty",
+                                "Hanabi01",
+                                "Hanabi02",
+                                "Hanabi03",
+                                "Hanabi04",
+                                "Hanabi05"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Fire_Count",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetIntee",
+                            "enable": true
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_Fire_Count",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Fire_Count",
+                            "useLimitRange": true,
+                            "maxValue": 5.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_Fire_Count",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Xm_Build_Tiejiangpu_01",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Fire_Basin_Vo",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Xm_Thing_Prop_Claypot_01",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Fire_State"
+                        }
+                    ]
+                },
+                "Fire_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Homeworld_Cooking",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "Fire_Off",
+                                "Fire_On"
+                            ]
+                        }
+                    ]
+                },
+                "Fire_Off": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Fire"
+                                }
+                            ],
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Fire_On": {
+                    "modifierName": "",
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 25.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Xm_Thing_Prop_Claypot_01_Cook",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "FirePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_FireBasin_Smoke",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "FirePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Interior_Xm_Thing_Prop_SumeruStove_01",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Fire_State"
+                        }
+                    ]
+                },
+                "Fire_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Homeworld_Cooking",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "Fire_Off",
+                                "Fire_On"
+                            ]
+                        }
+                    ]
+                },
+                "Fire_Off": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "AJLPGCJJKMO",
+                                    "element": "Fire"
+                                }
+                            ],
+                            "ratio": 1.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Fire_On": {
+                    "modifierName": "",
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 25.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_SumeruStove_01_FireCook",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "FirePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_FireBasin_Smoke",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "FirePoint"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_Homeworld_Cooking",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Prop_Thing_XmGrownBridge_01",
+            "modifiers": {
+                "XmGrownBridge_StateHandle": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "XmGrownBridge_State",
+                            "GVInTalk": 0.0,
+                            "valueSteps": [
+                                -0.5,
+                                0.5,
+                                1.5
+                            ],
+                            "modifierNameSteps": [
+                                "XmGrownBridge_Off",
+                                "XmGrownBridge_On"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Xm_CaneVine_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "XmGrownBridge_On": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "PositionDampTime": true,
+                            "parameter": "GadgetState",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "value": 201,
+                            "shieldHP": "Eff_SceneObj_Homeworld_Xm_CaneVine_01"
+                        }
+                    ]
+                },
+                "XmGrownBridge_Off": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SendEffectTrigger",
+                            "PositionDampTime": true,
+                            "parameter": "GadgetState",
+                            "attachPoint": "",
+                            "type": "Int",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Xm_CaneVine_01"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "XmGrownBridge_State",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "XmGrownBridge_StateHandle"
+                }
+            ],
+            "onFieldEnter": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 1.0,
+                    "key": "XmGrownBridge_State",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onFieldExit": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "XmGrownBridge_State",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeland_AYuanDu_Jump_Mat",
+            "modifiers": {
+                "DefaultState": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "SetTrampolineAbilityMixin",
+                            "abilityName": "Avatar_Trampoline_Jump_Controller",
+                            "HJCLNKECDGN": ""
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "DefaultState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeland_OwlGuard_01",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "LightEffect"
+                },
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "LightEffect"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "LightEffect": {
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_FilmOwl_03",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "EnableGadgetIntee"
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "GadgetState",
+                            "ratio": 201.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetIntee",
+                            "enable": true
+                        },
+                        {
+                            "$type": "SetAnimatorInt",
+                            "intID": "GadgetState",
+                            "ratio": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeland_BombPlay_Bomb",
+            "modifiers": {
+                "BombBoxLoop": {
+                    "modifierName": "",
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 1.0,
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_BombBarrel_01_Explode",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireAISoundEvent"
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "FCLNLLGDNHB": true,
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 0.5,
+                                            "MJHHBAFNOEG": 0.0
+                                        }
+                                    },
+                                    "EBADGGHGLKN": 6.0
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 0.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Blunt",
+                                        "enBreak": 9999999.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV6",
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    },
+                                    "forceCameraShake": true,
+                                    "cameraShake": {
+                                        "shakeRange": 0.36000001430511475,
+                                        "shakeTime": 0.36000001430511475
+                                    }
+                                }
+                            },
+                            "targetType": "All"
+                        },
+                        {
+                            "$type": "KillSelf",
+                            "duration": 0.10000000149011612,
+                            "hideEntity": true
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "TargetOriginOwner",
+                                    "key": "GV_Avatar_HM_In_Shoot_Bomb",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ServerLuaCall",
+                                    "target": "TargetOriginOwner",
+                                    "luaCallType": "FromGroup",
+                                    "funcName": "SLC_OnBombKill",
+                                    "AFEHPHNEJHM": 0.0,
+                                    "param2": 0.0,
+                                    "param3": 0.0
+                                },
+                                {
+                                    "$type": "DebugLog",
+                                    "content": "hm_bomb_hit_by_targetOwner"
+                                },
+                                {
+                                    "$type": "RemoveModifier",
+                                    "predicates": [
+                                        {
+                                            "$type": "BAMBPOIJFPG",
+                                            "predicates": [
+                                                {
+                                                    "$type": "NBGPPHOPDNC",
+                                                    "logic": "Equal",
+                                                    "PCPOFDGBGNB": 0.0
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "modifierName": "BombBoxLoop"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "GV_Avatar_HM_In_Shoot_Bomb",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "ServerLuaCall",
+                                    "target": "Target",
+                                    "luaCallType": "FromGroup",
+                                    "funcName": "SLC_OnBombKill",
+                                    "AFEHPHNEJHM": 0.0,
+                                    "param2": 0.0,
+                                    "param3": 0.0
+                                },
+                                {
+                                    "$type": "RemoveModifier",
+                                    "predicates": [
+                                        {
+                                            "$type": "BAMBPOIJFPG",
+                                            "predicates": [
+                                                {
+                                                    "$type": "NBGPPHOPDNC",
+                                                    "logic": "Equal",
+                                                    "PCPOFDGBGNB": 0.0
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "modifierName": "BombBoxLoop"
+                                }
+                            ]
+                        }
+                    ],
+                    "onCrash": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "BombBoxLoop"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BombBoxLoop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_BombPlay_Board",
+            "abilityMixins": [
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "State_Intee_CD"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "State_Intee_CD": {
+                    "modifierName": "",
+                    "duration": 4.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableGadgetIntee"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetIntee",
+                            "enable": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Interior_Common_Thing_Prop_Fishbowl_01",
+            "abilityMixins": [
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Knock"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "Knock": {
+                    "modifierName": "",
+                    "duration": 2.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireAISoundEvent",
+                            "volume": 100.0
+                        },
+                        {
+                            "$type": "EnableGadgetIntee"
+                        },
+                        {
+                            "$type": "TriggerAudio",
+                            "operation": {
+                                "$type": "KKNAPGLMMPI",
+                                "operation": {
+                                    "text": "Play_amb_sceneObj_sfx_fishbowl_01"
+                                }
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetIntee",
+                            "enable": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_SceneObj_Fishbowl_01",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Common_Thing_Prop_AyuanBlow_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "HomeworldEnterEditorMixin",
+                    "editorModifierNames": [
+                        "OnHomeEditor"
+                    ],
+                    "worldModifierNames": [
+                        "OnHomeWorld"
+                    ]
+                }
+            ],
+            "modifiers": {
+                "OnHomeEditor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "OnHomeWorld": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_ScenObj_Homeworld_Exterior_Ly_Thing_Prop_Soundflower_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Ani_Exterior_Fd_Thing_Prop_MachFish_01_Ability",
+            "abilityMixins": [
+                {
+                    "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+                    "globalValueKey": "Rand_State_Result",
+                    "valueSteps": [
+                        -0.5,
+                        0.5,
+                        1.5,
+                        2.5
+                    ],
+                    "modifierNameSteps": [
+                        "GV_0",
+                        "GV_1",
+                        "GV_2"
+                    ]
+                },
+                {
+                    "$type": "WidgetMpSupportMixin",
+                    "succActions": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Random_State"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "GV_0": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableGadgetInteeMp",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true,
+                            "enable": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableGadgetInteeMp",
+                            "PositionDampTime": true,
+                            "canBeHandledOnRecover": true
+                        }
+                    ]
+                },
+                "GV_1": {
+                    "modifierName": "",
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "Play_Idle1"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "Rand_State_Result",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "GV_2": {
+                    "modifierName": "",
+                    "duration": 3.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "Play_Idle2"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "ratio": 0.0,
+                            "key": "Rand_State_Result",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Random_State": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Randomed",
+                            "chance": 0.5,
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "Rand_State_Result",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 2.0,
+                                    "key": "Rand_State_Result",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "Rand_State_Result",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Ani_Exterior_Fd_Thing_Prop_BoxingMachine_01",
+            "modifiers": {
+                "HitManager": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShaderStateMachineSwitchMixin",
+                            "HPJJAKOLMIC": 1,
+                            "CEIFKFCFIIL": "Default"
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "Attack",
+                            "MPTriggerOnRemote": true
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "HitManager"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Ani_Exterior_Fd_Thing_Prop_MovieBall_01",
+            "modifiers": {
+                "AniManager": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 5.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "Personality"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "DoubleJump"
+                        }
+                    ]
+                },
+                "DoubleJump": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "Personality"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "AniManager"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Homeworld_Exterior_Ly_Thing_Prop_Shenxiang_01",
+            "modifiers": {
+                "EffManager": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_SceneObj_Homeworld_Exterior_Ly_Thing_Prop_Shenxiang_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "COAICNDKEMA": true,
+                                "attachPointName": "AttachPoint"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "EffManager"
+                }
+            ]
+        }
+    }
+]

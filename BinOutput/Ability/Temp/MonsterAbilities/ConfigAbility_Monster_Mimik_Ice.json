@@ -1,0 +1,724 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_ElementState_On",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "target": "Caster",
+                    "triggerID": "NonetoStage1",
+                    "MPTriggerOnRemote": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_ElementState_Off",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "target": "Caster",
+                    "triggerID": "Stage1toNone",
+                    "MPTriggerOnRemote": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_Fruit_Effect",
+            "modifiers": {
+                "UNIQUE_Mimik_Ice_Fruit_Effect": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox_Fruit"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox_Fruit"
+                            ]
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HitBox",
+                                "HeadBox"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Mimik_Ice_Fruit_Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_AbsorbFruitState",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "AbsorbFruit",
+                        "AbsorbFruit_Loop",
+                        "ForwardShoot01",
+                        "UpperShoot02"
+                    ],
+                    "modifierName": "AddWeight"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "AbsorbFruit",
+                        "AbsorbFruit_Loop",
+                        "ForwardShoot01",
+                        "UpperShoot02"
+                    ],
+                    "modifierName": "ResetFruitSkillCD"
+                }
+            ],
+            "modifiers": {
+                "AddWeight": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Entity_WeightRatio": 5.0
+                    }
+                },
+                "ResetFruitSkillCD": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                301,
+                                311,
+                                312
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_AbsorbFruit",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "AbsorbFruit_Loop"
+                    ],
+                    "modifierName": "UNIQUE_Mimik_Ice_Fruit"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Mimik_Ice_Fruit": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Frozen",
+                    "bonusCriticalHurt": 50.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShieldBarMixin",
+                            "onShieldBroken": [
+                                {
+                                    "$type": "ActCameraShake",
+                                    "cameraShake": {
+                                        "shakeRange": 0.20000000298023224,
+                                        "shakeTime": 0.11999999731779099,
+                                        "shakeDistance": 30.0,
+                                        "extension": {
+                                            "baseOnCamera": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "$type": "TriggerAbility",
+                                    "target": "Caster",
+                                    "abilityName": "Monster_Mimik_Ice_DownManager"
+                                },
+                                {
+                                    "$type": "SetPoseBool",
+                                    "target": "Caster",
+                                    "boolID": "Down",
+                                    "ratio": true
+                                },
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "target": "Caster",
+                                    "triggerID": "DownTrigger",
+                                    "MPTriggerOnRemote": true
+                                }
+                            ],
+                            "showDamageText": ""
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_MIMIK_ICE_FRUIT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Monster_Mimik_Ice_Fruit_Effect"
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Mimik_Ice_AbsorbFruit_Loop_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_ABILITY_MIMIK_ICE_FRUIT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Mimik_Ice_Fruit_Effect"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Mimik_Ice_Fruit"
+                        }
+                    ],
+                    "forceSyncToRemote": true
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_DownManager",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Down_AS"
+                    ],
+                    "modifierName": "RecoverManager"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_DownTimer": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Mimik_Ice_Down_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Mimik_Ice_Down_02",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Recover",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Down"
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "RecoverTrigger",
+                            "MPTriggerOnRemote": true
+                        }
+                    ],
+                    "forceSyncToRemote": true
+                },
+                "RecoverManager": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "Recover"
+                        },
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                301,
+                                311,
+                                312
+                            ]
+                        }
+                    ],
+                    "forceSyncToRemote": true
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_DownTimer"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Mimik_Ice_AbsorbFruit_DoFruitMoveEffect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "AbsorbFruit_BS"
+                    ],
+                    "modifierName": "Effect"
+                }
+            ],
+            "modifiers": {
+                "Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                },
+                                "attachPointName": "BulletSource",
+                                "OINJEIEFIBB": "Self"
+                            },
+                            "gadgetID": 42601005,
+                            "campID": 4001,
+                            "campTargetType": "Self"
+                        },
+                        {
+                            "$type": "SetPartControlTarget",
+                            "partRootNames": [
+                                "Fruit01",
+                                "Fruit02",
+                                "Fruit03"
+                            ]
+                        },
+                        {
+                            "$type": "EnablePartControl",
+                            "partRootNames": [
+                                "Fruit01",
+                                "Fruit02",
+                                "Fruit03"
+                            ],
+                            "enable": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillGadget",
+                            "gadgetInfo": {
+                                "configID": 42601005
+                            }
+                        },
+                        {
+                            "$type": "EnablePartControl",
+                            "partRootNames": [
+                                "Fruit01",
+                                "Fruit02",
+                                "Fruit03"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Mimik_AbsorbFruit_FruitMoveTarget",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_MONSTER_MIMIK_IS_FRUITMOVETARGET",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Mimik_AbsorbFruit_FruitMoveEffect",
+            "modifiers": {
+                "Effect": {
+                    "modifierName": "",
+                    "duration": 0.75,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Mimik_Ice_Fruit_Bullet",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_ForwardShoot01",
+            "modifiers": {
+                "UNIQUE_ForwardShootTargeting": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 1.2000000476837158,
+                                    "MJHHBAFNOEG": -3.5
+                                }
+                            },
+                            "lifeByOwnerV2": true,
+                            "gadgetID": 42601005,
+                            "campID": 4001
+                        },
+                        {
+                            "$type": "SetSelfAttackTarget",
+                            "otherTargets": {
+                                "$type": "CJMNJEEJEKB",
+                                "configID": 42601005
+                            }
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillGadget",
+                            "gadgetInfo": {
+                                "configID": 42601005
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42601001,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "BulletSource"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_ForwardShoot02",
+            "abilitySpecials": {
+                "FruitCount": 0.0
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42601002,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "NBLKPHLEMGO": "Horizontal",
+                            "maxAngle": 15.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "BulletSource"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_UpperShoot01",
+            "abilitySpecials": {
+                "FruitCount": 0.0
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42601003,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "BulletSource"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_UpperShoot02",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42601004,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "NBLKPHLEMGO": "Horizontal",
+                            "maxAngle": 15.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "BulletSource"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Mimik_Ice_ForwardBullet_Loop",
+            "modifiers": {
+                "UNIQUE_Mimik_Ice_ForwardBullet_Loop": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Frozen",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Mimik_Ice_Bullet_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Mimik_Ice_ForwardBullet_Loop"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Mimik_Ice_ForwardBullet_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Mimik_Ice_Bullet_01_Hit",
+                    "born": {
+                        "$type": "HANJDCBOIIE"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Mimik_Ice_ForwardBullet_Loop"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 0.75
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.20000000298023224,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Ice",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 12.5,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_FruitReborn_Effect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "FruitReborn_Act"
+                    ],
+                    "modifierName": "FruitReborn_Effect"
+                }
+            ],
+            "modifiers": {
+                "FruitReborn_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Mimik_Ice_FruitReborn_UnderGround",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Mimik_Ice_SkillSet",
+            "modifiers": {
+                "UNIQUE_Mimik_Ice_DefaultSkillSet": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "UseSkillEliteSet",
+                            "skillEliteSetID": 1
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTERAFFIX_Mimik_Ice_ActivitySummoned",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Mimik_Ice_DefaultSkillSet"
+                }
+            ]
+        }
+    }
+]

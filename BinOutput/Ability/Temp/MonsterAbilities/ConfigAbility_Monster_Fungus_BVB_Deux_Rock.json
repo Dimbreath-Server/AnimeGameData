@@ -1,0 +1,376 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Deux_BVB_Rock_Taunt",
+            "modifiers": {
+                "RockEndure": {
+                    "modifierName": "",
+                    "duration": 8.0,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EndureDelta": 0.33000001311302185
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "TriggerTaunt",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR15",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster",
+                                        "Partner"
+                                    ]
+                                }
+                            ],
+                            "tauntLevel": "Ability_TauntLevel_4",
+                            "careValue": 660.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerTaunt",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR15",
+                                "campTargetType": "Enemy",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Monster",
+                                        "Partner"
+                                    ]
+                                }
+                            ],
+                            "tauntLevel": "Ability_TauntLevel_4",
+                            "careValue": -410.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fungus_Deux_Rock_Taunt",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "RockEndure"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Deux_BVB_Rock_RockConsuming",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByStateIDMixin",
+                    "stateIDs": [
+                        "UnionBurst"
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "UBShader"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "RockConsuming_Monitor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Rock"
+                                },
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "BVB_FungusRock_UB"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AddElementDurability",
+                                    "target": "Target",
+                                    "ratio": -300.0,
+                                    "modifierName": "",
+                                    "elementType": "Rock",
+                                    "sortModifier": "All",
+                                    "maxValue": 3.4028234663852886e+38
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Predicated",
+                            "target": "Target",
+                            "targetPredicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Rock"
+                                },
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "BVB_FungusRock_Melee"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AddElementDurability",
+                                    "target": "Target",
+                                    "ratio": -50.0,
+                                    "modifierName": "",
+                                    "elementType": "Rock",
+                                    "sortModifier": "All",
+                                    "maxValue": 3.4028234663852886e+38
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "RockConsuming_Monitor"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Deux_BVB_Rock_TeamShield",
+            "abilitySpecials": {
+                "sub_hurt_delta_positive": 0.4000000059604645
+            },
+            "modifiers": {
+                "Shield_Handler": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Fungus_Rock_TeamShield"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Fungus_Rock_TeamShield"
+                        }
+                    ]
+                },
+                "Fungus_Rock_TeamShield": {
+                    "modifierName": "",
+                    "duration": 10.0,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "EliteShieldMixin",
+                            "shieldType": "default",
+                            "shieldAngle": 360.0,
+                            "maxShieldByHPRatio": 0.699999988079071,
+                            "costShieldRatioName": "",
+                            "showDamageText": ""
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.30000001192092896
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Fungus_Deux_Rock_TeamShield_Buff",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Passive_Resistance": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_PhysicalSubHurtDelta": "sub_hurt_delta_positive",
+                        "Actor_FireSubHurtDelta": "sub_hurt_delta_positive",
+                        "Actor_ElecSubHurtDelta": "sub_hurt_delta_positive",
+                        "Actor_IceSubHurtDelta": "sub_hurt_delta_positive",
+                        "Actor_WaterSubHurtDelta": "sub_hurt_delta_positive",
+                        "Actor_GrassSubHurtDelta": "sub_hurt_delta_positive",
+                        "Actor_WindSubHurtDelta": "sub_hurt_delta_positive",
+                        "Actor_RockSubHurtDelta": "sub_hurt_delta_positive"
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Passive_Resistance"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "otherTargets": {
+                        "$type": "JGOEKECMJLH",
+                        "shapeName": "CircleR30H10",
+                        "campTargetType": "SelfCamp",
+                        "OHJFACHECDC": 1.0
+                    },
+                    "predicates": [
+                        {
+                            "$type": "GOIBMIJJIFC",
+                            "entityTypes": [
+                                "Partner",
+                                "Monster"
+                            ]
+                        }
+                    ],
+                    "modifierName": "Shield_Handler"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Fungus_Deux_Rock_TeamShield",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Deux_BVB_Rock_Passive",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByStateIDMixin",
+                    "stateIDs": [
+                        "UnionBurst"
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "UBShader"
+                        }
+                    ]
+                }
+            ],
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_BURST_HIT_STACK",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_BURST_HIT_STACK",
+                    "useLimitRange": true,
+                    "maxValue": 4.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Fungus_Deux_BVB_Rock_EarthQuake",
+            "abilitySpecials": {
+                "base_ratio": 10.0,
+                "stack_ratio": 2.0,
+                "stack_count": 0.0
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "globalValueKey": "_BURST_HIT_STACK",
+                    "overrideMapKey": "stack_count"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "height": 1.399999976158142,
+                            "EBADGGHGLKN": 6.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": [
+                                    "stack_ratio",
+                                    "stack_count",
+                                    "MUL",
+                                    "base_ratio",
+                                    "ADD"
+                                ],
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 300.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "",
+                                "overrideHitImpulse": {
+                                    "hitLevel": "Air",
+                                    "JELEFKIMBOD": 0.0,
+                                    "hitImpulseY": 1360.0
+                                }
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.4000000059604645,
+                                "shakeTime": 0.11999999731779099,
+                                "shakeDir": {
+                                    "y": 1.0
+                                },
+                                "extension": {
+                                    "baseOnCamera": true,
+                                    "baseCycle": 0.07999999821186066,
+                                    "cycleDamping": 0.30000001192092896
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_BURST_HIT_STACK",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    }
+]

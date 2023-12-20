@@ -1,0 +1,2120 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Born",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_DEFENDER_NONE_WEAKNESSPROTECT",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "TriggerAbility",
+                    "predicates": [
+                        {
+                            "$type": "PCGFCGPFNLE",
+                            "logic": "LesserOrEqual",
+                            "ratio": 100.0,
+                            "parameter": "PoseID"
+                        }
+                    ],
+                    "abilityName": "Defender_None_Weakness"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_PowerOff",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Born",
+                        "NormalIdle_PowerOff",
+                        "PowerOff_WakeUp",
+                        "PowerOff_Warning"
+                    ],
+                    "modifierName": "UNIQUE_Defender_PowerOff",
+                    "predicates": [
+                        {
+                            "$type": "PCGFCGPFNLE",
+                            "logic": "Equal",
+                            "ratio": 101.0,
+                            "parameter": "PoseID"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Defender_PowerOff": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Entity_MassRatio": 1000.0,
+                        "Entity_WeightRatio": 5.0,
+                        "Actor_EndureDelta": 0.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "PowerOff_Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "PowerOff_IsGhostToAllied"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "PowerOff_IsGhostToEnemy"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "PowerOff_MuteTaunt"
+                        },
+                        {
+                            "$type": "HideUIBillBoard",
+                            "hide": true
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "PowerOff",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "HideUIBillBoard"
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "PowerOff"
+                        }
+                    ]
+                },
+                "PowerOff_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "PowerOff_IsGhostToAllied": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "IsGhostToAllied"
+                },
+                "PowerOff_IsGhostToEnemy": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "IsGhostToEnemy"
+                },
+                "PowerOff_MuteTaunt": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "MuteTaunt"
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Defender_PowerOff"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_PowerOff_WakeUp",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "triggerID": "WakeUpTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_PowerOff_Remove",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "PowerOff_Warning"
+                    ],
+                    "modifierName": "EyeEffect_PowerOffEnd"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "PowerOff_WarningAS"
+                    ],
+                    "modifierName": "PowerOff_WarningAS"
+                }
+            ],
+            "modifiers": {
+                "EyeEffect_PowerOffEnd": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Eye_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "PowerOff_WarningAS": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Defender_None_Weakness"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Weakness",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Break"
+                    ],
+                    "modifierName": "UNIQUE_Defender_BreakState"
+                }
+            ],
+            "abilitySpecials": {
+                "WeaknessDurability": 150.0
+            },
+            "modifiers": {
+                "UNIQUE_Defender_Weakness": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": "WeaknessDurability",
+                    "properties": {
+                        "Actor_EndureDelta": 1.0
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "EnergyState",
+                            "value": 1
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Eye",
+                            "scale": 0.10000000149011612,
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Active_Back",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_BackSmoke",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HeadBox",
+                                "BackBox"
+                            ],
+                            "setEnable": true
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_MONSTER_AutoMatron_WeakTag",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "WeakStartTrigger"
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "EnergyState"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Defender_None_Weak"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Eye_03",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Active_Back_02",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "EnableHitBoxByName",
+                            "hitBoxNames": [
+                                "HeadBox",
+                                "BackBox"
+                            ]
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_MONSTER_AutoMatron_WeakTag",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "JHAGMCCBELA",
+                                    "hitBoxNames": [
+                                        "HeadBox",
+                                        "BackBox"
+                                    ]
+                                },
+                                {
+                                    "$type": "ENLNAJBJAKE",
+                                    "logic": "GreaterOrEqual",
+                                    "HJMCHPBKEDN": 80.0
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_DEFENDER_NONE_WEAKNESSPROTECT",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetAnimatorTrigger",
+                                    "triggerID": "BreakTrigger"
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "predicates": [
+                                        {
+                                            "$type": "JHAGMCCBELA",
+                                            "hitBoxNames": [
+                                                "HeadBox"
+                                            ]
+                                        }
+                                    ],
+                                    "shieldHP": "Eff_Monster_Defender_None_Weakness_BeHit",
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "AimingPoint"
+                                    },
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "predicates": [
+                                        {
+                                            "$type": "JHAGMCCBELA",
+                                            "hitBoxNames": [
+                                                "BackBox"
+                                            ]
+                                        }
+                                    ],
+                                    "shieldHP": "Eff_Monster_Defender_None_Weakness_BeHit",
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "BackPoint"
+                                    },
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "AddElementDurability",
+                                    "ratio": -50.0,
+                                    "modifierName": "UNIQUE_Defender_Weakness",
+                                    "useLimitRange": true,
+                                    "maxValue": 9999.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Defender_BreakState": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_WeakStart",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "JHAGMCCBELA",
+                                    "hitBoxNames": [
+                                        "HeadBox",
+                                        "BackBox"
+                                    ]
+                                },
+                                {
+                                    "$type": "ENLNAJBJAKE",
+                                    "logic": "GreaterOrEqual",
+                                    "HJMCHPBKEDN": 80.0
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ABILITY_DEFENDER_NONE_WEAKNESSPROTECT",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "FireEffect",
+                                    "predicates": [
+                                        {
+                                            "$type": "JHAGMCCBELA",
+                                            "hitBoxNames": [
+                                                "HeadBox"
+                                            ]
+                                        }
+                                    ],
+                                    "shieldHP": "Eff_Monster_Defender_None_Weakness_BeHit",
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "AimingPoint"
+                                    },
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "predicates": [
+                                        {
+                                            "$type": "JHAGMCCBELA",
+                                            "hitBoxNames": [
+                                                "BackBox"
+                                            ]
+                                        }
+                                    ],
+                                    "shieldHP": "Eff_Monster_Defender_None_Weakness_BeHit",
+                                    "born": {
+                                        "$type": "JAPFKIFCLPF",
+                                        "attachPointName": "BackPoint"
+                                    },
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "AddElementDurability",
+                                    "ratio": -100.0,
+                                    "modifierName": "UNIQUE_Defender_Weakness",
+                                    "useLimitRange": true,
+                                    "maxValue": 9999.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetOverrideMapValue",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_MONSTERAFFIX_Defender_WeaknessNerf_ForBuoyantCombat",
+                            "ratio": 1.0,
+                            "PLDDAFOIEGE": true
+                        }
+                    ],
+                    "ratio": 50.0,
+                    "overrideMapKey": "WeaknessDurability",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Defender_Weakness"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Weakness_Remove",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Defender_Weakness"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Break_Remove",
+            "abilitySpecials": {
+                "BreakProtectTime": 7.5,
+                "BreakProtectTimeDelta": 1.5
+            },
+            "modifiers": {
+                "BreakProtect": {
+                    "modifierName": "",
+                    "duration": "BreakProtectTime",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_DEFENDER_NONE_WEAKNESSPROTECT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "BreakProtectEffect"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_ABILITY_DEFENDER_NONE_WEAKNESSPROTECT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "EffectTrigger",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Defender_None_Shield_Eye"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "EffectTrigger",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Defender_None_Shield_Back"
+                        }
+                    ]
+                },
+                "BreakProtectEffect": {
+                    "modifierName": "",
+                    "duration": [
+                        "BreakProtectTime",
+                        "BreakProtectTimeDelta",
+                        "ADD"
+                    ],
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Shield_Eye",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Shield_Back",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Defender_BreakState"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BreakProtect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Weak",
+            "abilitySpecials": {
+                "WeakTime_ExtraRatio": 0.0
+            },
+            "modifiers": {
+                "UNIQUE_WeakTimer": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": [
+                        15.0,
+                        "WeakTime_ExtraRatio",
+                        "MUL",
+                        15.0,
+                        "ADD"
+                    ],
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "WeakLocked",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "WeakLocked"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetGlobalValueToOverrideMap",
+                    "globalValueKey": "_MONSTER_WeakTime_ExtraRatio",
+                    "overrideMapKey": "WeakTime_ExtraRatio"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_WeakTimer"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Weak_Effect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        98,
+                        99,
+                        202,
+                        203
+                    ],
+                    "modifierName": "WeakEffect"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Weak_Start"
+                    ],
+                    "modifierName": "Watch_Weak"
+                }
+            ],
+            "modifiers": {
+                "WeakEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_WeakStart",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Watch_Weak": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "DoWatcherSystemAction",
+                            "watcherId": 82013,
+                            "inThreatListOnly": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "WeakEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Weak_Ground",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_WeakDust",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ActCameraShake",
+                    "cameraShake": {
+                        "shakeType": "CustomVector",
+                        "shakeRange": 0.20000000298023224,
+                        "shakeTime": 0.15000000596046448,
+                        "shakeDistance": 25.0,
+                        "shakeDir": {
+                            "y": -1.0
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Weak_End",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Weak_End"
+                    ],
+                    "modifierName": "EyeEffect_WeakEnd"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Weak_EndAS"
+                    ],
+                    "modifierName": "Weak_EndAS"
+                }
+            ],
+            "abilitySpecials": {
+                "WeakProtectTime": 15.0,
+                "WeakProtectTimeDelta": 1.5
+            },
+            "modifiers": {
+                "EyeEffect_WeakEnd": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Eye_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Weak_EndAS": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Defender_None_Weakness"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "WeakProtect"
+                        }
+                    ]
+                },
+                "WeakProtect": {
+                    "modifierName": "",
+                    "duration": "WeakProtectTime",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 1.0,
+                            "key": "_ABILITY_DEFENDER_NONE_WEAKNESSPROTECT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "WeakProtectEffect"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "_ABILITY_DEFENDER_NONE_WEAKNESSPROTECT",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "EffectTrigger",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Defender_None_Shield_Eye"
+                        },
+                        {
+                            "$type": "SendEffectTrigger",
+                            "parameter": "EffectTrigger",
+                            "attachPoint": "",
+                            "shieldHP": "Eff_Monster_Defender_None_Shield_Back"
+                        }
+                    ]
+                },
+                "WeakProtectEffect": {
+                    "modifierName": "",
+                    "duration": [
+                        "WeakProtectTime",
+                        "WeakProtectTimeDelta",
+                        "ADD"
+                    ],
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Shield_Eye",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Shield_Back",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Whirl",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Whirl_BS",
+                        "Whirl_Loop",
+                        "Whirl_AS"
+                    ],
+                    "startNormalizedTime": 0.800000011920929,
+                    "endNormalizedTime": 0.25,
+                    "angularSpeed": 90.0,
+                    "attackTrigger": ""
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Whirl_BS",
+                        "Whirl_Loop"
+                    ],
+                    "modifierName": "Whirl_State"
+                }
+            ],
+            "modifiers": {
+                "Whirl_Effect_StateCheck": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "ElementFrozen",
+                                "ElementPetrifaction"
+                            ],
+                            "reject": true,
+                            "modifierName": "Whirl_Effect"
+                        }
+                    ]
+                },
+                "Whirl_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.20000000298023224,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_WhirlLoop",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ActCameraShake",
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.1599999964237213,
+                                "shakeTime": 0.20000000298023224,
+                                "shakeDir": {
+                                    "y": 1.0
+                                },
+                                "extension": {
+                                    "baseCycle": 0.20000000298023224,
+                                    "cycleDamping": 0.0,
+                                    "rangeAttenuation": 1.0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "Whirl_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Whirl_Effect_StateCheck"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Whirl_Effect_StateCheck"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Laser_BS",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Laser_BS"
+                    ],
+                    "endNormalizedTime": 0.07999999821186066,
+                    "angularSpeed": 240.0,
+                    "attackTrigger": ""
+                }
+            ],
+            "modifiers": {
+                "Monster_Defender_Laser_Effect_Handler": {
+                    "modifierName": "",
+                    "duration": 0.2800000011920929,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Step",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "LeftHand"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Step",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "RightHand"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ResetAIAttackTarget"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Defender_Laser_Effect_Handler"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_CannonEffect",
+            "modifiers": {
+                "UNIQUE_Defender_None_ChaseAim_Effect": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.7000000476837158,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_ChaseAim",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_LaserBS1",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_LaserBS2",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_LaserBS3",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_LaserBS4",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_LaserBS5",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_LaserBS6",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "SelfAttackTarget",
+                    "modifierName": "UNIQUE_Defender_None_ChaseAim_Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Laser",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42304015,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "BackSmoke01",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "BackSmoke01"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42304015,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "BackSmoke02",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "BackSmoke02"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42304015,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "BackSmoke03",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "BackSmoke03"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42304015,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "BackSmoke04",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "BackSmoke04"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42304015,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "BackSmoke05",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "BackSmoke05"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "bulletID": 42304015,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "BNDNBMADMIJ",
+                            "attachPointName": "BackSmoke06",
+                            "OINJEIEFIBB": "Self"
+                        },
+                        "attachPointName": "BackSmoke06"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Defender_None_ChaseBullet",
+            "modifiers": {
+                "Defender_None_ChaseBullet_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Defender_None_Bullet_Chase",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Defender_None_ChaseBullet_Effect"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Formathr_None_ChaseBullet_Hit",
+                    "born": {
+                        "$type": "HANJDCBOIIE"
+                    },
+                    "scale": 0.4000000059604645,
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 0.0
+                                }
+                            },
+                            "EBADGGHGLKN": 0.5
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.3125,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Default",
+                                "enBreak": 100.0,
+                                "attackType": "Melee",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV4",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "cameraShake": {
+                                "shakeType": "HitVector",
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.11999999731779099,
+                                "shakeDir": {
+                                    "z": 1.0
+                                }
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Defender_None_ChaseBullet_Effect"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "Target",
+                    "modifierName": "UNIQUE_Defender_None_ChaseAim_Effect"
+                },
+                {
+                    "$type": "KillSelf"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Turn",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn"
+                    ],
+                    "startNormalizedTime": 0.10000000149011612,
+                    "endNormalizedTime": 0.30000001192092896,
+                    "angularSpeed": 180.0,
+                    "attackTrigger": ""
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn"
+                    ],
+                    "startNormalizedTime": 0.30000001192092896,
+                    "endNormalizedTime": 0.6000000238418579,
+                    "angularSpeed": 360.0,
+                    "attackTrigger": ""
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Smash_Turn",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Smash"
+                    ],
+                    "startNormalizedTime": 0.1850000023841858,
+                    "endNormalizedTime": 0.2150000035762787,
+                    "angularSpeed": 120.0,
+                    "attackTrigger": ""
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Smash"
+                    ],
+                    "startNormalizedTime": 0.3199999928474426,
+                    "endNormalizedTime": 0.3499999940395355,
+                    "angularSpeed": 270.0,
+                    "attackTrigger": ""
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Smash"
+                    ],
+                    "startNormalizedTime": 0.46000000834465027,
+                    "endNormalizedTime": 0.4699999988079071,
+                    "angularSpeed": 900.0,
+                    "attackTrigger": ""
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Smash_Atk01",
+            "modifiers": {
+                "Smash_Atk01_Detect": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Defender_None_Smash_Atk01"
+                                    ]
+                                }
+                            ],
+                            "shieldHP": "Eff_Monster_Defender_None_Smash_01",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Smash_01_Miss",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 1.0
+                                }
+                            },
+                            "MJBOOGOHDKH": 180.0,
+                            "EBADGGHGLKN": 2.75
+                        },
+                        "attackInfo": {
+                            "attackTag": "Defender_None_Smash_Atk01",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.5,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV6",
+                                "hitHaltTime": 0.05000000074505806,
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "cameraShake": {
+                                "shakeType": "HitVector",
+                                "shakeRange": 0.30000001192092896,
+                                "shakeTime": 0.23999999463558197,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "x": -1.0,
+                                    "y": -1.0
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Smash_Atk01_Detect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Smash_Atk02",
+            "modifiers": {
+                "Smash_Atk02_Detect": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAttackLanded": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "GLBJFGGNGGD",
+                                    "attackTags": [
+                                        "Defender_None_Smash_Atk02"
+                                    ]
+                                }
+                            ],
+                            "shieldHP": "Eff_Monster_Defender_None_Smash_02",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Smash_02_Miss",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 2.0
+                                }
+                            },
+                            "EBADGGHGLKN": 3.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "Defender_None_Smash_Atk02",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.75,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 100.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV6",
+                                "hitHaltTime": 0.05000000074505806,
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "cameraShake": {
+                                "shakeType": "HitVector",
+                                "shakeRange": 0.30000001192092896,
+                                "shakeTime": 0.23999999463558197,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "x": -1.0,
+                                    "y": -1.0
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Smash_Atk02_Detect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Smash_Alert",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToNormalizedTimeMixin",
+                    "stateID": "Smash",
+                    "modifierName": "Smash_Atk03_Collider",
+                    "normalizeStart": 0.46799999475479126,
+                    "normalizeEnd": 0.550000011920929
+                }
+            ],
+            "modifiers": {
+                "Smash_Atk03_Collider": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ],
+                            "setEnable": true
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Smash_Alert",
+                    "born": {
+                        "$type": "MBHKKFPFFAP",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 3.5
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ActCameraShake",
+                    "cameraShake": {
+                        "shakeType": "CustomVector",
+                        "shakeRange": 0.11999999731779099,
+                        "shakeTime": 0.15000000596046448,
+                        "shakeDir": {
+                            "y": 1.0
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Smash_Atk03",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "FPEIAHONPIH",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": 3.0
+                                }
+                            },
+                            "EBADGGHGLKN": 4.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV8"
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.36000001430511475,
+                                "shakeTime": 0.36000001430511475,
+                                "shakeDistance": 30.0,
+                                "shakeDir": {
+                                    "y": -1.0
+                                }
+                            }
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Smash_03",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Stamp",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Stamp"
+                    ],
+                    "startNormalizedTime": 0.15000000596046448,
+                    "endNormalizedTime": 0.3499999940395355,
+                    "angularSpeed": 120.0,
+                    "attackTrigger": ""
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Swipe"
+                    ],
+                    "endNormalizedTime": 0.11999999731779099,
+                    "angularSpeed": 180.0,
+                    "attackTrigger": ""
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "Predicated",
+                    "target": "SelfAttackTarget",
+                    "targetPredicates": [
+                        {
+                            "$type": "OMMNCGCCJEK",
+                            "logic": "Lesser",
+                            "ratio": 5.5
+                        }
+                    ],
+                    "successActions": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "SwipeTrigger"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Swipe_Arm_01",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Arm",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "ArmL02"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Arm",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "ArmR02"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Swipe_Arm_02",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Arm",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "ArmL03"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Arm",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "ArmR03"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Swipe_Arm_03",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Arm",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "ArmL04"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Arm",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "ArmR04"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Swipe_Arm_04",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Arm",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "ArmL05"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Arm",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "ArmR05"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Die",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Die",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Die_Ground",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_WeakDust",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 3.75
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "ActCameraShake",
+                    "cameraShake": {
+                        "shakeType": "CustomVector",
+                        "shakeRange": 0.36000001430511475,
+                        "shakeTime": 0.36000001430511475,
+                        "shakeDistance": 30.0,
+                        "shakeDir": {
+                            "y": -1.0
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_WeakDie_Ground",
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_WeakDust",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.0
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Step_Left",
+            "onAbilityStart": [
+                {
+                    "$type": "ActCameraShake",
+                    "predicates": [
+                        {
+                            "$type": "NEGFJPNFCFN",
+                            "logic": "Equal",
+                            "ratio": 0,
+                            "parameter": "SkillID"
+                        }
+                    ],
+                    "cameraShake": {
+                        "shakeType": "CustomVector",
+                        "shakeRange": 0.05999999865889549,
+                        "shakeTime": 0.09000000357627869,
+                        "shakeDir": {
+                            "y": -1.0
+                        }
+                    }
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Step",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "LeftFoot"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_Step_Right",
+            "onAbilityStart": [
+                {
+                    "$type": "ActCameraShake",
+                    "predicates": [
+                        {
+                            "$type": "NEGFJPNFCFN",
+                            "logic": "Equal",
+                            "ratio": 0,
+                            "parameter": "SkillID"
+                        }
+                    ],
+                    "cameraShake": {
+                        "shakeType": "CustomVector",
+                        "shakeRange": 0.05999999865889549,
+                        "shakeTime": 0.09000000357627869,
+                        "shakeDir": {
+                            "y": -1.0
+                        }
+                    }
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Defender_None_Step",
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "attachPointName": "RightFoot"
+                    },
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_ReturnToBorn",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        902,
+                        903
+                    ],
+                    "modifierName": "ReturnToBorn_State"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        902
+                    ],
+                    "modifierName": "ReturnToBorn_Disappear"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        903
+                    ],
+                    "modifierName": "ReturnToBorn_Appear"
+                }
+            ],
+            "modifiers": {
+                "ReturnToBorn_Disappear": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "StartDither",
+                            "duration": 2.0
+                        }
+                    ]
+                },
+                "ReturnToBorn_Appear": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "StartDither",
+                            "duration": 0.20000000298023224,
+                            "reverse": true
+                        }
+                    ]
+                },
+                "ReturnToBorn_State": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_Defender_Weakness"
+                        },
+                        {
+                            "$type": "ResetAnimatorTrigger",
+                            "triggerID": "WeakStartTrigger"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ReturnToBorn_Invincible"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ReturnToBorn_DenyLockOn"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "modifierName": "UNIQUE_WeakTimer"
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Defender_None_Weakness"
+                        }
+                    ]
+                },
+                "ReturnToBorn_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "Invincible"
+                },
+                "ReturnToBorn_DenyLockOn": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "DenyLockOn"
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_GearControl",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Weak_Start",
+                        "BeHit",
+                        "NormalIdle_PowerOff",
+                        "NormalIdle_WeakLoop",
+                        "PowerOff_WakeUp",
+                        "Born"
+                    ],
+                    "modifierName": "GearControl_Stop"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Weak_End",
+                        "Weak_EndAS",
+                        "PowerOff_Warning",
+                        "PowerOff_WarningAS"
+                    ],
+                    "modifierName": "GearControl_Active"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Smash",
+                        "Stamp",
+                        "Swipe",
+                        "Whirl_BS",
+                        "Whirl_Loop",
+                        "Laser_BS",
+                        "Laser_Aim"
+                    ],
+                    "modifierName": "GearControl_Skill"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalIdle",
+                        "Turn",
+                        "NormalMove",
+                        "Whirl_AS",
+                        "Laser_Shoot"
+                    ],
+                    "modifierName": "GearControl_Normal"
+                }
+            ],
+            "modifiers": {
+                "GearControl_Stop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "floatID": "GearSpeed",
+                            "ratio": 0.0
+                        }
+                    ]
+                },
+                "GearControl_Normal": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "floatID": "GearSpeed",
+                            "ratio": 1.0
+                        }
+                    ]
+                },
+                "GearControl_Active": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "floatID": "GearSpeed",
+                            "ratio": 3.0
+                        }
+                    ]
+                },
+                "GearControl_Skill": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorFloat",
+                            "floatID": "GearSpeed",
+                            "ratio": 2.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorFloat",
+                    "floatID": "GearSpeed",
+                    "ratio": 0.0
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "SetAnimatorFloat",
+                    "floatID": "GearSpeed",
+                    "ratio": 0.5
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Defender_None_HeadControl",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "NormalIdle_PowerOff",
+                        "PowerOff_WakeUp",
+                        "Weak_Start",
+                        "BeHit",
+                        "Break",
+                        "Whirl_BS",
+                        "Whirl_Loop",
+                        "Whirl_AS"
+                    ],
+                    "modifierName": "HeadControl_Disable"
+                }
+            ],
+            "modifiers": {
+                "HeadControl_Disable": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnableHeadControl"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "EnableHeadControl",
+                            "enable": true
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]

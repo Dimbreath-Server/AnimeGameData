@@ -1,0 +1,1835 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Equip_SelfDestroy",
+            "onDetach": [
+                {
+                    "$type": "KillSelf"
+                },
+                {
+                    "$type": "HideUIBillBoard",
+                    "hide": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Weapon_Grass_5",
+            "modifiers": {
+                "GrassMaterial": {
+                    "modifierName": "",
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 50.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShieldBarMixin",
+                            "showDamageText": ""
+                        },
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "ElementBurning"
+                            ],
+                            "modifierName": "ShieldOnFire"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "ShieldOnFire": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "target": "Owner",
+                            "boolID": "ShieldOnFire",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "target": "Owner",
+                            "boolID": "ShieldOnFire"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "GrassMaterial"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Weapon_Grass_10",
+            "modifiers": {
+                "GrassMaterial": {
+                    "modifierName": "",
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ShieldBarMixin",
+                            "showDamageText": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "GrassMaterial"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Weapon_Grass_30",
+            "modifiers": {
+                "GrassMaterial": {
+                    "modifierName": "",
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 300.0,
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Owner",
+                            "modifierName": "WeaponBroken_Attack"
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "WeaponBroken_Attack": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "bonusCriticalHurt": 100.0,
+                                    "strikeType": "Default",
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV4",
+                                    "hitHaltTimeScale": 0.05000000074505806
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "GrassMaterial"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Weapon_ShieldDefend",
+            "modifiers": {
+                "NormalDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "NormalIdle",
+                                "NormalMove",
+                                "Turn",
+                                "ShieldSmash",
+                                "Defend",
+                                "Defend_AS"
+                            ],
+                            "defendTriggerID": "DefendTrigger",
+                            "defendAngle": 90.0,
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 0.0,
+                            "defendCountInterval": 0
+                        }
+                    ]
+                },
+                "ForceDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "BeHit",
+                                "BeHitThrow"
+                            ],
+                            "defendTriggerID": "DefendTrigger",
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 4.0,
+                            "alwaysRecover": false,
+                            "defendCountInterval": 0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "modifierName": "NormalDefend"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "modifierName": "ForceDefend"
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "NormalDefend"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "ForceDefend"
+                }
+            ],
+            "onDetach": [
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "modifierName": "NormalDefend"
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "modifierName": "ForceDefend"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Weapon_ShieldDefendAttack",
+            "modifiers": {
+                "ShieldBroken_Attack": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "bonusCriticalHurt": 100.0,
+                                    "strikeType": "Default",
+                                    "enBreak": 1000.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV4",
+                                    "hitHaltTimeScale": 0.05000000074505806
+                                }
+                            }
+                        }
+                    ]
+                },
+                "UNIQUE_Monster_Weapon_GrassMatrial": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Wood",
+                    "bonusCriticalHurt": 50.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ElementShieldMixin",
+                            "elementType": "Grass",
+                            "showDamageText": "",
+                            "shieldAngle": 360.0,
+                            "maxShieldByHPRatio": 1.0,
+                            "damageRatio": 0.20000000298023224
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Undead_01_Shield_Broken",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "FreezeDetect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "ElementFreeze"
+                            ],
+                            "modifierName": "BeFreezed"
+                        }
+                    ]
+                },
+                "BeFreezed": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "InDefend"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Grass"
+                                }
+                            ],
+                            "modifierName": "ReDefend"
+                        }
+                    ]
+                },
+                "BurningDetect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "ElementBurning"
+                            ],
+                            "modifierName": "WeaponOnFire"
+                        }
+                    ]
+                },
+                "WeaponOnFire": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "target": "Owner",
+                            "boolID": "WeaponOnFire",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "target": "Owner",
+                            "modifierName": "InDefend"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "target": "Owner",
+                            "boolID": "WeaponOnFire"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Grass"
+                                }
+                            ],
+                            "modifierName": "ReDefend"
+                        }
+                    ]
+                },
+                "ReDefend": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Owner",
+                            "modifierName": "InDefend"
+                        }
+                    ]
+                },
+                "InDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "NormalDefend"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ForceDefend"
+                        }
+                    ]
+                },
+                "NormalDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "NormalIdle",
+                                "NormalMove",
+                                "Defend",
+                                "DefendAttack"
+                            ],
+                            "defendTriggerID": "DefendTrigger",
+                            "defendAngle": 90.0,
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 0.0,
+                            "defendCountInterval": 0,
+                            "onDefendSucceded": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Hili_None_Block",
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "ActCameraShake",
+                                    "cameraShake": {
+                                        "shakeRange": 0.03999999910593033,
+                                        "shakeTime": 0.18000000715255737
+                                    }
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_ABILITY_WEAPON_SHIELD_DEFEND_COUNT",
+                                    "useLimitRange": true,
+                                    "maxValue": 4.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.5
+                    }
+                },
+                "DefendAttack": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "NormalIdle",
+                                "NormalMove",
+                                "Defend",
+                                "DefendAttack",
+                                "BeHit"
+                            ],
+                            "defendTriggerID": "DefendAttackTrigger",
+                            "defendAngle": 90.0,
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 0.0,
+                            "defendCountInterval": 0,
+                            "attackType": "Melee",
+                            "onDefendSucceded": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Hili_None_Block",
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "ActCameraShake",
+                                    "cameraShake": {
+                                        "shakeRange": 0.03999999910593033,
+                                        "shakeTime": 0.18000000715255737
+                                    }
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": -5.0,
+                                    "key": "_ABILITY_WEAPON_SHIELD_DEFEND_COUNT",
+                                    "useLimitRange": true,
+                                    "maxValue": 4.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_None_Shield",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_None_ShieldCreate",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Hili_None_ShieldDestroy",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ForceDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "BeHit",
+                                "BeHitThrow"
+                            ],
+                            "defendTriggerID": "DefendTrigger",
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 4.0,
+                            "alwaysRecover": false,
+                            "defendCountInterval": 0,
+                            "onDefendSucceded": [
+                                {
+                                    "$type": "ActCameraShake",
+                                    "cameraShake": {
+                                        "shakeRange": 0.03999999910593033,
+                                        "shakeTime": 0.18000000715255737
+                                    }
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "ratio": 1.0,
+                                    "key": "_ABILITY_WEAPON_SHIELD_DEFEND_COUNT",
+                                    "useLimitRange": true,
+                                    "maxValue": 4.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.5
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Monster_Weapon_GrassMatrial"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "modifierName": "InDefend"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BurningDetect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "modifierName": "FreezeDetect"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_WEAPON_SHIELD_DEFEND_COUNT",
+                    "useLimitRange": true,
+                    "maxValue": 4.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "InDefend"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BurningDetect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "FreezeDetect"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Target",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_WEAPON_SHIELD_DEFEND_COUNT",
+                    "useLimitRange": true,
+                    "maxValue": 4.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onDetach": [
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "modifierName": "InDefend"
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "BurningDetect"
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "modifierName": "FreezeDetect"
+                },
+                {
+                    "$type": "ClearGlobalValue",
+                    "target": "Target",
+                    "key": "_ABILITY_WEAPON_SHIELD_DEFEND_COUNT"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "ShieldBroken_Attack"
+                },
+                {
+                    "$type": "ResetAnimatorTrigger",
+                    "target": "Target",
+                    "triggerID": "DefendTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Weapon_RockShield_DefendAttack",
+            "modifiers": {
+                "ShieldBroken_Attack": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "bonusCriticalHurt": 100.0,
+                                    "strikeType": "Default",
+                                    "enBreak": 1000.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV4",
+                                    "hitHaltTimeScale": 0.05000000074505806
+                                }
+                            }
+                        }
+                    ]
+                },
+                "UNIQUE_Monster_Weapon_RockMatrial": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Rock",
+                    "bonusCriticalHurt": 200.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ElementShieldMixin",
+                            "elementType": "Rock",
+                            "showDamageText": "",
+                            "shieldAngle": 360.0,
+                            "maxShieldByHPRatio": 1.0,
+                            "damageRatio": 0.20000000298023224,
+                            "onShieldFailed": [
+                                {
+                                    "$type": "FireEffect",
+                                    "target": "Owner",
+                                    "shieldHP": "Eff_Monster_Hili_Rock_BlockSuccess",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "AttachModifierToElementDurabilityMixin",
+                            "valueSteps": [
+                                0.5,
+                                100.5,
+                                200.5
+                            ],
+                            "modifierNameSteps": [
+                                "Empty",
+                                "Shield_Stage01"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "target": "Owner",
+                            "shieldHP": "Eff_Monster_Hili_Rock_ShieldDestroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Empty": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Shield_Stage01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Damaged"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "target": "Owner",
+                            "shieldHP": "Eff_Monster_Hili_Rock_ShieldDamaged",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Damaged",
+                            "ratio": true
+                        }
+                    ]
+                },
+                "FreezeDetect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "ElementFreeze"
+                            ],
+                            "modifierName": "BeFreezed"
+                        }
+                    ]
+                },
+                "BeFreezed": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "InDefend"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Rock"
+                                }
+                            ],
+                            "modifierName": "ReDefend"
+                        }
+                    ]
+                },
+                "ReDefend": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Owner",
+                            "modifierName": "InDefend"
+                        }
+                    ]
+                },
+                "InDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "NormalDefend"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ForceDefend"
+                        }
+                    ]
+                },
+                "NormalDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "NormalIdle",
+                                "NormalMove",
+                                "Defend",
+                                "DefendAttack"
+                            ],
+                            "defendTriggerID": "DefendTrigger",
+                            "defendAngle": 90.0,
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 0.0,
+                            "defendCountInterval": 0,
+                            "onDefendSucceded": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Hili_Rock_Block",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.25
+                    }
+                },
+                "ForceDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "BeHit",
+                                "BeHitThrow"
+                            ],
+                            "defendTriggerID": "DefendTrigger",
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 4.0,
+                            "alwaysRecover": false,
+                            "defendCountInterval": 0,
+                            "onDefendSucceded": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Hili_Rock_Block",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 1.0
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Monster_Weapon_RockMatrial"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "modifierName": "InDefend"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "modifierName": "FreezeDetect"
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "InDefend"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "FreezeDetect"
+                }
+            ],
+            "onDetach": [
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "modifierName": "InDefend"
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "modifierName": "FreezeDetect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "ShieldBroken_Attack"
+                },
+                {
+                    "$type": "ResetAnimatorTrigger",
+                    "target": "Target",
+                    "triggerID": "DefendTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Weapon_IceShield_DefendAttack",
+            "modifiers": {
+                "ShieldBroken_Attack": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "bonusCriticalHurt": 100.0,
+                                    "strikeType": "Default",
+                                    "enBreak": 1000.0,
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "default",
+                                    "hitImpulseType": "LV4",
+                                    "hitHaltTimeScale": 0.05000000074505806
+                                }
+                            }
+                        }
+                    ]
+                },
+                "UNIQUE_Monster_Weapon_IceMatrial": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Frozen",
+                    "bonusCriticalHurt": 200.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ElementShieldMixin",
+                            "elementType": "Ice",
+                            "showDamageText": "",
+                            "shieldAngle": 360.0,
+                            "maxShieldByHPRatio": 1.0,
+                            "damageRatio": 0.20000000298023224,
+                            "onShieldFailed": [
+                                {
+                                    "$type": "FireEffect",
+                                    "target": "Owner",
+                                    "shieldHP": "Eff_Monster_Hili_Rock_BlockSuccess",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "AttachModifierToElementDurabilityMixin",
+                            "valueSteps": [
+                                0.5,
+                                100.5,
+                                200.5
+                            ],
+                            "modifierNameSteps": [
+                                "Empty",
+                                "Shield_Stage01"
+                            ]
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "target": "Owner",
+                            "shieldHP": "Eff_Monster_Hili_Rock_ShieldDestroy",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "KillSelf"
+                        }
+                    ]
+                },
+                "Empty": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Shield_Stage01": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Damaged"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "target": "Owner",
+                            "shieldHP": "Eff_Monster_Hili_Rock_ShieldDamaged",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "Damaged",
+                            "ratio": true
+                        }
+                    ]
+                },
+                "FreezeDetect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToAbilityStateMixin",
+                            "abilityStates": [
+                                "ElementFreeze"
+                            ],
+                            "modifierName": "BeFreezed"
+                        }
+                    ]
+                },
+                "BeFreezed": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "InDefend"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "CMEJEMKPOCH",
+                                "PMDEAIMLCOL": [
+                                    "equip02"
+                                ]
+                            },
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Rock"
+                                }
+                            ],
+                            "modifierName": "ReDefend"
+                        }
+                    ]
+                },
+                "ReDefend": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Owner",
+                            "modifierName": "InDefend"
+                        }
+                    ]
+                },
+                "InDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "NormalDefend"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "ForceDefend"
+                        }
+                    ]
+                },
+                "NormalDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "NormalIdle",
+                                "NormalMove",
+                                "Defend",
+                                "DefendAttack"
+                            ],
+                            "defendTriggerID": "DefendTrigger",
+                            "defendAngle": 90.0,
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 0.0,
+                            "defendCountInterval": 0,
+                            "onDefendSucceded": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Hili_Rock_Block",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 0.25
+                    }
+                },
+                "ForceDefend": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "MonsterDefendMixin",
+                            "stateIDs": [
+                                "BeHit",
+                                "BeHitThrow"
+                            ],
+                            "defendTriggerID": "DefendTrigger",
+                            "defendProbability": 1.0,
+                            "defendProbabilityDelta": 0.0,
+                            "defendTimeInterval": 4.0,
+                            "alwaysRecover": false,
+                            "defendCountInterval": 0,
+                            "onDefendSucceded": [
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Monster_Hili_Rock_Block",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "Actor_EndureDelta": 1.0
+                    }
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Monster_Weapon_IceMatrial"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "modifierName": "InDefend"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "modifierName": "FreezeDetect"
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "InDefend"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "FreezeDetect"
+                }
+            ],
+            "onDetach": [
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "modifierName": "InDefend"
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "target": "Target",
+                    "modifierName": "FreezeDetect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "modifierName": "ShieldBroken_Attack"
+                },
+                {
+                    "$type": "ResetAnimatorTrigger",
+                    "target": "Target",
+                    "triggerID": "DefendTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Staff_Fire_WeaponInit",
+            "onAdded": [
+                {
+                    "$type": "TriggerAbility",
+                    "target": "Owner",
+                    "abilityName": "Abyss_Fire_WeaponElement"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Staff_Ice_WeaponInit",
+            "onAdded": [
+                {
+                    "$type": "TriggerAbility",
+                    "target": "Owner",
+                    "abilityName": "Abyss_Ice_WeaponElement"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Staff_Water_WeaponInit",
+            "onAdded": [
+                {
+                    "$type": "TriggerAbility",
+                    "target": "Owner",
+                    "abilityName": "Abyss_Water_WeaponElement"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Torch_FireState",
+            "modifiers": {
+                "UNIQUE_Hili_Fire_Torch_FireState": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 50.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Fire_Torch_FireElementLoop",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Owner",
+                            "abilityName": "Hili_Torch_FireState_OnFire"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "target": "Owner",
+                            "abilityName": "Hili_Torch_FireState_OffFire"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Hili_Fire_Torch_FireElementAS",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Hili_Fire_Torch_FireState"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Hili_Fire_Torch_FireState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_WoodenClub_Grass_SetGlobalValue",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 5.0,
+                    "key": "_IS_CLUB_",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 5.0,
+                    "key": "_IS_CLUB_",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Warglaive_Fire_01_IntoShadow",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerSetRenderersEnable",
+                    "renderNames": [
+                        "MonEquip_Warglaive_Fire_01"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Warglaive_Fire_01_OutOfShadow",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerSetRenderersEnable",
+                    "renderNames": [
+                        "MonEquip_Warglaive_Fire_01"
+                    ],
+                    "setEnable": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Weapon_Gadget_Disappear",
+            "onKill": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Weapon_Disappear",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Weapon_BeingHitDetect",
+            "modifiers": {
+                "UNIQUE_Weapon_BeingHitDetect": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onBeingHit": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "target": "Owner",
+                            "triggerID": "AwakeAlert"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "UNIQUE_Weapon_BeingHitDetect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_WoodenClub_01_SetGlobalValue",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 1.0,
+                    "key": "_IS_CLUB_01",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Target",
+                    "ratio": 1.0,
+                    "key": "_IS_CLUB_01",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Shield_01_SetGlobalValue",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 1.0,
+                    "key": "_IS_SHIELD_01",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Target",
+                    "ratio": 1.0,
+                    "key": "_IS_SHIELD_01",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Crossbow_01_SetGlobalValue",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 1.0,
+                    "key": "_IS_CROSSBOW_01",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Target",
+                    "ratio": 1.0,
+                    "key": "_IS_CROSSBOW_01",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Shield_02_SetGlobalValue",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 1.0,
+                    "key": "_IS_CLUB_02",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Target",
+                    "ratio": 1.0,
+                    "key": "_IS_CLUB_02",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Torch_02_SetGlobalValue",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 1.0,
+                    "key": "_IS_TORCH_02",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Target",
+                    "ratio": 1.0,
+                    "key": "_IS_TORCH_02",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Axe_01_SetGlobalValue",
+            "onAdded": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Owner",
+                    "ratio": 1.0,
+                    "key": "_IS_Axe_01",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "AddGlobalValue",
+                    "target": "Target",
+                    "ratio": 1.0,
+                    "key": "_IS_Axe_01",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Skirmisher_Spraygun_Ice_ImproveState",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_SprayGunNormal",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Skirmisher_Backpack_Ice_ImproveState",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_BackPackNormal",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Skirmisher_Spraygun_Water_ImproveState",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_SprayGunNormal",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "MonEquip_Skirmisher_Backpack_Water_ImproveState",
+            "onAdded": [
+                {
+                    "$type": "AttachEffect",
+                    "shieldHP": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_BackPackNormal",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shougun_Pole_Effect",
+            "modifiers": {
+                "UNIQUE_Monster_Shougun_Pole_Visable": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip02"
+                            ]
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip01"
+                            ]
+                        }
+                    ]
+                },
+                "Monster_Shougun_Pole_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Shougun_Pole_WeaponLoopEffect",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Shougun_Pole_Effect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_MONSTER_SHOUGUN_MITAKENARUKAMI_WEAPONTYPE_",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Monster_Shougun_Pole_Visable"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_MONSTER_SHOUGUN_WEAPONTYPE_",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Monster_Shougun_Pole_Visable"
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_MONSTER_SHOUGUN_MITAKENARUKAMI_WEAPONTYPE_",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Monster_Shougun_Pole_Visable"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_MONSTER_SHOUGUN_MITAKENARUKAMI_WEAPONTYPE_",
+                            "ratio": 0.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Monster_Shougun_Tachi_Visable"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Monster_Shougun_Tachi_Effect",
+            "modifiers": {
+                "UNIQUE_Monster_Shougun_Tachi_Visable": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "visible": true,
+                            "partNames": [
+                                "equip02"
+                            ]
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01"
+                            ]
+                        }
+                    ]
+                },
+                "Monster_Shougun_Tachi_Effect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Shougun_Tachi_WeaponLoopEffect",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Monster_Shougun_Tachi_Effect"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_MONSTER_SHOUGUN_MITAKENARUKAMI_WEAPONTYPE_",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Monster_Shougun_Tachi_Visable"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_MONSTER_SHOUGUN_WEAPONTYPE_",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Monster_Shougun_Tachi_Visable"
+                }
+            ],
+            "onAttach": [
+                {
+                    "$type": "ApplyModifier",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_MONSTER_SHOUGUN_MITAKENARUKAMI_WEAPONTYPE_",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Monster_Shougun_Tachi_Visable"
+                },
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "Owner",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_MONSTER_SHOUGUN_MITAKENARUKAMI_WEAPONTYPE_",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "modifierName": "UNIQUE_Monster_Shougun_Pole_Visable"
+                }
+            ]
+        }
+    }
+]

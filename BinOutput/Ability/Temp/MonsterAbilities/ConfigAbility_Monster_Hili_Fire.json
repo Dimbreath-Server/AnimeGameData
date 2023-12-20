@@ -1,0 +1,1826 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_FireRush",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "FireRush_BS1",
+                        "FireRush_BS2",
+                        "FireRush_Rush_Loop1"
+                    ],
+                    "startNormalizedTime": 0.6000000238418579,
+                    "angularSpeed": 70.0,
+                    "attackTrigger": "",
+                    "attackDistance": 3.25
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "FireRush_Rush_Loop2"
+                    ],
+                    "angularSpeed": 70.0,
+                    "attackTrigger": "NextSkillTrigger",
+                    "attackDistance": 3.25
+                },
+                {
+                    "$type": "AttackHittingSceneMixin",
+                    "onHittingScene": [
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "CrashTrigger"
+                        }
+                    ],
+                    "animEventIDs": [
+                        "FireRush_HitScene"
+                    ]
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "FireRush_BS1",
+                        "FireRush_BS2",
+                        "FireRush_Rush_Loop1",
+                        "FireRush_Rush_Loop2",
+                        "FireRush_AS"
+                    ],
+                    "modifierName": "RushAtkEffect"
+                }
+            ],
+            "modifiers": {
+                "RushAtkEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.20000000298023224,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Monster_Hili_Fire_RushAtk",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "WeaponR"
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Fire_RushAtk_Smoke",
+                            "born": {
+                                "$type": "EOJBLPNGNCN",
+                                "AMCAIHBNPDK": true
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "RemoveModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_EQUIP_IS_ONFIRE",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "modifierName": "RushAtkEffect"
+                        }
+                    ],
+                    "onKill": [
+                        {
+                            "$type": "RemoveModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_EQUIP_IS_ONFIRE",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "modifierName": "RushAtkEffect"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Torch_FireState_OnFire",
+            "abilityMixins": [
+                {
+                    "$type": "DoActionByPoseIDMixin",
+                    "poseIDs": [
+                        402
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                451
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "equip01_FireState",
+                    "ratio": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Torch_FireState_OffFire",
+            "onAbilityStart": [
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "equip01_FireState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Torch_EventPattern",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        401
+                    ],
+                    "modifierName": "UNIQUE_Hili_Fire_OnFireEventPattern"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        402
+                    ],
+                    "modifierName": "UNIQUE_Hili_Fire_OffFireEventPattern"
+                }
+            ],
+            "modifiers": {
+                "UNIQUE_Hili_Fire_OnFireEventPattern": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ReplaceEventPatternMixin",
+                            "oldPatterns": [
+                                "Monster_Hili_Fire_FireRush_Rush",
+                                "Monster_Hili_Fire_FireRush_AS",
+                                "Monster_Hili_Fire_NormalAttack",
+                                "Monster_Hili_Fire_FireRush_BS"
+                            ],
+                            "newPatterns": [
+                                "Monster_Hili_Fire_FireRush_Rush_Fire",
+                                "Monster_Hili_Fire_FireRush_AS_Fire",
+                                "Monster_Hili_Fire_NormalAttack_Fire",
+                                "Monster_Hili_Fire_FireRush_BS_Fire"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 10.0,
+                            "key": "_EQUIP_IS_ONFIRE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "UNIQUE_Hili_Fire_OffFireEventPattern": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ReplaceEventPatternMixin",
+                            "oldPatterns": [
+                                "Monster_Hili_Fire_FireRush_Rush_Fire",
+                                "Monster_Hili_Fire_FireRush_AS_Fire",
+                                "Monster_Hili_Fire_NormalAttack_Fire",
+                                "Monster_Hili_Fire_FireRush_BS_Fire"
+                            ],
+                            "newPatterns": [
+                                "Monster_Hili_Fire_FireRush_Rush",
+                                "Monster_Hili_Fire_FireRush_AS",
+                                "Monster_Hili_Fire_NormalAttack",
+                                "Monster_Hili_Fire_FireRush_BS"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -10.0,
+                            "key": "_EQUIP_IS_ONFIRE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Torch_FireUp",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CMEJEMKPOCH",
+                        "PMDEAIMLCOL": [
+                            "equip01"
+                        ]
+                    },
+                    "abilityName": "MonEquip_Torch_FireState"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_ShootArrow_WithRandom",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Aim"
+                    ],
+                    "endNormalizedTime": 2.0,
+                    "angularSpeed": 120.0,
+                    "attackTrigger": "",
+                    "attackDistance": 3.75
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Aim"
+                    ],
+                    "modifierName": "ShowAimingEffect"
+                }
+            ],
+            "modifiers": {
+                "ShowAimingEffect": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Fire_CrossBow_Aim_01",
+                            "born": {
+                                "$type": "JAPFKIFCLPF",
+                                "attachPointName": "WeaponR"
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "bulletID": 42101003,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.20000000298023224,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.10000000149011612
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "FEPHPHMCGAG": 0.30000001192092896,
+                            "NBHGGNLDGDH": 0.5,
+                            "maxAngle": 60.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "WeaponR"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "bulletID": 42101003,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.20000000298023224,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.10000000149011612
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 0.0,
+                                "MJHHBAFNOEG": 0.0
+                            },
+                            "maxAngle": 60.0,
+                            "BIPPDNKPCCC": 30.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "WeaponR"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "bulletID": 42101003,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.20000000298023224,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.10000000149011612
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 5.0,
+                                "MJHHBAFNOEG": 0.0
+                            },
+                            "maxAngle": 60.0,
+                            "BIPPDNKPCCC": 30.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "WeaponR"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "bulletID": 42101003,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.20000000298023224,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.10000000149011612
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": 10.0,
+                                "MJHHBAFNOEG": 0.0
+                            },
+                            "maxAngle": 60.0,
+                            "BIPPDNKPCCC": 30.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "WeaponR"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "bulletID": 42101003,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.20000000298023224,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.10000000149011612
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": -5.0,
+                                "MJHHBAFNOEG": 0.0
+                            },
+                            "maxAngle": 60.0,
+                            "BIPPDNKPCCC": 30.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "WeaponR"
+                    }
+                },
+                {
+                    "$type": "TriggerBullet",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "bulletID": 42101003,
+                    "born": {
+                        "$type": "JAPFKIFCLPF",
+                        "offset": {
+                            "LOGNGLEIFML": 0.20000000298023224,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.10000000149011612
+                        },
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "LPHIFJDFKHI": {
+                                "LOGNGLEIFML": 0.0,
+                                "JKDAHJILGBJ": -10.0,
+                                "MJHHBAFNOEG": 0.0
+                            },
+                            "maxAngle": 60.0,
+                            "BIPPDNKPCCC": 30.0,
+                            "HADFPLAAGIB": ""
+                        },
+                        "attachPointName": "WeaponR"
+                    }
+                },
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Monster_Hili_Fire_CrossBow_Arrow_AS",
+                    "effectTempleteID": -1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_Arrow_Damage",
+            "modifiers": {
+                "FireEffectModifier": {
+                    "modifierName": "",
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 50.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Fire_CrossBow_Arrow_Particle",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Monster_Hili_Fire_CrossBow_Arrow_Trail",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "FireEffectModifier"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "LOIMAGKHLJA",
+                            "element": "Fire"
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "JLALLFJFHMN": "Both",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 0.75
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Pierce",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "LOIMAGKHLJA",
+                            "element": "Fire"
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "JLALLFJFHMN": "Both",
+                            "born": {
+                                "$type": "HANJDCBOIIE"
+                            },
+                            "EBADGGHGLKN": 0.75
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.6660000085830688,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Pierce",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "none",
+                                "hitImpulseType": "LV2",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.05999999865889549,
+                                "shakeTime": 0.09000000357627869
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Fire"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "JLALLFJFHMN": "Both",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": -0.5
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 0.10000000149011612,
+                                "JKDAHJILGBJ": 0.10000000149011612,
+                                "MJHHBAFNOEG": 1.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.6660000085830688,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Pierce",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV1",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Fire"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "target": "Owner",
+                            "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                            "ratio": 1.0
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "PONOPJHLOMA",
+                            "triggerType": "TriggerNoRepeat",
+                            "JLALLFJFHMN": "Both",
+                            "born": {
+                                "$type": "HANJDCBOIIE",
+                                "offset": {
+                                    "LOGNGLEIFML": 0.0,
+                                    "JKDAHJILGBJ": 0.0,
+                                    "MJHHBAFNOEG": -0.5
+                                }
+                            },
+                            "size": {
+                                "LOGNGLEIFML": 0.10000000149011612,
+                                "JKDAHJILGBJ": 0.10000000149011612,
+                                "MJHHBAFNOEG": 1.0
+                            }
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.4659999907016754,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Pierce",
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV1",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "LOIMAGKHLJA",
+                            "element": "Fire"
+                        }
+                    ],
+                    "shieldHP": "Eff_Monster_Hili_Fire_CrossBow_ArrowHit",
+                    "born": {
+                        "$type": "HANJDCBOIIE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.0,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": 0.3499999940395355
+                        }
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "FireHitEffect",
+                    "predicates": [
+                        {
+                            "$type": "LOIMAGKHLJA",
+                            "element": "Fire"
+                        }
+                    ],
+                    "hitEntity": "",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Monster_Hili_Fire_CrossBow_ArrowHit",
+                        "surfaceEffect": {
+                            "Water": "Eff_Arrow_Fire_Hit_Water"
+                        }
+                    }
+                },
+                {
+                    "$type": "FireHitEffect",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Fire"
+                                }
+                            ]
+                        }
+                    ],
+                    "hitEntity": "Eff_Arrow_Hit_Monster",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Arrow_Hit_Earth",
+                        "surfaceEffect": {
+                            "Water": "Eff_Arrow_Hit_Water"
+                        }
+                    }
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "FireEffectModifier"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_BombCreate",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "BombCreateBS"
+                    ],
+                    "modifierName": "BombCreateBS"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "BombCreateAS"
+                    ],
+                    "modifierName": "BombCreate"
+                },
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        203
+                    ],
+                    "modifierName": "UNIQUE_MonsterEliteAffix_BoolReset"
+                }
+            ],
+            "abilitySpecials": {
+                "RandomHoldTime": 2.0
+            },
+            "modifiers": {
+                "UNIQUE_MonsterEliteAffix_DefaultState": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "UseSkillEliteSet",
+                            "skillEliteSetID": 1
+                        }
+                    ]
+                },
+                "UNIQUE_MonsterEliteAffix_BoolReset": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "BombRun"
+                        }
+                    ]
+                },
+                "BombHoldTimer": {
+                    "modifierName": "",
+                    "duration": "RandomHoldTime",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerCreateGadgetToEquipPart",
+                            "gadgetID": 42101012,
+                            "equipPart": "equip03"
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "BombRun",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "intID": "equip03",
+                            "value": 1
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "BombThrow"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "SlimeShaderTriggerTimer"
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_SLIMETHROWED_",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                                    "ratio": 1.0
+                                },
+                                {
+                                    "$type": "PCGFCGPFNLE",
+                                    "logic": "Lesser",
+                                    "ratio": 200.0,
+                                    "parameter": "PoseID"
+                                }
+                            ],
+                            "modifierName": "Hili_Fire_CrazyBomber"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "canBeHandledOnRecover": true,
+                            "boolID": "BombThrow",
+                            "ratio": true
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -5.0,
+                            "key": "_ABILITY_RANDOM_HOLDTIME",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Hili_Fire_CrazyBomber": {
+                    "modifierName": "",
+                    "duration": 15.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "EliteTrigger",
+                            "ratio": true
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "SetPoseBool",
+                            "boolID": "EliteTrigger"
+                        },
+                        {
+                            "$type": "ReTriggerAISkillInitialCD",
+                            "skillIDs": [
+                                505
+                            ]
+                        }
+                    ]
+                },
+                "BombCreateBS": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": 0.0,
+                            "key": "_ABILITY_RANDOM_HOLDTIME",
+                            "useLimitRange": true,
+                            "randomInRange": true,
+                            "maxValue": 4.0,
+                            "minValue": 3.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "globalValueKey": "_ABILITY_RANDOM_HOLDTIME",
+                            "overrideMapKey": "RandomHoldTime"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "BombCreateTimer"
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "BombCreate"
+                        }
+                    ]
+                },
+                "BombCreateTimer": {
+                    "modifierName": "",
+                    "duration": 1.7999999523162842,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "canBeHandledOnRecover": true,
+                            "boolID": "BombCreate",
+                            "ratio": true
+                        }
+                    ]
+                },
+                "BombCreate": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "BombHoldTimer"
+                        },
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "BombThrow"
+                        }
+                    ]
+                },
+                "SlimeShaderTriggerTimer": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Hili_Fire_SlimeShaderTrigger"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "predicates": [
+                        {
+                            "$type": "NGNODMLFFCB",
+                            "key": "_ELITEAFFIX_TAG",
+                            "ratio": 0.0,
+                            "ACJBNJNEBOC": "NoneOrEqual"
+                        }
+                    ],
+                    "modifierName": "UNIQUE_MonsterEliteAffix_DefaultState"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 0.0,
+                    "key": "_ABILITY_RANDOM_HOLDTIME",
+                    "useLimitRange": true,
+                    "randomInRange": true,
+                    "maxValue": 3.0,
+                    "minValue": 3.0
+                }
+            ],
+            "onKill": [
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "BombHoldTimer"
+                },
+                {
+                    "$type": "ResetAnimatorTrigger",
+                    "triggerID": "BombThrowTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_BombCreate_Effect",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "BombCreate"
+                    ],
+                    "modifierName": "BombCreate_Effect_Timer"
+                }
+            ],
+            "modifiers": {
+                "BombCreate_Effect": {
+                    "modifierName": "",
+                    "duration": 1.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "ICLJDAHDNBO",
+                                    "JFJANAGIFNK": [
+                                        "Water"
+                                    ]
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_Monster_Hili_Fire_CreateBomb_Water",
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN"
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_Monster_Hili_Fire_CreateBomb",
+                                    "born": {
+                                        "$type": "EOJBLPNGNCN"
+                                    },
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "BombCreate_Effect_Timer": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "BombCreate_Effect"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BombCreate_Effect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_BombThrow",
+            "modifiers": {
+                "Hili_Fire_SlimeThrow_ClosePushCollider": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "EnablePushColliderName",
+                            "pushColliderNames": [
+                                "PushCollider"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerThrowEquipPart",
+                    "equipPart": "equip03",
+                    "born": {
+                        "$type": "EOJBLPNGNCN",
+                        "GIAOINGDIPJ": {
+                            "$type": "POEEGOHIKAM",
+                            "NBLKPHLEMGO": "Horizontal",
+                            "maxAngle": 30.0,
+                            "HADFPLAAGIB": ""
+                        }
+                    }
+                },
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "topLimit": 1,
+                        "configID": 42101012
+                    },
+                    "abilityName": "Hili_Fire_SlimeThrow_BulletTriggerOpen"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "topLimit": 1,
+                        "configID": 42101012
+                    },
+                    "modifierName": "Hili_Fire_SlimeThrow_ClosePushCollider"
+                },
+                {
+                    "$type": "SetPoseBool",
+                    "boolID": "BombRun"
+                },
+                {
+                    "$type": "SetPoseInt",
+                    "intID": "equip03"
+                },
+                {
+                    "$type": "SetAnimatorBool",
+                    "boolID": "BombThrow"
+                },
+                {
+                    "$type": "AddGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_SLIMETHROWED_",
+                    "useLimitRange": true,
+                    "maxValue": 1.0,
+                    "minValue": 1.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_EquipAppear",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerHideWeapon",
+                    "visible": true,
+                    "partNames": [
+                        "equip01"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_BombOnHand",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "BeHit",
+                        "BeHitThrow",
+                        "Die",
+                        "Die_RagDoll",
+                        "Struggle"
+                    ],
+                    "modifierName": "BombDrop"
+                }
+            ],
+            "modifiers": {
+                "BombDrop": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "TriggerDropEquipParts",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "_SLIMETHROWED_",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "equipParts": [
+                                "equip03"
+                            ]
+                        },
+                        {
+                            "$type": "SetPoseInt",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "_SLIMETHROWED_",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "intID": "equip03"
+                        },
+                        {
+                            "$type": "TriggerHideWeapon",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "_SLIMETHROWED_",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "visible": true,
+                            "partNames": [
+                                "equip01"
+                            ]
+                        },
+                        {
+                            "$type": "DoWatcherSystemAction",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "_SLIMETHROWED_",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "watcherId": 82014,
+                            "inThreatListOnly": true
+                        },
+                        {
+                            "$type": "SetGlobalValue",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "target": "Self",
+                                    "key": "_SLIMETHROWED_",
+                                    "ratio": 0.0
+                                }
+                            ],
+                            "ratio": 1.0,
+                            "key": "_SLIMETHROWED_",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_BombCreateFail",
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorTrigger",
+                    "predicates": [
+                        {
+                            "$type": "ICLJDAHDNBO",
+                            "JFJANAGIFNK": [
+                                "Water"
+                            ]
+                        }
+                    ],
+                    "triggerID": "BombCreateFail"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_BombCreateFailWatcher",
+            "onAbilityStart": [
+                {
+                    "$type": "DoWatcherSystemAction",
+                    "watcherId": 82074,
+                    "inThreatListOnly": true
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_SlimeShaderTrigger",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "topLimit": 1,
+                        "configID": 42101012
+                    },
+                    "abilityName": "Hili_Fire_SlimeThrow_LightUpShader"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_SlimeThrow_BulletTriggerClose",
+            "onAdded": [
+                {
+                    "$type": "EnableBulletCollisionPluginTrigger"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_SlimeThrow_BulletTriggerOpen",
+            "modifiers": {
+                "UNIQUE_Bomb_LoopEffect": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Fire"
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_Monster_Hili_Fire_Bomb_Trail",
+                                    "effectTempleteID": -1.0
+                                }
+                            ],
+                            "failActions": [
+                                {
+                                    "$type": "AttachEffect",
+                                    "shieldHP": "Eff_Monster_Hili_Fire_Bomb_Trail_NoElem",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "EnableBulletCollisionPluginTrigger",
+                    "setEnable": true
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "UNIQUE_Bomb_LoopEffect"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_SlimeThrow_Element",
+            "abilitySpecials": {
+                "ShaderTime": 1.0
+            },
+            "modifiers": {
+                "DieAnimatorTimerModifier": {
+                    "modifierName": "",
+                    "duration": 10.0,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Fire"
+                                }
+                            ],
+                            "shieldHP": "Eff_Monster_Slime_Fire_SelfExplosion_Middle_BS",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "SetAnimatorTrigger",
+                            "triggerID": "DieTrigger"
+                        }
+                    ]
+                },
+                "TimerModifier": {
+                    "modifierName": "",
+                    "duration": 11.75,
+                    "bonusCriticalHurt": 100.0,
+                    "onRemoved": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Hili_Fire_SlimeThrow_Explode"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "DieAnimatorTimerModifier"
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "TimerModifier"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_SlimeThrow_Explode",
+            "onAbilityStart": [
+                {
+                    "$type": "RemoveUniqueModifier",
+                    "modifierName": "UNIQUE_Bomb_LoopEffect"
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "ICLJDAHDNBO",
+                            "JFJANAGIFNK": [
+                                "Water"
+                            ]
+                        }
+                    ],
+                    "shieldHP": "Eff_Monster_Brute_None_FireSlimeExplode_None",
+                    "born": {
+                        "$type": "EOJBLPNGNCN"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "ICLJDAHDNBO",
+                            "JFJANAGIFNK": [
+                                "Water"
+                            ]
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.25,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "cameraShake": {
+                                "shakeRange": 0.20000000298023224,
+                                "shakeTime": 0.30000001192092896,
+                                "shakeDistance": 25.0,
+                                "extension": {
+                                    "rangeAttenuation": 0.8999999761581421
+                                }
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Fire"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "ICLJDAHDNBO",
+                                    "JFJANAGIFNK": [
+                                        "Water"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "shieldHP": "Eff_Monster_Brute_None_FireSlimeExplode_None",
+                    "born": {
+                        "$type": "EOJBLPNGNCN"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "LOIMAGKHLJA",
+                                    "element": "Fire"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "ICLJDAHDNBO",
+                                    "JFJANAGIFNK": [
+                                        "Water"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "EBADGGHGLKN": 1.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 0.25,
+                                "JJGGAPONHOE": 0.0,
+                                "bonusCriticalHurt": 100.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 50.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV3",
+                                "hitHaltTimeScale": 0.009999999776482582
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "FireEffect",
+                    "predicates": [
+                        {
+                            "$type": "LOIMAGKHLJA",
+                            "element": "Fire"
+                        },
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "ICLJDAHDNBO",
+                                    "JFJANAGIFNK": [
+                                        "Water"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "shieldHP": "Eff_Monster_Brute_None_FireSlimeExplode_Fire",
+                    "born": {
+                        "$type": "EOJBLPNGNCN"
+                    },
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "TriggerAttackEvent",
+                    "predicates": [
+                        {
+                            "$type": "LOIMAGKHLJA",
+                            "element": "Fire"
+                        },
+                        {
+                            "$type": "BAMBPOIJFPG",
+                            "predicates": [
+                                {
+                                    "$type": "ICLJDAHDNBO",
+                                    "JFJANAGIFNK": [
+                                        "Water"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "attackEvent": {
+                        "attackPattern": {
+                            "$type": "DALACABODFA",
+                            "triggerType": "TriggerNoRepeat",
+                            "born": {
+                                "$type": "EOJBLPNGNCN"
+                            },
+                            "EBADGGHGLKN": 2.0
+                        },
+                        "attackInfo": {
+                            "attackTag": "",
+                            "attenuationTag": "",
+                            "attenuationGroup": "default",
+                            "attackProperty": {
+                                "LIMFCEKGALF": 1.0,
+                                "JJGGAPONHOE": 0.0,
+                                "elementType": "Fire",
+                                "bonusCriticalHurt": 50.0,
+                                "strikeType": "Blunt",
+                                "enBreak": 200.0,
+                                "damagePercentage": 0.0
+                            },
+                            "hitPattern": {
+                                "onHitEffectName": "default",
+                                "hitImpulseType": "LV5",
+                                "hitHaltTimeScale": 0.05000000074505806
+                            },
+                            "forceCameraShake": true,
+                            "cameraShake": {
+                                "shakeRange": 0.20000000298023224,
+                                "shakeTime": 0.15000000596046448,
+                                "shakeDistance": 35.0
+                            },
+                            "canBeModifiedBy": "OriginOwner"
+                        }
+                    },
+                    "targetType": "Enemy"
+                },
+                {
+                    "$type": "KillSelf",
+                    "duration": 1.2999999523162842
+                },
+                {
+                    "$type": "TriggerSetVisible"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_SlimeThrow_HitScene",
+            "onAbilityStart": [
+                {
+                    "$type": "FireHitEffect",
+                    "hitEntity": "",
+                    "hitScene": {
+                        "defaultEffect": "Eff_Monster_Hili_Fire_Bomb_DropToGround",
+                        "surfaceEffect": {
+                            "Water": "Eff_Monster_Hili_Fire_Slime_Hit_Water"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_SlimeThrow_LightUpShader",
+            "modifiers": {
+                "ElementModifier": {
+                    "modifierName": "",
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 25.0,
+                    "onRemoved": [
+                        {
+                            "$type": "SetAnimatorBool",
+                            "boolID": "FireState"
+                        }
+                    ]
+                }
+            },
+            "onAbilityStart": [
+                {
+                    "$type": "SetAnimatorBool",
+                    "boolID": "FireState",
+                    "ratio": true
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "ElementModifier"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_BombTurn",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn_Bomb"
+                    ],
+                    "angularSpeed": 120.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                },
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "BombThrow"
+                    ],
+                    "endNormalizedTime": 0.5,
+                    "angularSpeed": 120.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Hili_Fire_Rush_Turn",
+            "abilityMixins": [
+                {
+                    "$type": "SteerAttackMixin",
+                    "steerStateIDs": [
+                        "Turn"
+                    ],
+                    "angularSpeed": 120.0,
+                    "attackTrigger": "",
+                    "attackDistance": 12.0
+                }
+            ]
+        }
+    }
+]

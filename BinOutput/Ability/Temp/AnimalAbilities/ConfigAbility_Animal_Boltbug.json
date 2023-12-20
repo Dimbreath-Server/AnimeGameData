@@ -1,0 +1,292 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Boltbug_Scarab_UnderGroundHandler",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "Standby",
+                        "MakeBall",
+                        "IdleFree01",
+                        "Walk"
+                    ],
+                    "modifierName": "Boltbug_Scarab_AboveGround"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "DigIn",
+                        "Standby_Hide",
+                        "DigOut"
+                    ],
+                    "modifierName": "Boltbug_Scarab_UnderGround"
+                }
+            ],
+            "modifiers": {
+                "Boltbug_Scarab_AboveGround": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Boltbug_Scarab_UnderGround": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DisableMonsterPickedUpMixin"
+                        }
+                    ]
+                },
+                "Boltbug_Scarab_Invincible": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "state": "LockHP"
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Boltbug_Scarab_Invincible"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Boltbug_Scarab_MakeBall",
+            "onAbilityStart": [
+                {
+                    "$type": "CreateGadget",
+                    "born": {
+                        "$type": "PBDNLGHAMHE",
+                        "offset": {
+                            "LOGNGLEIFML": 0.03382803872227669,
+                            "JKDAHJILGBJ": 0.0,
+                            "MJHHBAFNOEG": -0.3788909912109375
+                        },
+                        "AMCAIHBNPDK": true,
+                        "PEJBIAJDKKF": 0.5,
+                        "OLIAGPMOBLE": true
+                    },
+                    "gadgetID": 42805001,
+                    "campID": 4001
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Boltbug_Scarab_DestroyBall",
+            "onAbilityStart": [
+                {
+                    "$type": "TriggerAbility",
+                    "otherTargets": {
+                        "$type": "CJMNJEEJEKB",
+                        "topLimit": 1,
+                        "configID": 42805001
+                    },
+                    "abilityName": "Boltbug_Scarab_Ball"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "Boltbug_Scarab_Ball",
+            "modifiers": {
+                "Boltbug_Scarab_Ball": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Animal_Boltbug_Scarab_Ball",
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onBeingHit": [
+                        {
+                            "$type": "TriggerAbility",
+                            "abilityName": "Monster_Fungus_Raptor_01_SummonAttackBullet_OnGround"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Boltbug_Scarab_Ball"
+                }
+            ],
+            "onAbilityStart": [
+                {
+                    "$type": "FireEffect",
+                    "shieldHP": "Eff_Animal_Boltbug_Scarab_BallDestroy",
+                    "effectTempleteID": -1.0
+                },
+                {
+                    "$type": "RemoveModifier",
+                    "modifierName": "Boltbug_Scarab_Ball"
+                }
+            ]
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "BoltBug_MachinaIustitia_LogicHandler",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToPoseIDMixin",
+                    "poseIDs": [
+                        99
+                    ],
+                    "modifierName": "Broken_Spark_VFX"
+                },
+                {
+                    "$type": "AttachToAnimatorStateIDMixin",
+                    "stateIDs": [
+                        "WorkingFly"
+                    ],
+                    "modifierName": "ScanLight_VFX"
+                },
+                {
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs": [
+                        "Fly"
+                    ],
+                    "modifierName": "Wings_VFX"
+                },
+                {
+                    "$type": "DoActionByStateIDMixin",
+                    "stateIDs": [
+                        "BeHitAir",
+                        "BeHit"
+                    ],
+                    "enterActions": [
+                        {
+                            "$type": "Predicated",
+                            "targetPredicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_BROKEN_STATE_",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "SetPoseInt",
+                                    "intID": "BrokenState",
+                                    "value": 2
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 2.0,
+                                    "key": "_BROKEN_STATE_",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Animal_Boltbug_MachinaIustitia_Break",
+                                    "effectTempleteID": -1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "modifiers": {
+                "BeHit_Monitor": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "properties": {
+                        "Actor_EndureDelta": 20.0
+                    },
+                    "onBeingHit": [
+                        {
+                            "$type": "Randomed",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "_BROKEN_STATE_",
+                                    "ratio": 2.0
+                                }
+                            ],
+                            "chance": 0.33000001311302185,
+                            "successActions": [
+                                {
+                                    "$type": "SetPoseInt",
+                                    "intID": "BrokenState",
+                                    "value": 3
+                                },
+                                {
+                                    "$type": "FireEffect",
+                                    "shieldHP": "Eff_Animal_Boltbug_MachinaIustitia_Break",
+                                    "effectTempleteID": -1.0
+                                },
+                                {
+                                    "$type": "SetGlobalValue",
+                                    "ratio": 3.0,
+                                    "key": "_BROKEN_STATE_",
+                                    "maxValue": 0.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Broken_Spark_VFX": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Animal_Boltbug_MachinaIustitia_Broken",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "ScanLight_VFX": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Animal_Boltbug_MachinaIustitia_ScanLight",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                },
+                "Wings_VFX": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "shieldHP": "Eff_Animal_Boltbug_MachinaIustitia_Wings",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "ratio": 1.0,
+                    "key": "_BROKEN_STATE_",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "BeHit_Monitor"
+                }
+            ]
+        }
+    }
+]

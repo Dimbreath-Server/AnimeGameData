@@ -1,0 +1,1623 @@
+[
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_ElementField_FireController",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Default"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Element_Handle"
+                }
+            ],
+            "abilitySpecials": {
+                "CounterStage": 0.0
+            },
+            "modifiers": {
+                "Default": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Element_Handle": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR100",
+                                "campTargetType": "All",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "Fire_Summonor"
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR100",
+                                "campTargetType": "All",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "Fire_AntiSummonor"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "otherTargets": {
+                                "$type": "JGOEKECMJLH",
+                                "shapeName": "CircleR100",
+                                "campTargetType": "All",
+                                "OHJFACHECDC": 1.0
+                            },
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "GOIBMIJJIFC",
+                                    "entityTypes": [
+                                        "Avatar"
+                                    ]
+                                }
+                            ],
+                            "modifierName": "Fire_Summonor"
+                        }
+                    ]
+                },
+                "Fire_Summonor": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "CurLocalAvatar",
+                            "ratio": 1.0,
+                            "key": "FIRE_CHARGES",
+                            "useLimitRange": true,
+                            "maxValue": 100.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "FIRE_CHARGES",
+                            "overrideMapKey": "CounterStage"
+                        },
+                        {
+                            "$type": "AddElementDurability",
+                            "target": "CurTeamAvatars",
+                            "PositionDampTime": true,
+                            "ratio": 50.0,
+                            "modifierName": "Fire_Damge",
+                            "useLimitRange": true,
+                            "maxValue": 50.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "HAS_FIRE_DAMAGE",
+                                    "ratio": 0.0,
+                                    "ACJBNJNEBOC": "NoneOrEqual"
+                                }
+                            ],
+                            "modifierName": "Fire_Damge"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "FIRE_CHARGES",
+                                    "ratio": 31.0
+                                }
+                            ],
+                            "modifierName": "Fire_Damge"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "FIRE_CHARGES",
+                                    "ratio": 31.0
+                                }
+                            ],
+                            "modifierName": "Fire_Damge"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "FIRE_CHARGES",
+                                    "ratio": 61.0
+                                }
+                            ],
+                            "modifierName": "Fire_Damge"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "FIRE_CHARGES",
+                                    "ratio": 61.0
+                                }
+                            ],
+                            "modifierName": "Fire_Damge"
+                        }
+                    ]
+                },
+                "Fire_AntiSummonor": {
+                    "modifierName": "",
+                    "duration": 0.20000000298023224,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "CurTeamAvatars",
+                            "ratio": 0.0,
+                            "key": "FIRE_CHARGES",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "Fire_Damge"
+                        }
+                    ]
+                },
+                "Remove_Fire": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 2.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": -10.0,
+                            "key": "FIRE_CHARGES",
+                            "useLimitRange": true,
+                            "maxValue": 100.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Fire_Damge": {
+                    "modifierName": "",
+                    "duration": 1.0,
+                    "elementType": "Fire",
+                    "bonusCriticalHurt": 50.0,
+                    "thinkInterval": 2.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 1.0,
+                            "key": "HAS_FIRE_DAMAGE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "FIRE_CHARGES",
+                                    "ratio": 30.0,
+                                    "ACJBNJNEBOC": "LessAndEqual"
+                                }
+                            ],
+                            "shieldHP": "Eff_Element_Fire_Level_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "FIRE_CHARGES",
+                                    "ratio": 30.0,
+                                    "ACJBNJNEBOC": "MoreThan"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "FIRE_CHARGES",
+                                    "ratio": 60.0,
+                                    "ACJBNJNEBOC": "LessAndEqual"
+                                }
+                            ],
+                            "shieldHP": "Eff_Element_Fire_Level_02",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "FIRE_CHARGES",
+                                    "ratio": 60.0,
+                                    "ACJBNJNEBOC": "MoreThan"
+                                }
+                            ],
+                            "shieldHP": "Eff_Element_Fire_Level_03",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "DungeonFogEffects",
+                            "muteRemoteAction": true,
+                            "enable": true,
+                            "cameraFogEffectName": "Eff_Camera_Fire",
+                            "playerFogEffectName": ""
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": -1.0,
+                            "key": "HAS_FIRE_DAMAGE",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "DungeonFogEffects",
+                            "muteRemoteAction": true,
+                            "cameraFogEffectName": "Eff_Camera_Fire",
+                            "playerFogEffectName": ""
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "DamageByAttackValue",
+                            "target": "CurLocalAvatar",
+                            "attacker": "Self",
+                            "attackInfo": {
+                                "attackTag": "",
+                                "attenuationTag": "",
+                                "attenuationGroup": "default",
+                                "attackProperty": {
+                                    "LIMFCEKGALF": 0.0,
+                                    "JJGGAPONHOE": 0.0,
+                                    "elementType": "Fire",
+                                    "bonusCriticalHurt": 50.0,
+                                    "enBreak": 0.0,
+                                    "damageExtra": "CounterStage",
+                                    "damagePercentage": 0.0
+                                },
+                                "hitPattern": {
+                                    "onHitEffectName": "none",
+                                    "hitImpulseType": "LV2",
+                                    "overrideHitImpulse": {
+                                        "hitLevel": "Light",
+                                        "JELEFKIMBOD": 600.0,
+                                        "hitImpulseY": 800.0
+                                    },
+                                    "hitHaltTimeScale": 0.05000000074505806
+                                }
+                            }
+                        }
+                    ],
+                    "onAvatarIn": [
+                        {
+                            "$type": "RemoveModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Remove_Fire"
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Remove_Fire"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_ElementField_IceController",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Default"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Element_Handle"
+                }
+            ],
+            "abilitySpecials": {
+                "CounterStage": 0.0
+            },
+            "modifiers": {
+                "Default": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Element_Handle": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "Team",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_Ice_Summonor"
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "lifeByOwnerIsAlive": true,
+                            "gadgetID": 70330016
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "target": "Team",
+                            "modifierName": "UNIQUE_Ice_Summonor"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "UNIQUE_Ice_SpeedSlow"
+                        }
+                    ]
+                },
+                "UNIQUE_Ice_Summonor": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 5.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "CurTeamAvatars",
+                            "ratio": 0.0,
+                            "key": "SLOW_CHARGES",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "CurLocalAvatar",
+                            "ratio": -0.05000000074505806,
+                            "key": "SLOW_CHARGES",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": -0.699999988079071
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "target": "CurLocalAvatar",
+                            "modifierName": "UNIQUE_Ice_Charge_Controller"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "CurLocalAvatar",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_Ice_Charge_Controller"
+                        }
+                    ]
+                },
+                "UNIQUE_Ice_Charge_Controller": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "SLOW_CHARGES",
+                            "overrideMapKey": "CounterStage"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "UNIQUE_Ice_SpeedSlow"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_Ice_SpeedSlow"
+                        }
+                    ],
+                    "onAvatarIn": [
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "Remove_Slow"
+                        },
+                        {
+                            "$type": "SetGlobalValueToOverrideMap",
+                            "globalValueKey": "SLOW_CHARGES",
+                            "overrideMapKey": "CounterStage"
+                        },
+                        {
+                            "$type": "RemoveModifier",
+                            "modifierName": "UNIQUE_Ice_SpeedSlow"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "predicates": [
+                                {
+                                    "$type": "BAMBPOIJFPG",
+                                    "predicates": [
+                                        {
+                                            "$type": "NGNODMLFFCB",
+                                            "key": "SLOW_CHARGES",
+                                            "ratio": -0.05000000074505806,
+                                            "ACJBNJNEBOC": "MoreThan"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "modifierName": "UNIQUE_Ice_SpeedSlow"
+                        }
+                    ],
+                    "onAvatarOut": [
+                        {
+                            "$type": "ApplyModifier",
+                            "PositionDampTime": true,
+                            "modifierName": "Remove_Slow"
+                        }
+                    ]
+                },
+                "Remove_Slow": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 2.0,
+                    "onThinkInterval": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "PositionDampTime": true,
+                            "ratio": 0.05000000074505806,
+                            "key": "SLOW_CHARGES",
+                            "useLimitRange": true,
+                            "maxValue": 0.0,
+                            "minValue": -0.699999988079071
+                        }
+                    ]
+                },
+                "UNIQUE_Ice_SpeedSlow": {
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Ice",
+                    "bonusCriticalHurt": 50.0,
+                    "properties": {
+                        "Animator_MoveSpeedRatio": "CounterStage"
+                    },
+                    "onAdded": [
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "SLOW_CHARGES",
+                                    "ratio": -0.20000000298023224,
+                                    "ACJBNJNEBOC": "MoreThan"
+                                }
+                            ],
+                            "shieldHP": "Eff_Element_Ice_Level_01",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "SLOW_CHARGES",
+                                    "ratio": -0.5,
+                                    "ACJBNJNEBOC": "MoreThan"
+                                },
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "SLOW_CHARGES",
+                                    "ratio": -0.20000000298023224,
+                                    "ACJBNJNEBOC": "LessAndEqual"
+                                }
+                            ],
+                            "shieldHP": "Eff_Element_Ice_Level_02",
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "AttachEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "SLOW_CHARGES",
+                                    "ratio": -0.5,
+                                    "ACJBNJNEBOC": "LessAndEqual"
+                                }
+                            ],
+                            "shieldHP": "Eff_Element_Ice_Level_03",
+                            "effectTempleteID": -1.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_ElementField_ElectricController",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Default"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Phase1"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Thunder_Summonor"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Phase2"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 202,
+                    "modifierName": "Thunder_Summonor_Phase2"
+                }
+            ],
+            "modifiers": {
+                "Default": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Team",
+                            "ratio": -5.0,
+                            "key": "IN_THUNDER_AREA",
+                            "useLimitRange": true,
+                            "maxValue": 2.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "GetPos_Phase1": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "Randomed",
+                            "chance": 0.699999988079071,
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalPos",
+                                    "target": "Applier",
+                                    "key": "ThunderPos",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "JCADOOKNCPM": {
+                                            "$type": "DDBMEHNLPBF",
+                                            "MNPPBODHINO": 2.0,
+                                            "DEEJGGKEKNN": 2.0
+                                        }
+                                    }
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "target": "Applier",
+                                    "ratio": 1.0,
+                                    "key": "First_Thunder",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "SetGlobalPos",
+                            "target": "Applier",
+                            "key": "ThunderPos2",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 8.0,
+                                    "DEEJGGKEKNN": 18.0
+                                }
+                            }
+                        },
+                        {
+                            "$type": "SetGlobalPos",
+                            "target": "Applier",
+                            "key": "ThunderPos3",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 8.0,
+                                    "DEEJGGKEKNN": 18.0
+                                }
+                            }
+                        },
+                        {
+                            "$type": "Randomed",
+                            "chance": 0.5,
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalPos",
+                                    "target": "Applier",
+                                    "key": "ThunderPos4",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "JCADOOKNCPM": {
+                                            "$type": "DDBMEHNLPBF",
+                                            "MNPPBODHINO": 8.0,
+                                            "DEEJGGKEKNN": 18.0
+                                        }
+                                    }
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "target": "Applier",
+                                    "ratio": 1.0,
+                                    "key": "Second_Thunder",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "Randomed",
+                            "chance": 0.5,
+                            "successActions": [
+                                {
+                                    "$type": "SetGlobalPos",
+                                    "target": "Applier",
+                                    "key": "ThunderPos5",
+                                    "born": {
+                                        "$type": "PBDNLGHAMHE",
+                                        "JCADOOKNCPM": {
+                                            "$type": "DDBMEHNLPBF",
+                                            "MNPPBODHINO": 8.0,
+                                            "DEEJGGKEKNN": 18.0
+                                        }
+                                    }
+                                },
+                                {
+                                    "$type": "AddGlobalValue",
+                                    "target": "Applier",
+                                    "ratio": 1.0,
+                                    "key": "Third_Thunder",
+                                    "useLimitRange": true,
+                                    "maxValue": 1.0,
+                                    "minValue": 0.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Thunder_Summonor": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 12.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "CurLocalAvatar",
+                            "modifierName": "GetPos_Phase1"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Thunder_Hit"
+                        },
+                        {
+                            "$type": "SetAvatarHitBuckets",
+                            "overrideAvatarHitBucketSetting": {
+                                "meleeBucketCount": 4
+                            }
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "CurLocalAvatar",
+                            "modifierName": "GetPos_Phase1"
+                        },
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Thunder_Hit"
+                        }
+                    ]
+                },
+                "Thunder_Hit": {
+                    "modifierName": "",
+                    "duration": 2.5,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "First_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_Ambor_AlertCircle",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Ambor_AlertCircle",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos2",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Ambor_AlertCircle",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos3",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Second_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_Ambor_AlertCircle",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos4",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Third_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_Ambor_AlertCircle",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos5",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "First_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_ThunderFall_01",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "First_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "positionKey": "ThunderPos",
+                                        "directionKey": ""
+                                    },
+                                    "EBADGGHGLKN": 2.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 500.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4",
+                                        "overrideHitImpulse": {
+                                            "hitLevel": "Heavy",
+                                            "JELEFKIMBOD": 50.0,
+                                            "hitImpulseY": 800.0
+                                        },
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "Randomed",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "First_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "chance": 0.6499999761581421,
+                            "successActions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "PositionDampTime": true,
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 1.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "positionKey": "ThunderPos",
+                                        "directionKey": ""
+                                    },
+                                    "gadgetID": 70900269,
+                                    "campID": 4001,
+                                    "campTargetType": "Enemy"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_ThunderFall_01",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos2",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "positionKey": "ThunderPos2",
+                                        "directionKey": ""
+                                    },
+                                    "EBADGGHGLKN": 2.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 500.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4",
+                                        "overrideHitImpulse": {
+                                            "hitLevel": "Heavy",
+                                            "JELEFKIMBOD": 50.0,
+                                            "hitImpulseY": 800.0
+                                        },
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "Randomed",
+                            "chance": 0.6499999761581421,
+                            "successActions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "PositionDampTime": true,
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 1.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "positionKey": "ThunderPos2",
+                                        "directionKey": ""
+                                    },
+                                    "gadgetID": 70900269,
+                                    "campID": 4001,
+                                    "campTargetType": "Enemy"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_ThunderFall_01",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos3",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "positionKey": "ThunderPos3",
+                                        "directionKey": ""
+                                    },
+                                    "EBADGGHGLKN": 2.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 500.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4",
+                                        "overrideHitImpulse": {
+                                            "hitLevel": "Heavy",
+                                            "JELEFKIMBOD": 50.0,
+                                            "hitImpulseY": 800.0
+                                        },
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "Randomed",
+                            "chance": 0.6499999761581421,
+                            "successActions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "PositionDampTime": true,
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 1.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "positionKey": "ThunderPos3",
+                                        "directionKey": ""
+                                    },
+                                    "gadgetID": 70900269,
+                                    "campID": 4001,
+                                    "campTargetType": "Enemy"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Second_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_ThunderFall_01",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos4",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Second_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "positionKey": "ThunderPos4",
+                                        "directionKey": ""
+                                    },
+                                    "EBADGGHGLKN": 2.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 500.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4",
+                                        "overrideHitImpulse": {
+                                            "hitLevel": "Heavy",
+                                            "JELEFKIMBOD": 50.0,
+                                            "hitImpulseY": 800.0
+                                        },
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "Randomed",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Second_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "chance": 0.6499999761581421,
+                            "successActions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "PositionDampTime": true,
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 1.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "positionKey": "ThunderPos4",
+                                        "directionKey": ""
+                                    },
+                                    "gadgetID": 70900269,
+                                    "campID": 4001,
+                                    "campTargetType": "Enemy"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Third_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "shieldHP": "Eff_ThunderFall_01",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos5",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Third_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "positionKey": "ThunderPos5",
+                                        "directionKey": ""
+                                    },
+                                    "EBADGGHGLKN": 2.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 500.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4",
+                                        "overrideHitImpulse": {
+                                            "hitLevel": "Heavy",
+                                            "JELEFKIMBOD": 50.0,
+                                            "hitImpulseY": 800.0
+                                        },
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "Randomed",
+                            "predicates": [
+                                {
+                                    "$type": "NGNODMLFFCB",
+                                    "key": "Third_Thunder",
+                                    "ratio": 1.0
+                                }
+                            ],
+                            "chance": 0.6499999761581421,
+                            "successActions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "PositionDampTime": true,
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 1.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "positionKey": "ThunderPos5",
+                                        "directionKey": ""
+                                    },
+                                    "gadgetID": 70900269,
+                                    "campID": 4001,
+                                    "campTargetType": "Enemy"
+                                }
+                            ]
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "First_Thunder",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "Second_Thunder",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AddGlobalValue",
+                            "ratio": -1.0,
+                            "key": "Third_Thunder",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Phase1": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Team",
+                            "ratio": 5.0,
+                            "key": "IN_THUNDER_AREA",
+                            "useLimitRange": true,
+                            "maxValue": 1.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Phase2": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Team",
+                            "ratio": 5.0,
+                            "key": "IN_THUNDER_AREA",
+                            "useLimitRange": true,
+                            "maxValue": 2.0,
+                            "minValue": 0.0
+                        }
+                    ]
+                },
+                "Thunder_Summonor_Phase2": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 30.0,
+                    "onAdded": [
+                        {
+                            "$type": "AddGlobalValue",
+                            "target": "Team",
+                            "ratio": -5.0,
+                            "key": "IN_THUNDER_AREA",
+                            "useLimitRange": true,
+                            "maxValue": 2.0,
+                            "minValue": 0.0
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Thunder_Hit_Phase2"
+                        }
+                    ]
+                },
+                "Thunder_Hit_Phase2": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": 5.0,
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 0.5,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Thunder_Trace"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "ApplyModifier",
+                            "modifierName": "Thunder_Trace"
+                        }
+                    ]
+                },
+                "GetPos_Phase2": {
+                    "modifierName": "",
+                    "duration": 0.10000000149011612,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalPos",
+                            "target": "Applier",
+                            "key": "ThunderPos_Phase2",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "JCADOOKNCPM": {
+                                    "$type": "DDBMEHNLPBF",
+                                    "MNPPBODHINO": 1.0,
+                                    "DEEJGGKEKNN": 1.0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "Thunder_Trace": {
+                    "modifierName": "",
+                    "duration": 0.44999998807907104,
+                    "bonusCriticalHurt": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "CurLocalAvatar",
+                            "modifierName": "GetPos_Phase2"
+                        },
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_Ambor_AlertCircle",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos_Phase2",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "FireEffect",
+                            "shieldHP": "Eff_ThunderFall_01",
+                            "born": {
+                                "$type": "DAPJIKNDLLN",
+                                "positionKey": "ThunderPos_Phase2",
+                                "directionKey": ""
+                            },
+                            "effectTempleteID": -1.0
+                        },
+                        {
+                            "$type": "TriggerAttackEvent",
+                            "attackEvent": {
+                                "attackPattern": {
+                                    "$type": "DALACABODFA",
+                                    "triggerType": "TriggerNoRepeat",
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "positionKey": "ThunderPos_Phase2",
+                                        "directionKey": ""
+                                    },
+                                    "EBADGGHGLKN": 2.5
+                                },
+                                "attackInfo": {
+                                    "attackTag": "",
+                                    "attenuationTag": "",
+                                    "attenuationGroup": "default",
+                                    "attackProperty": {
+                                        "LIMFCEKGALF": 1.0,
+                                        "JJGGAPONHOE": 0.0,
+                                        "elementType": "Electric",
+                                        "bonusCriticalHurt": 50.0,
+                                        "strikeType": "Default",
+                                        "enBreak": 500.0,
+                                        "damagePercentage": 0.0
+                                    },
+                                    "hitPattern": {
+                                        "onHitEffectName": "default",
+                                        "hitImpulseType": "LV4",
+                                        "overrideHitImpulse": {
+                                            "hitLevel": "Heavy",
+                                            "JELEFKIMBOD": 50.0,
+                                            "hitImpulseY": 800.0
+                                        },
+                                        "hitHaltTimeScale": 0.05000000074505806
+                                    }
+                                }
+                            },
+                            "targetType": "Enemy"
+                        },
+                        {
+                            "$type": "Randomed",
+                            "chance": 0.6499999761581421,
+                            "successActions": [
+                                {
+                                    "$type": "CreateGadget",
+                                    "PositionDampTime": true,
+                                    "born": {
+                                        "$type": "DAPJIKNDLLN",
+                                        "offset": {
+                                            "LOGNGLEIFML": 0.0,
+                                            "JKDAHJILGBJ": 1.0,
+                                            "MJHHBAFNOEG": 0.0
+                                        },
+                                        "positionKey": "ThunderPos_Phase2",
+                                        "directionKey": ""
+                                    },
+                                    "gadgetID": 70900269,
+                                    "campID": 4001,
+                                    "campTargetType": "Enemy"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_ElementField_WaterController",
+            "abilityMixins": [
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "modifierName": "Default"
+                },
+                {
+                    "$type": "AttachToGadgetStateMixin",
+                    "gadgetState": 201,
+                    "modifierName": "Element_Handle"
+                }
+            ],
+            "abilitySpecials": {
+                "CounterStage": 0.0
+            },
+            "modifiers": {
+                "Default": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0
+                },
+                "Element_Handle": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "thinkInterval": 10.0,
+                    "onAdded": [
+                        {
+                            "$type": "ApplyModifier",
+                            "target": "CurTeamAvatars",
+                            "PositionDampTime": true,
+                            "modifierName": "UNIQUE_Water_Summonor"
+                        },
+                        {
+                            "$type": "CreateGadget",
+                            "lifeByOwnerIsAlive": true,
+                            "gadgetID": 70330016
+                        }
+                    ],
+                    "onRemoved": [
+                        {
+                            "$type": "RemoveModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "UNIQUE_Water_Summonor"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "CreateGadget",
+                            "born": {
+                                "$type": "PBDNLGHAMHE",
+                                "AMCAIHBNPDK": true
+                            },
+                            "gadgetID": 70330015
+                        }
+                    ]
+                },
+                "UNIQUE_Water_Summonor": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 55.0,
+                    "isElementDurabilityMutable": false
+                }
+            }
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "SceneObj_Gear_ElementField_Bullet",
+            "modifiers": {
+                "Normal": {
+                    "modifierName": "",
+                    "bonusCriticalHurt": 100.0,
+                    "onKill": [
+                        {
+                            "$type": "KillSelf"
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "Team",
+                            "modifierName": "UNIQUE_Ice_Summonor"
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "UNIQUE_Ice_SpeedSlow"
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "UNIQUE_Ice_Charge_Controller"
+                        },
+                        {
+                            "$type": "RemoveUniqueModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "UNIQUE_Water_Summonor"
+                        },
+                        {
+                            "$type": "DebugLog",
+                            "PositionDampTime": true,
+                            "content": "onKillActions Start!!!!!!++++++++++++++++++++++"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Normal"
+                }
+            ]
+        }
+    }
+]
